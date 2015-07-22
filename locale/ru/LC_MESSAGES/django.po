@@ -1,0 +1,938 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-07 20:41+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: mainapp/forms.py:208
+msgid "Положение виджета"
+msgstr ""
+
+#: mainapp/forms.py:210
+msgid "Отступ слева"
+msgstr ""
+
+#: mainapp/forms.py:212
+msgid "Отступ справа"
+msgstr ""
+
+#: mainapp/forms.py:214
+msgid "Отступ снизу"
+msgstr ""
+
+#: mainapp/forms.py:217
+msgid "Анимировать текст на кнопке"
+msgstr ""
+
+#: mainapp/forms.py:220
+msgid "Цвет фона"
+msgstr ""
+
+#: mainapp/forms.py:222
+msgid "Цвет шрифта"
+msgstr ""
+
+#: mainapp/forms.py:224
+msgid "Цвет ссылок"
+msgstr ""
+
+#: mainapp/forms.py:227
+msgid "Дополнительный цвет"
+msgstr ""
+
+#: mainapp/forms.py:230
+msgid "Непрозрачность виджета"
+msgstr ""
+
+#: mainapp/forms.py:233
+msgid "Непрозрачность кнопки"
+msgstr ""
+
+#: mainapp/forms.py:236
+msgid "Непрозрачность панели звонка"
+msgstr ""
+
+#: mainapp/forms.py:239
+msgid "Непрозрачность полей ввода"
+msgstr ""
+
+#: mainapp/forms.py:243
+msgid "Шрифт"
+msgstr ""
+
+#: mainapp/forms.py:248
+msgid "Номер телефона для оповещений по СМС"
+msgstr ""
+
+#: mainapp/forms.py:250
+msgid "Email для оповещений о звонках"
+msgstr ""
+
+#: mainapp/forms.py:252
+msgid "Email для оповещений об окончании баланса"
+msgstr ""
+
+#: mainapp/forms.py:254
+msgid "Email для оффлайн сообщений"
+msgstr ""
+
+#: mainapp/forms.py:268
+msgid "Текст кнопки"
+msgstr ""
+
+#: mainapp/forms.py:270
+msgid "Текст при заказе моментального звонка"
+msgstr ""
+
+#: mainapp/forms.py:272
+msgid "Текст в режиме подготовки соединения"
+msgstr ""
+
+#: mainapp/forms.py:274
+msgid "Текст при установленном соединении"
+msgstr ""
+
+#: mainapp/forms.py:276
+msgid "Текст во время звонка"
+msgstr ""
+
+#: mainapp/forms.py:278
+msgid "Текст при успешном завершении звонка"
+msgstr ""
+
+#: mainapp/forms.py:280
+msgid "Текст при запоздавшем звонке"
+msgstr ""
+
+#: mainapp/forms.py:282
+msgid "Текст при неуспешном звонке"
+msgstr ""
+
+#: mainapp/forms.py:284
+msgid "Текст после окончания звонка"
+msgstr ""
+
+#: mainapp/forms.py:286
+msgid "Текст при заказе обратного звонка"
+msgstr ""
+
+#: mainapp/forms.py:288
+msgid "Текст при успешном оформлении запроса на обратный звонок"
+msgstr ""
+
+#: mainapp/forms.py:290
+msgid "Текст при неуспешном заказе обратного звонка"
+msgstr ""
+
+#: mainapp/forms.py:292
+msgid "Текст при отправке сообщения"
+msgstr ""
+
+#: mainapp/forms.py:294 mainapp/forms.py:300
+msgid "Текст при отправленном сообщении"
+msgstr ""
+
+#: mainapp/forms.py:297
+msgid "Текст при ошибке во время отправки сообщения"
+msgstr ""
+
+#: mainapp/forms.py:302
+msgid "Текст в нерабочее время"
+msgstr ""
+
+#: mainapp/forms.py:304
+msgid "Текст в нерабочее время, заказ принят"
+msgstr ""
+
+#: mainapp/forms.py:306
+msgid "Текст в бесплатной версии"
+msgstr ""
+
+#: mainapp/forms.py:308
+msgid "Текст в бесплатной версии, заказ принят"
+msgstr ""
+
+#: mainapp/forms.py:310
+msgid "Текст ссылки заказа"
+msgstr ""
+
+#: mainapp/forms.py:313
+msgid "Текст ссылки, переводящей в сценарий отправки сообщений"
+msgstr ""
+
+#: mainapp/forms.py:315
+msgid "Текст ссылки, шаг назад"
+msgstr ""
+
+#: mainapp/forms.py:318
+msgid "Текст ссылки, шаг назад из сообщения"
+msgstr ""
+
+#: mainapp/forms.py:324 mainapp/models.py:181
+msgid "Callfeed"
+msgstr ""
+
+#: mainapp/forms.py:325 mainapp/models.py:182
+msgid "Клиент"
+msgstr ""
+
+#: mainapp/forms.py:331
+msgid "Время до звонка в секундах"
+msgstr ""
+
+#: mainapp/forms.py:333
+msgid "Задержка между дозвоном от стороны А до Б"
+msgstr ""
+
+#: mainapp/forms.py:335 mainapp/models.py:201
+msgid "Задержка перед набором добавочного номера"
+msgstr ""
+
+#: mainapp/forms.py:338 mainapp/models.py:203
+msgid "Входящий номер, который увидит оператор"
+msgstr ""
+
+#: mainapp/forms.py:340 mainapp/models.py:195
+msgid "Порядок вызова"
+msgstr ""
+
+#: mainapp/forms.py:342 mainapp/models.py:206
+msgid "Проговаривать имя сайта"
+msgstr ""
+
+#: mainapp/forms.py:344 mainapp/models.py:207
+msgid "ГЕО-фильтр"
+msgstr ""
+
+#: mainapp/forms.py:346 mainapp/models.py:209
+msgid "Отключить на мобильных устройствах"
+msgstr ""
+
+#: mainapp/forms.py:348 mainapp/models.py:210
+msgid "Чёрный список номеров телефонов"
+msgstr ""
+
+#: mainapp/forms.py:350 mainapp/models.py:211
+msgid "Чёрный список IP-адресов"
+msgstr ""
+
+#: mainapp/forms.py:362
+msgid "Старый пароль"
+msgstr ""
+
+#: mainapp/forms.py:364
+msgid "Новый пароль"
+msgstr ""
+
+#: mainapp/forms.py:366
+msgid "Подтверждение нового пароля"
+msgstr ""
+
+#: mainapp/forms.py:386 mainapp/models.py:390
+msgid "Метод оплаты"
+msgstr ""
+
+#: mainapp/models.py:20 mainapp/models.py:132
+#: templates/pages/profile/client/client_widget_contacts_form.html:20
+msgid "Имя"
+msgstr ""
+
+#: mainapp/models.py:21 mainapp/models.py:135
+#: templates/pages/profile/client/client_widget_contacts_form.html:25
+msgid "Email"
+msgstr ""
+
+#: mainapp/models.py:22 mainapp/models.py:134
+msgid "Номер телефона"
+msgstr ""
+
+#: mainapp/models.py:23 mainapp/models.py:192
+msgid "Получать email-уведомления"
+msgstr ""
+
+#: mainapp/models.py:24 mainapp/models.py:193
+msgid "Получать SMS-уведомления"
+msgstr ""
+
+#: mainapp/models.py:25
+msgid "Баланс"
+msgstr ""
+
+#: mainapp/models.py:133
+msgid "Должность"
+msgstr ""
+
+#: mainapp/models.py:136
+msgid "Фото"
+msgstr ""
+
+#: mainapp/models.py:154
+msgid "Название тарифа"
+msgstr ""
+
+#: mainapp/models.py:155
+msgid "Описание"
+msgstr ""
+
+#: mainapp/models.py:156
+msgid "Цена(руб./мин.)"
+msgstr ""
+
+#: mainapp/models.py:157 mainapp/models.py:387
+#: templates/pages/profile/client/client_info_bills.html:23
+#: templates/pages/profile/client/client_payment_choose_method.html:14
+#: templates/pages/profile/client/client_payment_make.html:11
+msgid "Минут"
+msgstr ""
+
+#: mainapp/models.py:158
+msgid "Бесплатные минуты"
+msgstr ""
+
+#: mainapp/models.py:175
+msgid "Одновременно всем"
+msgstr ""
+
+#: mainapp/models.py:176
+msgid "По очереди"
+msgstr ""
+
+#: mainapp/models.py:185
+msgid "Все"
+msgstr ""
+
+#: mainapp/models.py:190
+#: templates/pages/profile/client/client_widget_options.html:12
+msgid "Адрес сайта"
+msgstr ""
+
+#: mainapp/models.py:191
+msgid "Активен"
+msgstr ""
+
+#: mainapp/models.py:194
+msgid "Включать имя оператора в СМС"
+msgstr ""
+
+#: mainapp/models.py:198
+msgid "Установлен"
+msgstr ""
+
+#: mainapp/models.py:199
+msgid "Время до звонка(сек.)"
+msgstr ""
+
+#: mainapp/models.py:200
+msgid "Задержка при звонке со стороны А к Б"
+msgstr ""
+
+#: mainapp/models.py:213
+msgid "Номер телефона для СМС-оповещений"
+msgstr ""
+
+#: mainapp/models.py:215
+msgid "Email для оповещения о звонках"
+msgstr ""
+
+#: mainapp/models.py:216
+msgid "Email для оповещений о нулевом балансе"
+msgstr ""
+
+#: mainapp/models.py:218
+msgid "Email для оповещений об оффлайн сообщениях"
+msgstr ""
+
+#: mainapp/models.py:303
+msgid "Успешно"
+msgstr ""
+
+#: mainapp/models.py:304
+msgid "Запланирован"
+msgstr ""
+
+#: mainapp/models.py:305
+msgid "Оператор не взял трубку"
+msgstr ""
+
+#: mainapp/models.py:306
+msgid "Клиент не взял трубку"
+msgstr ""
+
+#: mainapp/models.py:307
+msgid "Недостаточно минут"
+msgstr ""
+
+#: mainapp/models.py:311
+msgid "Описание звонка"
+msgstr ""
+
+#: mainapp/models.py:312
+#: templates/pages/profile/client/client_callbacks.html:63
+msgid "Номер телефона оператора"
+msgstr ""
+
+#: mainapp/models.py:313
+#: templates/pages/profile/client/client_callbacks.html:62
+msgid "Номер телефона клиента"
+msgstr ""
+
+#: mainapp/models.py:314
+msgid "Засчитанная длина соединения со стороны оператора"
+msgstr ""
+
+#: mainapp/models.py:315
+msgid "Засчитанная длина соединения со стороны клиента"
+msgstr ""
+
+#: mainapp/models.py:316
+msgid "Реальная длина соединения со стороны оператора"
+msgstr ""
+
+#: mainapp/models.py:317
+msgid "Реальная длина соединения со стороны клиента"
+msgstr ""
+
+#: mainapp/models.py:318
+msgid "Ссылка на запись разговора со стороны оператора"
+msgstr ""
+
+#: mainapp/models.py:319
+msgid "Ссылка на запись разговора со стороны клиента"
+msgstr ""
+
+#: mainapp/models.py:320
+msgid "Период ожидания оператора"
+msgstr ""
+
+#: mainapp/models.py:321
+msgid "Период ожидания клиента"
+msgstr ""
+
+#: mainapp/models.py:322
+#: templates/pages/profile/client/client_callbacks.html:66
+msgid "Статус звонка"
+msgstr ""
+
+#: mainapp/models.py:323
+msgid "Стоимость"
+msgstr ""
+
+#: mainapp/models.py:324
+msgid "Валюта"
+msgstr ""
+
+#: mainapp/models.py:325
+msgid "IP-адрес клиента"
+msgstr ""
+
+#: mainapp/models.py:326
+msgid "Гео-данные клиента"
+msgstr ""
+
+#: mainapp/models.py:328
+msgid "Идентификатор звонка в MTT"
+msgstr ""
+
+#: mainapp/models.py:329
+#: templates/pages/profile/client/client_callbacks.html:60
+msgid "Источник перехода"
+msgstr ""
+
+#: mainapp/models.py:330
+msgid "Поисковый запрос"
+msgstr ""
+
+#: mainapp/models.py:332 mainapp/models.py:386
+msgid "Когда"
+msgstr ""
+
+#: mainapp/models.py:357
+msgid "Понедельник"
+msgstr ""
+
+#: mainapp/models.py:358
+msgid "Вторник"
+msgstr ""
+
+#: mainapp/models.py:359
+msgid "Среда"
+msgstr ""
+
+#: mainapp/models.py:360
+msgid "Четверг"
+msgstr ""
+
+#: mainapp/models.py:361
+msgid "Пятница"
+msgstr ""
+
+#: mainapp/models.py:362
+msgid "Суббота"
+msgstr ""
+
+#: mainapp/models.py:363
+msgid "Воскресенье"
+msgstr ""
+
+#: mainapp/models.py:376
+msgid "Оплачен"
+msgstr ""
+
+#: mainapp/models.py:377
+msgid "Неоплачен"
+msgstr ""
+
+#: mainapp/models.py:382
+msgid "Наличный"
+msgstr ""
+
+#: mainapp/models.py:383
+msgid "Безналичный"
+msgstr ""
+
+#: mainapp/models.py:388
+msgid "Стоимость минуты"
+msgstr ""
+
+#: mainapp/models.py:389
+msgid "В сумме"
+msgstr ""
+
+#: mainapp/models.py:392
+#: templates/pages/profile/client/client_info_bills.html:26
+msgid "Статус"
+msgstr ""
+
+#: templates/pages/accounts/client/register.html:11
+msgid "Регистрация клиента"
+msgstr ""
+
+#: templates/pages/accounts/client/register.html:17
+#: templates/pages/login.html:14
+msgid "Продолжить"
+msgstr ""
+
+#: templates/pages/accounts/disabled.html:6
+msgid ""
+"Ваш аккаунт заблокирован. Пожалуйста, обратитесь к администрации Callfeed для "
+"получения дополнительной информации."
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:16
+msgid "Входящие звонки от клиентов"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:19
+#: templates/pages/profile/client/client_info_bills.html:15
+msgid "Экспорт"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:46
+msgid "Показать"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:56
+msgid "Отфильтрованные вызовы"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:59
+msgid "URL виджета"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:61
+msgid "Время"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:64
+msgid "Длительность"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:65
+msgid "IP, Регион"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:107
+#: templates/pages/profile/client/client_widgets.html:32
+msgid "Статистика"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:109
+msgid "Всего звонков"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:110
+msgid "Общее время с учётом округления"
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:110
+#: templates/pages/profile/client/client_callbacks.html:111
+#: templates/parts/client_profile_navbar.html:11
+msgid "мин."
+msgstr ""
+
+#: templates/pages/profile/client/client_callbacks.html:111
+msgid "Среднее время звонка"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:6
+#: templates/parts/profile_client_edit_sidebar.html:5
+msgid "Счета"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:12
+msgid "Список счетов"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:21
+msgid "Номер"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:22
+msgid "Дата"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:24
+#: templates/pages/profile/client/client_payment_choose_method.html:16
+#: templates/pages/profile/client/client_payment_make.html:13
+msgid "Сумма(руб.)"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:25
+#: templates/pages/profile/client/client_payment_choose_method.html:17
+#: templates/pages/profile/client/client_payment_make.html:14
+msgid "Метод"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:27
+msgid "Акт"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_bills.html:37
+msgid "Запросить акт"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_personal.html:17
+#: templates/pages/profile/client/client_info_security.html:17
+#: templates/pages/profile/client/client_operators_edit.html:45
+#: templates/pages/profile/client/client_widget_contacts_form.html:38
+#: templates/pages/profile/client/client_widget_content.html:17
+#: templates/pages/profile/client/client_widget_design.html:17
+#: templates/pages/profile/client/client_widget_notifications.html:37
+#: templates/pages/profile/client/client_widget_options.html:58
+#: templates/pages/profile/client/client_widget_parameters.html:17
+msgid "Сохранить"
+msgstr ""
+
+#: templates/pages/profile/client/client_info_security.html:6
+#: templates/parts/profile_client_edit_sidebar.html:4
+msgid "Безопасность"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:13
+#: templates/parts/client_profile_navbar.html:7
+msgid "Операторы"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:16
+msgid "Добавить оператора"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:23
+#: templates/pages/profile/client/client_operators_edit.html:13
+msgid "Фото оператора"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:27
+#: templates/pages/profile/client/client_widgets.html:41
+msgid "Редактировать"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:30
+#: templates/pages/profile/client/client_widgets.html:44
+msgid "Удалить"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:37
+msgid "У вас нет ни одного оператора"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators.html:55
+msgid "Вы уверены, что хотите удалить оператора?"
+msgstr ""
+
+#: templates/pages/profile/client/client_operators_edit.html:9
+msgid "Редактирование информации об операторе"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_cancel.html:8
+#, python-format
+msgid "Счёт #%(bill_id)s был успешно отменён."
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_method.html:8
+msgid "Выберите способ оплаты"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_method.html:15
+#: templates/pages/profile/client/client_payment_make.html:12
+msgid "Тариф(руб./мин.)"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_method.html:28
+#: templates/pages/profile/client/client_payment_make.html:24
+msgid "Оплатить"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_tariff.html:7
+msgid "Оплата: выбор тарифа"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_tariff.html:11
+msgid "минут"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_tariff.html:12
+msgid "руб./мин."
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_choose_tariff.html:14
+msgid "Купить"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_make.html:7
+msgid "Оплата"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_make.html:28
+msgid "Отменить оплату"
+msgstr ""
+
+#: templates/pages/profile/client/client_payment_request_cash.html:7
+#, python-format
+msgid "Оплата наличными по счёту #%(bill_id)s успешно запрошена"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_actions.html:6
+#: templates/parts/profile_client_widget_sidebar.html:6
+msgid "Действия"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_actions.html:11
+#: templates/pages/profile/client/client_widget_departments.html:10
+msgid "Этот раздел находится в стадии разработки"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:6
+#: templates/parts/profile_client_widget_sidebar.html:11
+msgid "Код виджета"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:11
+msgid ""
+"Представленный код необходимо разместить в любом месте в теле(body) "
+"страницы, на которую производится установка виджета."
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:14
+#: templates/pages/profile/client/client_widget_code.html:18
+msgid "Копировать в буфер обмена"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:16
+msgid "Кнопка для вызова виджета"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:21
+msgid "Отправьте код для установки виджета Вашему техническому специалисту"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:22
+msgid "Email технического специалиста"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_code.html:23
+msgid "Отправить"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_contacts_form.html:6
+msgid "Поля формы контакта"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_contacts_form.html:21
+#: templates/pages/profile/client/client_widget_contacts_form.html:26
+#: templates/pages/profile/client/client_widget_contacts_form.html:31
+msgid "присутствует на форме"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_contacts_form.html:22
+#: templates/pages/profile/client/client_widget_contacts_form.html:27
+#: templates/pages/profile/client/client_widget_contacts_form.html:32
+msgid "заполнение обязательно"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_contacts_form.html:30
+msgid "Телефон"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_content.html:6
+#: templates/parts/profile_client_widget_sidebar.html:10
+msgid "Содержание"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_departments.html:6
+#: templates/parts/profile_client_widget_sidebar.html:8
+msgid "Отделения"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_design.html:6
+#: templates/parts/profile_client_widget_sidebar.html:4
+msgid "Дизайн"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_notifications.html:6
+#: templates/parts/profile_client_widget_sidebar.html:5
+msgid "Оповещения"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_options.html:6
+#: templates/parts/profile_client_widget_sidebar.html:3
+msgid "Основное"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_options.html:13
+msgid "Часовой пояс"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_options.html:14
+msgid "График отдела продаж"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_options.html:22
+msgid "Будни по одному графику"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_options.html:26
+#: templates/pages/profile/client/client_widget_options.html:30
+#: templates/pages/profile/client/client_widget_options.html:34
+#: templates/pages/profile/client/client_widget_options.html:38
+#: templates/pages/profile/client/client_widget_options.html:42
+#: templates/pages/profile/client/client_widget_options.html:46
+#: templates/pages/profile/client/client_widget_options.html:50
+msgid "С"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_options.html:26
+#: templates/pages/profile/client/client_widget_options.html:30
+#: templates/pages/profile/client/client_widget_options.html:34
+#: templates/pages/profile/client/client_widget_options.html:38
+#: templates/pages/profile/client/client_widget_options.html:42
+#: templates/pages/profile/client/client_widget_options.html:46
+#: templates/pages/profile/client/client_widget_options.html:50
+msgid "По"
+msgstr ""
+
+#: templates/pages/profile/client/client_widget_parameters.html:6
+#: templates/parts/profile_client_widget_sidebar.html:7
+msgid "Параметры"
+msgstr ""
+
+#: templates/pages/profile/client/client_widgets.html:17
+#: templates/parts/client_profile_navbar.html:6
+msgid "Виджеты"
+msgstr ""
+
+#: templates/pages/profile/client/client_widgets.html:20
+msgid "Новый виджет"
+msgstr ""
+
+#: templates/pages/profile/client/client_widgets.html:35
+msgid "Журнал обращений"
+msgstr ""
+
+#: templates/pages/profile/client/client_widgets.html:38
+msgid "Остановить"
+msgstr ""
+
+#: templates/pages/profile/client/client_widgets.html:49
+msgid "У Вас нет ни одного виджета"
+msgstr ""
+
+#: templates/pages/profile/client/client_widgets.html:66
+msgid "Вы уверены, что хотите удалить виджет?"
+msgstr ""
+
+#: templates/parts/client_profile_navbar.html:5
+msgid "Звонки"
+msgstr ""
+
+#: templates/parts/client_profile_navbar.html:8
+msgid "Профиль"
+msgstr ""
+
+#: templates/parts/client_profile_navbar.html:12
+msgid "Пополнить"
+msgstr ""
+
+#: templates/parts/footer.html:12
+msgid "Все права защищены"
+msgstr ""
+
+#: templates/parts/footer.html:17 templates/parts/header.html:15
+msgid "Технологии"
+msgstr ""
+
+#: templates/parts/footer.html:18 templates/parts/header.html:16
+msgid "FAQ"
+msgstr ""
+
+#: templates/parts/footer.html:19 templates/parts/header.html:17
+msgid "Блог"
+msgstr ""
+
+#: templates/parts/footer.html:23
+msgid "Подпишись на нас"
+msgstr ""
+
+#: templates/parts/header.html:13
+msgid "Выйти"
+msgstr ""
+
+#: templates/parts/header.html:18
+msgid "Вход"
+msgstr ""
+
+#: templates/parts/profile_client_edit_sidebar.html:3
+#: templates/pages/profile/client/client_info_personal.html:6
+msgid "Личные данные"
+msgstr ""
+
+#: templates/parts/profile_client_widget_sidebar.html:9
+msgid "Форма контакта"
+msgstr ""
+
+#: templates/parts/reseller_clients_list.html:2
+msgid "Список клиентов"
+msgstr ""
+
+#: templates/parts/reseller_clients_list.html:9
+msgid "У Вас нет клиентов"
+msgstr ""
+
+#: templates/robokassa/success.html:7
+msgid "Покупка успешно оплачена!"
+msgstr ""

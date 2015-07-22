@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<header class="navbar-soft-gray">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/" class="">
+                <img style="margin-top: 7px; width: 170px; height: 33px;" src="{% static 'img/landing/logo.png' %}" alt="Callfeed">
+            </a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse white-text" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                {% block navbar_content %}
+                    {% if user.is_authenticated %}
+                        <li><a href="">{{ user.first_name }} {{ user.last_name }} (ID {{ user.id }})</a></li>
+                        <li><a href="/accounts/logout"><u>Выйти</u></a></li>
+                    {% else %}
+                        <li><a href="/technologies">Технологии</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/accounts/login">Вход</a></li>
+                    {% endif %}
+                {% endblock %}
+            </ul>
+        </nav>
+    </div>
+</header>

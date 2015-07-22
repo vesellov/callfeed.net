@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body_content %}
+    <h3 class="center">Add a new setup request</h3>
+
+    <div class="container row">
+        <div class="col s6">
+            <h4 class="center">Add a new setup request</h4>
+
+            <form action="/profile/manager/setup_requests" method="post">{% csrf_token %}
+                {{ setup_request_form.as_p }}
+                {{ setup_request_history_form.as_p }}
+                <input type="submit" value="Save" class="btn"/>
+            </form>
+        </div>
+        <div class="col s6">
+            <h4 class="center">Setup requests list:</h4>
+            <ul>
+                {% for setup_request in setup_requests %}
+                    <li>
+                        <a href="/profile/manager/setup_requests?setup_request_id={{ setup_request.id }}">{{ setup_request.organization_name }}({{ setup_request.site }})</a>
+                    </li>
+                {% empty %}
+                    <li><h5 class="center">You have no setup requests</h5></li>
+                {% endfor %}
+            </ul>
+            <h6 class="center" ><a href="/profile/manager/setup_requests">Create new setup request</a></h6>
+            <h4 class="center">History:</h4>
+            <ul>
+                {% for setup_request_history_elem in setup_request_history %}
+                    <li>{{ setup_request_history_elem }}</li>
+                {% empty %}
+                    <h5 class="center">The history is empty</h5>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>
+{% endblock %}

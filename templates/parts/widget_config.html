@@ -1,0 +1,418 @@
+<div class="col s12 left" id="widget_settings" style="display:none;" >
+    <style>
+        #widget_settings {
+            color: #888;
+        }
+        #widget_settings input {
+            color: blue;
+        }        
+    </style>
+    <form>
+        <h1>Настройки виджета</h1>
+        положение:
+        <select id="wposition" onchange="change_position()" style="">
+        <option value="bottom_dynamic">появляется динамически, между содержимым и "футером", во всю ширину экрана</option>
+        <option value="bottom_dynamic_smart">появляется динамически, между содержимым страницы и "футером", с учетом ширины содержимого</option>
+        <option value="bottom_static">появляется статично в подвале сайта, поверх страницы, во всю ширину экрана</option>
+        <option value="bottom">всплывает снизу как окно</option>
+        <option value="top">выплывает сверху как окно</option>
+        <option value="left">выплывает слева как окно</option>
+        <option value="right">выплывает справа как окно</option>
+        <option value="center">появляется по центру как окно</option>
+        </select> <br />
+        <br />
+
+        id HTML элемента, содержащего "футер": <input value="" id="wfooter_id" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        время жизни сессии виджета в cookie в секундах:  <input size=2 value="" id="wcookie_ttl_seconds" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        обратный отсчет с секунды:  <input size=2 value="" id="wcountdown_value" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        задержка перед "выскакиванием" виджета в секундах: <input value="" id="wcontroller1delay" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        ширина виджета: <input value="" id="wwidth" type="text" onkeyup="regenerate_code()" /> <br />
+        высота виджета: <input value="" id="wheight" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        смещение сверху: <input  value="" id="wtop" type="text" onkeyup="regenerate_code()" /> <br />
+        смещение снизу: <input value="" id="wbottom" type="text" onkeyup="regenerate_code()" /> <br />
+        смещение слева: <input value="" id="wleft" type="text" onkeyup="regenerate_code()" /> <br />
+        смещение справа: <input value="" id="wright" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        основной текст: <input id="wtext" size=80 value="" type="text" onkeyup="regenerate_code()" /> <br />
+        текст при успешном звонке: <input id="wtext_ok" size=80 value="" type="text" onkeyup="regenerate_code()" /> <br />
+        текст при истекшем времени звонка: <input  id="wtext_timeout" size=80 value="" type="text" onkeyup="regenerate_code()" /> <br />
+        основной текст для бесплатной версии: <input id="wtext_free" size=80 value="" type="text" onkeyup="regenerate_code()" /> <br />
+        текст в нерабочее время компании: <input id="wtext_dayoff" size=80 value="" type="text" onkeyup="regenerate_code()" /> <br />
+        текст при ошибке соединения: <input id="wtext_error" size=80 value="" type="text" onkeyup="regenerate_code()" /> <br />
+        текст для вызова: <input size=80 value="" id="wtext_call" type="text" onkeyup="regenerate_code()" /> <br />
+        текст для закрытия окна: <input size=80 value="" id="wtext_close" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        цвет виджета: <input  id="wcolor" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет рамки: <input  id="wborder_color" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет текста: <input value="" id="wtext_color" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет ссылок в тексте: <input  id="wlink_color" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет кнопки звонка: <input  id="wbuttons_color" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет рамки на кнопке: <input  id="wbuttons_border_color" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет текста на кнопке: <input  id="wbuttons_text_color" type="text" onkeyup="regenerate_code()" /> <br />
+        цвет поля для уведомлений: <input  id="wnotify_area_color" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        стиль шрифта (малый): <input value="" id="wfont_family1" type="text" onkeyup="regenerate_code()" /> <br />
+        стиль шрифта (средний): <input value="" id="wfont_family2" type="text" onkeyup="regenerate_code()" /> <br />
+        стиль шрифта (большой): <input value="" id="wfont_family3" type="text" onkeyup="regenerate_code()" /> <br />
+        url шрифта (малый): <input value="" id="wfont_url1" type="text" onkeyup="regenerate_code()" /> <br />
+        url шрифта (средний): <input value="" id="wfont_url2" type="text" onkeyup="regenerate_code()" /> <br />
+        url шрифта (большой): <input value="" id="wfont_url3" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        ширина картинки: <input value="" id="wpicture_width" type="text" onkeyup="regenerate_code()" /> <br />
+        высота картинки: <input value="" id="wpicture_height" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        ширина счетчика: <input value="" id="wcountdown_width" type="text" onkeyup="regenerate_code()" /> <br />
+        ширина поля для ввода времени: <input value="" id="wtimeinput_width" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        высота поля для ввода номера: <input value="" id="wphone_input_height" type="text" onkeyup="regenerate_code()" /> <br />
+        высота счетчика: <input value="" id="wcountdown_height" type="text" onkeyup="regenerate_code()" /> <br />
+        высота кнопки вызова: <input value="" id="wsubmit_button_height" type="text" onkeyup="regenerate_code()" /> <br />
+        высота текста на кнопке вызова: <input value="" id="wsubmit_button_line_height" type="text" onkeyup="regenerate_code()" /> <br />
+        <br />
+
+        внутренние отступы свехру и снизу: <input value="" id="wpadding_top_bottom" type="text" onkeyup="regenerate_code()" /> <br />
+        внутренние отступы между элементами: <input value="" id="wpadding_left_right" type="text" onkeyup="regenerate_code()" /> <br />
+        ширина "пустой" области справа: <input value="" id="wright_offset" type="text" onkeyup="regenerate_code()" /> <br />
+
+
+        <h1>Код виджета для вставки на сайт:</h1>
+        
+        <textarea id="fullsource" cols="80" rows="60">
+        </textarea>
+
+    </form>
+</div>
+
+<!-- 
+<div class="col s12 left">
+    <textarea id="source0" cols=80 rows=40>
+    </textarea>
+
+    <textarea id="source1" cols=80 rows=40>
+    </textarea>
+
+    <textarea id="source2" cols=80 rows=40>
+    </textarea>
+
+    <textarea id="source3" cols=80 rows=40>
+    </textarea>
+</div>
+-->
+
+{% load staticfiles %}
+<script src="{% static 'cf.min.js' %}"></script>
+
+<script type="text/javascript">
+
+	$.extend({
+	  getUrlVars: function(){
+	    var vars = [], hash;
+	    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	    for(var i = 0; i < hashes.length; i++)
+	    {
+	      hash = hashes[i].split('=');
+	      vars.push(hash[0]);
+	      vars[hash[0]] = hash[1];
+	    }
+	    return vars;
+	  },
+	  getUrlVar: function(name){
+	    return $.getUrlVars()[name];
+	  }
+	});
+
+
+    var CurrentToken = $.getUrlVar('widget_token');
+    CallFeedToken = null;
+    var CurrentSettings = null;
+
+
+    function change_position(){
+        if ($('#wposition').val() == 'center') {
+            $('#wtop').val('45%');
+            $('#wbottom').val('inherit');
+            $('#wleft').val('30%');
+            $('#wright').val('inherit');
+        } else if ($('#wposition').val() == 'bottom_static') {
+            $('#wtop').val('inherit');
+            $('#wbottom').val('0px');
+            $('#wleft').val('0px');
+            $('#wright').val('0px');
+        } else if ($('#wposition').val() == 'bottom_dynamic_smart') {
+            $('#wtop').val('inherit');
+            $('#wbottom').val('0px');
+            $('#wleft').val('0px');
+            $('#wright').val('0px');
+        } else if ($('#wposition').val() == 'bottom_dynamic') {
+            $('#wtop').val('inherit');
+            $('#wbottom').val('0px');
+            $('#wleft').val('0px');
+            $('#wright').val('0px');
+        } else if ($('#wposition').val() == 'top') {
+            $('#wtop').val('0px');
+            $('#wbottom').val('inherit');
+            $('#wleft').val('30%');
+            $('#wright').val('inherit');
+        } else if ($('#wposition').val() == 'bottom') {
+            $('#wtop').val('inherit');
+            $('#wbottom').val('0px');
+            $('#wleft').val('30%');
+            $('#wright').val('inherit');
+        } else if ($('#wposition').val() == 'left') {
+            $('#wtop').val('45%');
+            $('#wbottom').val('inherit');
+            $('#wleft').val('0px');
+            $('#wright').val('inherit');
+        } else if ($('#wposition').val() == 'right') {
+            $('#wtop').val('45%');
+            $('#wbottom').val('inherit');
+            $('#wleft').val('inherit');
+            $('#wright').val('0px');
+        }
+        regenerate_code();
+    }
+
+    function regenerate_code(settings){
+        if (settings == undefined){         
+            settings = CallFeedGenerateSources(CurrentToken, null)[4];
+            if (CurrentSettings) { 
+                for (var key in CurrentSettings) {
+                    if (key != 'controllers') {
+                        settings[key] = CurrentSettings[key];
+                    } else {
+                        if (CurrentSettings.controllers.delayed_popup &&
+                            CurrentSettings.controllers.delayed_popup.delay) {
+                            settings.controllers.delayed_popup.delay = CurrentSettings.controllers.delayed_popup.delay;
+                        }
+                    }
+                };
+            }
+        }
+
+        // main
+        if ($('#wposition').val() == "")
+            $('#wposition').val(settings.position);
+        if ($('#wfooter_id').val() == "")
+            $('#wfooter_id').val(settings.footer_id);
+        if ($('#wcookie_ttl_seconds').val() == "")
+            $('#wcookie_ttl_seconds').val(settings.cookie_ttl_seconds);
+        if ($('#wcountdown_value').val() == "")
+            $('#wcountdown_value').val(settings.countdown_from);
+
+        // controllers
+        if ($('#wcontroller1delay').val() == "") 
+            $('#wcontroller1delay').val(settings.controllers.delayed_popup.delay);
+
+        // width
+        if ($('#wwidth').val() == "")
+            $('#wwidth').val(settings.width);
+        if ($('#wpicture_width').val() == "")
+            $('#wpicture_width').val(settings.picture_width);
+        if ($('#wright_offset').val() == "")
+            $('#wright_offset').val(settings.right_offset);
+        if ($('#wcountdown_width').val() == "")
+            $('#wcountdown_width').val(settings.countdown_width);
+        if ($('#wtimeinput_width').val() == "")
+            $('#wtimeinput_width').val(settings.time_input_width);
+            
+        // height
+        if ($('#wheight').val() == "")
+            $('#wheight').val(settings.height);
+        if ($('#wpicture_height').val() == "")
+            $('#wpicture_height').val(settings.picture_height);
+        if ($('#wphone_input_height').val() == "")
+            $('#wphone_input_height').val(settings.phone_input_height);
+        if ($('#wcountdown_height').val() == "")
+            $('#wcountdown_height').val(settings.countdown_height);
+        if ($('#wsubmit_button_height').val() == "")
+            $('#wsubmit_button_height').val(settings.submit_button_height);
+        if ($('#wsubmit_button_line_height').val() == "")
+            $('#wsubmit_button_line_height').val(settings.submit_button_line_height);
+
+        // position
+        if ($('#wtop').val() == "")
+            $('#wtop').val(settings.content_top);
+        if ($('#wbottom').val() == "")
+            $('#wbottom').val(settings.content_bottom);
+        if ($('#wleft').val() == "")
+            $('#wleft').val(settings.content_left);
+        if ($('#wright').val() == "")
+            $('#wright').val(settings.content_right);
+
+        // paddings
+        if ($('#wpadding_left_right').val() == "")
+            $('#wpadding_left_right').val(settings.padding_left_right);
+        if ($('#wpadding_top_bottom').val() == "")
+            $('#wpadding_top_bottom').val(settings.padding_top_bottom);
+            
+        // colors
+        if ($('#wcolor').val() == "")
+            $('#wcolor').val(settings.bg_color);
+        if ($('#wborder_color').val() == "")
+            $('#wborder_color').val(settings.border_color);
+        if ($('#wtext_color').val() == "")
+            $('#wtext_color').val(settings.text_color);
+        if ($('#wlink_color').val() == "")
+            $('#wlink_color').val(settings.links_color);
+        if ($('#wbuttons_color').val() == "")
+            $('#wbuttons_color').val(settings.buttons_color);
+        if ($('#wbuttons_border_color').val() == "")
+            $('#wbuttons_border_color').val(settings.buttons_border_color);
+        if ($('#wbuttons_text_color').val() == "")
+            $('#wbuttons_text_color').val(settings.buttons_text_color);
+        if ($('#wnotify_area_color').val() == "")
+            $('#wnotify_area_color').val(settings.notify_area_color);
+        
+        // fonts
+        if ($('#wfont_family1').val() == "")
+            $('#wfont_family1').val(settings.font_family1);
+        if ($('#wfont_family2').val() == "")
+            $('#wfont_family2').val(settings.font_family2);
+        if ($('#wfont_family3').val() == "")
+            $('#wfont_family3').val(settings.font_family3);
+        if ($('#wfont_url1').val() == "")
+            $('#wfont_url1').val(settings.font_url1);
+        if ($('#wfont_url2').val() == "")
+            $('#wfont_url2').val(settings.font_url2);
+        if ($('#wfont_url3').val() == "")
+            $('#wfont_url3').val(settings.font_url3);
+            
+        // text
+        if ($('#wtext').val() == "")
+            $('#wtext').val(settings.text_main);
+        if ($('#wtext_ok').val() == "")
+            $('#wtext_ok').val(settings.text_ok);
+        if ($('#wtext_timeout').val() == "")
+            $('#wtext_timeout').val(settings.text_timeout);
+        if ($('#wtext_free').val() == "")
+            $('#wtext_free').val(settings.text_free);
+        if ($('#wtext_dayoff').val() == "")
+            $('#wtext_dayoff').val(settings.text_dayoff);
+        if ($('#wtext_error').val() == "")
+            $('#wtext_error').val(settings.text_error);
+        if ($('#wtext_call').val() == "")
+            $('#wtext_call').val(settings.text_call);
+        if ($('#wtext_close').val() == "")
+            $('#wtext_close').val(settings.text_close);
+            
+        // main
+        settings.token = CurrentToken; 
+        settings.position = $('#wposition').val();
+        settings.footer_id = $('#wfooter_id').val();
+        settings.cookie_ttl_seconds = parseInt($('#wcookie_ttl_seconds').val());
+        settings.countdown_from = parseInt($('#wcountdown_value').val());
+
+        // controllers
+        if (settings.controllers.delayed_popup) {
+            settings.controllers.delayed_popup.delay = parseInt($('#wcontroller1delay').val());
+        }
+        /*
+        settings.controllers = {
+            delayed_popup: {
+                delay: parseInt($('#wcontroller1delay').val())
+            }
+        };
+        */
+        
+        // width
+        settings.width = parseInt($('#wwidth').val());
+        settings.picture_width = parseInt($('#wpicture_width').val());
+        settings.right_offset = parseInt($('#wright_offset').val());
+        settings.countdown_width = parseInt($('#wcountdown_width').val());
+        settings.time_input_width = parseInt($('#wtimeinput_width').val());
+        
+        // height
+        settings.height = parseInt($('#wheight').val());
+        settings.picture_height = parseInt($('#wpicture_height').val());
+        settings.phone_input_height = parseInt($('#wphone_input_height').val()); 
+        settings.countdown_height = parseInt($('#wcountdown_height').val());
+        settings.submit_button_height = parseInt($('#wsubmit_button_height').val()); 
+        settings.submit_button_line_height = parseInt($('#wsubmit_button_line_height').val()); 
+        
+        // position
+        settings.content_top = $('#wtop').val();
+        settings.content_bottom = $('#wbottom').val();
+        settings.content_left = $('#wleft').val();
+        settings.content_right = $('#wright').val();
+        
+        // paddings
+        settings.padding_left_right = parseInt($('#wpadding_left_right').val()); 
+        settings.padding_top_bottom = parseInt($('#wpadding_top_bottom').val());
+        
+        // colors
+        settings.bg_color = $('#wcolor').val();
+        settings.border_color = $('#wborder_color').val();
+        settings.text_color = $('#wtext_color').val();
+        settings.links_color = $('#wlink_color').val();
+        settings.buttons_color = $('#wbuttons_color').val();
+        settings.buttons_border_color = $('#wbuttons_border_color').val();
+        settings.buttons_text_color = $('#wbuttons_text_color').val();
+        settings.notify_area_color = $('#wnotify_area_color').val();
+        
+        // fonts 
+        settings.font_family1 = $('#wfont_family1').val();
+        settings.font_family2 = $('#wfont_family2').val();
+        settings.font_family3 = $('#wfont_family3').val();
+        settings.font_url1 = $('#wfont_url1').val();
+        settings.font_url2 = $('#wfont_url2').val();
+        settings.font_url3 = $('#wfont_url3').val();
+        
+        // text
+        settings.text_main = $('#wtext').val();
+        settings.text_ok = 'Мы рады живому общению с нашими клиентами!';
+        settings.text_timeout = 'Извините, мы не успели вам перезвонить! Мы предоставим вам скидку!';
+        settings.text_free = 'Введите свой номер телефона. Наш менеджер перезвонит вам в указанное время.';
+        settings.text_dayoff = 'Введите свой номер телефона, наш менеджер перезвонит вам в указанное время в ближайший рабочий день.';
+        settings.text_error = 'Сожалеем! Сервис в данный момент недоступен, свяжитесь с нами по электронной почте.';
+        settings.text_call = 'Жду звонка!';
+        settings.text_close = 'Закрыть';
+
+        // just to not forget to skip comma at the end
+        settings.the_last = true;
+    
+        debug.log("Modified:", settings);
+        $("#id_settings").val(JSON.stringify(settings));
+    };
+
+    function update_view() {
+        if (CurrentToken != undefined) {
+            var current_settings_src = $("#id_settings").val();
+            CurrentSettings = JSON.parse(current_settings_src);
+            debug.log("Loaded:", CurrentSettings);
+            $("#widget_settings").show();
+            var sources = CallFeedGenerateSources(CurrentToken, CurrentSettings);
+            $("#fullsource").html(sources[3]);
+        } else {
+            $("#widget_settings").hide();
+            var sources = CallFeedGenerateSources(null, null);
+            var new_settings = sources[4];
+            debug.log("Generated:", new_settings);
+            $("#id_settings").val(JSON.stringify(new_settings));
+        }
+        
+        change_position();
+        regenerate_code();
+    };
+     
+
+	$(document).ready(function() {
+	    update_view();
+	});
+
+</script>

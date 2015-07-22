@@ -1,0 +1,5 @@
+#!/bin/bash
+
+grepnkill uwsgi
+redis-cli shutdown
+supervisorctl stop huey

@@ -1,0 +1,43 @@
+<div class="manager-info row">
+    <div class="phone_type col s2">
+{#        <label>Тип телефона</label>#}
+        <select> {# class="browser-default" #}
+            <option value="" disabled selected>Тип номера</option>
+            <option value="1">Обычный</option>
+            <option value="2">SIP</option>
+        </select>
+    </div>
+    <div class="phone_country col s2">
+{#        <label>Страна</label>#}
+        <select> {# class="browser-default" #}
+            <option value="" disabled selected>Страна</option>
+            <option value="1">Россия</option>
+            <option value="2">Испания</option>
+        </select>
+    </div>
+    <div class="input-field col s3">
+        <input type="tel" id="phone_number" class="validate"/>
+        <label for="phone_number">Телефон</label>
+    </div>
+    <div class="input-field col s3">
+        <input type="tel" id="phone_number_additional" class="validate"/>
+        <label for="phone_number_additional">Доп. телефон</label>
+    </div>
+    <div class="input-field col s1"> {# Активен ли #}
+        <input type="checkbox" id="phone_is_active"/>
+        <label for="phone_is_active"> </label>
+    </div>
+    <div class="input-field col s1">
+        <a class="remove-icon">&times;</a> {# Удалить #}
+    </div>
+    <div class="col s12"></div>
+    <div class="input-field col s6">
+        <input type="text" id="manager_name" class="validate"/>
+        <label for="manager_name">Имя</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" id="manager_department" class="validate"/>
+        <label for="manager_department">Отдел</label>
+    </div>
+    <div class="col s12"><br/></div>
+</div>

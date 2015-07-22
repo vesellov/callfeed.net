@@ -1,0 +1,8 @@
+# To run celery beat monitor, type:
+./../bin/python manage.py celery beat --loglevel=info
+# i18 - make translations for given languages:
+./../bin/django-admin makemessages -l ru
+# Update i18n & i10n resources:
+./../bin/django-admin makemessages -a
+# Compile messages:
+./../bin/django-admin compilemessages

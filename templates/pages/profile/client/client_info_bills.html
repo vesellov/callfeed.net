@@ -1,0 +1,81 @@
+{% extends 'pages/profile/client/profile_client_info.html' %}
+
+{% block page_title %}
+{% endblock %}
+
+{% block page_content %}
+    <div style="margin-top: -50px">
+        <div class="row">
+            <div class="col-lg-6 pull-left">
+                <h4><b>Счета</b></h4>
+            </div>
+            <div class="pull-right disabled">
+                <span style="line-height: 40px" class="align-right">Экспорт: <a href="#!" class="text-gray">XLS</a>  <a class="text-gray" href="#!">XML</a></span>
+            </div>
+        </div>
+        <br/>
+        {% if 'cashless_payment_request_received' in request.GET or 'electron_payment_accepted' in request.GET or 'payment_failed' in request.GET %}
+            {% if 'payment_failed' in request.GET %}
+                <div style="background-color: #F8CECC; border: 1px solid #000; padding: 10px" class="text-center">
+                    <p>
+                        Платёж не прошёл. Попробуйте повторить попытку оплаты. Если вы видите это сообщение не в первый раз, пожалуйста, свяжитесь с администрацией сайта.
+                    </p>
+                </div>
+            {% else %}
+                <div style="background-color: #D5e8d4; border: 1px solid #000; padding: 10px" class="text-center">
+                    <p>
+                        {% if 'electron_payment_accepted' in request.GET %}
+                            Платёж принят! Купленные минуты зачислены на Ваш счёт.
+                        {% else %}
+                            Заявка принята, в течение 10 минут с Вами свяжется менеджер для выставления счёта!
+                        {% endif %}
+                    </p>
+                </div>
+            {% endif %}
+            <div class="col-lg-12">&nbsp;</div>
+        {% endif %}
+        <table class="table table-bordered-cells">
+            <tr class="text-center">
+                <th>Номер</th>
+                <th>Дата</th>
+                <th>Минуты</th>
+                <th>Сумма (руб)</th>
+                <th>Способ</th>
+                <th>Статус</th>
+                <th>Акт</th>
+            </tr>
+            {% load filters %}
+            {% for bill in bills %}
+                <tr class="text-center">
+                    <td>{{ bill.id }}</td>
+                    <td>{{ bill.when|date:'d.m.Y' }}</td>
+                    <td>{{ bill.minutes }}</td>
+                    <td>{{ bill.sum }}</td>
+                    <td>{{ bill.payment_method|get_nice_payment_method_title }}</td>
+                    <td>
+                        {{ bill.status|get_nice_bill_status_title }}<br/>
+                        {% if bill|whether_payment_method_is_electron_and_unpaid == True %}
+                            <a class="disabled text-gray" href="javascript:void(0);"><u>Оплатить</u></a>
+                        {% endif %}
+                    </td>
+                    <td><a href="/profile/client/info/bills/request_act?bill_id={{ bill.id }}"><u>Запросить акт</u></a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">
+                        <span>&mdash;</span>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_bills';
+        var active_page = 'page_info';
+    </script>
+
+    {{ block.super }}
+{% endblock %}

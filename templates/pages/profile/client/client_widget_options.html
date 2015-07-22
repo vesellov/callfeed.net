@@ -1,0 +1,219 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Основные настройки виджета
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        {% if options_form.has_errors %}
+            <div class="col-lg-12">
+                <b>{{ options_form.errors }}</b>
+                <b class="text-red">Не все обязательные поля заполнены. Пожалуйста, убедитесь, что соблюдены все требования к заполнению формы</b>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        {% endif %}
+
+        {{ options_form.widget_id }}
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>Адрес сайта</b><br/>
+                    <span>Укажите адрес сайта, на который будет установлен виджет</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ options_form.site_url }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>Часовой пояс</b><br/>
+                    <span>По данному часовому поясу ббут отображаться время отправки оффлайн-сообщений и сообщений в чате. Так же, согласно этому часовому поясу будет рассчитываться и отправляться на email еежедневная статистика по работе операторов.</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {{ options_form.timezone }}
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ options_form.is_operator_shown_in_widget.label }}</b><br/>
+                    <span>Отметте данную опцию, если хотите, чтобы информация об операторе по умолчанию(должность и фото) отображались в виджете</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {{ options_form.is_operator_shown_in_widget }} <a href="" class="disabled"><u>Показывать</u></a>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>График отдела продаж</b><br/>
+                    <span>Утвердите график работы вашего отдела продаж</span>
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <table class="table table-bordered-lines">
+                <colgroup>
+                    <col class="col-lg-4"/>
+                    <col class="col-lg-8"/>
+                </colgroup>
+                <tr>
+                    <td class="text-left" colspan="2">{{ options_form.weekdays_have_same_schedule }} Будние дни по одному графику</td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.monday_flag }} {{ options_form.monday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.monday_from }} По {{ options_form.monday_to }}</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.tuesday_flag }} {{ options_form.tuesday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.tuesday_from }} По {{ options_form.tuesday_to }}</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.wednesday_flag }} {{ options_form.wednesday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.wednesday_from }} По {{ options_form.wednesday_to }}</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.thursday_flag }} {{ options_form.thursday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.thursday_from }} По {{ options_form.thursday_to }}</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.friday_flag }} {{ options_form.friday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.friday_from }} По {{ options_form.friday_to }}</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.saturday_flag }} {{ options_form.saturday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.saturday_from }} По {{ options_form.saturday_to }}</span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">{{ options_form.sunday_flag }} {{ options_form.sunday_flag.label}}</td>
+                    <td><span class="pull-right">С {{ options_form.sunday_from }} По {{ options_form.sunday_to }}</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>Входящие звонки</b><br/>
+                    <span>Отметьте операторов, которые будут отвечать за приём звонков от клиентов(обязательно должен быть выбран хотя бы один оператор)</span>
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <table class="table table-bordered-cells">
+                <colgroup>
+                    <col width="100px"/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="200px"/>
+                </colgroup>
+                {% load filters %}
+                {% for radio_choice, checkbox_choice, operator in options_form.operator_by_default_choices, options_form.related_operators, options_form.operators %}
+                    <tr>
+                        <td>{{ checkbox_choice }} <a href="" class="disabled"><u>Выбрать</u></a></td>
+                        <td>{{ operator.name }}</td>
+                        <td>{{ operator.position }}</td>
+                        <td>{{ operator.phone_number }}</td>
+                        <td>{{ radio_choice }} <a href="" class="disabled"><u>Оператор по умолчанию</u></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_options';
+        var active_page = 'page_widgets';
+    </script>
+    <script>
+        $(function () {
+            var weekDaysFlagIds = ['#id_monday_flag', '#id_tuesday_flag', '#id_wednesday_flag',
+                    '#id_thursday_flag', '#id_friday_flag'];
+            var weekDaysFromIds = ['#id_monday_from', '#id_tuesday_from', '#id_wednesday_from',
+                        '#id_thursday_from', '#id_friday_from'];
+            var weekDaysToIds = ['#id_monday_to', '#id_tuesday_to', '#id_wednesday_to',
+                        '#id_thursday_to', '#id_friday_to'];
+            var weekdaysHaveSameSchedule = false;
+
+            function checkIfWeekdaysHaveSameSchedule() {
+                var sample = $(weekDaysFromIds[0]).val() + $(weekDaysToIds[0]).val() + $(weekDaysFlagIds[0]).is(':checked');
+
+                for (var i = 1; i < weekDaysFromIds.length; i++) {
+                    var current = $(weekDaysFromIds[i]).val() + $(weekDaysToIds[i]).val() + $(weekDaysFlagIds[i]).is(':checked');
+
+                    if (current !== sample) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            function setWeekdaysValue(from, to, flag) {
+
+                for (var i = 1; i < weekDaysFromIds.length; i++) {
+                    $(weekDaysFromIds[i]).val(from);
+                    $(weekDaysToIds[i]).val(to);
+                    $(weekDaysFlagIds[i]).prop('checked', flag);
+                }
+            }
+
+            function toggleWeekVisibility(hidden) {
+                console.log('hidden: ', hidden);
+
+                var from = $(weekDaysFromIds[0]).val(), to = $(weekDaysToIds[0]).val(),
+                        flag = $(weekDaysFlagIds[0]).is(':checked');
+
+                for (var i = 1; i < weekDaysFlagIds.length; i++) {
+                    if (hidden) {
+                        $(weekDaysFlagIds[i]).parent('td').parent('tr').hide();
+                    } else {
+                        $(weekDaysFlagIds[i]).parent('td').parent('tr').show();
+                    }
+                }
+
+                    setWeekdaysValue(from, to, flag);
+            }
+
+            weekdaysHaveSameSchedule = checkIfWeekdaysHaveSameSchedule();
+            toggleWeekVisibility(weekdaysHaveSameSchedule);
+            $('#id_weekdays_have_same_schedule').prop('checked', weekdaysHaveSameSchedule);
+
+            $('#id_weekdays_have_same_schedule').on('change', function() {
+                if ($(this).is(':checked')) {
+                    toggleWeekVisibility(true);
+                } else {
+                    toggleWeekVisibility(false);
+                }
+            });
+        });
+    </script>
+    <script>
+        var trs = $('table tr');
+
+        if (trs.length === 1) {
+            $(trs).addClass('disabled');
+        }
+    </script>
+    {{ block.super }}
+{% endblock %}

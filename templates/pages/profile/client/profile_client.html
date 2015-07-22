@@ -1,0 +1,15 @@
+{% extends 'base_profile.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+
+    {% include 'parts/client_profile_navbar.html' with balance_minutes=client.balance_minutes %}
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        {{ block.super }}
+
+        $('#' + active_page).addClass('active');
+    </script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Код виджета
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <div class="row">
+                    <b>Установка кода на сайт</b><br/>
+                    <span>Для установки виджета, просто <b>вставьте данный текст</b> в тело сайта - <b>ближе к концу страницы до закрывающего тега &lt;/body&gt;</b>.</span>
+                </div>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <span class="width-100percent">
+                        <textarea name="widget_code" id="widget_code" cols="60" rows="2">{{ widget.gen_setup_code }}</textarea>
+                    </span>
+                </div>
+            </div>
+            <button type="button" id="btn_copy_code_to_clipboard">Скопировать в буфер</button>
+        </div>
+        <div class="col-lg-12">
+           	Способ вставки HTML-текста на сайт зависит от вашей CMS. 
+           	Чаще всего вы можете использовать <b>стандартный модуль</b> для простой вставки <b>HTML-текста</b> в тело сайта.
+           	Вы также можете напрямую вставить код виджета непосредственно <b>в исходные файлы</b> вашего сайта или <b>в файлы шаблонов</b>.
+           	Мы рекомендуем вставлять виджет <b>в "подвал"</b> сайта - тогда он будет доступен на всех страницах.    
+		</div>            
+        <div class="col-lg-12">&nbsp;</div>
+
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <div class="row">
+                    <b>Виджет с кнопки</b><br/>
+
+                    <span>Вы можете разместить кнопку виджета в любом месте Вашего сайта. Настройте внешний вид кнопки,
+                        скопируйте HTML-код и вставьте его в нужном месте сайта. Перед размещением кнопки убедитесь, что
+                        Вы установили основной код Callfeed. Размещение кнопки на сайте необязательно, Вы можете ограничиться
+                        только установкой кода на сайт</span>
+                </div>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <span class="width-100percent">
+                        <textarea name="widget_button_code" id="widget_button_code" cols="60" rows="1">{{ site_url }}#callfeed</textarea><br/>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+            <button type="button" id="btn_copy_button_code_to_clipboard">Скопировать в буфер</button>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>Отправьте веб-мастеру на email</b><br/>
+                    <span>Вы можете отправить инструкцию по установке виджета своему программисту на электронную почту</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="col-lg-12">
+                    <input name="notification_email" type="text" placeholder="Email веб-мастера"/>
+                </div>
+                <div class="col-lg-12">&nbsp;</div>
+                <div class="col-lg-12">
+                    <input type="submit" class="btn-green" value="Отправить"/>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_code';
+        var active_page = 'page_widgets';
+    </script>
+
+    {{ block.super }}
+
+    <script>
+        function copyToClipboard (text) {
+            window.prompt ("Чтобы скопировать текст в буфер обмена, нажмите Ctrl+C и Enter", text);
+        }
+
+        $('#btn_copy_code_to_clipboard').click(function() {
+            copyToClipboard($('#widget_code').text());
+        });
+        $('#btn_copy_button_code_to_clipboard').click(function() {
+            copyToClipboard($('#widget_button_code').text());
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Параметры
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        {% if options_form.has_errors %}
+            <div class="col-lg-12">
+                <b>{{ options_form.errors }}</b>
+                <b class="text-red">Не все обязательные поля заполнены. Пожалуйста, убедитесь, что соблюдены все требования к заполнению формы</b>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        {% endif %}
+
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.popup_time_sec.label }}</b><br/>
+                    <span>Здесь вы можете изменить задержку в секундах перед тем как виджет автоматически будет показан на экране.
+                    Виджет автоматически всплывет только при первом посещении сайта.
+                    Если вы установите значение равное "0", то эта функция будет отключена и виджет
+                    не будет автоматически всплывать при первом посещении сайта.
+                    Посетитель всегда может использовать кнопку или ссылку на сайте для вызова виджета.</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ parameters_form.popup_time_sec }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.time_before_callback_sec.label }}</b><br/>
+                    <span>Укажите время, за которое виджет должен соединить пользователя сайта с оператором(от 8 до 60 сек.)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ parameters_form.time_before_callback_sec }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.operator_incoming_number.label }}</b><br/>
+                    <span>Укажите номер телефона, который будет видеть оператор при входящем звонке(номер Callfeed или номер Клиента)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ parameters_form.operator_incoming_number }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.callback_type.label }}</b><br/>
+                    <span>Укажите сценарий, по которому будет осуществляться дозвон до операторов (поочерёдный или сразу всем)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ parameters_form.callback_type }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.speak_site_name.label }}</b><br/>
+                    <span>Голосовое вступление</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="disabled">
+                    {{ parameters_form.speak_site_name }} <a href="" class="text-gray"><u>Воспроизводить</u></a>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.geo_filter.label }}</b><br/>
+                    <span>Укажите страны, для которых нужно показывать виджет(по умолчанию, виджет будет виден посетителям из всех стран)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ parameters_form.geo_filter }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.disable_on_mobiles.label }}</b><br/>
+                    <span>Отключите виджет на мобильных устройствах, если в этом есть необходимость</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span>
+                    {{ parameters_form.disable_on_mobiles }} <a href=""><u>Отключить</u></a>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.blacklist_phones.label }}</b><br/>
+                    <span>Введите номера телефонов через запятую <br/> (например: +79201234567, +79507654321 ..)</span>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-12">&nbsp;</div>
+                <div class="width-100percent">
+                    {{ parameters_form.blacklist_phones }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ parameters_form.blacklist_ip.label }}</b><br/>
+                    <span>Введите IP-адреса через запятую <br/> (например: 123.123.123.123, 212.43.55.32 ..)</span>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-12">&nbsp;</div>
+                <div class="width-100percent">
+                    {{ parameters_form.blacklist_ip }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        {{ parameters_form.widget_id }}
+
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_parameters';
+        var active_page = 'page_widgets';
+    </script>
+
+    {{ block.super }}
+{% endblock %}

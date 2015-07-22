@@ -1,0 +1,38 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <br/>
+    <div class="container">
+        <section id="settings">
+            <div class="row">
+                <div class="col-lg-2 pull-left">
+                    {% include 'parts/profile_client_widget_sidebar.html' %}
+                </div>
+
+                <div class="col-lg-10 pull-right">
+                    <div class="panel panel-clean">
+                        <div class="panel-heading-clean">
+                            <h4>
+                                {% block page_title %}
+                                {% endblock %}
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            {% block page_content %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    {{ block.super }}
+
+    <script>
+        $('#' + active_tab).addClass('active');
+    </script>
+{% endblock %}

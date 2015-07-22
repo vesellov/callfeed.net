@@ -1,0 +1,81 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <br/>
+    <div class="container">
+        <div class="panel panel-clean">
+            <h4 class="panel-heading-clean"><b>Редактирование информации об операторе</b></h4>
+            <div class="panel-body">
+                {% if operator_form.has_errors %}
+                    <div class="col-lg-12"><span class="text-red">Все поля являются обязательными к заполнению. Пожалуйста, проверьте правильность заполнения полей формы</span></div>
+                    <div class="col-lg-12">&nbsp;</div>
+                {% endif %}
+                <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="col-lg-4">
+                        <img class="operator-photo-upload" src="{{ operator_form.photo_url.value }}" alt="Фото оператора"/><br/>
+                        <span>{{ operator_form.photo }}</span>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-lg-12">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <b>{{ operator_form.name.label }}</b><br/>
+                                    <span>Имя и фамилия оператора, которые будут отображаться в виджете</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                {{ operator_form.name }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12">&nbsp;</div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <b>{{ operator_form.position.label }}</b><br/>
+                                    <span>Должность оператора, которая будет отображена рядом с именем оператора</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                {{ operator_form.position }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12">&nbsp;</div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <b>{{ operator_form.phone_number.label }}</b><br/>
+                                    <span>Номер телефона оператора, на который будут приниматься звонки от посетителей сайта</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                {{ operator_form.phone_number }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12">&nbsp;</div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <b>{{ operator_form.email.label }}</b><br/>
+                                    <span>Электронная почта оператора, на которую будут приходить уведомления и сообщения</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                {{ operator_form.email }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12">&nbsp;</div>
+
+                        {{ operator_form.operator_id }}
+                    </div>
+                    <div class="col-lg-12 voffset3">
+                        <input class="btn-green" type="submit" value="Сохранить"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <div class="container">
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="row">
+            <h4><b>Выберите способ оплаты</b></h4>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="row">
+                <form action="/profile/client/payment/make" method="post">{% csrf_token %}
+                    <table class="table table-bordered-cells">
+                        <tr>
+                            <th>Минуты</th>
+                            <th>Тариф(руб/мин)</th>
+                            <th>Сумма</th>
+                            <th>Способ оплаты</th>
+                        </tr>
+                        <tr>
+                            <td>{{ tariff.minutes }}</td>
+                            <td>{{ tariff.price_per_minute }}</td>
+                            <td>{{ sum }}</td>
+                            <td>{{ choose_payment_method_form.payment_method }}</td>
+                        </tr>
+                    </table>
+
+                    {{ choose_payment_method_form.tariff_id }}
+                    <input class="btn-green" type="submit" value="Оплатить"/>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

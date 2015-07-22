@@ -1,0 +1,16 @@
+{% extends 'base_profile.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <div class="container">
+        <h4 class="center">administrative manager profile page</h4>
+        <div class="center">
+            <h5 class="center">Resellers list</h5>
+            {% for reseller in resellers %}
+                <b>{{ reseller.name }}</b>
+            {% empty %}
+                <b>You have no resellers</b>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

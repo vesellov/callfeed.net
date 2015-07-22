@@ -1,0 +1,196 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block options_sidebar %}
+{% endblock %}
+
+{% block body_content %}
+    {{ block.super }}
+    <br/>
+    <div class="container">
+        <section id="filters">
+            <div class="panel panel-clean">
+                <div class="panel-heading-clean">
+                    <div class="row">
+                        <div class="col-lg-6 pull-left">
+                            <h4><b>Входящие звонки от клиентов</b></h4>
+                        </div>
+                        <div class="pull-right disabled">
+                            <span style="line-height: 40px" class="align-right">Экспорт: <a href="#!" class="text-gray"><u>XLS</u></a>  <a class="text-gray" href="#!"><u>XML</u></a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form action="/profile/client/callbacks" method="post">{% csrf_token %}
+                        <div class="row">
+                            <table class="table table-bordered-cells text-center">
+                                <colgroup>
+                                    <col/>
+                                    <col/>
+                                    <col/>
+                                    <col/>
+                                    <col width="250px"/>
+                                    <col/>
+                                </colgroup>
+                                <tr class="filter-date-fields hidden-radio">
+                                    <td>{{ filter_form.date_choices.0 }}</td>
+                                    <td>{{ filter_form.date_choices.1 }}</td>
+                                    <td>{{ filter_form.date_choices.2 }}</td>
+                                    <td>{{ filter_form.date_choices.3 }}</td>
+                                    <td>{{ filter_form.from_date }} &mdash; {{ filter_form.to_date }}</td>
+                                    <td><span class="width-100percent">{{ filter_form.site_choices }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" class="text-left">
+                                        <div class="col-lg-6 pull-left">
+                                            <label style="margin-top: 5px">{{ filter_form.planned }} {{ filter_form.planned.label }}</label>
+                                        </div>
+                                        <input class="pull-right btn-purple" type="submit" value="Показать">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="contents">
+                <table class="table table-bordered-cells">
+                    <tr>
+                        <th>URL <br/> виджета</th>
+                        <th>Источник <br/> перехода</th>
+                        <th>Время</th>
+                        <th>Номер <br/> клиента</th>
+                        <th>Номер <br/> оператора</th>
+                        <th>Длительность</th>
+                        <th>IP, Регион</th>
+                        <th>Статус звонка</th>
+                    </tr>
+                    {% load filters %}
+
+                    {% for when in callbacks.keys %}
+                        <tr style="background-color: #FFF4C3">
+                            <td class="text-left" colspan="8">
+                                <b>{{ when|date:"d.m.Y" }}</b>
+                            </td>
+                        </tr>
+                        {% for callback in callbacks|get_item:when %}
+                            {% load filters %}
+                            <tr>
+                                <td>{{ callback.widget.site_url }}</td>
+                                <td>{% if callback.referer != '' %}{{ callback.referer }}{% else %}&mdash;{% endif %}</td>
+                                <td>{{ callback.when|date:'H:i' }}</td>
+                                <td>{% if callback.phone_number_side_b != '' %}{{ callback.phone_number_side_b }}{% else %}&mdash;{% endif %}</td>
+                                <td>{% if callback.phone_number_side_a != '' %}{{ callback.phone_number_side_a }}{% else %}&mdash;{% endif %}</td>
+                                <td>{{ callback.real_length_a_sec|add:callback.real_length_b_sec|turn_sec_to_min }}</td>
+                                <td>{{ callback.ip_side_b }}, {{ callback.geodata_side_b }}</td>
+                                <td class="callback-status-{{ callback.callback_status }}">{{ callback.callback_status|get_nice_callback_status }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="8">
+                                    <span>&mdash;</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">
+                                <span>&mdash;</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+        </section>
+
+        <section id="stats">
+            <span>Всего звонков: {{ callbacks_count }}</span><br/>
+            <span>Общее время с учётом округления: {{ callbacks_total_time_min }} мин.</span><br/>
+            <span>Среднее время разговора: {{ callbacks_average_time_min }} мин.</span><br/>
+            <div class="col-lg-12">&nbsp;</div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var fieldFromDate = $('#id_from_date'),
+            fieldToDate = $('#id_to_date'),
+            now = new Date();
+
+        function formatDate(dt) {
+            return dt.getDate() + '.' + (dt.getMonth() >= 0 && dt.getMonth() <= 9?'0':'') +(dt.getMonth() + 1) + '.' + dt.getFullYear();
+        }
+
+        function setDateToday() {
+            var nowStr = formatDate(now);
+
+            fieldFromDate.val(nowStr);
+            fieldToDate.val(nowStr);
+        }
+
+        function setDateYesterday() {
+            var yesterday = new Date(now);
+            yesterday.setDate(now.getDate() - 1);
+            var yesterdayStr = formatDate(yesterday);
+
+            fieldFromDate.val(yesterdayStr);
+            fieldToDate.val(yesterdayStr);
+        }
+
+        function setDateWeek() {
+            var weekAgo = new Date(now);
+            weekAgo.setDate(now.getDate() - 7);
+            var weekAgoStr = formatDate(weekAgo);
+            var nowStr = formatDate(now);
+
+            fieldFromDate.val(weekAgoStr);
+            fieldToDate.val(nowStr);
+        }
+
+        function setDateMonth() {
+            var monthAgo = new Date(now);
+            monthAgo.setMonth(now.getMonth() - 1);
+            var monthAgoStr = formatDate(monthAgo);
+            var nowStr = formatDate(now);
+
+            fieldFromDate.val(monthAgoStr);
+            fieldToDate.val(nowStr);
+        }
+
+        $('#id_date_choices_0').click(setDateToday);
+        $('#id_date_choices_1').click(setDateYesterday);
+        $('#id_date_choices_2').click(setDateWeek);
+        $('#id_date_choices_3').click(setDateMonth);
+
+        (function() {
+            var checkedValue = $('input[name=date_choices]:checked').val();
+
+            switch (checkedValue) {
+                case 'date_today':
+                    setDateToday();
+                    break;
+                case 'date_yesterday':
+                    setDateYesterday();
+                    break;
+                case 'date_week':
+                    setDateWeek();
+                    break;
+                case 'date_month':
+                    setDateMonth();
+                    break;
+            }
+        })();
+    </script>
+    <script>
+        $('input[type="radio"]:checked').parent().addClass('text-purple');
+        $('input[type="radio"]').on('change', function(e) {
+            $('input[type="radio"]').parent().removeClass('text-purple');
+            $('input[type="radio"]:checked').parent().addClass('text-purple');
+        });
+    </script>
+    <script>
+        var active_page = 'page_callbacks';
+    </script>
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js" language="JavaScript" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>CallFeed</title>
+    {% load staticfiles %}
+    {#    <link href="{% static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>#}
+    {#    <link href="{% static 'css/fonts.css' %}" type="text/css"  rel="stylesheet" media="screen,projection"/>#}
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+    {% block header %}
+        {% include 'parts/header.html' %}
+    {% endblock %}
+
+    {% block body_content %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'parts/footer.html' %}
+    {% endblock %}
+
+    <!--  Scripts-->
+    <script src="{% static 'js/ba-debug.js' %}"></script>
+{#    <script src="{% static 'js/materialize.js' %}"></script>#}
+{#    <script src="{% static 'js/init.js' %}"></script>#}
+{#    <script src="{% static 'js/main.js' %}"></script>#}
+    <script src="{% static 'js/bootbox.min.js' %}"></script>
+    <script>
+        var phoneNumberElements = $('.phone-number');
+        phoneNumberElements.on('focus',
+            function() {
+                if (this.value === '') {
+                    this.value = '+7';
+                }
+            }
+        );
+        phoneNumberElements.on('keyup',
+            function () {
+                if (this.value === '') {
+                    this.value = '+';
+                }
+            }
+        );
+    </script>
+    {% block additional_js %}
+    {% endblock %}
+</body>
+</html>

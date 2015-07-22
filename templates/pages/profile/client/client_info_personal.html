@@ -1,0 +1,88 @@
+{% extends 'pages/profile/client/profile_client_info.html' %}
+
+{% block page_title %}
+Личные данные
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>Ваше имя</b><br/>
+                    <span>Напишите Ваше имя для обращения к Вам(обязательно)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ personal_form.name }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>Ваш email</b><br/>
+                    <span>Укажите Ваш контактный email для связи с Вами(обязательно)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ personal_form.email }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>Ваш телефон</b><br/>
+                    <span>Укажите Ваш контактный номер телефона для связи с Вами(обязательно)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ personal_form.phone_number }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ personal_form.receive_email_notifications_flag.label }}</b><br/>
+                    <span>Снимите галочку, если не хотите получать уведомления</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {{ personal_form.receive_email_notifications_flag }} <a href=""><u>Получать</u></a>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ personal_form.receive_sms_notifications_flag.label }}</b><br/>
+                    <span>Снимите галочку, если не хотите получать уведомления</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {{ personal_form.receive_sms_notifications_flag }} <a href=""><u>Получать</u></a>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_personal';
+        var active_page = 'page_info';
+    </script>
+
+    {{ block.super }}
+{% endblock %}

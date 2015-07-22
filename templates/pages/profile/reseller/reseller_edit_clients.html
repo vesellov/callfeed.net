@@ -1,0 +1,20 @@
+{% extends 'base_profile.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <h3 class="center">Add a new client</h3>
+
+    <div class="container row">
+        <div class="col s6">
+            <h4 class="center">Add a new client</h4>
+
+            <form action="/profile/reseller/edit_clients" method="post">{% csrf_token %}
+                {{ add_client_form.as_p }}
+                <input type="submit" value="SAVE" class="btn"/>
+            </form>
+        </div>
+        <div class="col s6">
+            {% include 'parts/reseller_clients_list.html' %}
+        </div>
+    </div>
+{% endblock %}

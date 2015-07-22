@@ -1,0 +1,33 @@
+<form action="/accounts/register_client" method="post" class="row" id="registrationForm">{% csrf_token %}
+    <div class="col s12 m12">
+        <div class="card white">
+            <div class="card-content teal-text">
+                <span class="card-title col s12 m10 text-info teal-text">Регистрация</span>
+                <a class="card-title teal-text right" href="javascript: showForm('registration', true);">&times;</a>
+                <div class="input-field col s12">
+                    <input id="site_address" name="site_address" type="url" class="validate" onfocus="if ($(this).val() == '') { $(this).val('http://'); };" >
+                    <label for="site_address">Сайт</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="name" name="name" type="text" class="validate">
+                    <label for="name">Ваше имя</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="registration_email" name="email" type="email" class="validate">
+                    <label for="registration_email">Email</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="phone" name="phone" type="tel" class="validate">
+                    <label for="phone">Мобильный телефон</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="registration_password" name="password" type="password" class="validate">
+                    <label for="registration_password">Пароль</label>
+                </div>
+                <div id="registrationFormSubmit" class="center">
+                    <input type="submit" class="btn center" value="Продолжить">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

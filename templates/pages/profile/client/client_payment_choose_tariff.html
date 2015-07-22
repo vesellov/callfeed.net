@@ -1,0 +1,22 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <div class="container">
+        <div class="col-lg-12">&nbsp;</div>
+        <h4><b>Пополнение минут</b></h4>
+        <div class="col-lg-12">&nbsp;</div>
+
+        {% for choose_tariff_form in choose_tariff_forms %}
+            <div style="width: 200px; height: 170px; display: inline-block; border: 1px solid black; margin-bottom: 17px; margin-right: 17px">
+                <form action="/profile/client/payment/choose_method" method="post">{% csrf_token %}
+                    <h1 class="text-center"><b>{{ choose_tariff_form.minutes }}</b></h1>
+                    <h4 class="text-center">минут</h4>
+                    <h5 class="text-center">{{ choose_tariff_form.price_per_minute }} руб./мин.</h5>
+                    {{ choose_tariff_form.tariff_id }}
+                    <input style="margin-left: 50px;" class="btn-green" type="submit" value="Выбрать"/>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

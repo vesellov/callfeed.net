@@ -1,0 +1,33 @@
+{% block pre_nav_block %}
+    <div id="forms">
+        {% include 'forms/login.html' %}
+        {% include 'forms/registration.html' %}
+    </div>
+{% endblock %}
+{% load staticfiles %}
+<nav class="navbar-color white-text" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo left"><img style="padding-top: 7px;" src="{% static 'img/landing/logo.png' %}" alt="callfeed"></a>
+        <ul class="right">
+            {% block navbar_content %}
+                {% if user.is_authenticated %}
+                    <li><span id="user_name_and_id">{{ user.first_name }} {{ user.last_name }} (ID {{ user.id }})</span></li>
+                    <li><a href="/accounts/logout">Выйти</a></li>
+                {% else %}
+                    <li><a href="/technologies">Технологии</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/blog">Блог</a></li>
+{#                    <li><a href="javascript:showForm('login');">Вход</a></li>#}
+                    <li><a href="/accounts/login">Вход</a></li>
+                {% endif %}
+            {% endblock %}
+        </ul>
+
+{#        <ul id="nav-mobile" class="side-nav">#}
+{#            {% block navbar_content_mobile %}#}
+{#                <li><a href="#">Navbar Link</a></li>#}
+{#            {% endblock %}#}
+{#        </ul>#}
+{#        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>#}
+    </div>
+</nav>

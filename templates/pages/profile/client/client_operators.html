@@ -1,0 +1,76 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <br/>
+    <div class="container">
+        <section id="operatorss-list">
+            <div class="panel panel-clean">
+                <div class="panel-heading-clean">
+                    <div class="row">
+                        <div class="col-lg-6 pull-left">
+                            <h4><b>Операторы</b></h4>
+                        </div>
+                        <a style="line-height: 40px;" class="pull-right" href="/profile/client/operators/edit"><span style="line-height: 30px; color: #aaa;" class="glyphicon glyphicon-plus-sign"></span> <u>Добавить оператора</u></a>
+                    </div>
+                </div>
+{#                <div class="col-lg-12">&nbsp;</div>#}
+                <table class="table table-bordered-cells">
+                    <colgroup>
+                        <col width="78px"/>
+                        <col/>
+                        <col/>
+                        <col/>
+                        <col/>
+                        <col/>
+                    </colgroup>
+                    {% for operator in operators %}
+                        <tr class="text-center">
+                            <td><img class="operator-photo" src="{{ operator.photo_url }}" alt="Фото оператора"/></td>
+                            <td class="text-left">{{ operator.name }} <br/> <span class="text-gray">{{ operator.position }}</span></td>
+                            <td>{{ operator.phone_number }}</td>
+                            <td>{{ operator.email }}</td>
+                            <td><a href="/profile/client/operators/edit?operator_id={{ operator.id }}"><u>Редактировать</u></a></td>
+                            <td>
+                                {% if operator.is_delete_protected == False %}
+                                    <a class="text-red delete-btn" data-url="operators/delete?operator_id={{ operator.id }}" href="javascript:void(0);"><u>Удалить</u></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6">
+                                <span>У вас нет ни одного оператора</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var deleteBtnsSelector = $('.delete-btn');
+        for(var i = 0; i < deleteBtnsSelector.length; i++) {
+            (function(elem) {
+                elem.click(
+                    function(){
+                        (function() {
+                            bootbox.confirm("Вы уверены, что хотите удалить оператора?" , function(result) {
+                                if (result) {
+                                    window.location.assign(elem.data('url'));
+                                }
+                            });
+                        })()
+                    }
+                );
+            })($(deleteBtnsSelector[i]));
+        }
+    </script>
+    <script>
+        var active_page = 'page_operators';
+    </script>
+    {{ block.super }}
+{% endblock %}

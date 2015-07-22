@@ -1,0 +1,361 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Содержание
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_button.label }}</b><br/>
+                    <span>Придумайте мотивирующее название для кнопки(не более 30 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_button }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_main.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть по умолчанию при показе виджета с предложением заказать звонок(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_main }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_ready.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть в момент подготовки установления соединения(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_ready }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_start.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при осуществлении соединения с оператором(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_start }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_calling.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть во время разговора с оператором(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_calling }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_success.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при успешно установленном соединении(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_success }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_late.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть в случае, когда оператор не успел поднять трубку вовремя(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_late }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_failed.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть когда звонок не произошёл по техническим причинам(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_failed }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_dial_finished.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть после успешно оконченного звонка(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_dial_finished }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_order_start.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при заказе обратного звонка(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_order_start }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_order_done.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при успешном оформлении заказа на обратный звонок(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_order_done }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_order_failed.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть в случае неудачного заказа обратного звонка(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_order_failed }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_message_start.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть в форме отправки оффлайн-сообщения(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_message_start }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_message_sent.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при успешно завершённой отправке сообщения(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_message_sent }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_message_failed.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть в случае невозможности произвести отправку оффлайн-сообщения(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_message_failed }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_send_message_done.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при успешно совершённой отправле оффлайн-сообщения(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_send_message_done }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_timeoff_start.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при заказе обратного звонка в нерабочее время(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_timeoff_start }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_timeoff_done.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при успешном принятии заказа на обратный звонок в нерабочее время(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_timeoff_done }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_free_start.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при использовании бесплатной версии виджета(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_free_start }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_free_done.label }}</b><br/>
+                    <span>Этот текст посетители будут видеть при использовании бесплатной версии виджета при успешно принятом заказе(не более 200 символов)</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_free_done }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_link_order.label }}</b><br/>
+                    <span>Инициирует сценарий "Выбрать удобное время звонка"</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_link_order }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_link_send_message.label }}</b><br/>
+                    <span>Инициирует сценарий "Написать оффлайн-сообщение"</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_link_send_message }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_link_go_back.label }}</b><br/>
+                    <span>Инициирует возвращение к сценарию заказа звонка</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_link_go_back }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-7">
+                <div class="row">
+                    <b>{{ content_form.text_link_message_go_back.label }}</b><br/>
+                    <span>Инициирует сценарий заказа звонка из сценария "Отправка оффлайн-сообщения"</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <span class="width-100percent widget-text-content-box">
+                    {{ content_form.text_link_message_go_back }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+
+        {{ content_form.widget_id }}
+        {{ content_form.settings }}
+
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_content';
+        var active_page = 'page_widgets';
+    </script>
+    {{ block.super }}
+{% endblock %}

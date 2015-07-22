@@ -1,0 +1,8 @@
+{% extends 'pages/profile/client/profile_client.html' %}
+
+{% block body_content %}
+    {{ block.super }}
+    <div class="container">
+        <h1>Оплата наличными по счёту #{{ bill_id }} успешно запрошена</h1>
+    </div>
+{% endblock %}

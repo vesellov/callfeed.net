@@ -1,0 +1,89 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Уведомления
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        {% if options_form.has_errors %}
+            <div class="col-lg-12">
+                <b>{{ options_form.errors }}</b>
+                <b class="text-red">Не все обязательные поля заполнены. Пожалуйста, убедитесь, что соблюдены все требования к заполнению формы</b>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        {% endif %}
+
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ notifications_form.sms_notification_number.label }}</b><br/>
+                    <span>Укажите номер телефона для SMS-отчётов о качестве принятых звонков</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ notifications_form.sms_notification_number }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ notifications_form.callback_notifications_email.label }}</b><br/>
+                    <span>Укажите email для уведомления о непринятых входящих звонках</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ notifications_form.callback_notifications_email }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ notifications_form.out_of_balance_notifications_email.label }}</b><br/>
+                    <span>Email адрес, на который будут поступать уведомления о заказе звонка при нулевом балансе</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ notifications_form.out_of_balance_notifications_email }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ notifications_form.offline_message_notifications_email.label }}</b><br/>
+                    <span>Email адрес, на который будут отправляться оффлайн-сообщения</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ notifications_form.offline_message_notifications_email }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+
+        {{ notifications_form.widget_id }}
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_notifications';
+        var active_page = 'page_widgets';
+    </script>
+
+    {{ block.super }}
+{% endblock %}

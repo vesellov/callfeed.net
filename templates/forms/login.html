@@ -1,0 +1,22 @@
+<div class="row" id="loginForm">
+    <div class="col-lg-12" style="background-color: white">
+        <div class="card white">
+            <form action="/accounts/login" method="post" class="card-content teal-text">{% csrf_token %}
+                <span class="card-title col s12 m10 text-info teal-text">Вход</span>
+                <a class="card-title teal-text right" href="javascript: showForm('login', true);">&times;</a>
+                <div class="input-field col s12">
+                    <input id="login_email" name="email" type="email" class="validate">
+                    <label for="login_email">Email</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="login_password" name="password" type="password" class="validate">
+                    <label for="login_password">Пароль</label>
+                </div>
+                <div id="loginFormSubmit" class="center">
+                    <input type="submit" class="btn" value="Войти" style="color: black">
+                    <a class="btn">Забыли пароль?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

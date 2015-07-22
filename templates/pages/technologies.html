@@ -1,0 +1,81 @@
+{% extends 'base_no_bootstrap.html' %}
+{% load staticfiles %}
+
+{% block body_content %}
+    <div id="technologies_container">
+        <div class="container">
+            <div id="technologies_header">
+                <h2 class="center">Технологии</h2>
+            </div>
+            <div id="technologies_content">
+                <ul>
+                    <li><span>Ориентация Вашего товара/услуги под целевого клиента</span></li>
+                    <li><span>Быстрая установка и настройка виджета на Вашем сайте</span></li>
+                    <li><span>Детализированная статистика телефонных звонков, которая содержит характеристику Ваших клиентов</span></li>
+                    <li><span>Неограниченное число многоканальных телефонов для переговоров с клиентами</span></li>
+                    <li><span>Возможность получения обратной связи от клиента (и его контактов) при нулевом балансе</span></li>
+                    <li><span>Неограниченные возможности дизайна мультивиджета для максимального увеличения конверсии Вашего сайта</span></li>
+                </ul>
+
+                <h5 class="center">Схема работы виджета</h5>
+
+                <div id="technologies_step_box">
+                    <a id="technologies_prev_step" class="left"><img src="{% static 'img/technologies/button_left.png' %}" alt="Назад"/></a>
+                    <div id="technologies_step_content" class="center">
+                        <h3 id="technologies_step_title">Шаг 1</h3>
+                        <p>
+
+                        </p>
+                    </div>
+                    <a id="technologies_next_step" class="right"><img src="{% static 'img/technologies/button_right.png' %}" alt="Далее"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var current_step = 0;
+        var min_step = 0, max_step = 4;
+        var step_prefix = 'Шаг ';
+        var step_contents = ['Виджет анализирует поведение посетителя Вашего сайта, ориентирует Ваш товар/услугу под конкретного посетителя<br/> и мотивирует с помощью игрового маркетинга<br/> заказать обратный звонок',
+            'Посетитель заказывает обратный звонок,<br/> вводит свой номер телефона<br/> и ожидает соединения',
+            'Менеджер, получает сообщение о звонке,<br/> заказанном с сайта, снимает трубку<br/> и устанавливает соединение',
+            'Соединение установлено, посетитель<br/> получает ответы на свои вопросы<br/> и делает заказ',
+            'Соединение завершено, стороны получают<br/> sms-визитки с контактами друг друга.<br/> Статистика разговора автоматически<br/> сохраняется в личном кабинете',
+        ];
+
+        function setStepContent() {
+            $('#technologies_step_content').animate({opacity: '0.0'}, 'fast', function() {
+                $('#technologies_step_title').html(step_prefix + (current_step + 1));
+                var block = $('#technologies_step_content');
+                block.find('p').html(step_contents[current_step]);
+                block.animate({opacity: '1.0'}, 'fast');
+            });
+        }
+
+        function prevStep() {
+            if (current_step == min_step)
+                current_step = max_step;
+            else
+                current_step--;
+
+            setStepContent();
+        }
+
+        function nextStep() {
+            if (current_step == max_step)
+                current_step = min_step;
+            else
+                current_step++;
+
+            setStepContent();
+        }
+
+        $('#technologies_next_step').find('img').click(nextStep);
+        $('#technologies_prev_step').find('img').click(prevStep);
+
+        setStepContent();
+    </script>
+{% endblock %}

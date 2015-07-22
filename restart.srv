@@ -1,0 +1,11 @@
+#!/bin/bash
+
+./stop.srv
+
+sleep 2
+
+./start.srv
+
+sleep 1
+
+#tail -f nohup.out | grep -v index.php

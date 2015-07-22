@@ -1,0 +1,326 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Дизайн
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+        {% if options_form.has_errors %}
+            <div class="col-lg-12">
+                <b>{{ options_form.errors }}</b>
+                <b class="text-red">Не все обязательные поля заполнены. Пожалуйста, убедитесь, что соблюдены все требования к заполнению формы</b>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        {% endif %}
+
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.param_widget_position.label }}</b><br/>
+                    <span>Укажите позицию виджета относительно экрана(слева или справа)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.param_widget_position }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.param_root_position_left.label }}</b><br/>
+                    <span>Укажите отступ кнопки виджета слева экрана</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.param_root_position_left }}
+                </span>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        </div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.param_root_position_right.label }}</b><br/>
+                    <span>Укажите отступ кнопки виджета справа экрана</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.param_root_position_right }}
+                </span>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        </div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.param_root_position_bottom.label }}</b><br/>
+                    <span>Укажите отступ кнопки виджета снизу экрана</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.param_root_position_bottom }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.flag_button_text_animated.label }}</b><br/>
+                    <span>Текст на кнопке будет анимирован для привлечения внимания пользователя</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="disabled">
+                    {{ design_form.flag_button_text_animated }} <a href="" class="disabled text-gray"><u>Активировать анимацию</u></a>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_background_global.label }}</b><br/>
+                    <span>Укажите цвет фона кнопки и тела виджета</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_background_global }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_font_global.label }}</b><br/>
+                    <span>Укажите цвет текста содержимого виджета</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_font_global }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_font_link.label }}</b><br/>
+                    <span>Укажите цвет текста ссылок под формой и названия должности оператора в теле виджета</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_font_link }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_font_scondary_global.label }}</b><br/>
+                    <span>Укажите цвет текста, применяемый к отображаемой в виджете должности оператора</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_font_scondary_global }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_opacity_global.label }}</b><br/>
+                    <span>Укажите произвольный параметр непрозрачности фона виджета(от 10 до 100)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_opacity_global }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_opacity_main_button.label }}</b><br/>
+                    <span>Укажите произвольный параметр непрозрачности кнопки виджета(от 10 до 100)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_opacity_main_button }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_opacity_call_panel.label }}</b><br/>
+                    <span>Укажите произвольный параметр непрозрачности панели дозвона виджета(от 10 до 100)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_opacity_call_panel }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_opacity_inputs.label }}</b><br/>
+                    <span>Укажите произвольный параметр непрозрачности полей ввода виджета(от 10 до 100)</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.color_opacity_inputs }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.font.label }}</b><br/>
+                    <span>Укажите пользовательский шрифт виджета</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ design_form.font }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ design_form.color_background_image_global.label }}</b><br/>
+                    <span>Загрузите картинку в качестве фона для Вашего виджета</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                {% if design_form.color_background_image_global.value != '' %}
+                    <span class="width-100percent">
+                        <img class="color_background_image_global-preview" src="{{ design_form.color_background_image_global.value }}" alt=""/>
+                    </span>
+                {% endif %}
+                <span class="width-100percent no-margin">
+                    {{ design_form.background_image_global }}
+                </span>
+
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">&nbsp;</div>
+        {{ design_form.widget_id }}
+        {{ design_form.settings }}
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_design';
+        var active_page = 'page_widgets';
+    </script>
+
+    {{ block.super }}
+
+    {% load staticfiles %}
+
+    <link href="{% static 'css/colorpicker.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <script src="{% static 'js/colorpicker.js' %}"></script>
+    <script>
+        for (var i = 0; i < keys_list.length; i++) {
+            var the_key = keys_list[i];
+
+            if (the_key.indexOf('color_') != 0 || the_key.indexOf('color_opacity') != -1)
+                continue;
+
+            (function(input_key){
+                $('#id_' + input_key).ColorPicker({
+                color: $('#id_' + input_key).val(),
+                onShow: function (colpkr) {
+                    $(colpkr).fadeIn(100);
+                    return false;
+                },
+                onHide: function (colpkr) {
+                    $(colpkr).fadeOut(100);
+                    return false;
+                },
+                onChange: function (hsb, hex, rgb) {
+                    var elem = $('#id_' + input_key);
+{#                    elem.css('backgroundColor', '#' + hex);#}
+                    elem.val('#' + hex);
+                    elem.trigger('change');
+                }
+            });
+            })(the_key);
+        }
+    </script>
+    <script>
+        var param_widget_position = $('#id_param_widget_position');
+        var left_indent = $('#id_param_root_position_left');
+        var right_indent = $('#id_param_root_position_right');
+
+        if (left_indent.val() === 'initial') {
+            left_indent.parent('span').parent('div').parent('div').hide();
+            param_widget_position.val('right');
+        } else {
+            right_indent.parent('span').parent('div').parent('div').hide();
+            param_widget_position.val('left');
+        }
+
+        function updateActiveWidgetPositionField(updateValues) {
+            if (param_widget_position.val() === 'right') {
+                left_indent.parent('span').parent('div').parent('div').hide();
+                right_indent.parent('span').parent('div').parent('div').show();
+
+                if (updateValues) {
+                    left_indent.val('initial');
+                    left_indent.trigger('change');
+                    right_indent.val('20px');
+                    right_indent.trigger('change');
+                }
+            } else {
+                left_indent.parent('span').parent('div').parent('div').show();
+                right_indent.parent('span').parent('div').parent('div').hide();
+
+                if (updateValues) {
+                    left_indent.val('10px');
+                    left_indent.trigger('change');
+                    right_indent.val('initial');
+                    right_indent.trigger('change');
+                }
+            }
+        }
+
+        updateActiveWidgetPositionField(false);
+
+        param_widget_position.change(function() {
+            updateActiveWidgetPositionField(true);
+        });
+    </script>
+
+{% endblock %}

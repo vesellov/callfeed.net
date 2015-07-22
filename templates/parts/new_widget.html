@@ -1,0 +1,127 @@
+<div class="row">
+    <h3 class="center">Создание виджета</h3>
+    <div class="col s12"><br/><br/></div>
+    <div class="input-field col s12">{# Адрес сайта с виджетом #}
+        <input type="url" id="side_addr" class="validate"/>
+        <label for="side_addr">Адрес сайта для установки виджета</label>
+    </div>
+    <div class="col s12"><br/><br/><br/></div>
+    <h5 class="center">Управление менеджерами</h5>
+    <div class="col s12"><br/><br/><br/></div>
+    <div id="manager_list" class="col s12 section"> {# Поля с информацией о менеджерах, принимающих входящие звонки #}
+        {% include 'parts/manager_info.html' %}
+        {% include 'parts/manager_info.html' %}
+    </div>
+    <div class="col s12"><br/><br/></div>
+    <div class="row col s12 section">
+        <div class="row col s10 cancel-text-align-center">
+            <div class="col s12">
+                <input type="checkbox" id="put-manager-name-to-sms"/> {# Включено ли имя менеджера в SMS сообщение клиента #}
+                <label for="put-manager-name-to-sms">Включать имя менеджера в SMS сообщение клиенту</label>
+            </div>
+            <div class="col s12">
+                <input type="checkbox" id="consider-departments-while-calling"/> {# Включено ли распределение звонков по отделам или филиалам #}
+                <label for="consider-departments-while-calling">Распределение звонков по отделам/филиалам</label>
+            </div>
+        </div>
+        <div class="col s2">
+            <a id="add_manager" class="btn-floating btn-large waves-effect waves-light teal left"><i class="mdi-content-add"></i></a>
+        </div>
+    </div>
+    {# ------ #}
+    <div class="col s12"><br/><br/></div>
+    <h5 class="center">Настройки</h5>
+    <div class="col s12"><br/><br/></div>
+    <div class="col s6"> {# Номера телефонов для отчётов о качестве принятых звонков #}
+        <ul id="phone_numbers_to_notify" class="collection with-header cancel-text-align-center">
+            <li class="collection-header">
+                <div class="row">
+                    <div class="input-field col s10">
+                        <input type="tel" id="add_phone_number_to_notify_edt" class="left"/>
+                        <label for="add_phone_number_to_notify_edt" class="left">SMS-отчёт о звонках</label>
+                    </div>
+                    <div class="col s2 margin-top-15">
+                        <a href="#!" class="right"><i class="mdi-content-add small"></i></a>
+                    </div>
+                </div>
+            </li>
+            <li class="collection-item"><div>+7-934-234-14-51<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>+7-934-513-62-36<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>+7-952-671-62-35<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>+7-526-672-74-34<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+        </ul>
+    </div>
+    <div class="col s6 row"> {# email для уведомления о непринятых входящих звонках #}
+        <div class="col s12 input-field">
+            <input class="valid" type="email" id="email_to_notify"/>
+            <label for="email_to_notify">Почта для отчётов</label>
+        </div>
+        <div class="col s12 input-field">
+            <input type="number" id="company_timezone" class="valid"/> {# Часовой пояс компании #}
+            <label for="company_timezone">Часовой пояс компании</label>
+        </div>
+        <div class="col s12 input-field">
+            <input id="timeout_between_manager_and_client_calls" type="number" class="valid"/> {# Промежуток между звонками менеджеру и клиенту(0..60 сек.) #}
+            <label for="timeout_between_manager_and_client_calls">Между звонками менеджеру и клиенту(0..60 сек.)</label>
+        </div>
+        <div class="col s12 input-field">
+            <input id="timeout_before_additional_number_called" type="number" class="valid"/> {# Промежуток перед набором добавочного номера(0..50 сек.)  #}
+            <label for="timeout_before_additional_number_called">Перед набором добавочного номера(0..50 сек.)</label>
+        </div>
+    </div>
+
+    <div class="col s6"> {# График работ отдела продаж с понедельника по воскресенье #}
+        <ul id="timetable" class="collection with-header cancel-text-align-center">
+            <li class="collection-header"><h6 class="center grey-text">Расписание работы отдела продаж</h6></li>
+            <li class="collection-item row">
+                <div class="col 12">
+                    <input id="sell_department_timetable_chk_1" type="checkbox"/>
+                    <label for="sell_department_timetable_chk_1">Понедельник</label>
+                </div>
+                <div class="col s12">
+                    <select>
+                            <option value="0">0:00</option>
+                            <option value="1">1:00</option>
+                            <option value="2">2:00</option>
+                            <option value="3">3:00</option>
+                            <option value="4">4:00</option>
+                            <option value="5">5:00</option>
+                            <option value="6">6:00</option>
+                            <option value="7">7:00</option>
+                            <option value="8">8:00</option>
+                            <option value="9">9:00</option>
+                            <option value="10">10:00</option>
+                            <option value="11">11:00</option>
+                            <option value="12">12:00</option>
+                            <option value="13">13:00</option>
+                            <option value="14">14:00</option>
+                            <option value="15">15:00</option>
+                            <option value="16">16:00</option>
+                            <option value="17">17:00</option>
+                            <option value="18">18:00</option>
+                            <option value="19">19:00</option>
+                            <option value="20">20:00</option>
+                            <option value="21">21:00</option>
+                            <option value="22">22:00</option>
+                            <option value="23">23:00</option>
+                            <option value="24">24:00</option>
+                    </select>
+                </div>
+            </li>
+            <li class="collection-item"><div>Вторник<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>Среда<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>Четверг<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>Пятница<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>Суббота<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+            <li class="collection-item"><div>Воскресенье<a href="#!" class="secondary-content"><i class="mdi-content-remove"></i></a></div></li>
+        </ul>
+    </div>
+    <div id="phone_number_to_be_shown"></div> {# Отображаемый входящий номер телефона клиента; название скрипта? #}
+    <div id="manager_dial_scenary"></div> {# Сценарий дозвона менеджеров: поочереди/сразу всем #}
+    <div id="call_managers_in_random_order"></div> {# Если сценарий дозвона "поочереди" разрешить в случайном порядке #}
+    <div id="pronounce_site_name"></div> {# Произносить голосом с какого сайта звонок(доступно, если больше 1 сайта) #}
+    <div id="choose_office_dialog"></div> {# Показать диалог выбора офиса в виджете, если у компании больше одного #}
+    <div id="default_dial_country_code"></div> {# Код страны дозвона по умолчанию в диалоге #}
+    <div id="ip_blacklist"></div> {# Чёрный список ip #}
+    <div id="phone_numbers_blacklist"></div> {# Черный список номеров #}
+</div>

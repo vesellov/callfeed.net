@@ -1,0 +1,19 @@
+{% extends 'pages/profile/client/profile_client_widget.html' %}
+
+{% block page_title %}
+Отделы
+{% endblock %}
+
+{% block page_content %}
+    В разработке
+{% endblock %}
+
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_departments';
+        var active_page = 'page_widgets';
+    </script>
+
+    {{ block.super }}
+{% endblock %}

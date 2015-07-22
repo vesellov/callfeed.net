@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+    <h3 class="center">Add a new reseller</h3>
+
+    <div class="container row">
+        <div class="col s6">
+            <h4 class="center">Add a new reseller</h4>
+
+            <form action="/profile/administrative_manager/edit_resellers" method="post">{% csrf_token %}
+                {{ add_reseller_form.as_p }}
+                <input type="submit" value="Add" class="btn"/>
+            </form>
+        </div>
+        <div class="col s6">
+            <h4 class="center">Resellers list:</h4>
+
+            {% for reseller in resellers_list %}
+                <b>{{ reseller.name }}</b>
+            {% empty %}
+                <h5 class="center">You have no resellers</h5>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'pages/profile/client/profile_client_info.html' %}
+
+{% block page_title %}
+Безопасность
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post">{% csrf_token %}
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ security_form.old_password.label }}</b><br/>
+                    <span>Введите старый пароль для входа в систему</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ security_form.old_password }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ security_form.new_password.label }}</b><br/>
+                    <span>Введите новый пароль для входа в систему</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ security_form.new_password }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ security_form.new_password_confirmation.label }}</b><br/>
+                    <span>Повторите новый пароль для входа в систему</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ security_form.new_password_confirmation }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <input class="btn-green" type="submit" value="Сохранить"/>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block additional_js %}
+    <script>
+        var active_tab = 'tab_security';
+        var active_page = 'page_info';
+    </script>
+
+    {{ block.super }}
+{% endblock %}
