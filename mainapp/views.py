@@ -24,8 +24,11 @@ from robokassa.conf import USE_POST
 from robokassa.forms import RobokassaForm, ResultURLForm, SuccessRedirectForm, FailRedirectForm
 from robokassa.models import SuccessNotification
 from robokassa.signals import result_received, success_page_visited, fail_page_visited
+
 from callfeed import settings
+
 from functools import wraps
+
 from mainapp import widget_settings
 from mainapp.forms import AddResellerForm, EditClientForm, EditSetupRequestForm, EditSetupRequestHistoryForm, \
     ClientCallbacksFilterForm, ClientWidgetOptionsForm, \
@@ -157,6 +160,12 @@ class LoginAccount(View):
 
         user = login_form.login()
         login(request, user)
+
+        if user.groups.filter(name=settings.USER_GROUP_ADMINISTRATIVE_MANAGER).exists():
+            return HttpResponseRedirect('/profile/administrative_manager')
+
+        if user.groups.filter(name=settings.USER_GROUP_RESELLER).exists():
+            return HttpResponseRedirect('/profile/reseller')
 
         if user.groups.filter(name=settings.USER_GROUP_CLIENT).exists():
             return HttpResponseRedirect('/profile/client')
