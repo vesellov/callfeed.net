@@ -2,15 +2,22 @@
 
 {% block body_content %}
     {{ block.super }}
-    <div class="container">
-        <h4 class="center">administrative manager profile page</h4>
-        <div class="center">
-            <h5 class="center">Resellers list</h5>
-            {% for reseller in resellers %}
-                <b>{{ reseller.name }}</b>
-            {% empty %}
-                <b>You have no resellers</b>
-            {% endfor %}
+    <div class="col-lg-12">
+        <h4 class="center">Кабинет администратора</h4>
+        <div class="row">
+		    <div class="col-lg-6">
+	            <h4><b>Пользователи </b></h4>
+	            user1<br/>
+	            user2<br/>
+		    </div>
+		    <div class="col-lg-6">
+	            <h4><b>Реселлеры</b></h4>
+	            {% for reseller in resellers %}
+	                <b>{{ reseller.name }}</b>
+	            {% empty %}
+	                <b>You have no resellers</b>
+	            {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

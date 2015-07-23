@@ -342,7 +342,6 @@ class RegisterResellerAccount(ProtectedResellerView):
 class ProfileAccountAdministrativeManager(ProtectedAdministrativeManagerView):
     def get(self, request):
         resellers = AdministrativeManager.objects.get(user=request.user).reseller_set.all()
-
         return render(request, 'pages/profile/administrative_manager/profile_administrative_manager.html',
                       {'resellers': resellers})
 
