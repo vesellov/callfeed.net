@@ -349,7 +349,6 @@ class ProfileAccountAdministrativeManager(ProtectedAdministrativeManagerView):
 class ProfileReseller(ProtectedResellerView):
     def get(self, request):
         reseller = None
-
         try:
             reseller = Reseller.objects.get(user=request.user)
         except ObjectDoesNotExist:
