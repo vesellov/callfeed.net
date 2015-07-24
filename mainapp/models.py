@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import logging
 logger = logging.getLogger(__name__)
 
@@ -372,7 +373,7 @@ class Widget(models.Model):
 
         self.is_installed = True
         self.save()
-        logger.log(1, 'is_installed', self.is_installed)
+        sys.stderr.write('is_installed: ' + str(self.is_installed))
         return True
 
     def update_settings(self, form, excluded_fields=None):
