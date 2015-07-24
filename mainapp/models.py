@@ -368,6 +368,7 @@ class Widget(models.Model):
 
         self.is_installed = True
         self.save()
+        print 'is_installed', self.is_installed
         return True
 
     def update_settings(self, form, excluded_fields=None):
