@@ -9,7 +9,7 @@ from mainapp.views import LoginAccount, TestEverything, EditSetupRequest, Client
     ClientPaymentChooseTariff, ClientInfoBillsRequestAct, ClientPaymentChooseMethod, ClientPaymentRequestCashless, \
     ClientPaymentMake, ClientPaymentCancel, ClientWidgetDelete, ClientWidgetNew, ClientWidgetActions, \
     ClientWidgetToggleActivity, ClientWidgetCheck, PasswordReset, PasswordResetConfirmation, RobokassaResultReceived, \
-    RobokassaSuccess, RobokassaFail
+    RobokassaSuccess, RobokassaFail, ResellerWidgetCheck
 from mainapp.views import AccountsClientRegister
 from mainapp.views import Robokassa
 from mainapp.views import RegisterResellerAccount
@@ -45,6 +45,7 @@ urlpatterns = patterns(
     # Reseller related staff
     url(r'^profile/reseller/?$', ProfileReseller.as_view()),
     url(r'^profile/reseller/edit_clients/?$', ResellerEditClients.as_view()),
+    url(r'^profile/reseller/widget_check/?$', ResellerWidgetCheck.as_view()),
     # Client related staff
     url(r'^profile/client/?$', RedirectView.as_view(url='/profile/client/widgets')),
     url(r'^profile/client/info/personal/?$', ClientInfoPersonal.as_view()),
