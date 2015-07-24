@@ -2,14 +2,14 @@
 
 {% block body_content %}
     {{ block.super }}
-    <h4 class="center">reseller profile page</h4>
+    <h4 class="center">Кабинет Реселлера</h4>
     <div class="container">
         <div class="row col s12">
-            <div class="col s6">
+            <div class="col s6 pull-left">
                 Name: {{ reseller.name }}<br/>
                 Tariff: {{ reseller.tariff }}<br/>
             </div>
-            <div class="col s6">
+            <div class="col s6 pull-right">
                 {% include 'parts/reseller_clients_list.html' %}
             </div>
         </div>

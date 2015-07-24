@@ -2,7 +2,7 @@
 <ul>
     {% for client in reseller.client_set.all %}
         <li>
-            <a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }}</a>
+            <a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }} ({{ client.email}})</a>
         </li>
     {% empty %}
         <h5 class="center">У вас нет ни одного клиента</h5>
