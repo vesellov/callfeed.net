@@ -543,7 +543,8 @@ class ResellerWidgetCheck(ProtectedResellerView):
             widget = self.client.widget_set.get(id=widget_id)
             widget.check_if_installed()
         except:
-            pass
+            import traceback
+            traceback.print_exc()
         return HttpResponseRedirect('/profile/reseller')
 
 
