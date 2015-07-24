@@ -2,18 +2,18 @@
 
 {% block body_content %}
     {{ block.super }}
-    
-    <h3 class="center">Add a new client</h3>
-
     <div class="container">
         <div class="row col s12">
-	        <div class="col s6 pull-left">
-	            <h4 class="center">Add a new client</h4>
-	
-	            <form action="/profile/reseller/edit_clients" method="post">{% csrf_token %}
-	                {{ add_client_form.as_p }}
-	                <input type="submit" value="SAVE" class="btn"/>
-	            </form>
+            <h3 class="center">Кабинет Реселлера</h3>
+            <div class="col s6 pull-left">
+	           <h4 class="center">Данные клиента</h4>
+            <form action="/profile/reseller/edit_clients" method="post">{% csrf_token %}
+                {{ add_client_form.as_p }}
+                <input type="submit" value="SAVE" class="btn"/>
+            </form>
+            <div class="col s6 pull-left">
+                
+            </div>
 	        </div>
 	        <div class="col s6 pull-right">
 	            {% include 'parts/reseller_clients_list.html' %}

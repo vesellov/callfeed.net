@@ -151,7 +151,7 @@ USER_GROUP_CLIENT = 'client'
 # email settings
 
 EMAIL_HOST_USER = 'info@callfeed.ru'
-EMAIL_HOST_PASSWORD = 'YUGwEFoo'
+EMAIL_HOST_PASSWORD = 'HFZNpcCf'
 EMAIL_HOST = 'smtp.timeweb24.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True

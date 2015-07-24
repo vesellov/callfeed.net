@@ -3,6 +3,22 @@
     {% for client in reseller.client_set.all %}
         <li>
             <a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }} ({{ client.email}})</a>
+            <ul>
+            {% for widget in client.widget_set.all %}
+                <li>
+                    {% if widget.site_url != 'None' %}
+                        <a href="{{ widget.site_url }}" target=_blank>{{ widget.site_url }}</a>
+                    {% else %}
+                        <i>имя сайта не было указано</i>
+                    {% endif %}
+                    {% if widget.is_active %}
+                        <span style="color: green;">&nbsp;</span>
+                    {% else %}
+                        <span style="color: red;">(выключен)</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
         </li>
     {% empty %}
         <h5 class="center">У вас нет ни одного клиента</h5>
