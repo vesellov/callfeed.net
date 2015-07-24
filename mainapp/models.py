@@ -339,7 +339,12 @@ class Widget(models.Model):
         запретить вызывать её слишком часто, иначе это можно использовать
         во вред.
         """
-        setup_code_lines = self.gen_setup_code().split('\n')
+        # setup_code_lines = self.gen_setup_code().split('\n')
+        setup_code_lines = [
+            "var CallFeedToken = ",
+            "http://callfeed.net/static/cf.",
+            ]
+        
         import requests
 
         try:

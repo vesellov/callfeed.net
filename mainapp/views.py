@@ -506,7 +506,7 @@ class ResellerEditClients(ProtectedResellerView):
 
         client.save()
 
-        return HttpResponseRedirect(request.path)
+        return HttpResponseRedirect('/profile/reseller')
 
     def get(self, request):
         edit_client_form = None
@@ -532,7 +532,8 @@ class ResellerEditClients(ProtectedResellerView):
 
         return render(request, 'pages/profile/reseller/reseller_edit_clients.html',
                       {'add_client_form': edit_client_form,
-                       'reseller': reseller})
+                       'reseller': reseller,
+                       })
 
 
 # ## Client related staff
