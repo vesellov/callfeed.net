@@ -355,6 +355,7 @@ class Widget(models.Model):
         except:
             self.is_installed = False
             self.save()
+            sys.stderr.write('is_installed: ' + str(self.is_installed))
             return False
 
         pos = 0
@@ -365,6 +366,7 @@ class Widget(models.Model):
             if tmp_pos < pos:
                 self.is_installed = False
                 self.save()
+                sys.stderr.write('is_installed: ' + str(self.is_installed))
                 return False
 
             pos = tmp_pos
