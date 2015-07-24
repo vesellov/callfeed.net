@@ -3,6 +3,9 @@ __author__ = 'Max <qiwi360@gmail.com>'
 __version__ = 1, 0
 __detail__ = 'Based on https://github.com/subutux/json-rpc2php'
 
+import logging
+logger = logging.getLogger(__name__)
+
 import json
 import requests
 import pprint
@@ -63,7 +66,7 @@ class jsonrpc2(object):
                                  headers=self.headers,
                                  data=jsonrequest)
         
-        print 'rpc_call', method
+        logger.log(1, 'rpc_call', method)
         pprint.pprint(params)
 
         if notification is False:
