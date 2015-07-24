@@ -540,7 +540,7 @@ class ResellerWidgetCheck(ProtectedResellerView):
     def get(self, request):
         try:
             widget_id = request.GET.get('widget_id')
-            widget = self.client.widget_set.get(id=widget_id)
+            widget = Widget.objects.get(id=widget_id)
             widget.check_if_installed()
         except:
             import traceback
