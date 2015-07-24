@@ -87,7 +87,7 @@ DEFAULT_SETTINGS = {
     'param_free_sent_height': 170,  # cf_free_sent_content
     'param_timeoff_height': 280,  # cf_timeoff_content
     'param_timeoff_sent_height': 170,  # cf_timeoff_sent_content
-    'param_message_height': 370,  # cf_message_content
+    'param_message_height': 400,  # cf_message_content
     'param_message_sent_height': 170,  # cf_message_sent_content
     'param_order_height': 320,  # cf_order_content
     'param_order_sent_height': 210,  # cf_order_sent_content
