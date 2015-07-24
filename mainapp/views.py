@@ -354,7 +354,8 @@ class ProfileReseller(ProtectedResellerView):
         except ObjectDoesNotExist:
             print('FAIL: RESELLER OBJECT DOES NOT EXIST')
             return HttpResponseRedirect('/')
-        return render(request, 'pages/profile/reseller/profile_reseller.html', {'reseller': reseller})
+        return render(request, 'pages/profile/reseller/profile_reseller.html',
+                      {'reseller': reseller})
 
 
 # ## Administrative manager pages

@@ -1,3 +1,12 @@
+
+
+call-feed@yandex.ru
+widget15
+
+callfeed@bk.ru
+widget15
+
+
 https://bitbucket.org
 vesellov
 fitcall15
@@ -12,6 +21,8 @@ qiwi360@gmail.com
 max$callfeed
 orc@orc.orc
 orc
+AdminCallFeed
+widget15$$$
 
 Доступ к рабочему аккаунту МТТ
 Аккаунт: 883140779001051
