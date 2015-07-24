@@ -355,7 +355,7 @@ class Widget(models.Model):
         except:
             self.is_installed = False
             self.save()
-            sys.stderr.write('is_installed: ' + str(self.is_installed))
+            sys.stderr.write('requests FAILED, is_installed: ' + str(self.is_installed)+'\n\n')
             return False
 
         pos = 0
@@ -366,14 +366,14 @@ class Widget(models.Model):
             if tmp_pos < pos:
                 self.is_installed = False
                 self.save()
-                sys.stderr.write('is_installed: ' + str(self.is_installed))
+                sys.stderr.write('widget NOT FOUND, is_installed: ' + str(self.is_installed)+'\n\n')
                 return False
 
             pos = tmp_pos
 
         self.is_installed = True
         self.save()
-        sys.stderr.write('is_installed: ' + str(self.is_installed))
+        sys.stderr.write('widget FOUND!!!, is_installed: ' + str(self.is_installed)+'\n\n')
         return True
 
     def update_settings(self, form, excluded_fields=None):
