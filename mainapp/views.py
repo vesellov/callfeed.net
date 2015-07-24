@@ -544,7 +544,7 @@ class ResellerWidgetCheck(ProtectedResellerView):
             widget.check_if_installed()
         except:
             pass
-        return HttpResponseRedirect(request.path)
+        return HttpResponseRedirect('/profile/reseller')
 
 
 
