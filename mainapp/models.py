@@ -350,6 +350,8 @@ class Widget(models.Model):
         
         import requests
 
+        sys.stderr.write('check_if_installed ' + str(self.site_url) + '\n\n');
+
         try:
             page_content = requests.get(self.site_url).content
         except:
