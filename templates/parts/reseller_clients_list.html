@@ -1,16 +1,17 @@
 {% load staticfiles %}
 
 <h4 class="center">Список клиентов:</h4>
+<div class="table-responsive">
 <table class="table table-bordered-cells">
     {% for client in reseller.client_set.all %}
-     <tr class="text-center">
-      <td>
-             <a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }} ({{ client.email }})</a>
+    	<tr class="text-center">
+    		<td>
+            	<a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }}<br/>({{ client.email }})</a>
             </td>
             <td>
              	{{ client.phone_number }}
             </td>
-            <td>
+            <td style="white-space: nowrap;">
             	{{ client.user.date_joined }}
             </td>
             <td>
@@ -30,12 +31,17 @@
 	                    <span style="color: gray;">(выключен)</span>
 	                {% endif %}
 	                &nbsp;
-	                <a href="/profile/reseller/widget_check?widget_id={{ widget.id }}" class="text-right"><img class="refresh-widget-presence-ico" src="{% if widget.is_installed %}{% static 'img/refresh_green_ico.png' %}{% else %}{% static 'img/refresh_red_ico.png' %}{% endif %}" alt=""/></a>
+	                <span class="pull-right">
+	                	<a href="/profile/reseller/widget_check#refresh-widget-{{ widget.id }}?widget_id={{ widget.id }}" class="text-right">
+	                		<img id="refresh-widget-{{ widget.id }}" class="refresh-widget-presence-ico" src="{% if widget.is_installed %}{% static 'img/refresh_green_ico.png' %}{% else %}{% static 'img/refresh_red_ico.png' %}{% endif %}" alt=""/>
+                		</a>
+	                </span>
             		<br />
                 {% endfor %}
             </td>
         </tr>
     {% empty %}
-        <h5 class="center">У вас нет ни одного клиента</h5>
+        <tr><td><h5 class="center">У вас нет ни одного клиента</h5></td></tr>
     {% endfor %}
-</ul>
+</table>
+</div>
