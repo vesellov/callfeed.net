@@ -1,3 +1,4 @@
 #!/bin/bash
 
-tail -f nohup.out
+tail -f /home/callfeed/srv/logs/uwsgi.log
+

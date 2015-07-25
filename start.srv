@@ -1,7 +1,7 @@
 #!/bin/bash
 export DJANGO_SETTINGS_MODULE=callfeed.settings
 rm -rf nohup.out
-nohup uwsgi --ini uwsgi.ini &
+nohup uwsgi --ini uwsgi.ini >uwsgi.nohup.out &
 redis-server /etc/redis/redis.conf &
 supervisorctl start huey
 sleep 1
