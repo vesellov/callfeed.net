@@ -1,12 +1,28 @@
 {% load staticfiles %}
 
+<script>
+$('.refresh-widget-presence-ico').each(function(i,itm){
+	$(itm).click(function(){
+		var wid = $(itm).attr('id').substring(15);
+		debug.log('WID:', wid);
+		$.ajax(
+			url: "/profile/reseller/widget_check",
+			data: { widget_id: wid },
+			success: function (result) {
+				location.href = "/profile/reseller#refresh-widget-" + wid;
+			}
+		);
+	});
+});
+</script>
+
 <h4 class="center">Список клиентов:</h4>
 <div class="table-responsive">
 <table class="table table-bordered-cells">
     {% for client in reseller.client_set.all %}
     	<tr class="text-center">
     		<td>
-            	<a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }}<br/>({{ client.email }})</a>
+            	<a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }}<br/>{{ client.email }}</a>
             </td>
             <td>
              	{{ client.phone_number }}
@@ -17,12 +33,12 @@
             <td>
              	{{ client.balance_minutes }} мин.
             </td>
-            <td class="text-left"> 
+            <td class="text-left" style="white-space: nowrap;"> 
              	{% for widget in client.widget_set.all %}
 	                <span>
-	                	<a href="/profile/reseller/widget_check#refresh-widget-{{ widget.id }}?widget_id={{ widget.id }}" class="text-right">
+	                	<!-- <a href="/profile/reseller/widget_check?widget_id={{ widget.id }}" class="text-right">  -->
 	                		<img id="refresh-widget-{{ widget.id }}" class="refresh-widget-presence-ico" src="{% if widget.is_installed %}{% static 'img/refresh_green_ico.png' %}{% else %}{% static 'img/refresh_red_ico.png' %}{% endif %}" alt=""/>
-                		</a>
+                		<!--  </a>  -->
                   {% if widget.site_url != None %}
                       <a href="{{ widget.site_url }}" target=_blank>{{ widget.site_url }}</a>
                   {% else %}

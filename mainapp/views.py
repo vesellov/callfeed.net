@@ -545,9 +545,7 @@ class ResellerWidgetCheck(ProtectedResellerView):
         except:
             import traceback
             traceback.print_exc()
-            return HttpResponseRedirect('/profile/reseller')
-        return HttpResponseRedirect('/profile/reseller#refresh-widget-'+widget_id)
-
+        return HttpResponse(str(widget.is_installed))
 
 
 # ## Client related staff
