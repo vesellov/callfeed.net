@@ -577,12 +577,12 @@ class ClientCallbacks(ProtectedClientView):
             if planned:
                 filter_args['callback_status'] = CallbackInfo.CALLBACK_STATUS_PLANNED
 
-            for widget in widgets:
-                widget_callbacks = widget.callbackinfo_set.filter(**filter_args)[:]
+            for widgt in widgets:
+                widget_callbacks = widgt.callbacks.filter(**filter_args)[:]
 
                 for widget_callback in widget_callbacks:
-                    if widget.schedule is not None:
-                        widget_callback.when += timedelta(hours=widget.schedule.timezone)
+                    if widgt.schedule is not None:
+                        widget_callback.when += timedelta(hours=widgt.schedule.timezone)
 
                     widget_callback_pure_date = widget_callback.when.date()
 
@@ -594,7 +594,7 @@ class ClientCallbacks(ProtectedClientView):
                     callbacks_total_time_sec += \
                         (widget_callback.charged_length_a_sec + widget_callback.charged_length_b_sec)
         except Exception as e:
-            print('EXCEPTION', e)
+            traceback.print_exc()
 
         callbacks_average_time_sec = (callbacks_total_time_sec / callbacks_count) if callbacks_count > 0 else 0
 

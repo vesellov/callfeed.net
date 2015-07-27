@@ -2,16 +2,12 @@
 
 <script>
 $(document).ready(function() {
- debug.log('READY!!!!!');
  $('.refresh-widget-presence-ico').each(function(i,itm){
-  debug.log(i, itm);
   $(itm).click(function(){
    var wid = $(itm).attr('id').substring(15);
-   debug.log('WID:', wid);
    $.ajax({
     url: "/profile/reseller/widget_check",
     data: { widget_id: wid },
-    widgetid: wid,
     success: function (result) {
      location.href = "/profile/reseller#refresh-widget-" + wid;
     }
