@@ -78,7 +78,7 @@
                             {% load filters %}
                             <tr>
                                 <td>{{ callback.widget.site_url }}</td>
-                                <td>{% if callback.referer != '' %}{{ callback.referer|unquote_raw }}{% else %}&mdash;{% endif %}</td>
+                                <td>{% if callback.referer != '' %}{{ callback.referer }}{% else %}&mdash;{% endif %}</td>
                                 <td>{{ callback.when|date:'H:i' }}</td>
                                 <td>{% if callback.phone_number_side_b != '' %}{{ callback.phone_number_side_b }}{% else %}&mdash;{% endif %}</td>
                                 <td>{% if callback.phone_number_side_a != '' %}{{ callback.phone_number_side_a }}{% else %}&mdash;{% endif %}</td>

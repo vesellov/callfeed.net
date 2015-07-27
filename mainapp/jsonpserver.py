@@ -2,6 +2,7 @@
 import json
 import pprint
 import datetime
+import urllib
 
 from django.views.generic import View
 
@@ -308,7 +309,7 @@ class JSONPEntryPoint(View):
                 'callback': request.GET['callback'].replace('CallbackRegistry.', ''),
                 'ip': request.META['REMOTE_ADDR'],
                 'token': request.GET['token'],
-                'referrer': request.GET.get('referrer', ''),
+                'referrer': urllib.unquote(request.GET.get('referrer', '')),
                 'search_request': request.GET.get('search_request', ''),
                 'hostname': request.GET.get('hostname', ''),
             }

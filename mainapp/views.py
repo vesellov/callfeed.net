@@ -2,8 +2,6 @@
 
 import traceback
 
-from urllib import unquote
-
 from collections import OrderedDict
 from datetime import date, datetime, timedelta
 import json
@@ -14,13 +12,10 @@ from django.contrib.auth.models import User, Group
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
-from django.template.defaultfilters import stringfilter
-from django import template
 
 
 # Create your views here.
@@ -62,15 +57,6 @@ def method_decorator_adaptor(adapt_to, *decorator_args, **decorator_kwargs):
         return decorator
 
     return decorator_outer
-
-#------------------------------------------------------------------------------ 
-
-register = template.Library()
-
-@register.filter
-@stringfilter
-def unquote_raw(value):
-    return unquote(value)
 
 #------------------------------------------------------------------------------
  
