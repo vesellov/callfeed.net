@@ -1,4 +1,6 @@
 # coding=utf-8
+
+import traceback
 import json
 import pprint
 import datetime
@@ -268,9 +270,7 @@ class JSONPEntryPoint(View):
                     pending_callback.save()
             return (mtt_response_result, mtt_response.get('message', ''),)
         except:
-            import traceback
-
-            print (traceback.format_exc())
+            traceback.print_exc()
             return ('exception', traceback.format_exc(),)
 
     def get(self, request):
@@ -451,8 +451,7 @@ class JSONPEntryPoint(View):
                         widget.site_url)  # notify manager via email
                     response = 'ok'
                 except:
-                    import traceback
-
+                    traceback.print_exc()
                     response = 'exception: ' + traceback.format_exc()
 
                 jdata.update({'response': response,
@@ -500,9 +499,8 @@ class JSONPEntryPoint(View):
                         widget.site_url)  # notify manager via email
                     response = 'ok'
                 except:
-                    import traceback
-                    response = 'exception: ' + traceback.format_exc()
                     traceback.print_exc()
+                    response = 'exception: ' + traceback.format_exc()
 
                 jdata.update({'response': response,
                               'message': 'sending email to manager, email=%s' % widget.callback_notifications_email, })
@@ -541,8 +539,7 @@ class JSONPEntryPoint(View):
                         widget.site_url)  # notify manager via email
                     response = 'ok'
                 except:
-                    import traceback
-
+                    traceback.print_exc()
                     response = 'exception: ' + traceback.format_exc()
 
                 jdata.update({'response': response,
@@ -579,8 +576,7 @@ class JSONPEntryPoint(View):
                         widget.site_url)  # notify manager via email
                     response = 'ok'
                 except:
-                    import traceback
-
+                    traceback.print_exc()
                     response = 'exception: ' + traceback.format_exc()
 
                 jdata.update({'response': response,
@@ -654,9 +650,7 @@ class JSONPEntryPoint(View):
             open(filename, 'wb').write(pprint.pformat(jdata))
 
         except Exception as e:
-            import traceback
-
-            print(traceback.format_exc())
+            traceback.print_exc()
 
         return HttpResponse('%s(%s);' % (
             request.GET['callback'],

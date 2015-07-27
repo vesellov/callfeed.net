@@ -3,6 +3,9 @@
 Здесь описываются задачи, которые нужно выполнять в отложенном порядке.
 Например, ежедневная рассылка отчётов о качестве работы операторов по почте и так далее.
 """
+
+import traceback
+
 __author__ = 'max'
 from huey.djhuey import periodic_task, crontab, task
 from mainapp.jsonpserver import JSONPEntryPoint
@@ -69,9 +72,9 @@ def refresh_pending_callbacks():
             charged_b = int(mtt_response_result_struct.get('call_back_charged_length_B', '0'))
             callback.widget.client.balance_minutes -= int((float(charged_a) + float(charged_b)) / 60.0)
             callback.widget.client.save()
+            print ('refresh_pending_callbacks', )
         except Exception as e:
-            print('EXCEPTION')
-            print(e.args, e.message)
+            traceback.print_exc()
 
         callback.delete()
 

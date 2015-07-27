@@ -92,7 +92,7 @@ class ProtectedClientView(ProtectedViewLoginRequired):
             if self.client is None:
                 raise Exception()
         except:
-            print('EXCEPTION: No client assigned to the given user')
+            traceback.print_exc()
             return HttpResponseRedirect('/')
 
         if hasattr(self, 'widget_id'):
@@ -100,7 +100,7 @@ class ProtectedClientView(ProtectedViewLoginRequired):
             try:
                 self.widget = self.client.widget_set.get(id=self.widget_id)
             except:
-                print('EXCEPTION: No widget assigned to the given widget_id')
+                traceback.print_exc()
                 return HttpResponseRedirect('/profile/client/widgets')
 
         return super(ProtectedClientView, self).dispatch(request, *args, **kwargs)
@@ -650,7 +650,7 @@ class ClientCallbacks(ProtectedClientView):
                                               ClientCallbacksFilterForm.SITE_CHOICES_ALL)
             site_urls = self.build_site_urls_list(request)
         except Exception as e:
-            print('EXCEPTION', e)
+            traceback.print_exc()
 
         filter_form = ClientCallbacksFilterForm(site_urls,
                                                 initial={'date_choices': ClientCallbacksFilterForm.DATE_CHOICES_TODAY})
