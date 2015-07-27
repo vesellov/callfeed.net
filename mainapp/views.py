@@ -20,6 +20,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from django.template.defaultfilters import stringfilter
+from django import template
 
 
 # Create your views here.
@@ -62,6 +63,11 @@ def method_decorator_adaptor(adapt_to, *decorator_args, **decorator_kwargs):
 
     return decorator_outer
 
+#------------------------------------------------------------------------------ 
+
+register = template.Library()
+
+@register.filter
 @stringfilter
 def unquote_raw(value):
     return unquote(value)
