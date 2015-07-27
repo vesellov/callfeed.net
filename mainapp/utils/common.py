@@ -6,6 +6,8 @@ __author__ = 'max'
 import os
 import random
 import string
+import traceback
+
 from callfeed.settings import MEDIA_ROOT, MEDIA_URL, BASE_URL
 
 MIN_MEDIA_FILENAME_LENGTH, MAX_MEDIA_FILENAME_LENGTH = 6, 10
@@ -21,6 +23,7 @@ def save_media_file(uploaded_file, path=None):
     try:
         file_extension = uploaded_file.name.split('.')[-1]
     except Exception:
+        traceback.print_exc()
         return None
 
     def gen_filename():

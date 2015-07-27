@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import traceback
 
 import datetime
 import json
@@ -439,8 +440,7 @@ class Widget(models.Model):
                         # DELETE
                         delete(form_field)
         except Exception as e:
-            print('EXCEPTION')
-            print(e.message)
+            traceback.print_exc()
             return False
 
         self.settings = json.dumps(currents, ensure_ascii=False)
@@ -455,8 +455,7 @@ class Widget(models.Model):
             self.settings = json.dumps(currents, ensure_ascii=False)
             self.save()
         except Exception as e:
-            print('EXCEPTION')
-            print(e.message)
+            traceback.print_exc()
             return False
         return True
 
@@ -486,8 +485,7 @@ class Widget(models.Model):
 
                 result[form_field] = currents.get(form_field, defaults[form_field])
         except Exception as e:
-            print('EXCEPTION')
-            print(e.message)
+            traceback.print_exc()
 
         return result if not to_str else json.dumps(result, ensure_ascii=False)
     
