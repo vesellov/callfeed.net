@@ -2,6 +2,8 @@
 
 import traceback
 
+from urllib import unquote
+
 from collections import OrderedDict
 from datetime import date, datetime, timedelta
 import json
@@ -17,6 +19,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
+from django.template.defaultfilters import stringfilter
 
 
 # Create your views here.
@@ -43,6 +46,7 @@ from mainapp.utils.common import save_media_file, random_delay, rand_string
 from mainapp.utils.mail import send_email_act_request, send_email_widget_setup_code, send_email_request_cashless_payment, \
     send_email_password_reset_request, send_email_new_user_registered
 
+#------------------------------------------------------------------------------ 
 
 def method_decorator_adaptor(adapt_to, *decorator_args, **decorator_kwargs):
     def decorator_outer(func):
@@ -58,7 +62,12 @@ def method_decorator_adaptor(adapt_to, *decorator_args, **decorator_kwargs):
 
     return decorator_outer
 
+@stringfilter
+def unquote_raw(value):
+    return unquote(value)
 
+#------------------------------------------------------------------------------
+ 
 class ProtectedViewLoginRequired(View):
     @method_decorator(login_required)
     @method_decorator(never_cache)

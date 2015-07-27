@@ -466,7 +466,6 @@ class JSONPEntryPoint(View):
                                                  jdata['search_request'], order_date, jdata['order_phone'])
                 except:
                     import traceback
-
                     print(traceback.format_exc())
 
                 # temporary save data to the local file
@@ -501,8 +500,8 @@ class JSONPEntryPoint(View):
                     response = 'ok'
                 except:
                     import traceback
-
                     response = 'exception: ' + traceback.format_exc()
+                    traceback.print_exc()
 
                 jdata.update({'response': response,
                               'message': 'sending email to manager, email=%s' % widget.callback_notifications_email, })
