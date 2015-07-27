@@ -55,7 +55,7 @@
         </section>
 
         <section id="contents">
-                <table class="table table-bordered-cells">
+                <table class="table table-bordered-cells table-stripped">
                     <tr>
                         <th>URL <br/> виджета</th>
                         <th>Источник <br/> перехода</th>
@@ -78,7 +78,7 @@
                             {% load filters %}
                             <tr>
                                 <td>{{ callback.widget.site_url }}</td>
-                                <td>{% if callback.referer != '' %}{{ callback.referer }}{% else %}&mdash;{% endif %}</td>
+                                <td style="max-width: 200px; word-wrap: break-word;">{% if callback.referer != '' %}{{ callback.referer }}{% else %}&mdash;{% endif %}</td>
                                 <td>{{ callback.when|date:'H:i' }}</td>
                                 <td>{% if callback.phone_number_side_b != '' %}{{ callback.phone_number_side_b }}{% else %}&mdash;{% endif %}</td>
                                 <td>{% if callback.phone_number_side_a != '' %}{{ callback.phone_number_side_a }}{% else %}&mdash;{% endif %}</td>

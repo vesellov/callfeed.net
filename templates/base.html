@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js" language="JavaScript" type="text/javascript"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.1.3.min.js" language="JavaScript" type="text/javascript"></script> -->
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>CallFeed</title>
     {% load staticfiles %}
+    <script src="{% static 'js/ba-debug.js' %}"></script>
+    <script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
     {#    <link href="{% static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>#}
     {#    <link href="{% static 'css/fonts.css' %}" type="text/css"  rel="stylesheet" media="screen,projection"/>#}
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> -->
+    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet" /> 
+    <!-- <link href="{% static 'css/bootstrap.theme.css' %}" type="text/css" rel="stylesheet" />  -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- Custom styles -->
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" />
 </head>
 <body>
     {% block header %}
@@ -28,12 +33,12 @@
     {% endblock %}
 
     <!--  Scripts-->
-    <script src="{% static 'js/ba-debug.js' %}"></script>
 {#    <script src="{% static 'js/materialize.js' %}"></script>#}
 {#    <script src="{% static 'js/init.js' %}"></script>#}
 {#    <script src="{% static 'js/main.js' %}"></script>#}
     <script src="{% static 'js/bootbox.min.js' %}"></script>
     <script>
+     /*
         var phoneNumberElements = $('.phone-number');
         phoneNumberElements.on('focus',
             function() {
@@ -49,6 +54,7 @@
                 }
             }
         );
+     */
     </script>
     {% block additional_js %}
     {% endblock %}
