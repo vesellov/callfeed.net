@@ -22,32 +22,34 @@
                 <div class="panel-body">
                     <form action="/profile/client/callbacks" method="post">{% csrf_token %}
                         <div class="row">
-                            <table class="table table-bordered-cells text-center">
-                                <colgroup>
-                                    <col/>
-                                    <col/>
-                                    <col/>
-                                    <col/>
-                                    <col width="250px"/>
-                                    <col/>
-                                </colgroup>
-                                <tr class="filter-date-fields hidden-radio">
-                                    <td>{{ filter_form.date_choices.0 }}</td>
-                                    <td>{{ filter_form.date_choices.1 }}</td>
-                                    <td>{{ filter_form.date_choices.2 }}</td>
-                                    <td>{{ filter_form.date_choices.3 }}</td>
-                                    <td>{{ filter_form.from_date }} &mdash; {{ filter_form.to_date }}</td>
-                                    <td><span class="width-100percent">{{ filter_form.site_choices }}</span></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6" class="text-left">
-                                        <div class="col-lg-6 pull-left">
-                                            <label style="margin-top: 5px">{{ filter_form.planned }} {{ filter_form.planned.label }}</label>
-                                        </div>
-                                        <input class="pull-right btn-purple" type="submit" value="Показать">
-                                    </td>
-                                </tr>
-                            </table>
+                        	<div class="table-responsive">
+	                            <table class="table table-bordered-cells text-center">
+	                                <colgroup>
+	                                    <col/>
+	                                    <col/>
+	                                    <col/>
+	                                    <col/>
+	                                    <col width="250px"/>
+	                                    <col/>
+	                                </colgroup>
+	                                <tr class="filter-date-fields hidden-radio">
+	                                    <td>{{ filter_form.date_choices.0 }}</td>
+	                                    <td>{{ filter_form.date_choices.1 }}</td>
+	                                    <td>{{ filter_form.date_choices.2 }}</td>
+	                                    <td>{{ filter_form.date_choices.3 }}</td>
+	                                    <td>{{ filter_form.from_date }} &mdash; {{ filter_form.to_date }}</td>
+	                                    <td><span class="width-100percent">{{ filter_form.site_choices }}</span></td>
+	                                </tr>
+	                                <tr>
+	                                    <td colspan="6" class="text-left">
+	                                        <div class="col-lg-6 pull-left">
+	                                            <label style="margin-top: 5px">{{ filter_form.planned }} {{ filter_form.planned.label }}</label>
+	                                        </div>
+	                                        <input class="pull-right btn-purple" type="submit" value="Показать">
+	                                    </td>
+	                                </tr>
+	                            </table>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -55,6 +57,7 @@
         </section>
 
         <section id="contents">
+			<div class="table-responsive">
                 <table class="table table-bordered-cells table-stripped">
                     <tr>
                         <th>URL <br/> виджета</th>
@@ -101,6 +104,7 @@
                         </tr>
                     {% endfor %}
                 </table>
+            </div>
         </section>
 
         <section id="stats">

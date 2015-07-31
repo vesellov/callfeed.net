@@ -64,43 +64,45 @@
         </div>
         <div class="col-lg-12">&nbsp;</div>
         <div class="col-lg-12">
-            <table class="table table-bordered-lines">
-                <colgroup>
-                    <col class="col-lg-4"/>
-                    <col class="col-lg-8"/>
-                </colgroup>
-                <tr>
-                    <td class="text-left" colspan="2">{{ options_form.weekdays_have_same_schedule }} Будние дни по одному графику</td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.monday_flag }} {{ options_form.monday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.monday_from }} По {{ options_form.monday_to }}</span></td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.tuesday_flag }} {{ options_form.tuesday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.tuesday_from }} По {{ options_form.tuesday_to }}</span></td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.wednesday_flag }} {{ options_form.wednesday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.wednesday_from }} По {{ options_form.wednesday_to }}</span></td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.thursday_flag }} {{ options_form.thursday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.thursday_from }} По {{ options_form.thursday_to }}</span></td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.friday_flag }} {{ options_form.friday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.friday_from }} По {{ options_form.friday_to }}</span></td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.saturday_flag }} {{ options_form.saturday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.saturday_from }} По {{ options_form.saturday_to }}</span></td>
-                </tr>
-                <tr>
-                    <td class="text-left">{{ options_form.sunday_flag }} {{ options_form.sunday_flag.label}}</td>
-                    <td><span class="pull-right">С {{ options_form.sunday_from }} По {{ options_form.sunday_to }}</span></td>
-                </tr>
-            </table>
+			<div class="table-responsive">
+	            <table class="table table-bordered-lines">
+	                <colgroup>
+	                    <col class="col-lg-4"/>
+	                    <col class="col-lg-8"/>
+	                </colgroup>
+	                <tr>
+	                    <td class="text-left" colspan="2">{{ options_form.weekdays_have_same_schedule }} Будние дни по одному графику</td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.monday_flag }} {{ options_form.monday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.monday_from }} По {{ options_form.monday_to }}</span></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.tuesday_flag }} {{ options_form.tuesday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.tuesday_from }} По {{ options_form.tuesday_to }}</span></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.wednesday_flag }} {{ options_form.wednesday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.wednesday_from }} По {{ options_form.wednesday_to }}</span></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.thursday_flag }} {{ options_form.thursday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.thursday_from }} По {{ options_form.thursday_to }}</span></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.friday_flag }} {{ options_form.friday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.friday_from }} По {{ options_form.friday_to }}</span></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.saturday_flag }} {{ options_form.saturday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.saturday_from }} По {{ options_form.saturday_to }}</span></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">{{ options_form.sunday_flag }} {{ options_form.sunday_flag.label}}</td>
+	                    <td><span class="pull-right">С {{ options_form.sunday_from }} По {{ options_form.sunday_to }}</span></td>
+	                </tr>
+	            </table>
+            </div>
         </div>
         <div class="col-lg-12">&nbsp;</div>
         <div class="col-lg-12">
@@ -114,25 +116,27 @@
         </div>
         <div class="col-lg-12">&nbsp;</div>
         <div class="col-lg-12">
-            <table class="table table-bordered-cells">
-                <colgroup>
-                    <col width="100px"/>
-                    <col/>
-                    <col/>
-                    <col/>
-                    <col width="200px"/>
-                </colgroup>
-                {% load filters %}
-                {% for radio_choice, checkbox_choice, operator in options_form.operator_by_default_choices, options_form.related_operators, options_form.operators %}
-                    <tr>
-                        <td>{{ checkbox_choice }} <a href="" class="disabled"><u>Выбрать</u></a></td>
-                        <td>{{ operator.name }}</td>
-                        <td>{{ operator.position }}</td>
-                        <td>{{ operator.phone_number }}</td>
-                        <td>{{ radio_choice }} <a href="" class="disabled"><u>Оператор по умолчанию</u></a></td>
-                    </tr>
-                {% endfor %}
-            </table>
+			<div class="table-responsive">
+	            <table class="table table-bordered-cells">
+	                <colgroup>
+	                    <col width="100px"/>
+	                    <col/>
+	                    <col/>
+	                    <col/>
+	                    <col width="200px"/>
+	                </colgroup>
+	                {% load filters %}
+	                {% for radio_choice, checkbox_choice, operator in options_form.operator_by_default_choices, options_form.related_operators, options_form.operators %}
+	                    <tr>
+	                        <td>{{ checkbox_choice }} <a href="" class="disabled"><u>Выбрать</u></a></td>
+	                        <td>{{ operator.name }}</td>
+	                        <td>{{ operator.position }}</td>
+	                        <td>{{ operator.phone_number }}</td>
+	                        <td>{{ radio_choice }} <a href="" class="disabled"><u>Оператор по умолчанию</u></a></td>
+	                    </tr>
+	                {% endfor %}
+	            </table>
+            </div>
         </div>
         <div class="col-lg-12">
             <input class="btn-green" type="submit" value="Сохранить"/>

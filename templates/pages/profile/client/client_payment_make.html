@@ -11,22 +11,24 @@
         <div class="col-lg-12">
             <div class="row">
                 <form action="{{ make_payment_form.target }}" method="post">{% csrf_token %}
-                    <table class="table table-bordered-cells">
-                        <tr>
-                            <th>Минуты</th>
-                            <th>Тариф(руб./мин.)</th>
-                            <th>В сумме(руб.)</th>
-                            <th>Способ оплаты</th>
-                        </tr>
-                        <tr>
-                            <td>{{ bill.minutes }}</td>
-                            <td>{{ bill.price_per_minute }}</td>
-                            <td>{{ bill.sum }}</td>
-                            {% load filters %}
-                            <td>{{ bill.payment_method|get_nice_payment_method_title }}</td>
-                        </tr>
-                    </table>
-
+					<div class="table-responsive">
+	                    <table class="table table-bordered-cells">
+	                        <tr>
+	                            <th>Минуты</th>
+	                            <th>Тариф(руб./мин.)</th>
+	                            <th>В сумме(руб.)</th>
+	                            <th>Способ оплаты</th>
+	                        </tr>
+	                        <tr>
+	                            <td>{{ bill.minutes }}</td>
+	                            <td>{{ bill.price_per_minute }}</td>
+	                            <td>{{ bill.sum }}</td>
+	                            {% load filters %}
+	                            <td>{{ bill.payment_method|get_nice_payment_method_title }}</td>
+	                        </tr>
+	                    </table>
+					</div>
+					
                     {{ make_payment_form }}
 
                     <div class="col-lg-2">

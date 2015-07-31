@@ -34,40 +34,42 @@
             {% endif %}
             <div class="col-lg-12">&nbsp;</div>
         {% endif %}
-        <table class="table table-bordered-cells">
-            <tr class="text-center">
-                <th>Номер</th>
-                <th>Дата</th>
-                <th>Минуты</th>
-                <th>Сумма (руб)</th>
-                <th>Способ</th>
-                <th>Статус</th>
-                <th>Акт</th>
-            </tr>
-            {% load filters %}
-            {% for bill in bills %}
-                <tr class="text-center">
-                    <td>{{ bill.id }}</td>
-                    <td>{{ bill.when|date:'d.m.Y' }}</td>
-                    <td>{{ bill.minutes }}</td>
-                    <td>{{ bill.sum }}</td>
-                    <td>{{ bill.payment_method|get_nice_payment_method_title }}</td>
-                    <td>
-                        {{ bill.status|get_nice_bill_status_title }}<br/>
-                        {% if bill|whether_payment_method_is_electron_and_unpaid == True %}
-                            <a class="disabled text-gray" href="javascript:void(0);"><u>Оплатить</u></a>
-                        {% endif %}
-                    </td>
-                    <td><a href="/profile/client/info/bills/request_act?bill_id={{ bill.id }}"><u>Запросить акт</u></a></td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="7">
-                        <span>&mdash;</span>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
+		<div class="table-responsive">
+	        <table class="table table-bordered-cells">
+	            <tr class="text-center">
+	                <th>Номер</th>
+	                <th>Дата</th>
+	                <th>Минуты</th>
+	                <th>Сумма (руб)</th>
+	                <th>Способ</th>
+	                <th>Статус</th>
+	                <th>Акт</th>
+	            </tr>
+	            {% load filters %}
+	            {% for bill in bills %}
+	                <tr class="text-center">
+	                    <td>{{ bill.id }}</td>
+	                    <td>{{ bill.when|date:'d.m.Y' }}</td>
+	                    <td>{{ bill.minutes }}</td>
+	                    <td>{{ bill.sum }}</td>
+	                    <td>{{ bill.payment_method|get_nice_payment_method_title }}</td>
+	                    <td>
+	                        {{ bill.status|get_nice_bill_status_title }}<br/>
+	                        {% if bill|whether_payment_method_is_electron_and_unpaid == True %}
+	                            <a class="disabled text-gray" href="javascript:void(0);"><u>Оплатить</u></a>
+	                        {% endif %}
+	                    </td>
+	                    <td><a href="/profile/client/info/bills/request_act?bill_id={{ bill.id }}"><u>Запросить акт</u></a></td>
+	                </tr>
+	            {% empty %}
+	                <tr>
+	                    <td colspan="7">
+	                        <span>&mdash;</span>
+	                    </td>
+	                </tr>
+	            {% endfor %}
+	        </table>
+        </div>
     </div>
 {% endblock %}
 

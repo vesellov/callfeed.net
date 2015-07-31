@@ -18,28 +18,30 @@
 
         {{ contacts_form.widget_id }}
         <div class="col-lg-10">
-            <table class="table table-bordered-cells">
-                <colgroup>
-                    <col class="col-lg-3"/>
-                    <col class="col-lg-4"/>
-                    <col class="col-lg-5"/>
-                </colgroup>
-                <tr>
-                    <td class="text-left">Имя</td>
-                    <td>{{ contacts_form.flag_name_field }} <a href=""><u>Применить</u></a></td>
-                    <td>{{ contacts_form.flag_name_field_obligatory }} <a href=""><u>Сделать обязательным</u></a></td>
-                </tr>
-                <tr>
-                    <td class="text-left">Email</td>
-                    <td>{{ contacts_form.flag_email_field }} <a href=""><u>Применить</u></a></td>
-                    <td>{{ contacts_form.flag_email_field_obligatory }} <a href=""><u>Сделать обязательным</u></a></td>
-                </tr>
-                <tr>
-                    <td class="text-left">Телефон</td>
-                    <td>{{ contacts_form.flag_phone_field }} <a href=""><u>Применить</u></a></td>
-                    <td>{{ contacts_form.flag_phone_field_obligatory }} <a href=""><u>Сделать обязательным</u></a></td>
-                </tr>
-            </table>
+			<div class="table-responsive">
+	            <table class="table table-bordered-cells">
+	                <colgroup>
+	                    <col class="col-lg-3"/>
+	                    <col class="col-lg-4"/>
+	                    <col class="col-lg-5"/>
+	                </colgroup>
+	                <tr>
+	                    <td class="text-left">Имя</td>
+	                    <td>{{ contacts_form.flag_name_field }} <a href=""><u>Применить</u></a></td>
+	                    <td>{{ contacts_form.flag_name_field_obligatory }} <a href=""><u>Сделать обязательным</u></a></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">Email</td>
+	                    <td>{{ contacts_form.flag_email_field }} <a href=""><u>Применить</u></a></td>
+	                    <td>{{ contacts_form.flag_email_field_obligatory }} <a href=""><u>Сделать обязательным</u></a></td>
+	                </tr>
+	                <tr>
+	                    <td class="text-left">Телефон</td>
+	                    <td>{{ contacts_form.flag_phone_field }} <a href=""><u>Применить</u></a></td>
+	                    <td>{{ contacts_form.flag_phone_field_obligatory }} <a href=""><u>Сделать обязательным</u></a></td>
+	                </tr>
+	            </table>
+            </div>
             {{ contacts_form.settings }}
         </div>
 
