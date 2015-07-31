@@ -1,0 +1,49 @@
+@font-face {
+    font-family: bebasneue_bold;
+    src: url('./../fonts/bebasneue_bold.ttf');
+}
+
+html, body {
+    background-color: #E4E4E4;
+    color: #FFF;
+}
+
+.container {
+    padding-top: 50px;
+}
+
+h1 {
+    font-family: bebasneue_bold, serif;
+    margin-top: 40px;
+    color: #333;
+}
+
+.register-form {
+    padding-top: 50px;
+}
+
+input {
+    margin-bottom: 20px;
+    width: 280px !important;
+    height: 38px;
+    font-size: 17px;
+    color: #000;
+    background-color: #FFF;
+}
+
+input[type=submit] {
+    font-weight: bold;
+    background-color: #3AB363;
+    color: #FFF;
+}
+
+.or-login {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.or-login a {
+    color: #009DD9 !important;
+    text-decoration: underline;
+}
