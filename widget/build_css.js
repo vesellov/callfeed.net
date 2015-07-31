@@ -44,7 +44,7 @@ function CallFeedBuildCSS(settings) {
     o+="    width: %(param_total_max_width)spx!important;\n";
     o+="    /* background-image: none!important; */\n";
     o+="    /* background: none!important; */\n";
-    o+="    border-radius: %(param_content_border_radius)px!important;\n";
+    o+="    border-radius: %(param_content_border_radius)spx!important;\n";
     o+="    overflow: hidden!important;\n";
     o+="}\n";
     o+=".cf_background {\n";
@@ -54,7 +54,7 @@ function CallFeedBuildCSS(settings) {
     o+="    width: 100%!important;\n";
     o+="    height: 100%!important;\n";
     o+="    /* background-image: none!important; */\n";
-    o+="    border-radius: %(param_content_border_radius)pxpx!important;\n";
+    o+="    border-radius: %(param_content_border_radius)spx!important;\n";
     o+="    background-color: %(color_background_global)s!important;\n";
     o+="    opacity: %(color_opacity_global)s!important;\n";
     o+="    -webkit-background-size: cover;\n";
@@ -74,7 +74,7 @@ function CallFeedBuildCSS(settings) {
     o+="    /* background-image: none!important; */\n";
     o+="    background-color: %(color_background_global)s!important;\n";
     o+="    opacity: %(color_opacity_main_button)s!important;\n";
-    o+="    border-radius: %(param_main_button_border_radius)pxpx!important;\n";
+    o+="    border-radius: %(param_main_button_border_radius)spx!important;\n";
     o+="    -webkit-touch-callout: none;\n";
     o+="    -webkit-user-select: none;\n";
     o+="    -khtml-user-select: none;\n";
