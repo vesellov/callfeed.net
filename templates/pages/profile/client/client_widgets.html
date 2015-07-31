@@ -52,43 +52,45 @@
                        	</a>
                     </div>
                 </div>
-                <table class="table table-bordered-cells">
-                    {% for widget in client.widget_set.all %}
-                        <tr class="text-center">
-                            <td>
-                                <a target="_blank" href="{{ widget.site_url }}">{% if widget.site_url != None %}{{ widget.site_url }}{% else %}-{% endif %}</a>
-                                <a href="/profile/client/widget/check?widget_id={{ widget.id }}" class="text-right"><img class="refresh-widget-presence-ico" src="{% if widget.is_installed %}{% static 'img/refresh_green_ico.png' %}{% else %}{% static 'img/refresh_red_ico.png' %}{% endif %}" alt=""/></a>
-                            </td>
-                            <td>
-                                <a href="/profile/client/widget/code?widget_id={{ widget.id }}">Установить на сайт</a>
-                            </td>
-                            <!-- 
-                            <td>
-                                <a class="disabled text-gray" href="/profile/client/widget/stats?widget_id={{ widget.id }}">Статистика</a>
-                            </td>
-                            <td>
-                                <a class="disabled text-gray" href="/profile/client/widget/journal?widget_id={{ widget.id }}">Журнал обращений</a>
-                            </td>
-                            -->
-                            <td>
-                                <span><input class="widget-toggle-activity" type="checkbox" {% if widget.is_active %} checked {% endif %}
-                                        data-url="/profile/client/widget/toggle_activity?widget_id={{ widget.id }}"/>
-                                    <a href=""><u>{% if widget.is_active %} Остановить {% else %} Запустить {% endif %}</u></a>
-                                </span>
-                            </td>
-                            <td>
-                                <a href="/profile/client/widget/options?widget_id={{ widget.id }}"><u>Редактировать</u></a>
-                            </td>
-                            <td>
-                                <a class="text-red delete-btn" data-url="/profile/client/widget/delete?widget_id={{ widget.id }}" href="javascript:void(0);"><u>Удалить</u></a>
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="5"><span>Для начала создайте <a href="javascript: NewWidgetWindowOpen();">новый виджет</a> прямо сейчас.</span></td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered-cells">
+                        {% for widget in client.widget_set.all %}
+                            <tr class="text-center">
+                                <td>
+                                    <a target="_blank" href="{{ widget.site_url }}">{% if widget.site_url != None %}{{ widget.site_url }}{% else %}-{% endif %}</a>
+                                    <a href="/profile/client/widget/check?widget_id={{ widget.id }}" class="text-right"><img class="refresh-widget-presence-ico" src="{% if widget.is_installed %}{% static 'img/refresh_green_ico.png' %}{% else %}{% static 'img/refresh_red_ico.png' %}{% endif %}" alt=""/></a>
+                                </td>
+                                <td>
+                                    <a href="/profile/client/widget/code?widget_id={{ widget.id }}">Установить на сайт</a>
+                                </td>
+                                <!-- 
+                                <td>
+                                    <a class="disabled text-gray" href="/profile/client/widget/stats?widget_id={{ widget.id }}">Статистика</a>
+                                </td>
+                                <td>
+                                    <a class="disabled text-gray" href="/profile/client/widget/journal?widget_id={{ widget.id }}">Журнал обращений</a>
+                                </td>
+                                -->
+                                <td>
+                                    <span><input class="widget-toggle-activity" type="checkbox" {% if widget.is_active %} checked {% endif %}
+                                            data-url="/profile/client/widget/toggle_activity?widget_id={{ widget.id }}"/>
+                                        <a href=""><u>{% if widget.is_active %} Остановить {% else %} Запустить {% endif %}</u></a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/profile/client/widget/options?widget_id={{ widget.id }}"><u>Редактировать</u></a>
+                                </td>
+                                <td>
+                                    <a class="text-red delete-btn" data-url="/profile/client/widget/delete?widget_id={{ widget.id }}" href="javascript:void(0);"><u>Удалить</u></a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5"><span>Для начала создайте <a href="javascript: NewWidgetWindowOpen();">новый виджет</a> прямо сейчас.</span></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </section>
     </div>

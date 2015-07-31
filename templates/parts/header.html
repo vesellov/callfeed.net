@@ -6,7 +6,7 @@
                 <img style="margin-top: 7px; width: 170px; height: 33px;" src="{% static 'img/landing/logo.png' %}" alt="Callfeed">
             </a>
         </div>
-        <nav class="collapse navbar-collapse bs-navbar-collapse white-text" role="navigation">
+        <nav class="white-text" role="navigation">
             <ul class="nav navbar-nav navbar-right">
                 {% block navbar_content %}
                     {% if user.is_authenticated %}

@@ -1,15 +1,25 @@
-<nav class="white-text navbar-2x-soft-gray">
-    <div class="container">
-        <ul class="nav navbar-nav pull-left">
-            <li id="page_widgets"><a href="/profile/client/widgets">Виджеты</a></li>
-            <li id="page_callbacks"><a href="/profile/client/callbacks">Звонки</a></li>
-            <li id="page_operators"><a href="/profile/client/operators">Операторы</a></li>
-            <li id="page_info"><a href="/profile/client/info/personal">Профиль</a></li>
-        </ul>
-        <ul class="nav navbar-nav pull-right">
-            <li><a href="">{{ balance_minutes }} мин.</a></li>
-            <li><button style="margin-top: 8px" class="btn-purple" id="make_payment" onclick="window.location.assign('/profile/client/payment/choose_tariff')">Пополнить</button></li>
-        </ul>
+<nav class="navbar white-text navbar-2x-soft-gray ">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button id="client-navbar-button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#client-navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        </div> 
+        <div id="client-navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+                <li id="page_widgets"><a href="/profile/client/widgets">Виджеты</a></li>
+                <li id="page_callbacks"><a href="/profile/client/callbacks">Звонки</a></li>
+                <li id="page_operators"><a href="/profile/client/operators">Операторы</a></li>
+                <li id="page_info"><a href="/profile/client/info/personal">Профиль</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="">{{ balance_minutes }} мин.</a></li>
+                <li><button style="margin-top: 8px" class="btn-purple" id="make_payment" onclick="window.location.assign('/profile/client/payment/choose_tariff')">Пополнить</button></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
