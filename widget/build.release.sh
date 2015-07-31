@@ -11,6 +11,10 @@ echo "publish [cf.min.js]"
 scp cf.min.js callfeed:srv/static/
     
 
+echo "erase [cf.js]"
+rm -rf cf.js
+
+
 echo ""
 date
 echo "DONE!"

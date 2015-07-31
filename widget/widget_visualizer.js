@@ -185,7 +185,7 @@ var WidgetVisualizer = Automat.extend({
     		//CallFeedOptions.
     		$('#cf_main_button').hide();
     		$('#cf_widget_triangle_img').hide();
-    		$('#cf_widget').css('bottom': '0px');
+    		$('#cf_widget').css({'bottom': '0px'});
     	}
     },
     
