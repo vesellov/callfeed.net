@@ -318,10 +318,12 @@ class ClientWidgetDesignForm(ClientWidgetForm, ClientWidgetSettingsField):
                                                 label='Отступ справа')
     param_root_position_bottom = forms.CharField(initial=widget_settings.DEFAULT_SETTINGS['param_root_position_bottom'],
                                                  label='Отступ снизу')
-    param_content_border_radius = forms.CharField(initial=widget_settings.DEFAULT_SETTINGS['param_content_border_radius'],
-                                                 label='Радиус закругления краев виджета')
-    param_main_button_border_radius = forms.CharField(initial=widget_settings.DEFAULT_SETTINGS['param_main_button_border_radius'],
-                                                 label='Радиус закругления плавающей кнопки')
+    param_content_border_radius = forms.IntegerField(max_value=40, min_value=0,
+                                                     initial=widget_settings.DEFAULT_SETTINGS['param_content_border_radius'],
+                                                     label='Радиус закругления краев виджета')
+    param_main_button_border_radius = forms.IntegerField(max_value=40, min_value=0,
+                                                         initial=widget_settings.DEFAULT_SETTINGS['param_main_button_border_radius'],
+                                                         label='Радиус закругления плавающей кнопки')
     #
     flag_button_text_animated = forms.BooleanField(initial=False, required=False,
                                                    label='Текст на кнопке анимирован')
