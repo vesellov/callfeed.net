@@ -1,0 +1,780 @@
+#callfeed_root {
+    position: fixed!important;
+    left: %(param_root_position_left)s!important;
+    right: %(param_root_position_right)s!important;
+    bottom: %(param_root_position_bottom)s!important;
+    width: %(param_total_max_width)spx!important;
+    /*height: %(param_total_max_height)spx!important;*/
+    /*-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; */    
+    overflow: hidden!important;
+}
+#cf_widget {
+    position: absolute!important;
+    left: 0px!important;
+    bottom: %(param_button_height)spx!important;
+    width: %(param_total_max_width)spx!important;
+    height: 100%!important;
+    overflow: hidden!important;
+    /* background-image: none!important; */
+    display: none;  
+}
+#cf_widget_triangle_img {
+    position: absolute!important;
+    left: 134px!important;
+    bottom: -1px!important;
+    width: 0px!important;
+    height: 0px!important;
+    border-left: 10px solid rgba(0, 0, 0, 0)!important;
+    border-right: 10px solid rgba(0, 0, 0, 0)!important;
+    border-top: 11px solid %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+.cf_content {
+    position: absolute!important;
+    left: 0px!important;
+    bottom: 10px!important;
+    width: %(param_total_max_width)spx!important;
+    /* background-image: none!important; */
+    /* background: none!important; */    
+    border-radius: 15px!important;
+    overflow: hidden!important;
+}
+.cf_background {
+    position: absolute!important;
+    left: 0px!important;
+    top: 0px!important;
+    width: 100%!important;
+    height: 100%!important;
+    /* background-image: none!important; */
+    border-radius: 15px!important;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+
+#cf_main_button {
+    position: absolute!important;
+    left: 30px!important;
+    bottom: 0px!important;
+    width: %(param_button_width)spx!important;
+    height: %(param_button_height)spx!important;
+    cursor: pointer!important;
+    font-size: 17px!important;
+    color: %(color_font_global)s!important;
+    /* background-image: none!important; */
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_main_button)s!important;
+    border-radius: 19px!important;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;    
+}
+#cf_main_button:hover {
+	opacity: 1!important;
+}
+#cf_main_button_content {
+    position: absolute!important;
+    left: 0px!important;
+    top: 0px!important;
+    width: %(param_button_width)spx!important;
+    word-wrap: break-word!important;
+    text-align: center!important;
+    height: %(param_button_height)spx!important;
+    line-height: 38px!important;
+    vertical-align: middle; 
+}
+#cf_main_button_label {
+    font-family: Arial!important;  
+}
+
+
+#cf_copyright_link {
+    position: absolute!important;
+    bottom: 12px!important;
+    right: 12px!important;
+}
+#cf_copyright_link_content {
+    color: %(color_font_link)s!important;
+/*  color: %(color_font_global)s!important; 
+    opacity: .7!important; */
+    font-size: 10px!important;
+    font-family: %(param_font1)s!important;
+    font-weight: 400!important;
+    text-decoration: none!important;
+}
+
+
+.cf_manager_panel {
+    position: absolute!important;
+    top: 24px!important;
+    left: 20px!important;
+    right: 20px!important;
+    height: %(param_manager_panel_height)spx!important;
+}
+.cf_manager_face {
+    position: absolute!important;
+    top: 0px!important;
+    left: 0px!important;
+    width: 50px!important;
+    height: %(param_manager_panel_height)spx!important;
+    border-radius: 50px!important;
+}
+.cf_manager_name {
+    position: absolute!important;
+    top: 5px!important;
+    left: 65px!important;
+    right: 0px!important;
+    height: 25px!important;
+    color: %(color_font_global)s!important;
+    font-size: 14px!important;
+}
+.cf_manager_role {
+    position: absolute!important;
+    top: 30px!important;
+    left: 65px!important;
+    right: 0px!important;
+    height: 20px!important;
+    color: %(color_font_scondary_global)s!important;
+    font-size: 12px!important;
+}
+
+
+
+.cf_close_button {
+    position: absolute!important;
+    right: 10px!important;
+    top: 10px!important;
+    width: 12px!important;
+    height: 12px!important;
+    cursor: pointer!important;
+}
+.cf_close_button_img {
+    position: absolute!important;
+    left: 0px!important;
+    top: 0px!important;
+    width: 12px!important;
+    height: 12px!important; 
+}
+
+
+
+.cf_send_message_link {
+    position: absolute!important;
+    text-align: center!important;
+    left: 0px!important;
+    right: 0px!important;
+    bottom: 26px!important;
+    height: 16px!important;
+    color: %(color_font_link)s!important;
+    /* color: %(color_font_global)s!important; 
+    opacity: .7!important; */
+    white-space: nowrap!important;  
+    font-size: 13px!important;
+}
+.cf_time_select_link {
+    position: absolute!important;
+    text-align: center!important;
+    left: 0px!important;
+    right: 0px!important;
+    bottom: 52px!important;
+    height: 16px!important;
+    color: %(color_font_link)s!important;
+    /* color: %(color_font_global)s!important; 
+    opacity: .7!important; */
+    white-space: nowrap!important;
+    font-size: 13px!important;
+}
+
+
+
+.cf_call_panel {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    height: 38px!important;
+    /* background-image: none!important; */
+    background-color: %(color_background_inputs)s!important;
+    opacity: %(color_opacity_call_panel)s!important;
+    border-radius: 19px!important;
+    border: 1px solid %(color_background_inputs)s;
+    box-sizing: border-box!important;
+}
+.cf_call_input {
+    position: absolute!important;
+    left: 18px!important;
+    top: 0px!important;
+    width: 190px!important;
+    height: 36px!important;
+    font-size: 16px!important;
+    border: 0px!important;
+}
+.cf_call_button {
+    position: absolute!important;
+    width: 36px!important;
+    height: 36px!important;
+    cursor: pointer!important;
+    opacity: %(color_opacity_call_button)s!important;
+}
+.cf_call_button_bg_img {
+    position: absolute!important;
+    left: 0px!important;
+    top: 0px!important;
+    width: 36px!important;
+    height: 36px!important;
+    opacity: %(color_opacity_call_button)s!important;
+}
+.cf_call_button_phone_img {
+    position: absolute!important;
+    left: 8px!important;
+    top: 8px!important;
+    width: 20px!important;
+    height: 20px!important; 
+    opacity: %(color_opacity_call_button)s!important;
+}
+
+
+
+.cf_day_select {
+    position: absolute!important;
+    top: 0px!important;
+    left: 0px!important;
+    width: 130px!important;
+    height: 38px!important;
+    font-size: %(param_font_size_inputs)s!important;
+    color: #000!important;
+    border-radius: 19px!important;
+    cursor: pointer!important;
+    padding-left: 10px!important;
+}
+.cf_time_select {
+    position: absolute!important;
+    top: 0px!important;
+    right: 0px!important;
+    width: 80px!important;
+    height: 38px!important;
+    font-size: %(param_font_size_inputs)s!important;
+    color: #000!important;
+    border-radius: 19px!important;
+    cursor: pointer!important;
+    padding-left: 14px!important;
+
+}
+.cf_daytime_at_text {
+    position: absolute!important;
+    top: 10px!important;
+    left: 145px!important;
+    width: 16px!important;
+    height: 16px!important;
+    line-height: 16px!important;
+    color: %(color_font_global)s!important;
+    font-size: 16px!important;
+}
+
+
+
+.cf_custom_text {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    overflow: hidden!important;
+    /* cursor: default!important; */
+}
+.cf_custom_text_value {
+    font-family: %(param_font1)s!important;
+    font-weight: 400!important;
+    white-space: normal!important;
+    word-wrap:  break-word!important;
+}
+
+
+
+#cf_main_content {
+    display: none;
+    height: %(param_main_height)spx;
+}
+#cf_main_call_panel {
+    bottom: 87px!important;
+}
+#cf_main_custom_text {
+    top: 90px!important;
+    /* bottom: 130px!important; */
+}
+#cf_main_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 20px!important;  
+}
+#cf_main_call_button {
+    position: absolute!important;
+    right: 21px!important;
+    bottom: 88px!important;	
+}
+
+
+
+#cf_dial_content {
+    display: none;
+    height: %(param_dial_height)spx;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+#cf_dial_custom_text {
+    top: 90px!important;
+    /* bottom: 110px!important; */
+}
+#cf_dial_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 20px!important;  
+}
+#cf_dial_countdown_panel {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    bottom: 52px!important;
+    height: 50px!important;
+    text-align: center!important;
+}
+#cf_dial_countdown_text {
+    font-family: "Courier Обычный","Courier"!important;
+    font-weight: 600!important;
+    font-size: 50px!important;
+    line-height: 50px!important;
+}
+
+
+#cf_free_content {
+    display: none;
+    height: %(param_free_height)spx;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+#cf_free_call_button {
+    position: absolute!important;
+    right: 21px!important;
+    bottom: 51px!important; 
+}
+#cf_free_call_panel {
+    bottom: 50px!important;
+}
+#cf_free_daytime_panel {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    bottom: 100px!important;
+    height: 38px!important;
+}
+#cf_free_custom_text {
+    top: 90px!important;
+    /* bottom: 148px!important; */
+}
+#cf_free_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+#cf_free_sent_custom_text {
+    top: 24px!important;
+    /* bottom: 52px!important; */
+}
+#cf_free_sent_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+#cf_free_sent_content {
+    display: none;
+    height: %(param_free_sent_height)spx;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+
+
+#cf_timeoff_content {
+    display: none;
+    height: %(param_timeoff_height)spx;
+}
+#cf_timeoff_call_button {
+    position: absolute!important;
+    right: 21px!important;
+    bottom: 61px!important; 
+}
+#cf_timeoff_custom_text {
+    top: 24px!important;
+    /* height: 140px!important; */ 
+    /* right: 40px!important; */
+}
+#cf_timeoff_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+#cf_timeoff_call_panel {
+    bottom: 60px!important;
+}
+#cf_timeoff_daytime_panel {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    bottom: 110px!important;
+    height: 38px!important;
+}
+#cf_timeoff_sent_custom_text {
+    top: 24px!important;
+    /* bottom: 52px!important; */
+}
+#cf_timeoff_sent_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+#cf_timeoff_sent_content {
+    display: none;
+    height: %(param_timeoff_sent_height)spx;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+
+
+
+
+
+#cf_message_content {
+    display: none;
+    height: %(param_message_height)spx;
+}
+#cf_message_custom_text {
+    top: 24px!important;
+    right: 40px!important;
+    /* height: 60px!important; */ 
+}
+#cf_message_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+#cf_message_message_textarea {
+    position: absolute!important;
+    left: 20px!important;
+    width: 250px!important;
+    bottom: 260px;
+    height: 74px!important; 
+    color: #000!important;
+    resize: none!important;
+    /* background-image: none!important; */
+    background-color: %(color_background_inputs)s!important;
+    opacity: %(color_opacity_inputs)s!important;
+    border-radius: 12px!important;
+    padding: 14px!important;
+}
+#cf_message_name_input {
+    position: absolute!important;
+    left: 20px!important;
+    width: 236px!important;
+    height: 36px!important;
+    bottom: 210px;
+    color: #000!important;
+    border-radius: 12px!important;
+    padding-left: 14px!important;
+}
+#cf_message_email_input {
+    position: absolute!important;
+    left: 20px!important;
+    width: 236px!important;
+    height: 38px!important;
+    bottom: 160px;
+    color: #000!important;
+    border-radius: 12px!important;
+    padding-left: 14px!important;
+}
+#cf_message_phone_input {
+    position: absolute!important;
+    left: 20px!important;
+    width: 236px!important;
+    height: 38px!important;
+    bottom: 110px;
+    color: #000!important;
+    border-radius: 12px!important;
+    padding-left: 14px!important;
+}
+#cf_message_send_button {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    height: 38px!important;
+    bottom: 60px!important;
+    text-align: center!important;
+    cursor: pointer!important;
+    color: %(color_font_global)s!important;
+    line-height: 38px!important;
+    /* background-image: none!important; */
+    background-color: #3BB767!important;
+    opacity: %(color_opacity_call_button)s!important;
+    border-radius: 19px!important;
+}
+.cf_message_go_back_link {
+    position: absolute!important;
+    text-align: center!important;
+    left: 0px!important;
+    right: 0px!important;
+    bottom: 26px!important;
+    height: 16px!important;
+    color: %(color_font_link)s!important;
+    /* color: %(color_font_global)s!important; 
+    opacity: .7!important; */
+    white-space: nowrap!important;
+    font-size: 13px!important;  
+}
+#cf_message_sent_content {
+    display: none;
+    height: %(param_message_sent_height)spx;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+#cf_message_sent_custom_text {
+    top: 24px!important;
+    /* bottom: 52px!important; */
+}
+#cf_message_sent_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+
+
+
+#cf_order_content {
+    display: none;
+    height: %(param_order_height)spx;
+}
+#cf_order_call_button {
+    position: absolute!important;
+    right: 21px!important;
+    bottom: 88px!important; 
+}
+#cf_order_call_panel {
+    bottom: 87px!important;
+}
+#cf_order_daytime_panel {
+    position: absolute!important;
+    left: 20px!important;
+    right: 20px!important;
+    bottom: 137px!important;
+    height: 38px!important;
+}
+#cf_order_custom_text {
+    top: 90px!important;
+    /* bottom: 185px!important; */
+}
+#cf_order_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+.cf_order_go_back_link {
+    position: absolute!important;
+    left: 0px!important;
+    right: 0px!important;
+    text-align: center!important;
+    bottom: 52px!important;
+    height: 16px!important;
+    color: %(color_font_link)s!important;
+    /* color: %(color_font_global)s!important; 
+    opacity: .7!important; */
+    white-space: nowrap!important;
+    font-size: 13px!important;
+}
+#cf_order_sent_content {
+    display: none;
+    height: %(param_order_sent_height)spx;
+    background-color: %(color_background_global)s!important;
+    opacity: %(color_opacity_global)s!important;
+}
+#cf_order_sent_custom_text {
+    top: 90px!important;
+    /* bottom: 52px!important; */
+}
+#cf_order_sent_custom_text_value {
+    font-size: 16px!important;
+    color: %(color_font_global)s!important;   
+    text-align: left!important;
+    line-height: 16px!important;  
+}
+
+
+
+
+.cf__divimg { }
+.cf__divtext { }
+.cf__divpanel { }
+.cf__div0height {
+	height: 0px!important;
+}
+.cf__divhidden {
+	display: none!important;
+}
+.cf__divinput { }
+.cf__divlink { 
+    cursor: pointer!important;
+}
+.cf__img { }
+.cf__u { text-decoration: underline!important; }
+.cf__span {
+    font-family: %(param_font1)s!important;
+    font-weight: 400!important;
+    font-style: normal!important;
+}
+.cf__p {
+    font-family: %(param_font1)s!important;
+    font-weight: 400!important;
+    font-style: normal!important;
+}
+.cf__disabled {
+    background-color: #aaa!important;
+    opacity: %(color_opacity_inputs)s!important;
+    color: #ccc!important;
+}
+.cf__valid {
+	border-color: %(color_background_inputs)s!important;
+    background-color: %(color_background_inputs)s!important; 
+    opacity: %(color_opacity_inputs)s!important;
+}
+.cf__notvalid {
+    border: 1px solid #f00!important;
+    background-color: %(color_background_inputs)s!important; 
+    /* background-color: #ecc!important; */
+    opacity: %(color_opacity_inputs)s!important;
+}
+.cf__input {
+    margin:0!important;
+    border: 1px solid %(color_background_inputs)s;
+    padding:0!important;
+    outline:0!important;
+    /* background-image: none!important; */
+    background: %(color_background_inputs)s;
+    background-color: %(color_background_inputs)s;
+    /* background: none!important; */
+    opacity: %(color_opacity_inputs)s!important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow:none!important;
+    display:inline-block;
+    vertical-align:middle!important;
+    white-space:normal!important;
+    color: #000!important;
+    line-height: 34px!important;  
+    font-family: %(param_font1)s!important;
+    font-size: %(param_font_size_inputs)s!important;  
+    -webkit-box-sizing:content-box!important;
+    -moz-box-sizing:content-box!important;
+    box-sizing:content-box!important;
+    -webkit-appearance: none!important;
+    -moz-appearance: none!important;
+    appearance: none!important;    
+}
+.cf__input:focus, .cf__input:hover {
+	/* border: 0!important; */
+    border: 1px solid %(color_background_inputs)s;
+    outline:0!important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow:none!important;
+    background-color: %(color_background_inputs)s!important;
+    opacity: %(color_opacity_inputs)s!important;
+}
+.cf_call_panel input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ccc inset !important;
+    /* border: 0!important; */
+    /* border: 1px solid %(color_background_inputs)s; */
+}
+.cf_content input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ccc inset !important;
+    /* border: 0!important; */
+    border: 1px solid %(color_background_inputs)s;
+}
+.cf_call_panel input {
+    border: 0!important;
+    background: %(color_background_inputs)s;
+}
+.cf__select {
+    margin:0!important;
+    border: 0!important;
+    padding:0;
+    outline:0!important;
+    /* background-image: none!important; */
+    background: #F2F2F2 url("http://callfeed.net/static/img/widget/up_down_arrow.png") no-repeat right center ;
+    background-color: %(color_background_inputs)s!important;
+    opacity: %(color_opacity_inputs)s!important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow:none!important;
+    display:inline-block;
+    vertical-align:middle!important;
+    white-space:normal!important;
+    font-family:%(param_font1)s!important;  
+    font-size: %(param_font_size_inputs)s!important;  
+    -webkit-box-sizing:border-box!important;
+    -moz-box-sizing:border-box!important;
+    box-sizing:border-box!important;
+    cursor: pointer!important;
+    -webkit-appearance: none!important;
+    -moz-appearance: none!important;
+    appearance: none!important;    
+}
+.cf__select:focus, .cf__select:hover {
+    outline:0!important;
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow:none!important;
+    border-color:transparent!important;
+}
+.cf__select [disabled] {
+    background-color: %(color_background_inputs)s!important;
+    opacity: %(color_opacity_inputs)s!important;
+    color: #ccc!important;
+}
+.cf__select [multiple] {
+    vertical-align:middle!important;
+}
+.cf__textarea {
+    margin:0!important;
+    padding:0;
+    border: 0!important;
+    outline:0!important;
+    overflow: auto!important;
+    line-height: 1!important;  
+    font-family: %(param_font1)s!important;  
+    font-size: %(param_font_size_inputs)s!important;  
+    -webkit-box-shadow: none!important;
+    -moz-box-shadow: none!important;
+    box-shadow: none!important; 
+    -moz-box-sizing:border-box!important; 
+    -webkit-box-sizing:border-box!important;
+    box-sizing:border-box!important;
+    -webkit-appearance: none!important;
+    -moz-appearance: none!important;
+    appearance: none!important;
+}
