@@ -7,7 +7,7 @@
 {% block page_content %}
     <form action="" method="post">{% csrf_token %}
         <div class="col-lg-12">
-            <div class="col-lg-12">
+            <div class="col-lg-12" id="callfeed-html-code">
                 <div class="row">
                     <b>Установка кода на сайт</b><br/>
                     <span>Для установки виджета, просто <b>вставьте данный текст</b> в тело сайта - <b>ближе к концу страницы до закрывающего тега &lt;/body&gt;</b>.</span>
@@ -35,12 +35,8 @@
             <div class="col-lg-12">
                 <div class="row">
                     <b>Виджет с кнопки</b><br/>
-
-                    <span>Вы можете разместить кнопку виджета в любом месте Вашего сайта. Настройте внешний вид кнопки,
-                        скопируйте HTML-код и вставьте его в нужном месте сайта. Перед размещением кнопки убедитесь, что
-                        Вы установили основной код Callfeed на вашем сайте. 
-                        Размещение кнопки на сайте необязательно, Вы можете ограничиться
-                        только установкой кода на свой сайт.
+                    <span>
+                    	Вы можете разместить кнопку виджета в любом месте Вашего сайта:
                     </span>
                 </div>
             </div>
@@ -48,14 +44,22 @@
             <div class="col-lg-12">
                 <div class="row">
                     <span class="width-100percent">
-                        <textarea name="widget_button_code" id="widget_button_code" cols="60" rows="1">
-                        	&lt;a href=&quot;#callfeed&quot;&gt;Заказать обратный звонок&lt;/a&gt;
-                        </textarea><br/>
+                        <textarea name="widget_button_code" id="widget_button_code" cols="60" rows="1">&lt;a href=&quot;#callfeed&quot;&gt;Заказать обратный звонок&lt;/a&gt;</textarea>
                     </span>
                 </div>
             </div>
             <div class="col-lg-12">&nbsp;</div>
             <button type="button" id="btn_copy_button_code_to_clipboard">Скопировать в буфер</button>
+            <span>
+                Скопируйте <b>HTML-код ссылки</b> и <b>вставьте его</b> в нужном месте вашего сайта. 
+   				Настройте внешний вид ссылки для вызова виджета <b>используя CSS-стили</b> 
+   				если вы желаете что бы она выглядела как кнопка.
+   				Вы можете разместить <b>несколько ссылок</b> в <b>разных местах</b> вашего сайта.
+                Перед размещением ссылки убедитесь, что
+                Вы установили <a href="#callfeed-html-code">основной код виджета</a> на данной странице вашего сайта. 
+                Размещение ссылки на сайте <b>необязательно</b>, Вы можете ограничиться
+                только установкой кода виджета на свой сайт.
+			</span>
         </div>
         <div class="col-lg-12">&nbsp;</div>
 
