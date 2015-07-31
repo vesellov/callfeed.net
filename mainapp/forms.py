@@ -325,7 +325,7 @@ class ClientWidgetDesignForm(ClientWidgetForm, ClientWidgetSettingsField):
                                                          initial=widget_settings.DEFAULT_SETTINGS['param_main_button_border_radius'],
                                                          label='Радиус закругления плавающей кнопки')
     #
-    flag_button_visible = forms.BooleanField(initial=widget_settings.DEFAULT_SETTINGS['flag_button_visible'],
+    flag_button_visible = forms.BooleanField(required=False, initial=widget_settings.DEFAULT_SETTINGS['flag_button_visible'],
                                                    label='Отображать плавающую кнопку для вызова виджета')
     flag_button_text_animated = forms.BooleanField(initial=False, required=False,
                                                    label='Текст на кнопке анимирован')
@@ -343,8 +343,7 @@ class ClientWidgetDesignForm(ClientWidgetForm, ClientWidgetSettingsField):
                                               initial=widget_settings.DEFAULT_SETTINGS['color_opacity_global'],
                                               label='Непрозрачность виджета')
     color_opacity_main_button = forms.IntegerField(max_value=100, min_value=10,
-                                                   initial=widget_settings.DEFAULT_SETTINGS[
-                                                       'color_opacity_main_button'],
+                                                   initial=widget_settings.DEFAULT_SETTINGS['color_opacity_main_button'],
                                                    label='Непрозрачность кнопки')
     color_opacity_call_panel = forms.IntegerField(max_value=100, min_value=10,
                                                   initial=widget_settings.DEFAULT_SETTINGS['color_opacity_call_panel'],
