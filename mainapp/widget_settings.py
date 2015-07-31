@@ -144,6 +144,7 @@ DEFAULT_SETTINGS = {
     'flag_email_field_obligatory': True,
     'flag_phone_field': True,
     'flag_phone_field_obligatory': True,
+    'flag_button_visible': True,
     'flag_button_text_animated': False,
     'flag_is_operator_shown_in_widget': True,
     'flag_disable_on_mobiles': False,

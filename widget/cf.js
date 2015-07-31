@@ -1090,6 +1090,7 @@ function CallFeedDefaultSettings(my_token) {
     flag_email_field_obligatory: true,
     flag_phone_field: true,
     flag_phone_field_obligatory: true,
+    flag_button_visible: true,	
     flag_button_text_animated: false,	
     flag_is_operator_shown_in_widget: true,
     flag_disable_on_mobiles: false
@@ -3429,6 +3430,7 @@ var WidgetVisualizer = Automat.extend({
     doInit: function(event, args) {
         // Action method.
         debug.log(this.name+".doInit('"+event+"', "+args+")");
+        this._apply_main_button();
         this._apply_background();
         this._apply_managers();
         this._apply_text_color();
@@ -3544,6 +3546,15 @@ var WidgetVisualizer = Automat.extend({
     
 	// LOAD PARAMS ///////////////////////////////////////////////////
 
+    _apply_main_button: function() {
+    	if (!CallFeedOptions.flag_button_visible) {
+    		//CallFeedOptions.
+    		$('#cf_main_button').hide();
+    		$('#cf_widget_triangle_img').hide();
+    		$('#cf_widget').css('bottom': '0px');
+    	}
+    },
+    
     _apply_text_color: function() {
     	if (CallFeedOptions.color_font_global.toLowerCase() != '#fff' && 
     	    CallFeedOptions.color_font_global.toLowerCase() != '#ffffff') {

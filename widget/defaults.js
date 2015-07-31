@@ -107,6 +107,7 @@ function CallFeedDefaultSettings(my_token) {
     flag_email_field_obligatory: true,
     flag_phone_field: true,
     flag_phone_field_obligatory: true,
+    flag_button_visible: true,	
     flag_button_text_animated: false,	
     flag_is_operator_shown_in_widget: true,
     flag_disable_on_mobiles: false
