@@ -436,7 +436,7 @@ function jsonp_request(url, onSuccess, onError) {
 //[debug.js]
 //
 
-var CallFeedDebug = false;
+var CallFeedDebug = true;
 
 
 
@@ -1034,6 +1034,8 @@ function CallFeedDefaultSettings(my_token) {
 	param_order_height: 320, // cf_order_content
 	param_order_sent_height: 210, // cf_order_sent_content
 	param_z_index_global: 9999, // callfeed_root
+    param_content_border_radius: 15, // cf_content
+    param_main_button_border_radius: 19, // cf_main_button
 	
 	// TEXT VALUES
 	// client should be able to set any text value directly from admin panel
@@ -1054,6 +1056,8 @@ function CallFeedDefaultSettings(my_token) {
 	text_message_failed: 'Извините, сервис в данной момент не доступен.<br/>Просим прощение за доставленные неудобства.',
 	text_send_message_done: 'Спасибо за Ваше сообщение!<br/>Мы обязательно свяжемся с Вами в ближайшее время.',
 	text_timeoff_start: '<span style="color: #FAD468;">Здравствуйте!</span><br/>К сожалению наш рабочий день уже закончился. Пожалуйста оставьте Ваш номер телефона и выберите удобное время звонка.',
+	text_timeoff_start_morning: '<span style="color: #FAD468;">Доброе утро!</span><br/>Наш рабочий день еще не начался. Пожалуйста оставьте Ваш номер телефона и выберите удобное время звонка.',
+	text_timeoff_start_weekend: '<span style="color: #FAD468;">Привет!</span><br/>Сегодня у нас выходной. Пожалуйста оставьте Ваш номер телефона и выберите удобное время звонка.',
 	text_timeoff_done: 'Спасибо!<br/>Мы обязательно перезвоним Вам в указанное время.',
 	text_timeoff_failed: 'Извините, сервис в данной момент не доступен.<br/>Просим прощение за доставленные неудобства.',
 	text_free_start: '<span style="color: #FAD468;">Здравствуйте!</span><br/>Оставьте Ваш номер телефона и выберите удобное время звонка. Мы перезвоним и проконсультируем по всем вопросам.',
@@ -1145,7 +1149,7 @@ function CallFeedBuildCSS(settings) {
     o+="    width: %(param_total_max_width)spx!important;\n";
     o+="    /* background-image: none!important; */\n";
     o+="    /* background: none!important; */\n";
-    o+="    border-radius: 15px!important;\n";
+    o+="    border-radius: %(param_content_border_radius)px!important;\n";
     o+="    overflow: hidden!important;\n";
     o+="}\n";
     o+=".cf_background {\n";
@@ -1155,7 +1159,7 @@ function CallFeedBuildCSS(settings) {
     o+="    width: 100%!important;\n";
     o+="    height: 100%!important;\n";
     o+="    /* background-image: none!important; */\n";
-    o+="    border-radius: 15px!important;\n";
+    o+="    border-radius: %(param_content_border_radius)pxpx!important;\n";
     o+="    background-color: %(color_background_global)s!important;\n";
     o+="    opacity: %(color_opacity_global)s!important;\n";
     o+="    -webkit-background-size: cover;\n";
@@ -1175,7 +1179,7 @@ function CallFeedBuildCSS(settings) {
     o+="    /* background-image: none!important; */\n";
     o+="    background-color: %(color_background_global)s!important;\n";
     o+="    opacity: %(color_opacity_main_button)s!important;\n";
-    o+="    border-radius: 19px!important;\n";
+    o+="    border-radius: %(param_main_button_border_radius)pxpx!important;\n";
     o+="    -webkit-touch-callout: none;\n";
     o+="    -webkit-user-select: none;\n";
     o+="    -khtml-user-select: none;\n";
@@ -3837,7 +3841,9 @@ var WidgetDialer = Automat.extend({
         debug.log(this.name+".doJSONPCall('"+event+"', "+args+")", $("#cf_main_call_input").val());
         jsonp_request('http://callfeed.net/input?'+$.param({
         		'token': CallFeedToken, 
-        		'phone': $("#cf_main_call_input").val()
+        		'phone': $("#cf_main_call_input").val(),
+        		'referrer': encodeURIComponent(CallFeedSession.referrer),
+        		'hostame': encodeURIComponent(CallFeedSession.hostname)
         	}),
             function(data) {
                 debug.log("doJSONPCall.success", data);
@@ -4277,6 +4283,8 @@ var WidgetTimeoffOrder = Automat.extend({
         		'timeoff_phone': $("#cf_timeoff_call_input").val(),
         		'timeoff_day': $("#cf_timeoff_day_select").val(),
         		'timeoff_time': $("#cf_timeoff_time_select").val(),
+        		'referrer': encodeURIComponent(CallFeedSession.referrer),
+        		'hostame': encodeURIComponent(CallFeedSession.hostname)
         	}),
             function(data) {
                 debug.log("doJSONPSend.success", data);
@@ -4461,6 +4469,8 @@ var WidgetMessanger = Automat.extend({
 	    		'message_phone': $("#cf_message_phone_input").val(),
 	    		'message_email': $("#cf_message_email_input").val(),
 	    		'message_text': $("#cf_message_message_textarea").val(),
+        		'referrer': encodeURIComponent(CallFeedSession.referrer),
+        		'hostame': encodeURIComponent(CallFeedSession.hostname)
 	    	}),
 	        function(data) {
 	            debug.log("doJSONPSend.success", data);
@@ -4715,6 +4725,8 @@ var WidgetFreeCaller = Automat.extend({
 	    		'free_phone': $("#cf_free_call_input").val(),
         		'free_day': $("#cf_free_day_select").val(),
         		'free_time': $("#cf_free_time_select").val(),
+        		'referrer': encodeURIComponent(CallFeedSession.referrer),
+        		'hostame': encodeURIComponent(CallFeedSession.hostname)
 	    	}),
 	        function(data) {
 	            debug.log("doJSONPSend.success", data);

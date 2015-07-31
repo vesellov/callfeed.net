@@ -41,7 +41,7 @@
     width: %(param_total_max_width)spx!important;
     /* background-image: none!important; */
     /* background: none!important; */    
-    border-radius: 15px!important;
+    border-radius: %(param_content_border_radius)px!important;
     overflow: hidden!important;
 }
 .cf_background {
@@ -51,7 +51,7 @@
     width: 100%!important;
     height: 100%!important;
     /* background-image: none!important; */
-    border-radius: 15px!important;
+    border-radius: %(param_content_border_radius)pxpx!important;
     background-color: %(color_background_global)s!important;
     opacity: %(color_opacity_global)s!important;
     -webkit-background-size: cover;
@@ -75,7 +75,7 @@
     /* background-image: none!important; */
     background-color: %(color_background_global)s!important;
     opacity: %(color_opacity_main_button)s!important;
-    border-radius: 19px!important;
+    border-radius: %(param_main_button_border_radius)pxpx!important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

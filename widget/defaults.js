@@ -51,6 +51,8 @@ function CallFeedDefaultSettings(my_token) {
 	param_order_height: 320, // cf_order_content
 	param_order_sent_height: 210, // cf_order_sent_content
 	param_z_index_global: 9999, // callfeed_root
+    param_content_border_radius: 15, // cf_content
+    param_main_button_border_radius: 19, // cf_main_button
 	
 	// TEXT VALUES
 	// client should be able to set any text value directly from admin panel
@@ -71,6 +73,8 @@ function CallFeedDefaultSettings(my_token) {
 	text_message_failed: 'Извините, сервис в данной момент не доступен.<br/>Просим прощение за доставленные неудобства.',
 	text_send_message_done: 'Спасибо за Ваше сообщение!<br/>Мы обязательно свяжемся с Вами в ближайшее время.',
 	text_timeoff_start: '<span style="color: #FAD468;">Здравствуйте!</span><br/>К сожалению наш рабочий день уже закончился. Пожалуйста оставьте Ваш номер телефона и выберите удобное время звонка.',
+	text_timeoff_start_morning: '<span style="color: #FAD468;">Доброе утро!</span><br/>Наш рабочий день еще не начался. Пожалуйста оставьте Ваш номер телефона и выберите удобное время звонка.',
+	text_timeoff_start_weekend: '<span style="color: #FAD468;">Привет!</span><br/>Сегодня у нас выходной. Пожалуйста оставьте Ваш номер телефона и выберите удобное время звонка.',
 	text_timeoff_done: 'Спасибо!<br/>Мы обязательно перезвоним Вам в указанное время.',
 	text_timeoff_failed: 'Извините, сервис в данной момент не доступен.<br/>Просим прощение за доставленные неудобства.',
 	text_free_start: '<span style="color: #FAD468;">Здравствуйте!</span><br/>Оставьте Ваш номер телефона и выберите удобное время звонка. Мы перезвоним и проконсультируем по всем вопросам.',

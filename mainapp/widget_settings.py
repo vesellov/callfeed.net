@@ -92,6 +92,8 @@ DEFAULT_SETTINGS = {
     'param_order_height': 320,  # cf_order_content
     'param_order_sent_height': 210,  # cf_order_sent_content
 	'param_z_index_global': 9999, # callfeed_root
+    'param_content_border_radius': 15, # cf_content
+    'param_main_button_border_radius': 19, # cf_main_button
 
     # TEXT VALUES
     # client should be able to set any text value directly from admin panel
