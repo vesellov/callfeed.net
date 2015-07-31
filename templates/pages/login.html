@@ -7,37 +7,37 @@
 {% block body_content %}
     <main>
         <div class="container">
-            <div class="col-lg-12 text-center">
-                <a href="/"><img src="{% static 'img/landing/logo.png' %}" alt=""/></a>
-                <h1>Вход в панель управления</h1>
-            </div>
             <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4 login-form">
-                    <form action="/accounts/login" method="post">{% csrf_token %}
-                        {% if login_form.has_errors %}
+                <div class="col-lg-4 col-md-3 col-sm-3 text-center">&nbsp;</div>
+                <div class="col-lg-4 col-md-6 col-sm-6 text-center">
+                    <a href="/"><img src="{% static 'img/landing/logo.png' %}" alt=""/></a>
+                    <h1>Вход в панель управления</h1>
+                    <div class="login-form">
+                        <form action="/accounts/login" method="post">{% csrf_token %}
+                            {% if login_form.has_errors %}
+                                <div class="col-lg-12">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-8 text-center text-red"><b>Неверный логин/пароль</b></div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                                <div class="col-lg-12">&nbsp;</div>
+                            {% endif %}
                             <div class="col-lg-12 width-100percent">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8 text-center text-red"><b>Неверный логин/пароль</b></div>
-                                <div class="col-lg-2"></div>
+                                {{ login_form.email }}
                             </div>
-                            <div class="col-lg-12">&nbsp;</div>
-                        {% endif %}
-                        <div class="col-lg-12 width-100percent">
-                            {{ login_form.email }}
-                        </div>
-                        <div class="col-lg-12 width-100percent">
-                            {{ login_form.password }}
-                        </div>
-                        <div class="col-lg-12 width-100percent">
-                            <input class="btn-green" type="submit" value="Войти"/>
-                        </div>
-                        <div class="col-lg-12 width-100percent text-center forgot-password">
-                            <a href="/accounts/password/reset">Забыли пароль?</a>
-                        </div>
-                    </form>
+                            <div class="col-lg-12 width-100percent">
+                                {{ login_form.password }}
+                            </div>
+                            <div class="col-lg-12 width-100percent">
+                                <input class="btn-green" type="submit" value="Войти"/>
+                            </div>
+                            <div class="col-lg-12 width-100percent text-center forgot-password">
+                                <a href="/accounts/password/reset">Забыли пароль?</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-lg-4"></div>
+                <div class="col-lg-4 col-md-3 col-sm-3 text-center">&nbsp;</div>
             </div>
         </div>
     </main>
