@@ -16,7 +16,7 @@
 #cf_widget {
     position: absolute!important;
     left: 0px!important;
-    bottom: %(param_button_height)spx!important;
+    bottom: %(param_button_height)spx;
     width: %(param_total_max_width)spx!important;
     height: 100%!important;
     overflow: hidden!important;

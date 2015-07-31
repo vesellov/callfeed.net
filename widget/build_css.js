@@ -19,7 +19,7 @@ function CallFeedBuildCSS(settings) {
     o+="#cf_widget {\n";
     o+="    position: absolute!important;\n";
     o+="    left: 0px!important;\n";
-    o+="    bottom: %(param_button_height)spx!important;\n";
+    o+="    bottom: %(param_button_height)spx;\n";
     o+="    width: %(param_total_max_width)spx!important;\n";
     o+="    height: 100%!important;\n";
     o+="    overflow: hidden!important;\n";
