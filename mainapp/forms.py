@@ -417,46 +417,46 @@ class ClientWidgetContentForm(ClientWidgetForm, ClientWidgetSettingsField):
     text_button = forms.CharField(max_length=120, initial=widget_settings.DEFAULT_SETTINGS['text_button'],
                                   label='Текст кнопки')
     text_main = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_main'],
-                                label='Текст при заказе немедленного обратного звонка', widget=forms.Textarea())
+                                label='Текст при заказе немедленного обратного звонка', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_ready = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_ready'],
-                                      label='Текст в режиме подготовки соединения', widget=forms.Textarea())
+                                      label='Текст в режиме подготовки соединения', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_start = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_start'],
-                                      label='Текст при установке соединения', widget=forms.Textarea())
+                                      label='Текст при установке соединения', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_calling = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_calling'],
-                                        label='Текст во время звонка', widget=forms.Textarea())
+                                        label='Текст во время звонка', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_success = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_success'],
-                                        label='Текст при успешном дозвоне', widget=forms.Textarea())
+                                        label='Текст при успешном дозвоне', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_late = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_late'],
-                                     label='Текст при запоздавшем звонке', widget=forms.Textarea())
+                                     label='Текст при запоздавшем звонке', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_failed = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_failed'],
-                                       label='Текст при неуспешном дозвоне', widget=forms.Textarea())
+                                       label='Текст при неуспешном дозвоне', widget=forms.Textarea(attrs={'rows': '4'}))
     text_dial_finished = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_dial_finished'],
-                                         label='Текст по окончанию звонка', widget=forms.Textarea())
+                                         label='Текст по окончанию звонка', widget=forms.Textarea(attrs={'rows': '4'}))
     text_order_start = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_order_start'],
-                                       label='Текст при заказе обратного звонка', widget=forms.Textarea())
+                                       label='Текст при заказе обратного звонка', widget=forms.Textarea(attrs={'rows': '4'}))
     text_order_done = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_order_done'],
-                                      label='Текст при успешном оформлении заказа звонка', widget=forms.Textarea())
+                                      label='Текст при успешном оформлении заказа звонка', widget=forms.Textarea(attrs={'rows': '4'}))
     text_order_failed = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_order_failed'],
-                                        label='Текст при неуспешном заказе звонка', widget=forms.Textarea())
+                                        label='Текст при неуспешном заказе звонка', widget=forms.Textarea(attrs={'rows': '4'}))
     text_message_start = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_message_start'],
-                                         label='Текст при отправке сообщения', widget=forms.Textarea())
+                                         label='Текст при отправке сообщения', widget=forms.Textarea(attrs={'rows': '4'}))
     text_message_sent = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_message_sent'],
-                                        label='Текст при успешно завершённой отправке', widget=forms.Textarea())
+                                        label='Текст при успешно завершённой отправке', widget=forms.Textarea(attrs={'rows': '4'}))
     text_message_failed = forms.CharField(max_length=300,
                                           initial=widget_settings.DEFAULT_SETTINGS['text_message_failed'],
-                                          label='Текст при ошибке отправки сообщения', widget=forms.Textarea())
+                                          label='Текст при ошибке отправки сообщения', widget=forms.Textarea(attrs={'rows': '4'}))
     text_send_message_done = forms.CharField(max_length=300,
                                              initial=widget_settings.DEFAULT_SETTINGS['text_send_message_done'],
-                                             label='Текст при успешной отправке сообщения', widget=forms.Textarea())
+                                             label='Текст при успешной отправке сообщения', widget=forms.Textarea(attrs={'rows': '4'}))
     text_timeoff_start = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_timeoff_start'],
-                                         label='Текст при заказе звонка в нерабочее время', widget=forms.Textarea())
+                                         label='Текст при заказе звонка в нерабочее время', widget=forms.Textarea(attrs={'rows': '4'}))
     text_timeoff_done = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_timeoff_done'],
                                         label='Текст при успешном принятии заказа на звонок в нерабочее время',
-                                        widget=forms.Textarea())
+                                        widget=forms.Textarea(attrs={'rows': '4'}))
     text_free_start = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_free_start'],
-                                      label='Текст в бесплатной версии', widget=forms.Textarea())
+                                      label='Текст в бесплатной версии', widget=forms.Textarea(attrs={'rows': '4'}))
     text_free_done = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_free_done'],
-                                     label='Текст в бесплатной версии, заказ принят', widget=forms.Textarea())
+                                     label='Текст в бесплатной версии, заказ принят', widget=forms.Textarea(attrs={'rows': '4'}))
     text_link_order = forms.CharField(max_length=300, initial=widget_settings.DEFAULT_SETTINGS['text_link_order'],
                                       label='Текст ссылки заказа')
     text_link_send_message = forms.CharField(max_length=300,
@@ -497,9 +497,9 @@ class ClientWidgetParametersForm(ClientWidgetForm):
                                    label='Геофильтр')
     disable_on_mobiles = forms.BooleanField(required=False,
                                             label='Отключить на мобильных телефонах')
-    blacklist_phones = forms.CharField(max_length=3000, widget=forms.Textarea(), required=False,
+    blacklist_phones = forms.CharField(max_length=3000, widget=forms.Textarea(attrs={'rows': '4'}), required=False,
                                        label='Чёрный список номеров телефонов')
-    blacklist_ip = forms.CharField(max_length=3000, widget=forms.Textarea(), required=False,
+    blacklist_ip = forms.CharField(max_length=3000, widget=forms.Textarea(attrs={'rows': '4'}), required=False,
                                    label='Чёрный список IP-адресов')
 
 
