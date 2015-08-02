@@ -807,6 +807,7 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
 
         if not options_form.is_valid():
             print('FAIL: FORM IS NOT VALID "%s; %s"' % (options_form.errors, options_form.non_field_errors()))
+            options_form.has_errors = True
             return render(request, 'pages/profile/client/client_widget_options.html',
                           {'client': self.client,
                            'widget_id': widget.id,
