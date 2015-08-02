@@ -129,7 +129,7 @@ class MTTProxy(object):
                         {"customer_name","optional":false}
                 returns: {"type":"array"}
         """
-        return self.server.getCustomerBalance({'customer_name': customer_name}) 
+        return self.server.getCustomerAccountList({'customer_name': customer_name}) 
         
     def deleteCallBackFollowme(self, customer_name):
         """deleteCallBackFollowme:
@@ -238,3 +238,4 @@ if __name__ == '__main__':
         print 'python mtt.py clear'
         print 'python mtt.py call [phoneA] [phoneB] [duration] [timeout]'
         print 'python mtt.py info [call_id]'
+        print 'python mtt.py balance'
