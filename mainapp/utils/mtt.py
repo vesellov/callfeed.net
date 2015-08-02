@@ -238,3 +238,4 @@ if __name__ == '__main__':
         print 'python mtt.py clear'
         print 'python mtt.py call [phoneA] [phoneB] [duration] [timeout]'
         print 'python mtt.py info [call_id]'
+        print 'python mtt.py balance'
