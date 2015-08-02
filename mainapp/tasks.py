@@ -72,7 +72,7 @@ def refresh_pending_callbacks():
             charged_b = int(mtt_response_result_struct.get('call_back_charged_length_B', '0'))
             callback.widget.client.balance_minutes -= int((float(charged_a) + float(charged_b)) / 60.0)
             callback.widget.client.save()
-            print ('refresh_pending_callbacks', )
+            print ('refresh_pending_callbacks', callback.widget.client.name, callback.widget.client.email, callback.widget.client.balance_minutes)
         except Exception as e:
             traceback.print_exc()
 

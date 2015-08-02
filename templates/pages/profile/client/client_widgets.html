@@ -9,7 +9,11 @@
 
     <script>
     	function NewWidgetButtonClicked() {
-    		location.href = '/profile/client/widget/new?site_url='+encodeURIComponent($('#new-widget-site-url-input').val());
+    		var site_url = $('#new-widget-site-url-input').val();
+    		if (site_url.slice(0, 7) != 'http://' && site_url.slice(0, 8) != 'https://') {
+    			site_url = 'http://' + site_url; 
+    		}
+    		location.href = '/profile/client/widget/new?site_url='+encodeURIComponent(site_url);
  		 	$('#overlay').hide();
 			$('#new-widget-window').hide();
     	}

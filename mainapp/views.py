@@ -719,7 +719,7 @@ class ClientOperatorsEdit(ProtectedClientView):
 
         return HttpResponseRedirect('/profile/client/operators/edit?operator_id=%s' % operator.id)
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         operator_id = request.GET.get('operator_id')
 
         operator_form = None
@@ -733,8 +733,9 @@ class ClientOperatorsEdit(ProtectedClientView):
             operator_form = ClientOperatorsEditOperatorForm(instance=operator,
                                                             initial={'operator_id': operator_id})
 
-        if has_errors:
+        if errors:
             operator_form.has_errors = True
+            operator_form.errors = errors
 
         return render(request, 'pages/profile/client/client_operators_edit.html', {
             'client': self.client,
@@ -861,7 +862,7 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
                        'widget_id': widget.id,
                        'options_form': options_form})
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         widget = self.widget
         schedule = widget.schedule
 
@@ -904,8 +905,9 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
 
         options_form = ClientWidgetOptionsForm(client=self.client, widget=widget, initial=initial)
 
-        if has_errors:
+        if errors:
             options_form.has_errors = True
+            options_form.errors = errors
 
         return render(request, 'pages/profile/client/client_widget_options.html',
                       {'client': self.client,
@@ -931,7 +933,7 @@ class ClientWidgetDesign(ProtectedClientWidgetView):
 
         return self.get(request)
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id}
@@ -939,8 +941,9 @@ class ClientWidgetDesign(ProtectedClientWidgetView):
         design_form = ClientWidgetDesignForm(widget=widget,
                                              initial=initial)
 
-        if has_errors:
+        if errors:
             design_form.has_errors = True
+            design_form.errors = errors
 
         return render(request, 'pages/profile/client/client_widget_design.html',
                       {'client': self.client,
@@ -974,7 +977,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
 
         return self.get(request)
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id,
@@ -984,8 +987,9 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
                    'offline_message_notifications_email': widget.offline_message_notifications_email}
         notifications_form = ClientWidgetNotificationsForm(initial=initial)
 
-        if has_errors:
+        if errors:
             notifications_form.has_errors = True
+            notifications_form.errors = errors
 
         return render(request, 'pages/profile/client/client_widget_notifications.html', {
             'client': self.client,
@@ -1045,7 +1049,7 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
                        'widget_id': widget.id,
                        'parameters_form': parameters_form})
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id,
@@ -1062,8 +1066,9 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
 
         parameters_form = ClientWidgetParametersForm(initial=initial)
 
-        if has_errors:
+        if errors:
             parameters_form.has_errors = True
+            parameters_form.errors = errors
 
         return render(request, 'pages/profile/client/client_widget_parameters.html',
                       {'client': self.client,
@@ -1093,14 +1098,15 @@ class ClientWidgetContactsForm(ProtectedClientWidgetView):
         self.widget.update_settings(contacts_form.cleaned_data, contacts_form.excluded_fields)
         return self.get(request)
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id}
         contacts_form = ClientWidgetContactsFormForm(widget=widget, initial=initial)
 
-        if has_errors:
+        if errors:
             contacts_form.has_errors = True
+            contacts_form.errors = errors
 
         return render(request, 'pages/profile/client/client_widget_contacts_form.html',
                       {'client': self.client,
@@ -1120,15 +1126,16 @@ class ClientWidgetContent(ProtectedClientWidgetView):
 
         return self.get(request)
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id}
 
         content_form = ClientWidgetContentForm(widget=widget, initial=initial)
 
-        if has_errors:
+        if errors:
             content_form.has_errors = True
+            content_form.errors = errors
 
         return render(request, 'pages/profile/client/client_widget_content.html',
                       {'client': self.client,
@@ -1202,11 +1209,12 @@ class ClientInfoPersonal(ProtectedClientView):
                       {'client': self.client,
                        'personal_form': personal_form})
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         personal_form = ClientInfoPersonalForm(instance=self.client)
 
-        if has_errors:
-            personal_form.has_errors = has_errors
+        if errors:
+            personal_form.has_errors = errors
+            personal_form.errors = errors
 
         return render(request, 'pages/profile/client/client_info_personal.html',
                       {'client': self.client,
@@ -1236,11 +1244,12 @@ class ClientInfoSecurity(ProtectedClientView):
 
         return self.get(request)
 
-    def get(self, request, has_errors=False):
+    def get(self, request, errors=None):
         security_form = ClientInfoSecurityForm()
 
-        if has_errors:
+        if errors:
             security_form.has_errors = True
+            security_form.errors = errors
 
         return render(request, 'pages/profile/client/client_info_security.html', {
             'client': self.client,

@@ -80,4 +80,4 @@ class ProxySMS:
 if __name__ == '__main__':
     print('Sending test sms message..')
     sms = ProxySMS()
-    sms.send(to='+79182194288', message='h+w!')
+    sms.send(to='+79182194288', message='hello!')

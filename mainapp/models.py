@@ -573,7 +573,7 @@ class CallbackInfo(models.Model):
         if event in self.tracking_history:
             return False
 
-        self.tracking_history += event
+        self.tracking_history += ("e: %s; " % event)
         self.save()
         return True
 

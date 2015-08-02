@@ -42,8 +42,10 @@ class CallTrackingPoint(View):
 
         if callback.is_finished():
             callback.callback_status = CallbackInfo.CALLBACK_STATUS_SUCCEED
+            callback.save()
         elif callback.is_lasting():
             callback.callback_status = CallbackInfo.CALLBACK_STATUS_LASTING
+            callback.save()
 
         random_delay()  # to prevent time attacks
         return HttpResponse('')
