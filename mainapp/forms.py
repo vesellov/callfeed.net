@@ -262,7 +262,8 @@ class ClientWidgetOptionsForm(ClientWidgetForm):
     is_operator_shown_in_widget = forms.BooleanField(label='Показывать в виджете информацию об операторе',
                                                      required=False, initial=True)
     #
-    operator_by_default_choices = forms.ChoiceField(widget=forms.RadioSelect())
+    operator_by_default_choices = forms.ChoiceField(widget=forms.RadioSelect(), 
+                                                    error_messages={'required': 'Выберите оператора по умолчанию'})
     related_operators = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple())
     operators = []
 
