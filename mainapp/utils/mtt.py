@@ -129,7 +129,7 @@ class MTTProxy(object):
                         {"customer_name","optional":false}
                 returns: {"type":"array"}
         """
-        return self.server.getCustomerBalance({'customer_name': customer_name}) 
+        return self.server.getCustomerAccountList({'customer_name': customer_name}) 
         
     def deleteCallBackFollowme(self, customer_name):
         """deleteCallBackFollowme:

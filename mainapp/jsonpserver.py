@@ -610,7 +610,7 @@ class JSONPEntryPoint(View):
                     request.GET['callback'],
                     json.dumps(jdata, ensure_ascii=False)),
                                     'text/javascript')
-
+            #--- INITIATE CALLBACK
             callback_result = JSONPEntryPoint.initiate_callback(jdata['phone'], widget, '', '', jdata['ip'])
             if callback_result[0] == 'exception':
                 jdata.update({'response': 'error', 'message': callback_result[1], })

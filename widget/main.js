@@ -37,8 +37,13 @@ domReady(function(){
 	
 	function init_callfeed(jq) {
 		
+		if (CallFeedSession) {
+			debug.log('INIT_CALLFEED FAILED!!!!, CallFeedSession already defined:', CallFeedSession);
+			return;
+		}
+		
 		window.$ = jq;
-		debug.log('init_callfeed', $, $.fn.jquery, window);
+		debug.log('INIT_CALLFEED', $, $.fn.jquery, window);
 		
 		init_jquery_cookie(jq);
 
