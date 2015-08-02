@@ -120,6 +120,17 @@ class MTTProxy(object):
         return self.server.getCallBackFollowmeCallInfo({'customer_name': customer_name,
                                                         'callBackCall_id': callback_call_id})
 
+    def registerCustomerWithFullData(self, a):
+        pass
+    
+    def getCustomerBalance(self, customer_name):
+        """getCustomerBalance:
+                parameters:
+                        {"customer_name","optional":false}
+                returns: {"type":"array"}
+        """
+        return self.server.getCustomerBalance({'customer_name': customer_name}) 
+        
     def deleteCallBackFollowme(self, customer_name):
         """deleteCallBackFollowme:
                  parameters:
@@ -217,6 +228,11 @@ if __name__ == '__main__':
         callback_call_id = sys.argv[2]
         r = mttproxy.getCallBackFollowmeCallInfo(CUSTOMER_NAME, callback_call_id)
         pprint.pprint(r)
+        
+    elif cmd == 'balance':
+        r = mttproxy.getCustomerBalance(CUSTOMER_NAME)
+        pprint.pprint(r)
+    
     else:
         print 'use:'
         print 'python mtt.py clear'
