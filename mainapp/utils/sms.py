@@ -6,8 +6,9 @@
 from urllib2 import urlopen, URLError
 from urllib import quote
 
-APP_ID = '1014c2de-780a-ce64-8d0d-2d8c61d62bb0'
-PARTNER_ID = 117208
+APP_ID = '45f01f7d-0419-0074-09a3-888efdaff811' # '1014c2de-780a-ce64-8d0d-2d8c61d62bb0'
+PARTNER_ID = 122353 # 117208
+
 DEBUG = True
 
 
