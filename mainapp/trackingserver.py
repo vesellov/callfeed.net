@@ -21,6 +21,8 @@ class CallTrackingPoint(View):
         """
         event = request.GET.get('event', None)
         callback_id = request.GET.get('id', None)
+        
+        print ('CallTrackingPoint', event, callback_id)
 
         if None in (event, callback_id):
             return HttpResponse('')
