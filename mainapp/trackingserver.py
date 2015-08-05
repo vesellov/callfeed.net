@@ -30,6 +30,7 @@ class CallTrackingPoint(View):
         try:
             callback = CallbackInfo.objects.get(mtt_callback_call_id=callback_id)
         except ObjectDoesNotExist:
+            print('CallTrackingPoint  mtt_callback_call_id %s  is not found' % callback_id)
             random_delay(finishing_with=0.6)  # to prevent time attacks
             return HttpResponse('')
 

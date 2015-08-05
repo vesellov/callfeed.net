@@ -679,27 +679,29 @@ class JSONPEntryPoint(View):
             jdata.update({'response': 'ok', 'message': callback_result[1], })
 
             mtt_response = jdata.get('mtt_response', {})
-            mtt_response_result = mtt_response.get('result', None)
+#            mtt_response_result = mtt_response.get('result', None)
 
-            if mtt_response_result is not None:
-                mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
-                client_ip_addr = request.META.get('REMOTE_ADDR', '')
-
-                if mtt_response_result_callback_id is not None:
-                    pending_callback = PendingCallback(
-                        widget=widget,
-                        mtt_callback_call_id=mtt_response_result_callback_id,
-                        ip_side_b=client_ip_addr,
-                        geodata_side_b=ip_to_location(client_ip_addr),
-                        referer=jdata['referrer'],
-                        search_request=jdata['search_request'],
-                        when=datetime.datetime.now())
-                    pending_callback.save()
+#            if mtt_response_result is not None:
+#                mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
+#                client_ip_addr = request.META.get('REMOTE_ADDR', '')
+#
+#                if mtt_response_result_callback_id is not None:
+#                    pending_callback = PendingCallback(
+#                        widget=widget,
+#                        mtt_callback_call_id=mtt_response_result_callback_id,
+#                        ip_side_b=client_ip_addr,
+#                        geodata_side_b=ip_to_location(client_ip_addr),
+#                        referer=jdata['referrer'],
+#                        search_request=jdata['search_request'],
+#                        when=datetime.datetime.now())
+#                    pending_callback.save()
 
             # temporary save data to the local file
             filename = '/home/callfeed/incomings/%s_%s.txt' % (
                 jdata['ip'].replace('.', '_'), jdata['callback'])
             open(filename, 'wb').write(pprint.pformat(jdata))
+            
+            print ('MTT CALL!!!',  jdata['token'], jdata['hostname'], jdata['phone'], mtt_response_result_callback_id, client_ip_addr, ip_to_location(client_ip_addr) )
 
         except Exception as e:
             traceback.print_exc()
