@@ -7,13 +7,14 @@ import datetime
 import urllib
 
 from django.views.generic import View
-
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 from mainapp import widget_settings
 from mainapp.models import Widget, PendingCallback, CallbackInfo
 from mainapp.utils import mtt
 from mainapp.utils import mail
+from mainapp.utils.common import random_delay
 
 # ------------------------------------------------------------------------------
 
@@ -376,6 +377,17 @@ class JSONPEntryPoint(View):
                         'role': operator.position.encode('utf8').decode('utf8'),
                         'photo_url': operator.photo_url,
                     })
+                    
+
+            if not len(managers_wo_phones):
+                jdata.update({
+                    'response': 'error',
+                    'message': 'no managers found for this widget'})
+                return HttpResponse('%s(%s);' % (
+                    request.GET['callback'],
+                    json.dumps(jdata, ensure_ascii=False)),
+                                    'text/javascript')                    
+                
             if len(manager) == 0:
                 manager = managers_wo_phones[0]
 
@@ -418,16 +430,56 @@ class JSONPEntryPoint(View):
                 s['flag_is_operator_shown_in_widget'] = widget.is_operator_shown_in_widget
                 s['flag_disable_on_mobiles'] = widget.disable_on_mobiles
                 jdata['options'] = s
-
-            if not len(managers_wo_phones):
+                
                 jdata.update({
-                    'response': 'error',
-                    'message': 'no managers found for this widget'})
+                    'response': 'ok',
+                    'message': 'connected'})
                 return HttpResponse('%s(%s);' % (
                     request.GET['callback'],
                     json.dumps(jdata, ensure_ascii=False)),
                                     'text/javascript')
 
+            #--- REQUEST STATUS
+            if 'request_status' in request.GET: 
+                hostname = request.GET.get('hostname', None)
+                call_id = request.GET.get('call_id', None)
+                valid_host = False
+                # print 'request_options', widget.site_url, hostname, unicode(hostname).decode('idna'), type(unicode(hostname).decode('idna'))
+                if hostname:
+                    if widget.site_url.count(hostname):
+                        valid_host = True
+                    if widget.site_url.count(unicode(hostname).decode('idna')):
+                        valid_host = True
+                if not valid_host:
+                    jdata.update({'response': 'refused',
+                                  'message': 'incorrect host name', })
+                    return HttpResponse('%s(%s);' % (
+                        request.GET['callback'],
+                        json.dumps(jdata, ensure_ascii=False)),
+                                        'text/javascript')
+                try:
+                    callback = CallbackInfo.objects.get(mtt_callback_call_id=call_id)
+                except ObjectDoesNotExist:
+                    random_delay(finishing_with=0.6)  # to prevent time attacks
+                    jdata.update({'response': 'failed',
+                                  'message': 'call id %s not found' % call_id, })
+                    return HttpResponse('%s(%s);' % (
+                        request.GET['callback'],
+                        json.dumps(jdata, ensure_ascii=False)),
+                                        'text/javascript')
+                    
+                jdata['status'] = {
+                    'tracking_history': callback.tracking_history,
+                    }
+
+                jdata.update({
+                    'response': 'ok',
+                    'message': 'connected'})
+                return HttpResponse('%s(%s);' % (
+                    request.GET['callback'],
+                    json.dumps(jdata, ensure_ascii=False)),
+                                    'text/javascript')
+                    
             #--- ORDER CALL
             if 'order_time' in request.GET and 'order_day' in request.GET and 'order_delta_day' in request.GET and 'order_phone' in request.GET:
                 jdata['notify_by_email'] = widget.callback_notifications_email

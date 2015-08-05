@@ -570,6 +570,8 @@ class CallbackInfo(models.Model):
         :param event: TRACKING_EVENT_*
         :return: True if success, False otherwise
         """
+        print ('update_tracking', event, self.tracking_history)
+
         if event in self.tracking_history:
             return False
 
