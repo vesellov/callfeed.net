@@ -176,21 +176,36 @@ class JSONPEntryPoint(View):
         # TODO!!!!
         return False
 
-        deferred_callback_info = CallbackInfo(widget=widget, 
-                                              ip_side_b=ip_side_b,
-                                              geodata_side_b=ip_to_location(ip_side_b),
-                                              referer=referrer,
-                                              search_request=search_request,
-                                              planned_for_datetime=callback_planned_for_datetime,
-                                              when=datetime.datetime.now(),
-                                              phone_number_side_b=phone_number)
+        deferred_callback_info = PendingCallback(
+            widget = widget,
+            phone_number_side_b = phone_number,
+            mtt_callback_call_id = '', 
+            ip_side_b = ip_side_b,
+            referer = referrer,
+            geodata_side_b = ip_to_location(ip_side_b),
+            search_request = search_request,
+            when = datetime.datetime.now(),
+            tracking_history = '',
+            callback_status = CALLBACK_STATUS_PLANNED,
+            planned_for_datetime = callback_planned_for_datetime,)
+
+    
+#        deferred_callback_info = CallbackInfo(widget=widget, 
+#                                              ip_side_b=ip_side_b,
+#                                              geodata_side_b=ip_to_location(ip_side_b),
+#                                              referer=referrer,
+#                                              search_request=search_request,
+#                                              planned_for_datetime=callback_planned_for_datetime,
+#                                              when=datetime.datetime.now(),
+#                                              phone_number_side_b=phone_number)
+
         deferred_callback_info.save()
         from tasks import initiate_deferred_callback
         initiate_deferred_callback.schedule(args=(deferred_callback_info,), eta=callback_planned_for_datetime)
         return True
 
     @staticmethod
-    def initiate_callback(phone_number, widget, search_str, rferrer_str, ip_address):
+    def initiate_callback(phone_number, widget, search_str, rferrer_str, ip_address, pending_callback_id=None):
         """
         Инициирует соединение.
         :param phone_number: телефон клиента
@@ -246,18 +261,21 @@ class JSONPEntryPoint(View):
                     str(m['phone'].strip('+')),
                     str(widget.callback_type),
                     m['name']))
-            new_pending_info = PendingCallback(
-                widget = widget,
-                mtt_callback_call_id = '',
-                ip_side_b = ip_address,
-                geodata_side_b = ip_to_location(ip_address),
-                referer = rferrer_str,
-                search_request = search_str,
-                when = datetime.datetime.now(),
-                phone_number_side_b = phone_number)
-            new_pending_info.save()
-            
-            print '        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info)
+            if pending_callback_id:
+                new_pending_info = PendingCallback.objects().get(id=pending_callback_id) 
+                print '        loaded existing PendingCallback (id=%d) : %s' % (new_pending_info.id, new_pending_info)
+            else:
+                new_pending_info = PendingCallback(
+                    widget = widget,
+                    mtt_callback_call_id = '',
+                    ip_side_b = ip_address,
+                    geodata_side_b = ip_to_location(ip_address),
+                    referer = rferrer_str,
+                    search_request = search_str,
+                    when = datetime.datetime.now(),
+                    phone_number_side_b = phone_number)
+                new_pending_info.save()
+                print '        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info)
             
             mttproxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
             mtt_response = mttproxy.makeCallBackCallFollowme(

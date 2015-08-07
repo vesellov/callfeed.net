@@ -32,7 +32,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
         try:
             mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
         except:
-            print '        FAILED!', traceback.format_exc()
+            print '        CallbackInfo %s : NOT FOUND in MTT' % callback.mtt_callback_call_id
             callback.delete()
             continue
             
@@ -96,19 +96,24 @@ def initiate_deferred_callback(deferred_callback_info):
     """
     Инициация отложенного звонка
     """
-    if deferred_callback_info.client.balance_minutes < Client.MINIMUM_ALLOWED_BALANCE_MINUTES:
+    if deferred_callback_info.widget.client.balance_minutes < Client.MINIMUM_ALLOWED_BALANCE_MINUTES:
         # out of balance
-        deferred_callback_info.callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
-        deferred_callback_info.save()
+        # deferred_callback_info.callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
+        # deferred_callback_info.save()
         send_email_out_of_balance_initiate_callback(deferred_callback_info.widget.out_of_balance_notifications_email,
                                                     deferred_callback_info.phone_number_side_b,
                                                     deferred_callback_info.planned_for_datetime,
                                                     deferred_callback_info.widget.site_url)
+        deferred_callback_info.delete()
         return
 
-    JSONPEntryPoint.initiate_callback(deferred_callback_info.phone_number_side_b, deferred_callback_info.widget,
-                                      deferred_callback_info.search_request, deferred_callback_info.referer,
-                                      deferred_callback_info.ip_side_b)
+    JSONPEntryPoint.initiate_callback(
+        deferred_callback_info.phone_number_side_b, 
+        deferred_callback_info.widget,
+        deferred_callback_info.search_request, 
+        deferred_callback_info.referer,
+        deferred_callback_info.ip_side_b,
+        pending_callback_id=deferred_callback_info.id)
 
 
 
