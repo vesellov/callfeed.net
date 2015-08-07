@@ -26,11 +26,9 @@ def ip_to_location(ip):
     """
     if ip in (None, ''):
         return ''
-
     import geocoder
-
     ret = geocoder.ip(ip).address
-    print('ip_to_location: %s -> %s' % (ip, str(ret)))
+    # print('ip_to_location: %s -> %s' % (ip, str(ret)))
     return ret
 
 # ------------------------------------------------------------------------------
@@ -280,8 +278,15 @@ class JSONPEntryPoint(View):
                 return ('error', 'makeCallBackCallFollowme returned None',)
             
             mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
-            if new_pending_info.mtt_callback_call_id != mtt_response_result_callback_id:
-                print ('        WARNING: %s != %s' % (mtt_response_result_callback_id, new_pending_info.mtt_callback_call_id))
+            if mtt_response_result_callback_id is None:
+                print ('        ERROR: callBackCall_id is None')
+                return ('error', 'callBackCall_id is None',)
+           
+            new_pending_info.mtt_callback_call_id = mtt_response_result_callback_id
+            new_pending_info.save()
+            
+            # if new_pending_info.mtt_callback_call_id != mtt_response_result_callback_id:
+                # print ('        WARNING: %s != %s' % (mtt_response_result_callback_id, new_pending_info.mtt_callback_call_id))
                 # return ('error', '%s != %s' % (mtt_response_result_callback_id, new_pending_info.mtt_callback_call_id))
                 
 #            mtt_response_check = mttproxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, mtt_response_result_callback_id)

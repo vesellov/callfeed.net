@@ -19,7 +19,9 @@ from mainapp.utils import mtt
 def track_by_id(request, id):
     event = request.GET.get('event', None)
     callback_id = request.GET.get('id', None)
+    
     print ('track_by_id', id, event, callback_id)
+    
     if None in (event, callback_id):
         random_delay(finishing_with=0.6)  # to prevent time attacks
         return HttpResponse('')
@@ -29,6 +31,9 @@ def track_by_id(request, id):
         print ('        PendingCallback %s is not found' % id)
         random_delay(finishing_with=0.6)  # to prevent time attacks
         return HttpResponse('')
+        
+    if callback.mtt_callback_call_id != callback_id:
+        print ('        WARNING: %s != %s' % (callback_id, callback.mtt_callback_call_id))
         
     dt = 0
     try:
@@ -46,6 +51,7 @@ def track_by_id(request, id):
     random_delay()  # to prevent time attacks
     return HttpResponse('')        
         
+#------------------------------------------------------------------------------ 
 
 class CallTrackingPoint(View):
     def get(self, request):
