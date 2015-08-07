@@ -66,8 +66,7 @@ class jsonrpc2(object):
                                  headers=self.headers,
                                  data=jsonrequest)
         
-        print 'rpc_call', method
-        pprint.pprint(params)
+        print 'RPC CALL:', method, pprint.pformat(params)
 
         if notification is False:
             f_obj = json.loads(response.content)

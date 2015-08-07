@@ -160,7 +160,8 @@ class JSONPEntryPoint(View):
         if not self.datetime_fits_in_schedule(widget.schedule, callback_planned_for_datetime):
             return False
 
-        deferred_callbacks_filter = widget.callbacks.filter(
+        # deferred_callbacks_filter = widget.callbacks.filter(
+        deferred_callbacks_filter = PendingCallback.filter(
             planned_for_datetime__range=(
                 callback_planned_for_datetime - datetime.timedelta(seconds=max_delta_sec),
                 callback_planned_for_datetime + datetime.timedelta(seconds=max_delta_sec)),
@@ -494,7 +495,7 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
                 try:
-                    callback = CallbackInfo.objects.get(mtt_callback_call_id=call_id)
+                    callback = PendingCallback.objects.get(mtt_callback_call_id=call_id)
                 except ObjectDoesNotExist:
                     random_delay(finishing_with=0.6)  # to prevent time attacks
                     jdata.update({'response': 'failed',
