@@ -17,7 +17,7 @@ from mainapp.utils import mtt
 #------------------------------------------------------------------------------ 
 
 def track_by_id(request, id):
-    event = request.GET.get('event', None)
+    event = request.GET.get('stage', None)
     callback_id = request.GET.get('id', None)
     
     print ('track_by_id', id, event, callback_id)
