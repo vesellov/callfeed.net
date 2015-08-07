@@ -374,7 +374,7 @@ class Widget(models.Model):
             ]
         
         import requests
-        print ('check_if_installed ', str(self.site_url));
+        print 'check_if_installed ', str(self.site_url)
         try:
             page_content = requests.get(self.site_url).content
         except:
@@ -391,14 +391,14 @@ class Widget(models.Model):
             if tmp_pos < pos:
                 self.is_installed = False
                 self.save()
-                print ('        NOT FOUND, is_installed: ', str(self.is_installed))
+                print '        NOT FOUND, is_installed: ', str(self.is_installed)
                 return False
 
             pos = tmp_pos
 
         self.is_installed = True
         self.save()
-        print ('        FOUND!!!, is_installed: ', str(self.is_installed))
+        print '        FOUND!!!, is_installed: ', str(self.is_installed)
         return True
 
     def update_settings(self, form, excluded_fields=None):
@@ -566,7 +566,7 @@ class CallbackInfo(models.Model):
         :param event: TRACKING_EVENT_*
         :return: True if success, False otherwise
         """
-        print ('update_tracking', event, self.tracking_history)
+        print 'update_tracking', event, self.tracking_history
 
         if event in self.tracking_history:
             return False

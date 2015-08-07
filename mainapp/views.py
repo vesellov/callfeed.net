@@ -293,7 +293,7 @@ class AccountsClientRegister(View):
         client_register_form = ClientRegisterForm(data=request.POST)
 
         if not client_register_form.is_valid():
-            print ('FAIL: FORM IS NOT VALID')
+            print 'FAIL: FORM IS NOT VALID'
             return self.get(request, client_register_form)
 
         email, password = client_register_form.cleaned_data['email'], client_register_form.cleaned_data['password']
@@ -307,7 +307,7 @@ class AccountsClientRegister(View):
 
         user = authenticate(username=email, password=password)
         if not user:
-            print ('FAIL: authenticate failed')
+            print 'FAIL: authenticate failed'
             random_delay(finishing_with=1.5)  # prevents from time attacks
             return self.get(request, client_register_form)
             
@@ -355,7 +355,7 @@ class ProfileReseller(ProtectedResellerView):
         try:
             reseller = Reseller.objects.get(user=request.user)
         except ObjectDoesNotExist:
-            print('FAIL: RESELLER OBJECT DOES NOT EXIST')
+            print 'FAIL: RESELLER OBJECT DOES NOT EXIST'
             return HttpResponseRedirect('/')
         return render(request, 'pages/profile/reseller/profile_reseller.html',
                       {'reseller': reseller})
@@ -369,7 +369,7 @@ class AdministrativeManagerEditResellers(ProtectedAdministrativeManagerView):
         add_reseller_form = AddResellerForm(request.POST)
 
         if not add_reseller_form.is_valid():
-            print('FAIL: FORM ISNT VALID')
+            print 'FAIL: FORM ISNT VALID'
             return HttpResponseRedirect('/')
 
         email = add_reseller_form.cleaned_data['email']
@@ -382,7 +382,7 @@ class AdministrativeManagerEditResellers(ProtectedAdministrativeManagerView):
         try:
             group = Group.objects.get(name=settings.USER_GROUP_RESELLER)
         except ObjectDoesNotExist:
-            print('FAIL: GROUP IS NONE')
+            print 'FAIL: GROUP IS NONE'
             return HttpResponseRedirect('/')
 
         user = None
@@ -390,7 +390,7 @@ class AdministrativeManagerEditResellers(ProtectedAdministrativeManagerView):
         try:
             user = User.objects.create_user(email, email, password)
         except ObjectDoesNotExist:
-            print('FAIL: USER IS NONE')
+            print 'FAIL: USER IS NONE'
             return HttpResponseRedirect('/')
 
         user.save()
@@ -400,14 +400,14 @@ class AdministrativeManagerEditResellers(ProtectedAdministrativeManagerView):
         try:
             administrative_manager = AdministrativeManager.objects.get(user=request.user)
         except ObjectDoesNotExist:
-            print('FAIL: ADMINISTRATIVE MANAGER IS NONE')
+            print 'FAIL: ADMINISTRATIVE MANAGER IS NONE'
             return HttpResponseRedirect('/')
 
         reseller = Reseller(name=name, user=user, administrative_manager=administrative_manager,
                             tariff=tariff)
 
         if reseller is None:
-            print('FAIL: RESELLER IS NONE')
+            print 'FAIL: RESELLER IS NONE'
             return HttpResponseRedirect('/')
 
         user.groups.add(group)
@@ -421,7 +421,7 @@ class AdministrativeManagerEditResellers(ProtectedAdministrativeManagerView):
         try:
             resellers_list = AdministrativeManager.objects.get(user=request.user).reseller_set.all()
         except ObjectDoesNotExist:
-            print('FAIL: CANT GET RESELLERS LIST')
+            print 'FAIL: CANT GET RESELLERS LIST'
             return HttpResponseRedirect('/')
 
         return render(request, 'pages/profile/administrative_manager/administrative_manager_edit_resellers.html',
@@ -437,7 +437,7 @@ class ResellerEditClients(ProtectedResellerView):
         add_client_form = EditClientForm(request.POST)
 
         if not add_client_form.is_valid():
-            print('FAIL: FORM ISNT VALID %s ' % add_client_form.errors)
+            print 'FAIL: FORM ISNT VALID %s ' % add_client_form.errors
             return HttpResponseRedirect('/')
 
         name = add_client_form.cleaned_data['name']
@@ -448,18 +448,18 @@ class ResellerEditClients(ProtectedResellerView):
 
         try:
             if client_id == '':
-                print('if client_id == '':')
+                print 'if client_id == '':'
                 raise KeyError()
 
             client = Client.objects.get(id=client_id)
             reseller = Reseller.objects.get(user=request.user)
 
             if client.reseller != reseller:
-                print('if client.user.reseller != reseller:')
+                print 'if client.user.reseller != reseller:'
                 raise KeyError()
         except (ObjectDoesNotExist, KeyError):
             if password == '':
-                print('FAIL: PASSWORD FIELD CANT BE EMPTY')
+                print 'FAIL: PASSWORD FIELD CANT BE EMPTY'
                 return HttpResponseRedirect('/')
 
             group = None
@@ -467,7 +467,7 @@ class ResellerEditClients(ProtectedResellerView):
             try:
                 group = Group.objects.get(name=settings.USER_GROUP_CLIENT)
             except ObjectDoesNotExist:
-                print('FAIL: GROUP IS NONE')
+                print 'FAIL: GROUP IS NONE'
                 return HttpResponseRedirect('/')
 
             user = None
@@ -475,7 +475,7 @@ class ResellerEditClients(ProtectedResellerView):
             try:
                 user = User.objects.create_user(email, email, password)
             except ObjectDoesNotExist:
-                print('FAIL: USER IS NONE')
+                print 'FAIL: USER IS NONE'
                 return HttpResponseRedirect('/')
 
             user.save()
@@ -485,7 +485,7 @@ class ResellerEditClients(ProtectedResellerView):
             try:
                 reseller = Reseller.objects.get(user=request.user)
             except ObjectDoesNotExist:
-                print('FAIL: RESELLER IS NONE')
+                print 'FAIL: RESELLER IS NONE'
                 return HttpResponseRedirect('/')
 
             client = Client(user=user, reseller=reseller, name=name,
@@ -493,10 +493,11 @@ class ResellerEditClients(ProtectedResellerView):
                             free_minutes=reseller.tariff.free_minutes)
 
             if client is None:
-                print('FAIL: CLIENT IS NONE')
+                print 'FAIL: CLIENT IS NONE'
                 return HttpResponseRedirect('/')
 
             user.groups.add(group)
+            
         else:
             client.name = name
             client.email = email
@@ -617,7 +618,7 @@ class ClientCallbacks(ProtectedClientView):
         callbacks_filter_form = ClientCallbacksFilterForm(self.build_site_urls_list(request), request.POST)
 
         if not callbacks_filter_form.is_valid():
-            print('FAIL: FORM ISNT VALID %s ' % callbacks_filter_form.errors)
+            print 'FAIL: FORM ISNT VALID %s ' % callbacks_filter_form.errors
             return self.get(request)
 
         date_choices = callbacks_filter_form.cleaned_data['date_choices']
@@ -691,7 +692,7 @@ class ClientOperatorsEdit(ProtectedClientView):
         operator_form = ClientOperatorsEditOperatorForm(request.POST, request.FILES)
 
         if not operator_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % operator_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % operator_form.errors
             return self.get(request, has_errors=True)
 
         operator = None
@@ -742,7 +743,7 @@ class ClientOperatorsEdit(ProtectedClientView):
         return render(request, 'pages/profile/client/client_operators_edit.html', {
             'client': self.client,
             'operator_form': operator_form
-        })
+            })
 
 
 class ClientOperatorsDelete(ProtectedClientView):
@@ -808,7 +809,7 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
             return HttpResponseRedirect('/profile/client/widgets')
 
         if not options_form.is_valid():
-            print('FAIL: FORM IS NOT VALID "%s; %s"' % (options_form.errors, options_form.non_field_errors()))
+            print 'FAIL: FORM IS NOT VALID "%s; %s"' % (options_form.errors, options_form.non_field_errors())
             options_form.has_errors = True
             return render(request, 'pages/profile/client/client_widget_options.html',
                           {'client': self.client,
@@ -821,7 +822,7 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
             widget.default_operator = new_default_operator
             widget.save()
         except ObjectDoesNotExist:
-            print('FAIL: OPERATOR DOES NOT EXIST')
+            print 'FAIL: OPERATOR DOES NOT EXIST'
             return self.get(request, has_errors=True)
 
         widget.related_operators.clear()
@@ -923,7 +924,7 @@ class ClientWidgetDesign(ProtectedClientWidgetView):
         design_form = ClientWidgetDesignForm(data=request.POST, files=request.FILES)
 
         if not design_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % design_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % design_form.errors
             return self.get(request, has_errors=True)
 
         if 'background_image_global' in request.FILES.keys():
@@ -959,7 +960,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
         notifications_form = ClientWidgetNotificationsForm(request.POST)
 
         if not notifications_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % notifications_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % notifications_form.errors
             return self.get(request, has_errors=True)
 
         widget = None
@@ -967,7 +968,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
         try:
             widget = Widget.objects.get(id=notifications_form.cleaned_data['widget_id'])
         except (ObjectDoesNotExist, KeyError):
-            print('FAIL: WIDGET DOES NOT EXIST')
+            print 'FAIL: WIDGET DOES NOT EXIST'
             return self.get(request, has_errors=True)
 
         widget.sms_notification_number = notifications_form.cleaned_data['sms_notification_number']
@@ -998,7 +999,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
             'client': self.client,
             'widget_id': widget.id,
             'notifications_form': notifications_form
-        })
+            })
 
 
 class ClientWidgetActions(ProtectedClientWidgetView):
@@ -1009,7 +1010,7 @@ class ClientWidgetActions(ProtectedClientWidgetView):
         return render(request, 'pages/profile/client/client_widget_actions.html', {
             'client': self.client,
             'widget_id': self.widget_id,
-        })
+            })
 
 
 class ClientWidgetParameters(ProtectedClientWidgetView):
@@ -1017,7 +1018,7 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
         parameters_form = ClientWidgetParametersForm(request.POST)
 
         if not parameters_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % parameters_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % parameters_form.errors
             return self.get(request, has_errors=True)
 
         widget = None
@@ -1025,7 +1026,7 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
         try:
             widget = Widget.objects.get(id=parameters_form.cleaned_data['widget_id'])
         except (ObjectDoesNotExist, KeyError):
-            print('FAIL: WIDGET DOES NOT EXIST')
+            print 'FAIL: WIDGET DOES NOT EXIST'
             return self.get(request, has_errors=True)
         # widget.popup_time_sec = parameters_form.cleaned_data['popup_time_sec']
         widget.time_before_callback_sec = parameters_form.cleaned_data['time_before_callback_sec']
@@ -1095,7 +1096,7 @@ class ClientWidgetContactsForm(ProtectedClientWidgetView):
         contacts_form = ClientWidgetContactsFormForm(data=request.POST)
 
         if not contacts_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % contacts_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % contacts_form.errors
             return self.get(request, has_errors=True)
 
         self.widget.update_settings(contacts_form.cleaned_data, contacts_form.excluded_fields)
@@ -1122,7 +1123,7 @@ class ClientWidgetContent(ProtectedClientWidgetView):
         content_form = ClientWidgetContentForm(data=request.POST)
 
         if not content_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % content_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % content_form.errors
             return self.get(request, has_errors=True)
 
         self.widget.update_settings(content_form.cleaned_data, content_form.excluded_fields)
@@ -1192,7 +1193,7 @@ class ClientInfoPersonal(ProtectedClientView):
         personal_form = ClientInfoPersonalForm(request.POST)
 
         if not personal_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % personal_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % personal_form.errors
             return self.get(request, has_errors=True)
 
         update_dict = {'name': personal_form.cleaned_data['name'],  # client
@@ -1229,14 +1230,14 @@ class ClientInfoSecurity(ProtectedClientView):
         security_form = ClientInfoSecurityForm(request.POST)
 
         if not security_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % security_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % security_form.errors
             return self.get(request, has_errors=True)
 
         success = self.client.user.check_password(security_form.cleaned_data['old_password']) and \
                   security_form.cleaned_data['new_password'] == security_form.cleaned_data['new_password_confirmation']
 
         if not success:
-            print('FAIL: OLD PASSWORD DO NOT MATCH OR PASSWORDS ARE DIFFERENT')
+            print 'FAIL: OLD PASSWORD DO NOT MATCH OR PASSWORDS ARE DIFFERENT'
             return self.get(request, has_errors=True)
 
         self.client.user.set_password(security_form.cleaned_data['new_password'])
@@ -1309,13 +1310,13 @@ class ClientPaymentChooseMethod(ProtectedClientView):
         choose_tariff_form = ClientPaymentChooseTariffForm(data=request.POST)
 
         if not choose_tariff_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % choose_tariff_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % choose_tariff_form.errors
             return HttpResponseRedirect('/profile/client/payment/choose_tariff')
 
         tariff = self.client.reseller.tariff_web.get(id=choose_tariff_form.cleaned_data['tariff_id'])
 
         if tariff is None:
-            print('FAIL: TARIFF IS NONE')
+            print 'FAIL: TARIFF IS NONE'
             return HttpResponseRedirect('/profile/client/payment/choose_tariff')
 
         choose_payment_method_form = ClientPaymentChooseMethodForm(initial={
@@ -1336,13 +1337,13 @@ class ClientPaymentMake(ProtectedClientView):
         choose_payment_method_form = ClientPaymentChooseMethodForm(data=request.POST)
 
         if not choose_payment_method_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % choose_payment_method_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % choose_payment_method_form.errors
             return HttpResponseRedirect('/profile/client/payment/choose_method')
 
         tariff = self.client.reseller.tariff_web.get(id=choose_payment_method_form.cleaned_data['tariff_id'])
 
         if tariff is None:
-            print('FAIL: TARIFF IS NONE')
+            print 'FAIL: TARIFF IS NONE'
             return HttpResponseRedirect('/profile/client/payment/choose_method')
 
         bill = Bill(client=self.client, when=datetime.now(), minutes=tariff.minutes,
@@ -1376,13 +1377,13 @@ class ClientPaymentRequestCashless(ProtectedClientView):
         payment_request_cashless_form = ClientPaymentRequestCashlessForm(request.POST)
 
         if not payment_request_cashless_form.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % payment_request_cashless_form.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % payment_request_cashless_form.errors
             return HttpResponseRedirect('/profile/client/payment/choose_tariff')
 
         try:
             bill = self.client.bill_set.get(id=payment_request_cashless_form.cleaned_data['bill_id'])
         except ObjectDoesNotExist:
-            print('FAIL: BILL #%s DOES NOT EXIST' % str(payment_request_cashless_form.cleaned_data['bill_id']))
+            print 'FAIL: BILL #%s DOES NOT EXIST' % str(payment_request_cashless_form.cleaned_data['bill_id'])
             return HttpResponseRedirect('/profile/client/payment/choose_tariff')
 
         send_email_request_cashless_payment(bill.id, self.client.id, self.client.name)
@@ -1402,7 +1403,7 @@ class ClientPaymentCancel(ProtectedClientView):
         bill_id_field = ClientPaymentBillIdField(request.POST)
 
         if not bill_id_field.is_valid():
-            print('FAIL: FORM IS NOT VALID %s' % bill_id_field.errors)
+            print 'FAIL: FORM IS NOT VALID %s' % bill_id_field.errors
             return HttpResponseRedirect('/profile/client/payment/choose_tariff')
 
         try:
@@ -1420,7 +1421,7 @@ class ClientPaymentCancel(ProtectedClientView):
         return render(request, 'pages/profile/client/client_payment_cancel.html', {
             'client': self.client,
             'bill_id': bill_id_field.cleaned_data['bill_id'],
-        })
+            })
 
     def get(self, _):
         return HttpResponseRedirect('/profile/client/payment/choose_tariff')
@@ -1558,7 +1559,7 @@ class EditSetupRequest(View):
         edit_setup_request_history_form = EditSetupRequestHistoryForm(request.POST)
 
         if not edit_setup_request_history_form.is_valid():
-            print('FAIL: edit_setup_request_history_form ISNT VALID: %s' % edit_setup_request_history_form.errors)
+            print 'FAIL: edit_setup_request_history_form ISNT VALID: %s' % edit_setup_request_history_form.errors
             return HttpResponse('FAIL')
 
         setup_request_history = SetupRequestHistory(setup_request=setup_request,

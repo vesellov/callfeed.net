@@ -28,7 +28,7 @@ def refresh_pending_callbacks(id=None):
         pending_callbacks = PendingCallback.objects.all()
     mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
 
-    print ('refresh_pending_callbacks', pending_callbacks)
+    print 'refresh_pending_callbacks', pending_callbacks
 
     for callback in pending_callbacks:
         mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
@@ -70,18 +70,19 @@ def refresh_pending_callbacks(id=None):
         
         new_callback_info.save()
         
-        print ('        new CallbackInfo created:', new_callback_info)
+        print '        new CallbackInfo created:', new_callback_info
 
         try:
             charged_a = int(mtt_response_result_struct.get('call_back_charged_length_A', '0'))
             charged_b = int(mtt_response_result_struct.get('call_back_charged_length_B', '0'))
             callback.widget.client.balance_minutes -= int((float(charged_a) + float(charged_b)) / 60.0)
             callback.widget.client.save()
-            print ('        OK!', callback.widget.client.name, callback.widget.client.email, callback.widget.client.balance_minutes)
+            print '        OK!', callback.widget.client.name, callback.widget.client.email, callback.widget.client.balance_minutes
         except Exception as e:
             traceback.print_exc()
 
         callback.delete()
+
 
 
 @task()

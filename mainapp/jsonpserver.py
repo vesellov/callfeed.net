@@ -153,7 +153,7 @@ class JSONPEntryPoint(View):
         :param callback_planned_for_datetime: an accurate datetime the callback to be initiated at; should be in the server's timezone
         :return: True or False
         """
-        print ('order_deferred_callback', ip_side_b, referrer, search_request, callback_planned_for_datetime, phone_number)
+        print 'order_deferred_callback', ip_side_b, referrer, search_request, callback_planned_for_datetime, phone_number
 
         max_delta_sec = 30  # how many seconds is allowed between two deferred callbacks
 
@@ -201,7 +201,7 @@ class JSONPEntryPoint(View):
         :return:
         """
         
-        print ('initiate_callback', phone_number, widget, search_str, rferrer_str, ip_address)
+        print 'initiate_callback', phone_number, widget, search_str, rferrer_str, ip_address
         
         try:
             manager = {}
@@ -257,7 +257,7 @@ class JSONPEntryPoint(View):
                 phone_number_side_b = phone_number)
             new_pending_info.save()
             
-            print ('        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info))
+            print '        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info)
             
             mttproxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
             mtt_response = mttproxy.makeCallBackCallFollowme(
@@ -274,12 +274,12 @@ class JSONPEntryPoint(View):
             mtt_response_result = mtt_response.get('result', None)
 
             if mtt_response_result is None:
-                print ('        ERROR: makeCallBackCallFollowme returned None')
+                print '        ERROR: makeCallBackCallFollowme returned None'
                 return ('error', 'makeCallBackCallFollowme returned None',)
             
             mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
             if mtt_response_result_callback_id is None:
-                print ('        ERROR: callBackCall_id is None')
+                print '        ERROR: callBackCall_id is None'
                 return ('error', 'callBackCall_id is None',)
                          
             print '        OK! %s' % new_pending_info.mtt_callback_call_id
@@ -536,7 +536,7 @@ class JSONPEntryPoint(View):
                                                  jdata['search_request'], order_date, jdata['order_phone'])
                 except:
                     import traceback
-                    print(traceback.format_exc())
+                    print traceback.format_exc()
 
                 # temporary save data to the local file
                 filename = '/home/callfeed/incomings/%s_%s.txt' % (
