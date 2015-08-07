@@ -19,7 +19,7 @@ from mainapp.views import ProfileReseller
 from mainapp.views import AdministrativeManagerEditResellers
 from mainapp.views import ResellerEditClients
 from mainapp.jsonpserver import JSONPEntryPoint
-from mainapp.trackingserver import CallTrackingPoint
+from mainapp.trackingserver import CallTrackingPoint, track_by_id
 
 __author__ = 'max'
 
@@ -29,7 +29,7 @@ urlpatterns = patterns(
     # BackEnd servers
     url(r'^input', JSONPEntryPoint.as_view()), 
     #url(r'^tracking/', CallTrackingPoint.as_view()),
-    url(r'^tracking/event.php', CallTrackingPoint.as_view()),
+    url(r'^tracking/P<id>\d+/event.php', track_by_id),
     # Accounts related staff
     url(r'^accounts/login/?$', LoginAccount.as_view()),
     url(r'^accounts/logout/?$', LogoutAccount.as_view()),

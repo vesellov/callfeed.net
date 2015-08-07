@@ -8,12 +8,44 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import View
 from django.http import HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404 
 
 from mainapp.models import CallbackInfo, PendingCallback
 from mainapp.utils.common import random_delay
 from mainapp.utils import mtt
 
 #------------------------------------------------------------------------------ 
+
+def track_by_id(request, id):
+    event = request.GET.get('event', None)
+    callback_id = request.GET.get('id', None)
+    print ('track_by_id', id, event, callback_id)
+    if None in (event, callback_id):
+        random_delay(finishing_with=0.6)  # to prevent time attacks
+        return HttpResponse('')
+
+    callback = PendingCallback.objects.get(id=id)
+    if not callback:
+        print ('        PendingCallback %s is not found' % id)
+        random_delay(finishing_with=0.6)  # to prevent time attacks
+        return HttpResponse('')
+        
+    dt = 0
+    try:
+        dt = datetime.datetime.now() - callback.when
+    except:
+        import traceback
+        traceback.print_exc()
+    
+    callback.mtt_callback_call_id = callback_id
+    callback.tracking_history += ("%s(%s);" % (event, dt))
+    callback.save()
+        
+    print ('        OK! %s %s', (event, dt)) 
+
+    random_delay()  # to prevent time attacks
+    return HttpResponse('')        
+        
 
 class CallTrackingPoint(View):
     def get(self, request):

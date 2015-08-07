@@ -43,32 +43,28 @@ def refresh_pending_callbacks():
         record_url_b = mtt_response_result_struct.get('call_back_record_URL_B', '')
         record_url_b = mtt_response_result_struct.get('downloadURL', '')
 
-        callback_info = CallbackInfo(widget=callback.widget,
-                                     call_description=mtt_response_result_struct.get('callDescription', ''),
-                                     phone_number_side_a=mtt_response_result_struct.get('destination_A', ''),
-                                     phone_number_side_b=mtt_response_result_struct.get('destination_B', ''),
-                                     charged_length_a_sec=int(
-                                         mtt_response_result_struct.get('call_back_charged_length_A', '0')),
-                                     charged_length_b_sec=int(
-                                         mtt_response_result_struct.get('call_back_charged_length_B', '0')),
-                                     real_length_a_sec=int(
-                                         mtt_response_result_struct.get('call_back_real_length_A', '0')),
-                                     real_length_b_sec=int(
-                                         mtt_response_result_struct.get('call_back_real_length_B', '0')),
-                                     record_url_a=record_url_a, record_url_b=record_url_b,
-                                     waiting_period_a_sec=mtt_response_result_struct.get('waiting_period_A',
-                                                                                         '0'),
-                                     waiting_period_b_sec=mtt_response_result_struct.get('waiting_period_B',
-                                                                                         '0'),
-                                     callback_status=CallbackInfo.CALLBACK_STATUS_SUCCEED,
-                                     cost=mtt_response_result_struct.get('call_back_cost', 0.0),
-                                     currency=mtt_response_result_struct.get('call_back_currency', 'RUB'),
-                                     ip_side_b=callback.ip_side_b, geodata_side_b='-',
-                                     mtt_callback_call_id=callback.mtt_callback_call_id,
-                                     referer=callback.referer, search_request=callback.search_request,
-                                     when=callback.when,
-                                     tracking_history=callback.tracking_history)
-        callback_info.save()
+        new_callback_info = CallbackInfo(
+            widget=callback.widget,
+            call_description=mtt_response_result_struct.get('callDescription', ''),
+            phone_number_side_a=mtt_response_result_struct.get('destination_A', ''),
+            phone_number_side_b=mtt_response_result_struct.get('destination_B', ''),
+            charged_length_a_sec=int(mtt_response_result_struct.get('call_back_charged_length_A', '0')),
+            charged_length_b_sec=int(mtt_response_result_struct.get('call_back_charged_length_B', '0')),
+            real_length_a_sec=int(mtt_response_result_struct.get('call_back_real_length_A', '0')),
+            real_length_b_sec=int(mtt_response_result_struct.get('call_back_real_length_B', '0')),
+            record_url_a=record_url_a, record_url_b=record_url_b,
+            waiting_period_a_sec=mtt_response_result_struct.get('waiting_period_A', '0'),
+            waiting_period_b_sec=mtt_response_result_struct.get('waiting_period_B', '0'),
+            callback_status=CallbackInfo.CALLBACK_STATUS_SUCCEED,
+            cost=mtt_response_result_struct.get('call_back_cost', 0.0),
+            currency=mtt_response_result_struct.get('call_back_currency', 'RUB'),
+            ip_side_b=callback.ip_side_b, geodata_side_b='-',
+            mtt_callback_call_id=callback.mtt_callback_call_id,
+            referer=callback.referer, search_request=callback.search_request,
+            when=callback.when,
+            tracking_history=callback.tracking_history)
+        
+        new_callback_info.save()
 
         try:
             charged_a = int(mtt_response_result_struct.get('call_back_charged_length_A', '0'))

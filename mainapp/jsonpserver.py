@@ -155,7 +155,7 @@ class JSONPEntryPoint(View):
         :param callback_planned_for_datetime: an accurate datetime the callback to be initiated at; should be in the server's timezone
         :return: True or False
         """
-        print 'order_deferred_callback', ip_side_b, referrer, search_request, callback_planned_for_datetime, phone_number
+        print ('order_deferred_callback', ip_side_b, referrer, search_request, callback_planned_for_datetime, phone_number)
 
         max_delta_sec = 30  # how many seconds is allowed between two deferred callbacks
 
@@ -174,7 +174,12 @@ class JSONPEntryPoint(View):
             #  ability to count spent minutes for such cases
             return False
 
-        deferred_callback_info = CallbackInfo(widget=widget, ip_side_b=ip_side_b,
+
+        # TODO!!!!
+        return False
+
+        deferred_callback_info = CallbackInfo(widget=widget, 
+                                              ip_side_b=ip_side_b,
                                               geodata_side_b=ip_to_location(ip_side_b),
                                               referer=referrer,
                                               search_request=search_request,
@@ -183,7 +188,6 @@ class JSONPEntryPoint(View):
                                               phone_number_side_b=phone_number)
         deferred_callback_info.save()
         from tasks import initiate_deferred_callback
-
         initiate_deferred_callback.schedule(args=(deferred_callback_info,), eta=callback_planned_for_datetime)
         return True
 
@@ -198,6 +202,9 @@ class JSONPEntryPoint(View):
         :param ip_address: ip-адрес клиента
         :return:
         """
+        
+        print ('initiate_callback', phone_number, widget, search_str, rferrer_str, ip_address)
+        
         try:
             manager = {}
             managers = []
@@ -241,16 +248,25 @@ class JSONPEntryPoint(View):
                     str(m['phone'].strip('+')),
                     str(widget.callback_type),
                     m['name']))
-            mttproxy = mtt.MTTProxy(
-                mtt.CUSTOMER_NAME,
-                mtt.LOGIN,
-                mtt.PASSWORD,
-                mtt.api_url)
+            new_pending_info = PendingCallback(
+                widget = widget,
+                mtt_callback_call_id = '',
+                ip_side_b = ip_address,
+                geodata_side_b = ip_to_location(ip_address),
+                referer = rferrer_str,
+                search_request = search_str,
+                when = datetime.datetime.now(),
+                phone_number_side_b = phone_number)
+            new_pending_info.save()
+            
+            print ('        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info))
+            
+            mttproxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
             mtt_response = mttproxy.makeCallBackCallFollowme(
                 mtt.CUSTOMER_NAME,
                 b_number=str(phoneB.strip('+')),
                 caller_id=str(phoneA.strip('+')),
-                callback_url='callfeed.net/tracking',
+                callback_url='callfeed.net/tracking/%d' % (new_pending_info.id),
                 record_enable=1,
                 client_caller_id=str(client_caller_id.strip('+')),
                 duration=int(call_duration),
@@ -258,20 +274,80 @@ class JSONPEntryPoint(View):
                 caller_description=str('CallFeed.NET from %s to %s' % (phoneB.strip('+'), phoneA.strip('+'))),
                 callback_follow_me_struct=structs)
             mtt_response_result = mtt_response.get('result', None)
-            new_pending_callback = None
-            if mtt_response_result is not None:
-                mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
-                if mtt_response_result_callback_id is not None:
-                    new_pending_callback = PendingCallback(widget=widget,
-                                                       mtt_callback_call_id=mtt_response_result_callback_id,
-                                                       ip_side_b=ip_address,
-                                                       geodata_side_b=ip_to_location(ip_address),
-                                                       referer=rferrer_str,
-                                                       search_request=search_str,
-                                                       when=datetime.datetime.now(),
-                                                       tracking_history='')
-                    new_pending_callback.save()
-            print('initiate_callback', mtt_response_result_callback_id, new_pending_callback, phoneA, phoneB, ip_address)
+
+            if mtt_response_result is None:
+                print ('        ERROR: makeCallBackCallFollowme returned None')
+                return ('error', 'makeCallBackCallFollowme returned None',)
+            
+            mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
+            if new_pending_info.mtt_callback_call_id != mtt_response_result_callback_id:
+                print ('        WARNING: %s != %s' % (mtt_response_result_callback_id, new_pending_info.mtt_callback_call_id))
+                # return ('error', '%s != %s' % (mtt_response_result_callback_id, new_pending_info.mtt_callback_call_id))
+                
+#            mtt_response_check = mttproxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, mtt_response_result_callback_id)
+#            mtt_response_check_result = mtt_response_check.get('result', None)
+#    
+#            if mtt_response_check_result is None:
+#                print ('        ERROR: getCallBackFollowmeCallInfo returned None')
+#                return ('error', 'getCallBackFollowmeCallInfo returned None',)
+#    
+#            call_info_struct = mtt_response_check_result.get('callBackFollowmeCallInfoStruct', None)
+#    
+#            if call_info_struct is None:
+#                print ('        ERROR: callBackFollowmeCallInfoStruct is None')
+#                return ('error', 'callBackFollowmeCallInfoStruct is None',)
+#    
+#            record_url_a = call_info_struct.get('call_back_record_URL_A', '')
+#            record_url_a = call_info_struct.get('downloadURL', '')
+#            record_url_b = call_info_struct.get('call_back_record_URL_B', '')
+#            record_url_b = call_info_struct.get('downloadURL', '')
+#     
+#            new_pending_info.call_description = call_info_struct.get('callDescription', '')
+#            new_pending_info.phone_number_side_a = call_info_struct.get('destination_A', '')
+#            new_pending_info.phone_number_side_b = call_info_struct.get('destination_B', '')
+#            new_pending_info.charged_length_a_sec=int(call_info_struct.get('call_back_charged_length_A', '0'))
+#            new_pending_info.charged_length_b_sec=int(call_info_struct.get('call_back_charged_length_B', '0'))
+#            new_pending_info.real_length_a_sec=int(call_info_struct.get('call_back_real_length_A', '0'))
+#            new_pending_info.real_length_b_sec=int(call_info_struct.get('call_back_real_length_B', '0'))
+#            new_pending_info.record_url_a = record_url_a
+#            new_pending_info.record_url_b = record_url_b
+#            new_pending_info.waiting_period_a_sec = call_info_struct.get('waiting_period_A', '0')
+#            new_pending_info.waiting_period_b_sec = call_info_struct.get('waiting_period_B', '0')
+#            new_pending_info.callback_status = CallbackInfo.CALLBACK_STATUS_SUCCEED
+#            new_pending_info.cost = call_info_struct.get('call_back_cost', 0.0)
+#            new_pending_info.currency = call_info_struct.get('call_back_currency', 'RUB')
+#            # new_pending_info.ip_side_b = callback.ip_side_b
+#            # new_pending_info.geodata_side_b='-'
+#            # mtt_callback_call_id=callback.mtt_callback_call_id,
+#            # new_pending_info.referer = callback.referer, search_request=callback.search_request,
+#            # new_pending_info.when = callback.when,
+#            # new_pending_info.tracking_history=callback.tracking_history
+#            new_pending_info.save()
+#    
+#            try:
+#                charged_a = int(call_info_struct.get('call_back_charged_length_A', '0'))
+#                charged_b = int(call_info_struct.get('call_back_charged_length_B', '0'))
+#                widget.client.balance_minutes -= int((float(charged_a) + float(charged_b)) / 60.0)
+#                widget.client.save()
+#                print ('        BALANCE:', widget.client.name, widget.client.email, widget.client.balance_minutes)
+#            except:
+#                traceback.print_exc()                    
+                
+            print '        OK! %s' % new_pending_info.mtt_callback_call_id
+             
+                    
+                    
+#                if mtt_response_result_callback_id is not None:
+#                    new_pending_callback = PendingCallback(widget=widget,
+#                                                       mtt_callback_call_id=mtt_response_result_callback_id,
+#                                                       ip_side_b=ip_address,
+#                                                       geodata_side_b=ip_to_location(ip_address),
+#                                                       referer=rferrer_str,
+#                                                       search_request=search_str,
+#                                                       when=datetime.datetime.now(),
+#                                                       tracking_history='')
+#                    new_pending_callback.save()
+            # print('initiate_callback', mtt_response_result_callback_id, new_pending_info, phoneA, phoneB, ip_address)
             return (mtt_response_result, mtt_response.get('message', ''),)
         except:
             traceback.print_exc()

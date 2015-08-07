@@ -612,6 +612,7 @@ class PendingCallback(models.Model):
     (т.е. для него не создан объект CallbackInfo)
     """
     widget = models.ForeignKey(Widget)
+    phone_number_side_b = models.CharField(max_length=12, default='')
     mtt_callback_call_id = models.CharField(max_length=50)
     ip_side_b = models.IPAddressField()
     geodata_side_b = models.CharField(max_length=100, default='-')
