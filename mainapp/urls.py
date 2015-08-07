@@ -29,7 +29,7 @@ urlpatterns = patterns(
     # BackEnd servers
     url(r'^input', JSONPEntryPoint.as_view()), 
     #url(r'^tracking/', CallTrackingPoint.as_view()),
-    url(r'^tracking/P<id>\d+/event.php', track_by_id),
+    url(r'^tracking/P<id>\d+/event.php$', track_by_id),
     # Accounts related staff
     url(r'^accounts/login/?$', LoginAccount.as_view()),
     url(r'^accounts/logout/?$', LogoutAccount.as_view()),
