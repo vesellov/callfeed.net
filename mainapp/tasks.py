@@ -24,6 +24,8 @@ def refresh_pending_callbacks():
     pending_callbacks = PendingCallback.objects.all()
     mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
 
+    print ('refresh_pending_callbacks', pending_callbacks)
+
     for callback in pending_callbacks:
         mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
         mtt_response_result = mtt_response.get('result', None)
@@ -64,7 +66,8 @@ def refresh_pending_callbacks():
                                      ip_side_b=callback.ip_side_b, geodata_side_b='-',
                                      mtt_callback_call_id=callback.mtt_callback_call_id,
                                      referer=callback.referer, search_request=callback.search_request,
-                                     when=callback.when)
+                                     when=callback.when,
+                                     tracking_history=callback.tracking_history)
         callback_info.save()
 
         try:

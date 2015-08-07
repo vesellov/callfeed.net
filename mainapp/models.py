@@ -513,9 +513,10 @@ class CallbackInfo(models.Model):
     CALLBACK_STATUS_FAIL_B = 'fail_b'
     CALLBACK_STATUS_FAIL_OUT_OF_BALANCE = 'out_of_balance'
     #
-    TRACKING_EVENT_START_SIDE_A, TRACKING_EVENT_START_SIDE_B, \
-    TRACKING_EVENT_END_SIDE_A, TRACKING_EVENT_END_SIDE_B = \
-        'start_side_A', 'start_side_B', 'end_side_A', 'end_side_B'
+    TRACKING_EVENT_START_SIDE_A = 'start_side_A'
+    TRACKING_EVENT_START_SIDE_B = 'start_side_B'
+    TRACKING_EVENT_END_SIDE_A = 'end_side_A'
+    TRACKING_EVENT_END_SIDE_B = 'end_side_B'
     #
     CALLBACK_STATUSES = (
         (CALLBACK_STATUS_SUCCEED, 'Звонок прошёл успешно'),
@@ -616,7 +617,8 @@ class PendingCallback(models.Model):
     geodata_side_b = models.CharField(max_length=100, default='-')
     referer = models.CharField(max_length=255)
     search_request = models.CharField(max_length=100)
-    when = models.DateTimeField()
+    when = models.DateTimeField(blank=True, null=True)
+    tracking_history = models.CharField(max_length=200, default='') 
 
 
 class Schedule(models.Model):

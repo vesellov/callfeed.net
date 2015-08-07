@@ -258,17 +258,20 @@ class JSONPEntryPoint(View):
                 caller_description=str('CallFeed.NET from %s to %s' % (phoneB.strip('+'), phoneA.strip('+'))),
                 callback_follow_me_struct=structs)
             mtt_response_result = mtt_response.get('result', None)
+            new_pending_callback = None
             if mtt_response_result is not None:
                 mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
                 if mtt_response_result_callback_id is not None:
-                    pending_callback = PendingCallback(widget=widget,
+                    new_pending_callback = PendingCallback(widget=widget,
                                                        mtt_callback_call_id=mtt_response_result_callback_id,
                                                        ip_side_b=ip_address,
                                                        geodata_side_b=ip_to_location(ip_address),
                                                        referer=rferrer_str,
                                                        search_request=search_str,
-                                                       when=datetime.datetime.now())
-                    pending_callback.save()
+                                                       when=datetime.datetime.now(),
+                                                       tracking_history='')
+                    new_pending_callback.save()
+            print('initiate_callback', mtt_response_result_callback_id, new_pending_callback, phoneA, phoneB, ip_address)
             return (mtt_response_result, mtt_response.get('message', ''),)
         except:
             traceback.print_exc()
@@ -306,14 +309,17 @@ class JSONPEntryPoint(View):
                             token, traceback.format_exc())}, ensure_ascii=False)),
                                     'text/javascript')
 
+            client_ip_addr = request.META.get('REMOTE_ADDR', '')
+
             jdata = {
                 'callback': request.GET['callback'].replace('CallbackRegistry.', ''),
-                'ip': request.META['REMOTE_ADDR'],
+                'ip': client_ip_addr,
                 'token': request.GET['token'],
                 'referrer': urllib.unquote(request.GET.get('referrer', '')),
                 'search_request': request.GET.get('search_request', ''),
                 'hostname': request.GET.get('hostname', ''),
             }
+
 
             #--- check ip in black list
             if self.is_ip_in_blacklist(jdata['ip'], widget.blacklist_ip.split(',')):
@@ -679,11 +685,10 @@ class JSONPEntryPoint(View):
             jdata.update({'response': 'ok', 'message': callback_result[1], })
 
             mtt_response = jdata.get('mtt_response', {})
-#            mtt_response_result = mtt_response.get('result', None)
+            mtt_response_result = mtt_response.get('result', None)
 
 #            if mtt_response_result is not None:
 #                mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
-#                client_ip_addr = request.META.get('REMOTE_ADDR', '')
 #
 #                if mtt_response_result_callback_id is not None:
 #                    pending_callback = PendingCallback(
@@ -701,7 +706,7 @@ class JSONPEntryPoint(View):
                 jdata['ip'].replace('.', '_'), jdata['callback'])
             open(filename, 'wb').write(pprint.pformat(jdata))
             
-            print ('MTT CALL!!!',  jdata['token'], jdata['hostname'], jdata['phone'], mtt_response_result_callback_id, client_ip_addr, ip_to_location(client_ip_addr) )
+            print ('MTT CALL!!!',  jdata['token'], jdata['hostname'], jdata['phone'], client_ip_addr, mtt_response_result)
 
         except Exception as e:
             traceback.print_exc()
