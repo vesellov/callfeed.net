@@ -16,20 +16,18 @@ from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 
 #------------------------------------------------------------------------------ 
 
-def refresh_pending_callbacks(id=None):
+def refresh_pending_callbacks(pending_callbacks=None):
     """
     Обновляем информацию о только начавшихся звонках, статусы которых нам пока неизвестны.
     Запрашиваем статусы этих самых звонков и т. д.
     """
     
-    if id:
-        pending_callbacks = [PendingCallback.objects().get(id=id),]
-    else:
+    if pending_callbacks is None:
         pending_callbacks = PendingCallback.objects.all()
-    mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
-
+        
     print 'refresh_pending_callbacks', pending_callbacks
-
+        
+    mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
     for callback in pending_callbacks:
         mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
         mtt_response_result = mtt_response.get('result', None)

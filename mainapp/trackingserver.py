@@ -56,15 +56,14 @@ def track_by_id(request, id):
         need_refresh = True
     elif callback.is_lasting():
         callback.callback_status = CALLBACK_STATUS_LASTING
-        need_refresh = True
         
     callback.save()
         
-    print '        OK! %s, need_refresh=%s' % (
+    print '        OK! [%s] need_refresh=%s' % (
         callback.tracking_history, need_refresh) 
 
     if need_refresh:
-        refresh_pending_callbacks(id=callback.id)
+        refresh_pending_callbacks([callback,])
 
     random_delay()  # to prevent time attacks
     return HttpResponse('')        
