@@ -4,12 +4,15 @@
 """
 __author__ = 'max'
 import datetime
-from mainapp.models import CallbackInfo, Bill
+from mainapp.models import CallbackInfo, Bill, CALLBACK_STATUSES
 from django.template.defaulttags import register
 from django import template
 
+#------------------------------------------------------------------------------ 
+
 register = template.Library()
 
+#------------------------------------------------------------------------------ 
 
 @register.filter
 def get_item(dictionary, key):
@@ -20,7 +23,7 @@ def get_item(dictionary, key):
 @register.filter
 def get_nice_callback_status(callback_status_id):
     """Вернёт красивое имя по идентификатору статуса обратного звонка"""
-    for callback_status in CallbackInfo.CALLBACK_STATUSES:
+    for callback_status in CALLBACK_STATUSES:
         if callback_status[0] == callback_status_id:
             return callback_status[1]
 

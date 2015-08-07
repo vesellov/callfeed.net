@@ -42,6 +42,8 @@ from mainapp.utils.common import save_media_file, random_delay, rand_string
 from mainapp.utils.mail import send_email_act_request, send_email_widget_setup_code, send_email_request_cashless_payment, \
     send_email_password_reset_request, send_email_new_user_registered
 
+from models import CALLBACK_STATUS_PLANNED
+
 #------------------------------------------------------------------------------ 
 
 def method_decorator_adaptor(adapt_to, *decorator_args, **decorator_kwargs):
@@ -576,7 +578,7 @@ class ClientCallbacks(ProtectedClientView):
             filter_args = {'when__range': [start_datetime, end_datetime]}
 
             if planned:
-                filter_args['callback_status'] = CallbackInfo.CALLBACK_STATUS_PLANNED
+                filter_args['callback_status'] = CALLBACK_STATUS_PLANNED
 
             for widgt in widgets:
                 widget_callbacks = widgt.callbacks.filter(**filter_args)[:]

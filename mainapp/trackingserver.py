@@ -10,9 +10,10 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404 
 
-from mainapp.models import CallbackInfo, PendingCallback
+from mainapp.models import CallbackInfo, PendingCallback, CALLBACK_STATUS_SUCCEED, CALLBACK_STATUS_LASTING 
 from mainapp.utils.common import random_delay
 from mainapp.utils import mtt
+from mainapp.tasks import refresh_pending_callbacks
 
 #------------------------------------------------------------------------------ 
 
@@ -36,21 +37,33 @@ def track_by_id(request, id):
         random_delay(finishing_with=0.6)  # to prevent time attacks
         return HttpResponse('')
         
-    if callback.mtt_callback_call_id != callback_id:
-        print ('        WARNING: %s != %s' % (callback_id, callback.mtt_callback_call_id))
+    # if callback.mtt_callback_call_id != callback_id:
+        # print ('        WARNING: %s != %s' % (callback_id, callback.mtt_callback_call_id))
         
-    dt = 0
+    dt = 0.0
     try:
-        dt = datetime.datetime.now() - callback.when
+        dt = (datetime.datetime.now() - callback.when).total_seconds() 
     except:
         import traceback
         traceback.print_exc()
     
     callback.mtt_callback_call_id = callback_id
     callback.tracking_history += ("%s(%s);" % (event, dt))
+    
+    need_refresh = False
+    if callback.is_finished():
+        callback.callback_status = CALLBACK_STATUS_SUCCEED
+        need_refresh = True
+    elif callback.is_lasting():
+        callback.callback_status = CALLBACK_STATUS_LASTING
+        need_refresh = True
+        
     callback.save()
         
     print ('        OK! %s %s', (event, dt)) 
+
+    if need_refresh:
+        refresh_pending_callbacks(id=callback.id)
 
     random_delay()  # to prevent time attacks
     return HttpResponse('')        

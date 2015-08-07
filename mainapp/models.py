@@ -15,6 +15,30 @@ from mainapp import widget_settings
 from mainapp.utils.common import rand_string
 from mainapp.widget_settings import DEFAULT_SETTINGS
 
+#------------------------------------------------------------------------------ 
+
+CALLBACK_STATUS_SUCCEED = 'succeed'
+CALLBACK_STATUS_PLANNED = 'planned'
+CALLBACK_STATUS_LASTING = 'lasting'
+CALLBACK_STATUS_FAIL_A = 'fail_a'
+CALLBACK_STATUS_FAIL_B = 'fail_b'
+CALLBACK_STATUS_FAIL_OUT_OF_BALANCE = 'out_of_balance'
+#
+TRACKING_EVENT_START_SIDE_A = 'start_side_A'
+TRACKING_EVENT_START_SIDE_B = 'start_side_B'
+TRACKING_EVENT_END_SIDE_A = 'end_side_A'
+TRACKING_EVENT_END_SIDE_B = 'end_side_B'
+#
+CALLBACK_STATUSES = (
+    (CALLBACK_STATUS_SUCCEED, 'Звонок прошёл успешно'),
+    (CALLBACK_STATUS_PLANNED, 'Запланирован'),
+    (CALLBACK_STATUS_LASTING, 'Звонок продолжается'),
+    (CALLBACK_STATUS_FAIL_A, 'Оператор не взял трубку'),
+    (CALLBACK_STATUS_FAIL_B, 'Клиент не взял трубку'),
+    (CALLBACK_STATUS_FAIL_OUT_OF_BALANCE, 'Недостаточно минут'),
+)
+    
+#------------------------------------------------------------------------------ 
 
 class ResetPasswordStorage(models.Model):
     RESET_PASSWORD_CODE_LENGTH = 37
@@ -350,15 +374,13 @@ class Widget(models.Model):
             ]
         
         import requests
-
-        sys.stderr.write('check_if_installed ' + str(self.site_url) + '\n\n');
-
+        print ('check_if_installed ', str(self.site_url));
         try:
             page_content = requests.get(self.site_url).content
         except:
             self.is_installed = False
             self.save()
-            sys.stderr.write('requests FAILED, is_installed: ' + str(self.is_installed)+'\n\n')
+            print ('        FAILED, is_installed: ', str(self.is_installed))
             return False
 
         pos = 0
@@ -369,14 +391,14 @@ class Widget(models.Model):
             if tmp_pos < pos:
                 self.is_installed = False
                 self.save()
-                sys.stderr.write('widget NOT FOUND, is_installed: ' + str(self.is_installed)+'\n\n')
+                print ('        NOT FOUND, is_installed: ', str(self.is_installed))
                 return False
 
             pos = tmp_pos
 
         self.is_installed = True
         self.save()
-        sys.stderr.write('widget FOUND!!!, is_installed: ' + str(self.is_installed)+'\n\n')
+        print ('        FOUND!!!, is_installed: ', str(self.is_installed))
         return True
 
     def update_settings(self, form, excluded_fields=None):
@@ -506,27 +528,6 @@ class CallbackInfo(models.Model):
     """
     CallbackInfo; CALLBACK_STATUS_PLANNED status is set by default
     """
-    CALLBACK_STATUS_SUCCEED = 'succeed'
-    CALLBACK_STATUS_PLANNED = 'planned'
-    CALLBACK_STATUS_LASTING = 'lasting'
-    CALLBACK_STATUS_FAIL_A = 'fail_a'
-    CALLBACK_STATUS_FAIL_B = 'fail_b'
-    CALLBACK_STATUS_FAIL_OUT_OF_BALANCE = 'out_of_balance'
-    #
-    TRACKING_EVENT_START_SIDE_A = 'start_side_A'
-    TRACKING_EVENT_START_SIDE_B = 'start_side_B'
-    TRACKING_EVENT_END_SIDE_A = 'end_side_A'
-    TRACKING_EVENT_END_SIDE_B = 'end_side_B'
-    #
-    CALLBACK_STATUSES = (
-        (CALLBACK_STATUS_SUCCEED, 'Звонок прошёл успешно'),
-        (CALLBACK_STATUS_PLANNED, 'Запланирован'),
-        (CALLBACK_STATUS_LASTING, 'Звонок продолжается'),
-        (CALLBACK_STATUS_FAIL_A, 'Оператор не взял трубку'),
-        (CALLBACK_STATUS_FAIL_B, 'Клиент не взял трубку'),
-        (CALLBACK_STATUS_FAIL_OUT_OF_BALANCE, 'Недостаточно минут'),
-    )
-    #
     widget = models.ForeignKey(Widget, related_name='callbacks')
     call_description = models.CharField(max_length=255, default='')
     phone_number_side_a = models.CharField('Номер телефона оператора', max_length=12, default='')
@@ -539,24 +540,18 @@ class CallbackInfo(models.Model):
     record_url_b = models.CharField('Ссылка на запись разговора клиента', max_length=255, default='')
     waiting_period_a_sec = models.IntegerField('Период ожидания со стороны оператора', default=0)
     waiting_period_b_sec = models.IntegerField('Период ожидания со стороны клиента', default=0)
-    callback_status = models.CharField('Статус звонка', max_length=20, choices=CALLBACK_STATUSES,
-                                       default=CALLBACK_STATUS_PLANNED)
+    callback_status = models.CharField('Статус звонка', max_length=20, choices=CALLBACK_STATUSES, default=CALLBACK_STATUS_PLANNED)
     cost = models.DecimalField('Стоимость', decimal_places=2, max_digits=12, default=Decimal())
     currency = models.CharField('Валюта', max_length=3, default='')
     ip_side_b = models.IPAddressField('IP-адрес клиента', default='')
-    geodata_side_b = models.CharField('Геодата клиента', max_length=100,
-                                      default='')  # страна, город откуда пользователь
+    geodata_side_b = models.CharField('Геодата клиента', max_length=100, default='')  # страна, город откуда пользователь
     mtt_callback_call_id = models.CharField(max_length=50, default='')
-    referer = models.CharField('Источник перехода', max_length=255,
-                               default='')  # ссылка - откуда пришёл пользователь на сайт
-    search_request = models.CharField('Поисковый запрос',
-                                      max_length=100,
-                                      default='')  # текст поискового запроса, по которому пришёл пользователь
+    referer = models.CharField('Источник перехода', max_length=255, default='')  # ссылка - откуда пришёл пользователь на сайт
+    search_request = models.CharField('Поисковый запрос', max_length=100, default='')  # текст поискового запроса, по которому пришёл пользователь
     when = models.DateTimeField('Когда', blank=True, null=True)  # когда был совершён звонок
     # (или заказан - если звонок запланирован)
     planned_for_datetime = models.DateTimeField(blank=True, null=True)  # на когда запланирован
-    tracking_history = models.CharField('История звонка', max_length=100,
-                                        default='')  # последовательность звонка(кто за кем поднял трубку и тд)
+    tracking_history = models.CharField('История звонка', max_length=100, default='')  # последовательность звонка(кто за кем поднял трубку и тд)
 
     def update_tracking(self, event):
         """
@@ -584,18 +579,18 @@ class CallbackInfo(models.Model):
         """
         Use this method to check if the callback successfully started(and an operator has picked up the phone)
         """
-        return CallbackInfo.TRACKING_EVENT_START_SIDE_A in self.tracking_history and \
-               CallbackInfo.TRACKING_EVENT_END_SIDE_A not in self.tracking_history and \
-               CallbackInfo.TRACKING_EVENT_END_SIDE_B not in self.tracking_history
+        return TRACKING_EVENT_START_SIDE_A in self.tracking_history and \
+               TRACKING_EVENT_END_SIDE_A not in self.tracking_history and \
+               TRACKING_EVENT_END_SIDE_B not in self.tracking_history
 
     def is_finished(self):
         """
         Use this method to check if the callback was successfully finished(operator or a client has dropped the line)
         """
-        return CallbackInfo.TRACKING_EVENT_START_SIDE_A in self.tracking_history and \
-               CallbackInfo.TRACKING_EVENT_START_SIDE_B in self.tracking_history and \
-               (CallbackInfo.TRACKING_EVENT_END_SIDE_A in self.tracking_history or
-                CallbackInfo.TRACKING_EVENT_END_SIDE_B in self.tracking_history)
+        return TRACKING_EVENT_START_SIDE_A in self.tracking_history and \
+               TRACKING_EVENT_START_SIDE_B in self.tracking_history and \
+               (TRACKING_EVENT_END_SIDE_A in self.tracking_history or
+                TRACKING_EVENT_END_SIDE_B in self.tracking_history)
 
     def __str__(self):
         return 'CallbackInfo(from %s to %s, cost: %s)' % \
@@ -620,6 +615,27 @@ class PendingCallback(models.Model):
     search_request = models.CharField(max_length=100)
     when = models.DateTimeField(blank=True, null=True)
     tracking_history = models.CharField(max_length=200, default='') 
+    callback_status = models.CharField(max_length=20, choices=CALLBACK_STATUSES, default=CALLBACK_STATUS_PLANNED)
+
+    def status_check(self, status_str):
+        return str(self.tracking_history).count(status_str) > 0
+
+    def is_lasting(self):
+        """
+        Use this method to check if the callback successfully started(and an operator has picked up the phone)
+        """
+        return TRACKING_EVENT_START_SIDE_A in self.tracking_history and \
+               TRACKING_EVENT_END_SIDE_A not in self.tracking_history and \
+               TRACKING_EVENT_END_SIDE_B not in self.tracking_history
+
+    def is_finished(self):
+        """
+        Use this method to check if the callback was successfully finished(operator or a client has dropped the line)
+        """
+        return TRACKING_EVENT_START_SIDE_A in self.tracking_history and \
+               TRACKING_EVENT_START_SIDE_B in self.tracking_history and \
+               (TRACKING_EVENT_END_SIDE_A in self.tracking_history or
+                TRACKING_EVENT_END_SIDE_B in self.tracking_history)
 
 
 class Schedule(models.Model):
