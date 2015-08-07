@@ -26,7 +26,11 @@ def track_by_id(request, id):
         random_delay(finishing_with=0.6)  # to prevent time attacks
         return HttpResponse('')
 
-    callback = PendingCallback.objects.get(id=id)
+    try:
+        callback = PendingCallback.objects.get(id=int(id))
+    except:
+        callback = None
+        
     if not callback:
         print ('        PendingCallback %s is not found' % id)
         random_delay(finishing_with=0.6)  # to prevent time attacks
