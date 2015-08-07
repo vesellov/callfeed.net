@@ -29,16 +29,23 @@ def refresh_pending_callbacks(pending_callbacks=None):
         
     mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
     for callback in pending_callbacks:
-        mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
+        try:
+            mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
+        except:
+            print '        FAILED!', traceback.format_exc()
+            callback.delete()
+            continue
+            
         mtt_response_result = mtt_response.get('result', None)
-
         if mtt_response_result is None:
             print '        WARNING!!!', mtt_response
+            callback.delete()
             continue
 
         mtt_response_result_struct = mtt_response_result.get('callBackFollowmeCallInfoStruct', None)
         if mtt_response_result_struct is None:
             print '        WARNING!!!', mtt_response_result
+            callback.delete()
             continue
 
         record_url_a = mtt_response_result_struct.get('call_back_record_URL_A', '')

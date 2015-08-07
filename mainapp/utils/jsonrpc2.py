@@ -66,7 +66,7 @@ class jsonrpc2(object):
                                  headers=self.headers,
                                  data=jsonrequest)
         
-        logger.log(1, 'rpc_call', method)
+        print 'rpc_call', method
         pprint.pprint(params)
 
         if notification is False:
