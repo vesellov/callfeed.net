@@ -5,6 +5,7 @@
 """
 
 import traceback
+import datetime
 
 __author__ = 'max'
 from huey.djhuey import periodic_task, crontab, task
@@ -110,9 +111,11 @@ def refresh_pending_callbacks(pending_callbacks=None):
                 
         try:
             mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
-        except rpcException as e:
-            print '        CallbackInfo %s is empty in MTT response: %s' % (callback.mtt_callback_call_id, e['message'])
-            process_pending_callback(callback, message=e['message'])
+        except:
+            next_refresh = datetime.datetime.now() + datetime.timedelta(seconds=5)
+            refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
+            print '        skip, PendingCallback %s, empty MTT response, next refrest at %s' % (callback.mtt_callback_call_id, next_refresh)
+            # process_pending_callback(callback, message=e['message'])
             continue
             
         mtt_response_result = mtt_response.get('result', None)
@@ -128,6 +131,11 @@ def refresh_pending_callbacks(pending_callbacks=None):
             continue
 
         process_pending_callback(callback, mtt_response_result_struct=mtt_struct)
+
+
+@task()
+def refresh_pending_callback_again(callback):
+    refresh_pending_callbacks([callback,])
 
 
 @task()

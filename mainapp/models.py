@@ -268,7 +268,7 @@ class Widget(models.Model):
     is_operator_name_included = models.BooleanField('Включать имя оператора в SMS', default=False)
     is_operator_shown_in_widget = models.BooleanField('Показывать в виджете информацию об операторе', default=False)
     callback_type = models.CharField('Порядок дозвона', max_length=10, choices=CALLBACK_TYPES,
-                                     default=CALLBACK_TYPE_RING_ALL)
+                                     default=CALLBACK_TYPE_LINEAR)
     is_raw = models.BooleanField(default=False)  # whether the widget ready for being used(all its options are complete).
                                                 # Actually, the only required option is 'site_url'
     is_installed = models.BooleanField('Установлен', default=False)  # whether the widget installed on the web site
