@@ -33,11 +33,12 @@ def refresh_pending_callbacks(pending_callbacks=None):
         mtt_response_result = mtt_response.get('result', None)
 
         if mtt_response_result is None:
+            print '        WARNING!!!', mtt_response
             continue
 
         mtt_response_result_struct = mtt_response_result.get('callBackFollowmeCallInfoStruct', None)
-
         if mtt_response_result_struct is None:
+            print '        WARNING!!!', mtt_response_result
             continue
 
         record_url_a = mtt_response_result_struct.get('call_back_record_URL_A', '')
