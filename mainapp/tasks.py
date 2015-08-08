@@ -181,7 +181,7 @@ def refresh_pending_callback_again(callback):
 
 #------------------------------------------------------------------------------ 
 
-@periodic_task(crontab(second='*/10'))
+@periodic_task(crontab(minute='*/1'))
 def refresh_pending_callbacks_task():
     print 'refresh_pending_callbacks_task'
     try:
