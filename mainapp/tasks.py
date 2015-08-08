@@ -8,7 +8,8 @@ import traceback
 import datetime
 
 __author__ = 'max'
-from huey.djhuey import periodic_task, crontab, task
+# from huey.djhuey import periodic_task, crontab, task
+from periodically.decorators import *
 from mainapp.jsonpserver import JSONPEntryPoint
 
 from mainapp.models import PendingCallback, CallbackInfo, Client, CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
@@ -16,6 +17,12 @@ from mainapp.utils import mtt
 from mainapp.utils.jsonrpc2 import rpcException
 from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 
+#------------------------------------------------------------------------------ 
+
+@every(seconds=5)
+def refresh_pending_callbacks_task():
+    return refresh_pending_callbacks()
+    
 #------------------------------------------------------------------------------ 
 
 def process_pending_callback(callback, mtt_response_result_struct=None, message=None):
@@ -144,12 +151,12 @@ def refresh_pending_callbacks(pending_callbacks=None):
     except:
         traceback.print_exc()
 
-@task()
+# @task()
 def refresh_pending_callback_again(callback):
     refresh_pending_callbacks([callback,])
 
 
-@task()
+# @task()
 def initiate_deferred_callback(deferred_callback_info):
     """
     Инициация отложенного звонка
@@ -176,7 +183,7 @@ def initiate_deferred_callback(deferred_callback_info):
 
 
 
-@periodic_task(crontab(minute='*/1'))
-def refresh_pending_callbacks_task():
-    return refresh_pending_callbacks()
+# @periodic_task(crontab(minute='*/1'))
+# def refresh_pending_callbacks_task():
+#     return refresh_pending_callbacks()
 
