@@ -38,7 +38,7 @@ def refresh_pending_callbacks_task():
     
 #------------------------------------------------------------------------------ 
 
-# @task()
+@task()
 def refresh_pending_callback_again(callback):
     refresh_pending_callbacks([callback,])
 

@@ -159,10 +159,10 @@ EMAIL_USE_SSL = True
 EMAIL_SUBJECT_PREFIX = '[Callfeed]'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-PERIODICALLY = {
-    'SCHEDULERS': {
-        'default': {
-            'backend': 'mainapp.MySpecialBackend',
-        },
-    },
-}
+#PERIODICALLY = {
+#    'SCHEDULERS': {
+#        'default': {
+#            'backend': 'mainapp.MySpecialBackend',
+#        },
+#    },
+#}
