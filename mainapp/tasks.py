@@ -20,12 +20,6 @@ from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 
 #------------------------------------------------------------------------------ 
 
-@periodic_task(crontab(minute='*/1'))
-def refresh_pending_callbacks_task():
-    return refresh_pending_callbacks()
-
-#------------------------------------------------------------------------------ 
-
 # @hourly()
 # def do_something():
 #     print 'Doing something!'
@@ -36,33 +30,6 @@ def refresh_pending_callbacks_task():
 # def refresh_pending_callbacks_task():
 #     return refresh_pending_callbacks()
     
-#------------------------------------------------------------------------------ 
-
-# @task()
-def initiate_deferred_callback(deferred_callback_info):
-    """
-    Инициация отложенного звонка
-    """
-    if deferred_callback_info.widget.client.balance_minutes < Client.MINIMUM_ALLOWED_BALANCE_MINUTES:
-        # out of balance
-        # deferred_callback_info.callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
-        # deferred_callback_info.save()
-        send_email_out_of_balance_initiate_callback(
-            deferred_callback_info.widget.out_of_balance_notifications_email,
-            deferred_callback_info.phone_number_side_b,
-            deferred_callback_info.planned_for_datetime,
-            deferred_callback_info.widget.site_url)
-        deferred_callback_info.delete()
-        return
-
-    JSONPEntryPoint.initiate_callback(
-        deferred_callback_info.phone_number_side_b, 
-        deferred_callback_info.widget,
-        deferred_callback_info.search_request, 
-        deferred_callback_info.referer,
-        deferred_callback_info.ip_side_b,
-        pending_callback_id=deferred_callback_info.id)
-
 #------------------------------------------------------------------------------ 
 
 def process_pending_callback(callback, mtt_response_result_struct=None, message=None):
@@ -210,6 +177,48 @@ def refresh_pending_callback_again(callback):
         refresh_pending_callbacks([callback,])
     except:
         traceback.print_exc()
+    return True
 
+#------------------------------------------------------------------------------ 
+
+@periodic_task(crontab(second='*/10'))
+def refresh_pending_callbacks_task():
+    print 'refresh_pending_callbacks_task'
+    try:
+        return refresh_pending_callbacks()
+    except:
+        traceback.print_exc()
+    return True
+
+
+#------------------------------------------------------------------------------ 
+
+@task()
+def initiate_deferred_callback(deferred_callback_info):
+    """
+    Инициация отложенного звонка
+    """
+    if deferred_callback_info.widget.client.balance_minutes < Client.MINIMUM_ALLOWED_BALANCE_MINUTES:
+        # out of balance
+        # deferred_callback_info.callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
+        # deferred_callback_info.save()
+        send_email_out_of_balance_initiate_callback(
+            deferred_callback_info.widget.out_of_balance_notifications_email,
+            deferred_callback_info.phone_number_side_b,
+            deferred_callback_info.planned_for_datetime,
+            deferred_callback_info.widget.site_url)
+        # deferred_callback_info.delete()
+        process_pending_callback(deferred_callback_info, message="Недостаточно средств для запуска отложенного звонка")
+        return True
+
+    JSONPEntryPoint.initiate_callback(
+        deferred_callback_info.phone_number_side_b, 
+        deferred_callback_info.widget,
+        deferred_callback_info.search_request, 
+        deferred_callback_info.referer,
+        deferred_callback_info.ip_side_b,
+        pending_callback_id=deferred_callback_info.id)
+
+    return True
 
 
