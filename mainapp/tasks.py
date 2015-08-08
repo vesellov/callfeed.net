@@ -38,12 +38,6 @@ def refresh_pending_callbacks_task():
     
 #------------------------------------------------------------------------------ 
 
-@task()
-def refresh_pending_callback_again(callback):
-    refresh_pending_callbacks([callback,])
-
-#------------------------------------------------------------------------------ 
-
 # @task()
 def initiate_deferred_callback(deferred_callback_info):
     """
@@ -206,6 +200,16 @@ def refresh_pending_callbacks(pending_callbacks=None):
     except:
         traceback.print_exc()
 
+
+#------------------------------------------------------------------------------ 
+
+@task()
+def refresh_pending_callback_again(callback):
+    print 'refresh_pending_callback_again', callback
+    try:
+        refresh_pending_callbacks([callback,])
+    except:
+        traceback.print_exc()
 
 
 
