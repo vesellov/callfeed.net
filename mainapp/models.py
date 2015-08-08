@@ -618,6 +618,9 @@ class PendingCallback(models.Model):
     callback_status = models.CharField(max_length=20, choices=CALLBACK_STATUSES, default=CALLBACK_STATUS_PLANNED)
     planned_for_datetime = models.DateTimeField(blank=True, null=True)
 
+    def __repr__(self):
+        return "PendingCallback-%d(%s)" % (self.id, self.mtt_callback_call_id)
+
     def status_check(self, status_str):
         return str(self.tracking_history).count(status_str) > 0
 

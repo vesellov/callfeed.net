@@ -107,11 +107,14 @@ def refresh_pending_callbacks(pending_callbacks=None):
         mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
         for callback in pending_callbacks:
             if callback.planned_for_datetime:
-                print '        skip, PendingCallback %d is planned for %s' % (callback.id, callback.planned_for_datetime)
+                print '        skip, PendingCallback %d (%s) is planned for %s' % (callback.id, callback.mtt_callback_call_id, callback.planned_for_datetime)
                 continue
             
+            if not callback.mtt_callback_call_id:
+                print '        skip, PendingCallback %s : mtt_callback_call_id is empty' % (callback.id)
+            
             delta = datetime.datetime.now() - callback.when
-            print '        PendingCallback %s lifetime is %d seconds' % delta.total_seconds() 
+            print '        PendingCallback %d (%s) lifetime is %d seconds' % (callback.id, callback.mtt_callback_call_id, delta.total_seconds()) 
             if delta.total_seconds() > 60*60:
                 process_pending_callback(callback, message="Истек интервал обработки звонока")
                 continue 
@@ -121,7 +124,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
             except:
                 next_refresh = datetime.datetime.now() + datetime.timedelta(seconds=5)
                 # refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
-                print '        skip, PendingCallback %s, empty MTT response, next refrest at %s' % (callback.mtt_callback_call_id, next_refresh)
+                print '        skip, PendingCallback %d (%s), empty MTT response, next refrest at %s' % (callback.id, callback.mtt_callback_call_id, next_refresh)
                 # process_pending_callback(callback, message=e['message'])
                 continue
                 
