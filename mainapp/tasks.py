@@ -172,6 +172,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
 
 @task()
 def refresh_pending_callback_again(callback):
+    open('/tmp/out2', 'w').write('refresh_pending_callback_again\n')
     print 'refresh_pending_callback_again', callback
     try:
         refresh_pending_callbacks([callback,])
@@ -183,6 +184,7 @@ def refresh_pending_callback_again(callback):
 
 @periodic_task(crontab(minute='*/1'))
 def refresh_pending_callbacks_task():
+    open('/tmp/out1', 'w').write('refresh_pending_callbacks_task\n')
     print 'refresh_pending_callbacks_task'
     try:
         return refresh_pending_callbacks()
