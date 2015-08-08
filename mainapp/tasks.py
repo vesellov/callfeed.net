@@ -20,9 +20,9 @@ from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 
 #------------------------------------------------------------------------------ 
 
-#@periodic_task(crontab(minute='*/1'))
-#def refresh_pending_callbacks_task():
-#    return refresh_pending_callbacks()
+@periodic_task(crontab(minute='*/1'))
+def refresh_pending_callbacks_task():
+    return refresh_pending_callbacks()
 
 #------------------------------------------------------------------------------ 
 
@@ -36,6 +36,39 @@ from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 # def refresh_pending_callbacks_task():
 #     return refresh_pending_callbacks()
     
+#------------------------------------------------------------------------------ 
+
+# @task()
+def refresh_pending_callback_again(callback):
+    refresh_pending_callbacks([callback,])
+
+#------------------------------------------------------------------------------ 
+
+# @task()
+def initiate_deferred_callback(deferred_callback_info):
+    """
+    Инициация отложенного звонка
+    """
+    if deferred_callback_info.widget.client.balance_minutes < Client.MINIMUM_ALLOWED_BALANCE_MINUTES:
+        # out of balance
+        # deferred_callback_info.callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
+        # deferred_callback_info.save()
+        send_email_out_of_balance_initiate_callback(
+            deferred_callback_info.widget.out_of_balance_notifications_email,
+            deferred_callback_info.phone_number_side_b,
+            deferred_callback_info.planned_for_datetime,
+            deferred_callback_info.widget.site_url)
+        deferred_callback_info.delete()
+        return
+
+    JSONPEntryPoint.initiate_callback(
+        deferred_callback_info.phone_number_side_b, 
+        deferred_callback_info.widget,
+        deferred_callback_info.search_request, 
+        deferred_callback_info.referer,
+        deferred_callback_info.ip_side_b,
+        pending_callback_id=deferred_callback_info.id)
+
 #------------------------------------------------------------------------------ 
 
 def process_pending_callback(callback, mtt_response_result_struct=None, message=None):
@@ -110,7 +143,7 @@ def process_pending_callback(callback, mtt_response_result_struct=None, message=
 
     callback.delete()  
       
-
+#------------------------------------------------------------------------------ 
 
 def refresh_pending_callbacks(pending_callbacks=None):
     """
@@ -147,7 +180,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
                     process_pending_callback(callback, message="Звонок не был зарегистрирован")
                     continue
                 next_refresh = datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
-                # refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
+                refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
                 print '        skip, PendingCallback %d (%s), empty MTT response, next refrest at %s' % (callback.id, callback.mtt_callback_call_id, next_refresh)
                 print '        ', datetime.datetime.now(), datetime.datetime.utcnow(), time.asctime(), time.localtime()
                 # process_pending_callback(callback, message=e['message'])
@@ -169,35 +202,6 @@ def refresh_pending_callbacks(pending_callbacks=None):
     except:
         traceback.print_exc()
 
-# @task()
-def refresh_pending_callback_again(callback):
-    refresh_pending_callbacks([callback,])
-
-
-# @task()
-def initiate_deferred_callback(deferred_callback_info):
-    """
-    Инициация отложенного звонка
-    """
-    if deferred_callback_info.widget.client.balance_minutes < Client.MINIMUM_ALLOWED_BALANCE_MINUTES:
-        # out of balance
-        # deferred_callback_info.callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
-        # deferred_callback_info.save()
-        send_email_out_of_balance_initiate_callback(
-            deferred_callback_info.widget.out_of_balance_notifications_email,
-            deferred_callback_info.phone_number_side_b,
-            deferred_callback_info.planned_for_datetime,
-            deferred_callback_info.widget.site_url)
-        deferred_callback_info.delete()
-        return
-
-    JSONPEntryPoint.initiate_callback(
-        deferred_callback_info.phone_number_side_b, 
-        deferred_callback_info.widget,
-        deferred_callback_info.search_request, 
-        deferred_callback_info.referer,
-        deferred_callback_info.ip_side_b,
-        pending_callback_id=deferred_callback_info.id)
 
 
 
