@@ -144,10 +144,10 @@ def refresh_pending_callbacks(pending_callbacks=None):
                     print '        skip, PendingCallback %d (%s), empty MTT responses in 20 seconds' % (callback.id, callback.mtt_callback_call_id)
                     process_pending_callback(callback, message="Звонок не был зарегистрирован")
                     continue
-                next_refresh = datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
-                refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
-                print '        skip, PendingCallback %d (%s), empty MTT response, next refrest at %s' % (callback.id, callback.mtt_callback_call_id, next_refresh)
-                print '        ', datetime.datetime.now(), datetime.datetime.utcnow(), time.asctime(), time.localtime()
+                # next_refresh = datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
+                refresh_pending_callback_again.schedule(args=(callback,), delay=(1*5))
+                print '        skip, PendingCallback %d (%s), empty MTT response, next refrest in 5 seconds' % (callback.id, callback.mtt_callback_call_id)
+                # print '        ', datetime.datetime.now(), datetime.datetime.utcnow(), time.asctime(), time.localtime()
                 # process_pending_callback(callback, message=e['message'])
                 continue
                 
