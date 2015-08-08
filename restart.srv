@@ -8,6 +8,3 @@ sleep 0.1
 
 ./start.srv
 
-# sleep 0.5
-
-#tail -f nohup.out | grep -v index.php
