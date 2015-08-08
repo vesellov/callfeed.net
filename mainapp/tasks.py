@@ -109,8 +109,11 @@ def refresh_pending_callbacks(pending_callbacks=None):
             print '        skip, PendingCallback %d is planned for %s' % (callback.id, callback.planned_for_datetime)
             continue
         
-        # delta = datetime.datetime.now() - callback.when
-        # if delta > 
+        delta = datetime.datetime.now() - callback.when
+        print '        PendingCallback %s lifetime is %d seconds' % delta.total_seconds() 
+        if delta.total_seconds() > 60*60:
+            process_pending_callback(callback, message="Истек интервал обработки звонока")
+            continue 
                 
         try:
             mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
