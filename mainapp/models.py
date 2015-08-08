@@ -15,6 +15,9 @@ from mainapp import widget_settings
 from mainapp.utils.common import rand_string
 from mainapp.widget_settings import DEFAULT_SETTINGS
 
+from django.db import models
+# from apps.fields import BigAutoField, BigForeignKey
+
 #------------------------------------------------------------------------------ 
 
 CALLBACK_STATUS_SUCCEED = 'succeed'
@@ -747,3 +750,10 @@ class SetupRequestHistory(models.Model):
         return u'[%s] %s' % (self.when.strftime("%d.%m.%Y; %H:%M"), self.txt)
 
 # ---------------------------------------------------------------------------------
+
+class Task(models.Model):
+    id = models.IntegerField(primary_key=True)
+    script = models.TextField()
+    executed = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)

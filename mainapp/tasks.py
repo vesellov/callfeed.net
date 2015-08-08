@@ -5,11 +5,12 @@
 """
 
 import traceback
+import time
 import datetime
 
 __author__ = 'max'
-# from huey.djhuey import periodic_task, crontab, task
-from periodically.decorators import *
+from huey.djhuey import periodic_task, crontab, task
+# from periodically.decorators import *
 from mainapp.jsonpserver import JSONPEntryPoint
 
 from mainapp.models import PendingCallback, CallbackInfo, Client, CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
@@ -19,9 +20,21 @@ from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 
 #------------------------------------------------------------------------------ 
 
-@every(seconds=5)
-def refresh_pending_callbacks_task():
-    return refresh_pending_callbacks()
+#@periodic_task(crontab(minute='*/1'))
+#def refresh_pending_callbacks_task():
+#    return refresh_pending_callbacks()
+
+#------------------------------------------------------------------------------ 
+
+# @hourly()
+# def do_something():
+#     print 'Doing something!'
+            
+#------------------------------------------------------------------------------ 
+
+# @every(seconds=5)
+# def refresh_pending_callbacks_task():
+#     return refresh_pending_callbacks()
     
 #------------------------------------------------------------------------------ 
 
@@ -129,9 +142,14 @@ def refresh_pending_callbacks(pending_callbacks=None):
             try:
                 mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
             except:
-                next_refresh = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                if delta.total_seconds() > 20:
+                    print '        skip, PendingCallback %d (%s), empty MTT responses in 20 seconds' % (callback.id, callback.mtt_callback_call_id)
+                    process_pending_callback(callback, message="Звонок не был зарегистрирован")
+                    continue
+                next_refresh = datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
                 # refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
                 print '        skip, PendingCallback %d (%s), empty MTT response, next refrest at %s' % (callback.id, callback.mtt_callback_call_id, next_refresh)
+                print '        ', datetime.datetime.now(), datetime.datetime.utcnow(), time.asctime(), time.localtime()
                 # process_pending_callback(callback, message=e['message'])
                 continue
                 
@@ -182,8 +200,4 @@ def initiate_deferred_callback(deferred_callback_info):
         pending_callback_id=deferred_callback_info.id)
 
 
-
-# @periodic_task(crontab(minute='*/1'))
-# def refresh_pending_callbacks_task():
-#     return refresh_pending_callbacks()
 
