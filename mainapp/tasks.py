@@ -103,41 +103,43 @@ def refresh_pending_callbacks(pending_callbacks=None):
         
     print 'refresh_pending_callbacks', pending_callbacks
         
-    mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
-    for callback in pending_callbacks:
-        if callback.planned_for_datetime:
-            print '        skip, PendingCallback %d is planned for %s' % (callback.id, callback.planned_for_datetime)
-            continue
-        
-        delta = datetime.datetime.now() - callback.when
-        print '        PendingCallback %s lifetime is %d seconds' % delta.total_seconds() 
-        if delta.total_seconds() > 60*60:
-            process_pending_callback(callback, message="Истек интервал обработки звонока")
-            continue 
-                
-        try:
-            mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
-        except:
-            next_refresh = datetime.datetime.now() + datetime.timedelta(seconds=5)
-            # refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
-            print '        skip, PendingCallback %s, empty MTT response, next refrest at %s' % (callback.mtt_callback_call_id, next_refresh)
-            # process_pending_callback(callback, message=e['message'])
-            continue
+    try:
+        mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
+        for callback in pending_callbacks:
+            if callback.planned_for_datetime:
+                print '        skip, PendingCallback %d is planned for %s' % (callback.id, callback.planned_for_datetime)
+                continue
             
-        mtt_response_result = mtt_response.get('result', None)
-        if mtt_response_result is None:
-            print '        WARNING!!! empty MTT response'
-            process_pending_callback(callback, message='empty MTT response')
-            continue
-
-        mtt_struct = mtt_response_result.get('callBackFollowmeCallInfoStruct', None)
-        if mtt_struct is None:
-            print '        WARNING!!! wrong MTT response, callBackFollowmeCallInfoStruct not found'
-            process_pending_callback(callback, message='wrong MTT response, callBackFollowmeCallInfoStruct not found')
-            continue
-
-        process_pending_callback(callback, mtt_response_result_struct=mtt_struct)
-
+            delta = datetime.datetime.now() - callback.when
+            print '        PendingCallback %s lifetime is %d seconds' % delta.total_seconds() 
+            if delta.total_seconds() > 60*60:
+                process_pending_callback(callback, message="Истек интервал обработки звонока")
+                continue 
+                    
+            try:
+                mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
+            except:
+                next_refresh = datetime.datetime.now() + datetime.timedelta(seconds=5)
+                # refresh_pending_callback_again.schedule(args=(callback,), eta=next_refresh)
+                print '        skip, PendingCallback %s, empty MTT response, next refrest at %s' % (callback.mtt_callback_call_id, next_refresh)
+                # process_pending_callback(callback, message=e['message'])
+                continue
+                
+            mtt_response_result = mtt_response.get('result', None)
+            if mtt_response_result is None:
+                print '        WARNING!!! empty MTT response'
+                process_pending_callback(callback, message='empty MTT response')
+                continue
+    
+            mtt_struct = mtt_response_result.get('callBackFollowmeCallInfoStruct', None)
+            if mtt_struct is None:
+                print '        WARNING!!! wrong MTT response, callBackFollowmeCallInfoStruct not found'
+                process_pending_callback(callback, message='wrong MTT response, callBackFollowmeCallInfoStruct not found')
+                continue
+    
+            process_pending_callback(callback, mtt_response_result_struct=mtt_struct)
+    except:
+        traceback.print_exc()
 
 @task()
 def refresh_pending_callback_again(callback):
