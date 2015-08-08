@@ -79,7 +79,11 @@ def process_pending_callback(callback, mtt_response_result_struct=None, message=
     try:
         
         if callback.mtt_callback_call_id:
-            callback_info = CallbackInfo.objects.get(mtt_callback_call_id=callback.mtt_callback_call_id)
+            try:
+                callback_info = CallbackInfo.objects.get(mtt_callback_call_id=callback.mtt_callback_call_id)
+            except:
+                callback_info = None
+                print '        CallbackInfo matching query does not exist: mtt_callback_call_id=%s' % callback.mtt_callback_call_id 
             if not callback_info:
                 callback_info = CallbackInfo(
                     widget = callback.widget,
