@@ -2,10 +2,12 @@
 
 ./stop.srv
 
-sleep 2
+sleep 0.1
+
+./migrate.srv
 
 ./start.srv
 
-sleep 1
+# sleep 0.5
 
 #tail -f nohup.out | grep -v index.php
