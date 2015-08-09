@@ -655,11 +655,13 @@ class JSONPEntryPoint(View):
                     response = 'exception: ' + traceback.format_exc()
 
                 if response == 'ok':
+                    print str(widget.sms_notification_number)
                     try:
+                        pass
                         # notify manager via SMS
-                        sms.send(str(widget.sms_notification_number), 
-                            "Получено новое сообщение от посетителя %s, проверьте ваш почтовый ящик" % (
-                                widget.site_url))
+                        # sms.send(str(widget.sms_notification_number), 
+                        #     "Получено новое сообщение от посетителя %s, проверьте ваш почтовый ящик" % (
+                        #         widget.site_url))
                     except:
                         traceback.print_exc()
                         response = 'exception: ' + traceback.format_exc()
