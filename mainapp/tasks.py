@@ -187,13 +187,14 @@ def refresh_pending_callbacks(pending_callbacks=None):
                     if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A):
                         print '        PendingCallback %d (%s), timed out' % (callback.id, callback.mtt_callback_call_id)
                         process_pending_callback(callback,
+                            callback_status=CALLBACK_STATUS_FAIL_A,
                             call_description="Оператор не поднял трубку или сбросил вызов")
                         continue
                 
                 if delta.total_seconds() > 5*60:
                     print '        skip, PendingCallback %d (%s), empty MTT responses in 5 min' % (callback.id, callback.mtt_callback_call_id)
                     process_pending_callback(callback,
-                        # callback_status=CALLBACK_STATUS_FAIL_A,
+                        callback_status=CALLBACK_STATUS_FAIL_A,
                         call_description="Звонок не был зарегистрирован в течении 5 минут")
                     continue
                 

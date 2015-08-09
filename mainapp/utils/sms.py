@@ -3,14 +3,20 @@
 Модуль, ответственный за отправку сообщений. Содержит прокси-класс, реализующий функционал отправки SMS-сообщения
 """
 
+import sys
+import traceback
+
 from urllib2 import urlopen, URLError
 from urllib import quote
+
+#------------------------------------------------------------------------------ 
 
 APP_ID = '45f01f7d-0419-0074-09a3-888efdaff811' # '1014c2de-780a-ce64-8d0d-2d8c61d62bb0'
 PARTNER_ID = 122353 # 117208
 
 DEBUG = True
 
+#------------------------------------------------------------------------------ 
 
 class SMS:
     def __init__(self, app_id, debug):
@@ -18,7 +24,11 @@ class SMS:
         self.http_timeout = 10  # Timeout for http connection default is 10
         self.debug = debug
         self.service_codes = {
-            100: "Сообщение принято к отправке. На следующих строчках вы найдете идентификаторы отправленных сообщений в том же порядке, в котором вы указали номера, на которых совершалась отправка.",
+            # На следующих строчках вы найдете идентификаторы
+            # отправленных сообщений
+            # в том же порядке, в котором вы указали номера,
+            # на которых совершалась отправка.
+            100: "Сообщение принято к отправке.",
             200: "Неправильный api_id",
             201: "Не хватает средств на лицевом счету",
             202: "Неправильно указан получатель",
@@ -54,21 +64,31 @@ class SMS:
                                                   res.info()))
         except URLError as err_str:
             print('sms sender[debug]: {} '.format(err_str))
-            # sys.exit(2)
-            return
+            return '{}'.format(err_str)
 
-        service_result = res.read().splitlines()
+        try:
+            result = res.read()
+            service_result = result.splitlines()
+            
+            if not result.strip() or not service_result:
+                print("sms send[debug]: Empty response from SMS.RU")
+                return "Empty response from SMS.RU"
+    
+            if int(service_result[0]) != 100:
+                print("sms send[debug]: Unable send sms message to %s when service has returned code: %s " % (
+                    to, service_codes[int(service_result[0])]))
+                return service_codes[int(service_result[0])]
+    
+            if int(service_result[0]) == 100:
+                print("sms send[debug]: Message send ok. ID: %s" % (service_result[1]))
+                
+        except:
+            traceback.print_exc()
+            return traceback.format_exc()  
+        
+        return ''
 
-        if service_result is not None and int(service_result[0]) == 100:
-            print("sms send[debug]: Message send ok. ID: %s" % (service_result[1]))
-            # sys.exit(0)
-            return
-        if service_result is not None and int(service_result[0]) != 100:
-            print("sms send[debug]: Unable send sms message to %s when service has returned code: %s " % (
-                to, service_codes[int(service_result[0])]))
-            # sys.exit(1)
-            return
-
+#------------------------------------------------------------------------------ 
 
 class ProxySMS:
     def __init__(self, app_id=APP_ID, debug=DEBUG):
@@ -77,8 +97,14 @@ class ProxySMS:
     def __getattr__(self, name):
         return getattr(self.__sms, name)
 
+#------------------------------------------------------------------------------ 
+
+def send(to, sms):
+    sms = ProxySMS()
+    sms.send(to=to, message=sms)
+
+#------------------------------------------------------------------------------ 
 
 if __name__ == '__main__':
-    print('Sending test sms message..')
-    sms = ProxySMS()
-    sms.send(to='+79182194288', message='hello!')
+    print 'sending...'
+    print send(sys.argv[1], sys.argv[2])
