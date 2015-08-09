@@ -51,7 +51,6 @@ def process_pending_callback(callback,
         mtt_response_result_struct=None,
         call_description=None,
         callback_status=None):
-    print 'process_pending_callback', callback.id, str(mtt_response_result_struct)[:10], callback_status, call_description 
 
     new_callback_status = None
 
@@ -75,6 +74,8 @@ def process_pending_callback(callback,
                 break
     
     callback_info = None
+
+    print 'process_pending_callback', callback.id, str(mtt_response_result_struct)[:10], new_callback_status, call_description 
     
     try:
         

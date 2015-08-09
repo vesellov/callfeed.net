@@ -69,22 +69,9 @@ def track_by_id(request, id):
        callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B) :
         callback.callback_status = CALLBACK_STATUS_SUCCEED
 
-#    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
-#       callback.tracking_history.count(TRACKING_EVENT_START_SIDE_B) and \
-#       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_A) and \
-#       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B) :
-#        callback.callback_status = CALLBACK_STATUS_SUCCEED
-#        
-#    callback.callback_status = CALLBACK_STATUS_FAIL_A
-
-#    if callback.is_finished():
-#        callback.callback_status = CALLBACK_STATUS_SUCCEED
-#    elif callback.is_lasting():
-#        callback.callback_status = CALLBACK_STATUS_LASTING
-        
     callback.save()
         
-    print '        OK! [%s]' % (callback.tracking_history) 
+    print '        OK! [%s], callback_status = %s' % (callback.tracking_history, callback.callback_status) 
 
 #    if TRACKING_EVENT_END_SIDE_A in callback.tracking_history:
     refresh_pending_callbacks([callback,])
