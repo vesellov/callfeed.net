@@ -174,7 +174,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
             
             if not callback.mtt_callback_call_id:
                 print '        PendingCallback %d has no MTT ID yet (%s), lifetime is %d seconds' % (callback.id, callback.mtt_callback_call_id, delta.total_seconds()) 
-                if delta.total_seconds() > 60*60:
+                if delta.total_seconds() > callback.widget.time_before_callback_sec * 2:
                     process_pending_callback(callback,
                         # callback_status=CALLBACK_STATUS_FAIL_A, 
                         call_description="Истек интервал обработки звонока")
@@ -183,6 +183,13 @@ def refresh_pending_callbacks(pending_callbacks=None):
             try:
                 mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
             except:
+                if delta.total_seconds() > callback.widget.time_before_callback_sec * 2:
+                    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A):
+                        print '        PendingCallback %d (%s), timed out' % (callback.id, callback.mtt_callback_call_id)
+                        process_pending_callback(callback,
+                            call_description="Оператор не поднял трубку или сбросил вызов")
+                        continue
+                
                 if delta.total_seconds() > 5*60:
                     print '        skip, PendingCallback %d (%s), empty MTT responses in 5 min' % (callback.id, callback.mtt_callback_call_id)
                     process_pending_callback(callback,
