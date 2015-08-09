@@ -4,6 +4,7 @@
 Например, ежедневная рассылка отчётов о качестве работы операторов по почте и так далее.
 """
 
+import sys
 import traceback
 import time
 import datetime
@@ -189,30 +190,34 @@ def refresh_pending_callbacks(pending_callbacks=None):
                         call_description="Звонок не был зарегистрирован в течении 20 секунд")
                     continue
                 
-                refresh_pending_callback_again.schedule(args=(callback,), delay=(1*5))
+                refresh_pending_callback_again.schedule(args=(callback.id,), delay=(1*5))
                 print '        skip, PendingCallback %d (%s), empty MTT response, next refrest in 5 seconds' % (callback.id, callback.mtt_callback_call_id)
                 continue
                 
             mtt_response_result = mtt_response.get('result', None)
             if mtt_response_result is None:
-                print '        WARNING!!! empty MTT response'
-                process_pending_callback(callback,
-                    # callback_status=CALLBACK_STATUS_FAIL_A,                                         
-                    call_description='Получен пустой ответ от сервера МТТ')
+                refresh_pending_callback_again.schedule(args=(callback.id,), delay=(1*5))
+                print '        WARNING!!! empty MTT response, skip, retry in 5 sec'
+#                process_pending_callback(callback,
+#                    # callback_status=CALLBACK_STATUS_FAIL_A,                                         
+#                    call_description='Получен пустой ответ от сервера МТТ')
                 continue
     
             mtt_struct = mtt_response_result.get('callBackFollowmeCallInfoStruct', None)
             if mtt_struct is None:
-                print '        WARNING!!! wrong MTT response, callBackFollowmeCallInfoStruct not found'
-                process_pending_callback(callback,
-                    # callback_status=CALLBACK_STATUS_FAIL_A,
-                    call_description='Получен ошибочный ответ от сервера МТТ')
+                refresh_pending_callback_again.schedule(args=(callback.id,), delay=(1*5))
+                print '        WARNING!!! wrong MTT response, callBackFollowmeCallInfoStruct not found, skip, retry in 5 seconds'
+#                process_pending_callback(callback,
+#                    # callback_status=CALLBACK_STATUS_FAIL_A,
+#                    call_description='Получен ошибочный ответ от сервера МТТ')
                 continue
     
             process_pending_callback(callback,
                 mtt_response_result_struct=mtt_struct)
     except:
         traceback.print_exc()
+        
+    return True
 
 
 #------------------------------------------------------------------------------ 
@@ -224,6 +229,7 @@ def refresh_pending_callback_again(callback):
         refresh_pending_callbacks([callback,])
     except:
         traceback.print_exc()
+    sys.stdout.flush()
     return True
 
 #------------------------------------------------------------------------------ 
