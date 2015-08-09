@@ -169,8 +169,9 @@ def refresh_pending_callbacks(pending_callbacks=None):
                 print '        skip, PendingCallback %d (%s) is planned for %s' % (callback.id, callback.mtt_callback_call_id, callback.planned_for_datetime)
                 continue
             
+            delta = datetime.datetime.now() - callback.when
+            
             if not callback.mtt_callback_call_id:
-                delta = datetime.datetime.now() - callback.when
                 print '        PendingCallback %d has no MTT ID yet (%s), lifetime is %d seconds' % (callback.id, callback.mtt_callback_call_id, delta.total_seconds()) 
                 if delta.total_seconds() > 60*60:
                     process_pending_callback(callback,
