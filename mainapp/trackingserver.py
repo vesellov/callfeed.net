@@ -10,8 +10,15 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404 
 
-from mainapp.models import CallbackInfo, PendingCallback, \
-    CALLBACK_STATUS_SUCCEED, CALLBACK_STATUS_LASTING, TRACKING_EVENT_END_SIDE_A 
+from mainapp.models import CallbackInfo
+from mainapp.models import PendingCallback
+from mainapp.models import CALLBACK_STATUS_SUCCEED
+from mainapp.models import CALLBACK_STATUS_LASTING
+from mainapp.models import TRACKING_EVENT_END_SIDE_A
+from mainapp.models import TRACKING_EVENT_END_SIDE_B
+from mainapp.models import TRACKING_EVENT_START_SIDE_A
+from mainapp.models import TRACKING_EVENT_START_SIDE_B
+ 
 from mainapp.utils.common import random_delay
 from mainapp.utils import mtt
 from mainapp.tasks import refresh_pending_callbacks
@@ -51,17 +58,36 @@ def track_by_id(request, id):
     callback.mtt_callback_call_id = callback_id
     callback.tracking_history += "%s(%s);" % (event, dt)
     
-    if callback.is_finished():
-        callback.callback_status = CALLBACK_STATUS_SUCCEED
-    elif callback.is_lasting():
+    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
+       not callback.tracking_history.count(TRACKING_EVENT_END_SIDE_A) and \
+       not callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B):
         callback.callback_status = CALLBACK_STATUS_LASTING
+
+    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
+       callback.tracking_history.count(TRACKING_EVENT_START_SIDE_B) and \
+       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_A) and \
+       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B) :
+        callback.callback_status = CALLBACK_STATUS_SUCCEED
+
+#    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
+#       callback.tracking_history.count(TRACKING_EVENT_START_SIDE_B) and \
+#       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_A) and \
+#       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B) :
+#        callback.callback_status = CALLBACK_STATUS_SUCCEED
+#        
+#    callback.callback_status = CALLBACK_STATUS_FAIL_A
+
+#    if callback.is_finished():
+#        callback.callback_status = CALLBACK_STATUS_SUCCEED
+#    elif callback.is_lasting():
+#        callback.callback_status = CALLBACK_STATUS_LASTING
         
     callback.save()
         
     print '        OK! [%s]' % (callback.tracking_history) 
 
-    if TRACKING_EVENT_END_SIDE_A in callback.tracking_history:
-        refresh_pending_callbacks([callback,])
+#    if TRACKING_EVENT_END_SIDE_A in callback.tracking_history:
+    refresh_pending_callbacks([callback,])
 
     random_delay()  # to prevent time attacks
     return HttpResponse('')        

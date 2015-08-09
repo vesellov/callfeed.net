@@ -20,6 +20,7 @@ from django.db import models
 
 #------------------------------------------------------------------------------ 
 
+CALLBACK_STATUS_STARTED = 'started'
 CALLBACK_STATUS_SUCCEED = 'succeed'
 CALLBACK_STATUS_PLANNED = 'planned'
 CALLBACK_STATUS_LASTING = 'lasting'
@@ -33,6 +34,7 @@ TRACKING_EVENT_END_SIDE_A = 'end_side_A'
 TRACKING_EVENT_END_SIDE_B = 'end_side_B'
 #
 CALLBACK_STATUSES = (
+    (CALLBACK_STATUS_STARTED, 'Звонок инициирован'),                     
     (CALLBACK_STATUS_SUCCEED, 'Звонок прошёл успешно'),
     (CALLBACK_STATUS_PLANNED, 'Запланирован'),
     (CALLBACK_STATUS_LASTING, 'Звонок продолжается'),

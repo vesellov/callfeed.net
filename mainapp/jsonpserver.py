@@ -10,8 +10,15 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
+
 from mainapp import widget_settings
-from mainapp.models import Widget, PendingCallback, CallbackInfo, CALLBACK_STATUS_PLANNED
+
+from mainapp.models import Widget
+from mainapp.models import PendingCallback
+from mainapp.models import CallbackInfo 
+from mainapp.models import CALLBACK_STATUS_PLANNED
+from mainapp.models import CALLBACK_STATUS_STARTED
+
 from mainapp.utils import mtt
 from mainapp.utils import mail
 from mainapp.utils.common import random_delay
@@ -173,10 +180,6 @@ class JSONPEntryPoint(View):
             #  ability to count spent minutes for such cases
             return False
 
-
-        # TODO!!!!
-        return False
-
         deferred_callback_info = PendingCallback(
             widget = widget,
             phone_number_side_b = phone_number,
@@ -274,7 +277,8 @@ class JSONPEntryPoint(View):
                     referer = rferrer_str,
                     search_request = search_str,
                     when = datetime.datetime.now(),
-                    phone_number_side_b = phone_number)
+                    phone_number_side_b = phone_number,
+                    callback_status = CALLBACK_STATUS_STARTED)
                 new_pending_info.save()
                 print '        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info)
             

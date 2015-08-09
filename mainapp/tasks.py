@@ -13,7 +13,22 @@ from huey.djhuey import periodic_task, crontab, task
 # from periodically.decorators import *
 from mainapp.jsonpserver import JSONPEntryPoint
 
-from mainapp.models import PendingCallback, CallbackInfo, Client, CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
+from mainapp.models import PendingCallback
+from mainapp.models import CallbackInfo
+from mainapp.models import Client
+from mainapp.models import CALLBACK_STATUSES
+from mainapp.models import CALLBACK_STATUS_STARTED
+from mainapp.models import CALLBACK_STATUS_PLANNED
+from mainapp.models import CALLBACK_STATUS_SUCCEED
+from mainapp.models import CALLBACK_STATUS_FAIL_A
+from mainapp.models import CALLBACK_STATUS_FAIL_B
+from mainapp.models import CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
+from mainapp.models import CALLBACK_STATUS_LASTING
+from mainapp.models import TRACKING_EVENT_START_SIDE_A
+from mainapp.models import TRACKING_EVENT_START_SIDE_B
+from mainapp.models import TRACKING_EVENT_END_SIDE_A
+from mainapp.models import TRACKING_EVENT_END_SIDE_B
+
 from mainapp.utils import mtt
 from mainapp.utils.jsonrpc2 import rpcException
 from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
@@ -32,8 +47,32 @@ from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
     
 #------------------------------------------------------------------------------ 
 
-def process_pending_callback(callback, mtt_response_result_struct=None, message=None):
-    print 'process_pending_callback', callback.id, str(mtt_response_result_struct)[:10], message
+def process_pending_callback(callback,
+        mtt_response_result_struct=None,
+        call_description=None,
+        callback_status=None):
+    print 'process_pending_callback', callback.id, str(mtt_response_result_struct)[:10], callback_status, call_description 
+
+    new_callback_status = None
+
+    if callback_status is None:
+        if callback.callback_status == CALLBACK_STATUS_PLANNED:
+            new_callback_status = callback.callback_status  
+        elif callback.callback_status == CALLBACK_STATUS_LASTING:
+            new_callback_status = CALLBACK_STATUS_FAIL_B
+        elif callback.callback_status == CALLBACK_STATUS_STARTED:
+            new_callback_status = CALLBACK_STATUS_FAIL_A
+        else:
+            new_callback_status = callback.callback_status
+    else:
+        new_callback_status = callback_status
+        
+    if call_description is None:
+        call_description = 'ОШИБКА! Неизвестный статус звонка'  
+        for status in CALLBACK_STATUSES:
+            if status[0] == callback_status:
+                call_description = status[1]
+                break
     
     callback_info = None
     
@@ -44,15 +83,16 @@ def process_pending_callback(callback, mtt_response_result_struct=None, message=
                 callback_info = CallbackInfo.objects.get(mtt_callback_call_id=callback.mtt_callback_call_id)
             except:
                 callback_info = None
-                print '        CallbackInfo matching query does not exist: mtt_callback_call_id=%s' % callback.mtt_callback_call_id 
+                print '        CallbackInfo matching query does not exist: mtt_callback_call_id=%s' % callback.mtt_callback_call_id
+                 
             if not callback_info:
                 callback_info = CallbackInfo(
                     widget = callback.widget,
-                    call_description = message if message else '',                          
+                    call_description = call_description,                          
                     phone_number_side_b = callback.phone_number_side_b,
                     mtt_callback_call_id = callback.mtt_callback_call_id,
                     when = callback.when,
-                    callback_status = callback.callback_status,
+                    callback_status = new_callback_status,
                     referer = callback.referer, 
                     search_request = callback.search_request,
                     tracking_history = callback.tracking_history,
@@ -80,7 +120,7 @@ def process_pending_callback(callback, mtt_response_result_struct=None, message=
                     record_url_a = record_url_a, record_url_b=record_url_b,
                     waiting_period_a_sec = mtt_response_result_struct.get('waiting_period_A', '0'),
                     waiting_period_b_sec = mtt_response_result_struct.get('waiting_period_B', '0'),
-                    callback_status = callback.callback_status,
+                    callback_status = new_callback_status,
                     cost = mtt_response_result_struct.get('call_back_cost', 0.0),
                     currency = mtt_response_result_struct.get('call_back_currency', 'RUB'),
                     ip_side_b = callback.ip_side_b,
@@ -124,17 +164,17 @@ def refresh_pending_callbacks(pending_callbacks=None):
     try:
         mtt_proxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
         for callback in pending_callbacks:
-            if callback.planned_for_datetime:
+            if callback.planned_for_datetime or callback.callback_status == CALLBACK_STATUS_PLANNED:
                 print '        skip, PendingCallback %d (%s) is planned for %s' % (callback.id, callback.mtt_callback_call_id, callback.planned_for_datetime)
                 continue
             
             if not callback.mtt_callback_call_id:
-                print '        skip, PendingCallback %s : mtt_callback_call_id is empty' % (callback.id)
-            
-            delta = datetime.datetime.now() - callback.when
-            print '        PendingCallback %d (%s) lifetime is %d seconds' % (callback.id, callback.mtt_callback_call_id, delta.total_seconds()) 
-            if delta.total_seconds() > 60*60:
-                process_pending_callback(callback, message="Истек интервал обработки звонока")
+                delta = datetime.datetime.now() - callback.when
+                print '        PendingCallback %d has no MTT ID yet (%s), lifetime is %d seconds' % (callback.id, callback.mtt_callback_call_id, delta.total_seconds()) 
+                if delta.total_seconds() > 60*60:
+                    process_pending_callback(callback,
+                        # callback_status=CALLBACK_STATUS_FAIL_A, 
+                        call_description="Истек интервал обработки звонока")
                 continue 
                     
             try:
@@ -142,28 +182,33 @@ def refresh_pending_callbacks(pending_callbacks=None):
             except:
                 if delta.total_seconds() > 20:
                     print '        skip, PendingCallback %d (%s), empty MTT responses in 20 seconds' % (callback.id, callback.mtt_callback_call_id)
-                    process_pending_callback(callback, message="Звонок не был зарегистрирован")
+                    process_pending_callback(callback,
+                        # callback_status=CALLBACK_STATUS_FAIL_A,
+                        call_description="Звонок не был зарегистрирован в течении 20 секунд")
                     continue
-                # next_refresh = datetime.datetime.utcnow() + datetime.timedelta(seconds=5)
+                
                 refresh_pending_callback_again.schedule(args=(callback,), delay=(1*5))
                 print '        skip, PendingCallback %d (%s), empty MTT response, next refrest in 5 seconds' % (callback.id, callback.mtt_callback_call_id)
-                # print '        ', datetime.datetime.now(), datetime.datetime.utcnow(), time.asctime(), time.localtime()
-                # process_pending_callback(callback, message=e['message'])
                 continue
                 
             mtt_response_result = mtt_response.get('result', None)
             if mtt_response_result is None:
                 print '        WARNING!!! empty MTT response'
-                process_pending_callback(callback, message='empty MTT response')
+                process_pending_callback(callback,
+                    # callback_status=CALLBACK_STATUS_FAIL_A,                                         
+                    call_description='Получен пустой ответ от сервера МТТ')
                 continue
     
             mtt_struct = mtt_response_result.get('callBackFollowmeCallInfoStruct', None)
             if mtt_struct is None:
                 print '        WARNING!!! wrong MTT response, callBackFollowmeCallInfoStruct not found'
-                process_pending_callback(callback, message='wrong MTT response, callBackFollowmeCallInfoStruct not found')
+                process_pending_callback(callback,
+                    # callback_status=CALLBACK_STATUS_FAIL_A,
+                    call_description='Получен ошибочный ответ от сервера МТТ')
                 continue
     
-            process_pending_callback(callback, mtt_response_result_struct=mtt_struct)
+            process_pending_callback(callback,
+                mtt_response_result_struct=mtt_struct)
     except:
         traceback.print_exc()
 
@@ -172,8 +217,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
 
 @task()
 def refresh_pending_callback_again(callback):
-    open('/tmp/out2', 'w').write('refresh_pending_callback_again\n')
-    print 'refresh_pending_callback_again', callback
+    # print 'refresh_pending_callback_again', callback
     try:
         refresh_pending_callbacks([callback,])
     except:
@@ -182,15 +226,14 @@ def refresh_pending_callback_again(callback):
 
 #------------------------------------------------------------------------------ 
 
-@periodic_task(crontab(minute='*/1'))
-def refresh_pending_callbacks_task():
-    open('/tmp/out1', 'w').write('refresh_pending_callbacks_task\n')
-    print 'refresh_pending_callbacks_task'
-    try:
-        return refresh_pending_callbacks()
-    except:
-        traceback.print_exc()
-    return True
+#@periodic_task(crontab(minute='*/1'))
+#def refresh_pending_callbacks_task():
+#    # print 'refresh_pending_callbacks_task'
+#    try:
+#        return refresh_pending_callbacks()
+#    except:
+#        traceback.print_exc()
+#    return True
 
 
 #------------------------------------------------------------------------------ 
@@ -210,7 +253,9 @@ def initiate_deferred_callback(deferred_callback_info):
             deferred_callback_info.planned_for_datetime,
             deferred_callback_info.widget.site_url)
         # deferred_callback_info.delete()
-        process_pending_callback(deferred_callback_info, message="Недостаточно средств для запуска отложенного звонка")
+        process_pending_callback(deferred_callback_info, 
+            call_description = "Недостаточно средств для запуска отложенного звонка", 
+            callback_status = CALLBACK_STATUS_FAIL_OUT_OF_BALANCE, )
         return True
 
     JSONPEntryPoint.initiate_callback(

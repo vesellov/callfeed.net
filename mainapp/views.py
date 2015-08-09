@@ -631,7 +631,8 @@ class ClientCallbacks(ProtectedClientView):
             = self.build_callbacks_report(request, date_choices, from_date, to_date, planned,
                                           site_choices)
 
-        return render(request, 'pages/profile/client/client_callbacks.html',
+        return render(request, 
+                      'pages/profile/client/client_callbacks.html',
                       {'callbacks': callbacks,
                        'callbacks_count': callbacks_count,
                        'callbacks_total_time_min': callbacks_total_time_min,
