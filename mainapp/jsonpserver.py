@@ -660,16 +660,15 @@ class JSONPEntryPoint(View):
                     try:
                         # pass
                         # notify manager via SMS
-                        sms_ret = sms.send(str(widget.sms_notification_number), "TEST") 
-                            # u"123 %s : 123" % (
-                            #     widget.site_url))
+                        sms_ret = sms.send(str(widget.sms_notification_number), 
+                            u"Входящее сообщение на %s" % (widget.site_url))
                     except Exception as e:
-                        print 'sms error', e
+                        # print 'sms error', e
                         # traceback.print_exc()
                         response = 'exception: ' + str(e) # traceback.format_exc()
 
                 jdata.update({'response': response,
-                              'message': 'sending email to manager on %s' % widget.callback_notifications_email, })
+                              'message': 'sending email to manager', })
 
                 # temporary save data to the local file
                 filename = '/home/callfeed/incomings/%s_%s.txt' % (

@@ -54,14 +54,19 @@ class SMS:
         service_codes = self.service_codes
 
         url = self.url % (app_id, to.lstrip('+'), quote(message), PARTNER_ID)
+        
+        try:
+            print url
+        except:
+            pass 
 
         if debug:
             url += "&test=1"
 
         try:
             res = urlopen(url, timeout=self.http_timeout)
-            print("GET: {} {}\nReply:\n{}".format(
-                res.geturl(), res.msg, res.info()))
+            print("GET: {}\nReply:\n{}".format(
+                res.geturl(), res.info()))
         except URLError as err_str:
             print('sms sender[debug]: {} '.format(err_str))
             return '{}'.format(err_str)
