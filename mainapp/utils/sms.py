@@ -56,12 +56,12 @@ class SMS:
         url = self.url % (app_id, to, quote(message), PARTNER_ID)
 
         if debug:
-            url += "%s&test=1" % url
+            url += "&test=1"
 
         try:
             res = urlopen(url, timeout=self.http_timeout)
-            print("GET: {} {}\nReply:\n{}".format(res.geturl(), res.msg,
-                                                  res.info()))
+            print("GET: {} {}\nReply:\n{}".format(
+                res.geturl(), res.msg, res.info()))
         except URLError as err_str:
             print('sms sender[debug]: {} '.format(err_str))
             return '{}'.format(err_str)
@@ -101,7 +101,7 @@ class ProxySMS:
 
 def send(to, sms):
     proxy = ProxySMS()
-    proxy.send(to, sms)
+    return proxy.send(to, sms)
 
 #------------------------------------------------------------------------------ 
 
