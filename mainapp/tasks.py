@@ -183,11 +183,11 @@ def refresh_pending_callbacks(pending_callbacks=None):
             try:
                 mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
             except:
-                if delta.total_seconds() > 20:
-                    print '        skip, PendingCallback %d (%s), empty MTT responses in 20 seconds' % (callback.id, callback.mtt_callback_call_id)
+                if delta.total_seconds() > 5*60:
+                    print '        skip, PendingCallback %d (%s), empty MTT responses in 5 min' % (callback.id, callback.mtt_callback_call_id)
                     process_pending_callback(callback,
                         # callback_status=CALLBACK_STATUS_FAIL_A,
-                        call_description="Звонок не был зарегистрирован в течении 20 секунд")
+                        call_description="Звонок не был зарегистрирован в течении 5 минут")
                     continue
                 
                 refresh_pending_callback_again.schedule(args=(callback.id,), delay=(1*5))
@@ -225,11 +225,19 @@ def refresh_pending_callbacks(pending_callbacks=None):
 @task()
 def refresh_pending_callback_again(callback_id):
     print 'refresh_pending_callback_again', callback_id
+    
     try:
         callback = PendingCallback.objects.get(id=callback_id)
+    except:
+        print '        PendingCallback %d not found' % callback_id
+        sys.stdout.flush()
+        return True
+        
+    try:
         refresh_pending_callbacks([callback,])
     except:
         traceback.print_exc()
+
     sys.stdout.flush()
     return True
 
