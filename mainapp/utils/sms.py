@@ -53,6 +53,12 @@ class SMS:
         debug = self.debug
         service_codes = self.service_codes
 
+        print type(message)
+
+        print message
+        
+        print quote(message)
+
         url = self.url % (app_id, to.lstrip('+'), quote(message), PARTNER_ID)
         
         try:
