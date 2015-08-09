@@ -660,9 +660,9 @@ class JSONPEntryPoint(View):
                     try:
                         # pass
                         # notify manager via SMS
-                        sms_ret = sms.send(str(widget.sms_notification_number), 
-                            u"Получено новое сообщение от посетителя %s, проверьте ваш почтовый ящик" % (
-                                widget.site_url))
+                        sms_ret = sms.send(str(widget.sms_notification_number), "TEST") 
+                            # u"123 %s : 123" % (
+                            #     widget.site_url))
                     except Exception as e:
                         print 'sms error', e
                         # traceback.print_exc()
