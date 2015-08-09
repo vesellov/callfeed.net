@@ -655,17 +655,15 @@ class JSONPEntryPoint(View):
                     response = 'exception: ' + traceback.format_exc()
 
                 if response == 'ok':
-                    print str(widget.sms_notification_number)
-                    sms_ret = ''
                     try:
                         # pass
                         # notify manager via SMS
-                        sms_ret = sms.send(str(widget.sms_notification_number), 
-                            u"Входящее сообщение на %s" % (widget.site_url))
+                        sms.send(str(widget.sms_notification_number), 
+                            u"CallFeed.NET: Новое сообщение на %s" % (widget.site_url))
                     except Exception as e:
                         # print 'sms error', e
                         # traceback.print_exc()
-                        response = 'exception: ' + str(e) # traceback.format_exc()
+                        response = 'exception: ERROR sending SMS'
 
                 jdata.update({'response': response,
                               'message': 'sending email to manager', })

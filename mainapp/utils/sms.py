@@ -53,22 +53,9 @@ class SMS:
         app_id = self.app_id
         debug = self.debug
         service_codes = self.service_codes
-
-        # print type(message)
-
-	message = message.encode(locale.getpreferredencoding())
-        message = str(message)
-        
-        # print message
-        
-        # print quote(message)
+        message = unicode(message).encode(locale.getpreferredencoding())
 
         url = self.url % (app_id, to.lstrip('+'), quote(message), PARTNER_ID)
-        
-        # try:
-        #     print url
-        # except:
-        #     pass 
 
         if debug:
             url += "&test=1"
@@ -123,5 +110,4 @@ def send(to, msg):
 
 if __name__ == '__main__':
     print 'sending...'
-    # print send(sys.argv[1], sys.argv[2])
-    print send(sys.argv[1], u"Входящее сообщение на")
+    print send(sys.argv[1], sys.argv[2])
