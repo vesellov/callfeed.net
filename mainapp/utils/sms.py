@@ -101,8 +101,8 @@ class ProxySMS:
 
 def send(to, sms):
     print '[SMS]', to, sms
-    proxy = ProxySMS()
-    return proxy.send(to, sms)
+    # proxy = ProxySMS()
+    # return proxy.send(to, sms)
 
 #------------------------------------------------------------------------------ 
 
