@@ -223,9 +223,10 @@ def refresh_pending_callbacks(pending_callbacks=None):
 #------------------------------------------------------------------------------ 
 
 @task()
-def refresh_pending_callback_again(callback):
-    # print 'refresh_pending_callback_again', callback
+def refresh_pending_callback_again(callback_id):
+    print 'refresh_pending_callback_again', callback_id
     try:
+        callback = PendingCallback.objects.get(id=callback_id)
         refresh_pending_callbacks([callback,])
     except:
         traceback.print_exc()
