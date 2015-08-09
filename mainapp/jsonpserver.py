@@ -651,7 +651,7 @@ class JSONPEntryPoint(View):
                         widget.site_url)  
                     # notify manager via SMS
                     sms.send(widget.sms_notification_number, 
-                        "Получено новое сообщение от посетителя %s" % (
+                        "Получено новое сообщение от посетителя %s, проверьте ваш почтовый ящик" % (
                             widget.site_url))
                     response = 'ok'
                 except:
