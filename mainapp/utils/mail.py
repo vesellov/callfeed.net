@@ -12,7 +12,6 @@ from callfeed import settings
 
 __author__ = 'max'
 
- 
 CALLFEED_EMAIL = 'info@callfeed.ru'
 
 #------------------------------------------------------------------------------ 
@@ -48,7 +47,7 @@ def send_email_order_call(notification_email, order_phone, order_day, order_time
 
 
 def send_email_timeoff_order_call(notification_email, timeoff_phone, timeoff_day, timeoff_time, url):
-    subject = u'Заказ обратного звонка с сайта'
+    subject = u'Заказ звонка с сайта в нерабочее время'
     template_content = unicode(open('%s/mail/callback_timeoff_request.html' % settings.TEMPLATE_DIRS[0], 'r').read(),
                                'utf-8')
     mail_body = template_content % {'timeoff_phone': timeoff_phone,

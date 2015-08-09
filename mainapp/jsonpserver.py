@@ -10,6 +10,7 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
+#------------------------------------------------------------------------------ 
 
 from mainapp import widget_settings
 
@@ -20,6 +21,7 @@ from mainapp.models import CALLBACK_STATUS_PLANNED
 from mainapp.models import CALLBACK_STATUS_STARTED
 
 from mainapp.utils import mtt
+from mainapp.utils import sms
 from mainapp.utils import mail
 from mainapp.utils.common import random_delay
 
@@ -536,12 +538,20 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
                 try:
+                    # notify manager via email
                     mail.send_email_order_call(
                         widget.callback_notifications_email,
                         jdata['order_phone'],
                         jdata['order_day'],
                         jdata['order_time'],
-                        widget.site_url)  # notify manager via email
+                        widget.site_url)  
+                    # notify manager via SMS
+                    sms.send(widget.sms_notification_number, 
+                        "Заказ обратного звонка с %s, телефон: %s, время для связи: %s в %s" % (
+                            widget.site_url,
+                            jdata['order_phone'],
+                            jdata['order_day'],
+                            jdata['order_time']))
                     response = 'ok'
                 except:
                     traceback.print_exc()
@@ -584,12 +594,20 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
                 try:
+                    # notify manager via email
                     mail.send_email_timeoff_order_call(
                         widget.callback_notifications_email,
                         jdata['timeoff_phone'],
                         jdata['timeoff_day'],
                         jdata['timeoff_time'],
-                        widget.site_url)  # notify manager via email
+                        widget.site_url)  
+                    # notify manager via SMS
+                    sms.send(widget.sms_notification_number, 
+                        "Заказ звонка с %s в нерабочее время, телефон: %s, время для связи: %s в %s" % (
+                            widget.site_url,                                                                                                        
+                            jdata['timeoff_phone'],
+                            jdata['timeoff_day'],
+                            jdata['timeoff_time']))
                     response = 'ok'
                 except:
                     traceback.print_exc()
@@ -624,12 +642,17 @@ class JSONPEntryPoint(View):
                 # pprint.pprint(widget.offline_message_notifications_email)
                 # pprint.pprint(jdata)
                 try:
+                    # notify manager via email
                     mail.send_email_message(
                         str(widget.offline_message_notifications_email),
                         jdata['message_phone'],
                         str(jdata['message_email']),
                         jdata['message_text'],
-                        widget.site_url)  # notify manager via email
+                        widget.site_url)  
+                    # notify manager via SMS
+                    sms.send(widget.sms_notification_number, 
+                        "Получено новое сообщение от посетителя %s" % (
+                            widget.site_url))
                     response = 'ok'
                 except:
                     traceback.print_exc()

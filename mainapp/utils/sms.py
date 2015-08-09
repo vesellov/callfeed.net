@@ -53,7 +53,7 @@ class SMS:
         debug = self.debug
         service_codes = self.service_codes
 
-        url = self.url % (app_id, to, quote(message), PARTNER_ID)
+        url = self.url % (app_id, to.lstrip('+'), quote(message), PARTNER_ID)
 
         if debug:
             url += "&test=1"
@@ -86,7 +86,7 @@ class SMS:
             traceback.print_exc()
             return traceback.format_exc()  
         
-        return ''
+        return service_result[1]
 
 #------------------------------------------------------------------------------ 
 
