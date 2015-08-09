@@ -55,6 +55,8 @@ class SMS:
 
         print type(message)
 
+        message = unicode(message).decode('utf-8')
+        
         print message
         
         print quote(message)
