@@ -55,7 +55,7 @@ class SMS:
 
         print type(message)
 
-        message = unicode(message).decode('utf-8')
+        message = unicode(message).decode('utf-8', 'ignore')
         
         print message
         
@@ -121,4 +121,5 @@ def send(to, msg):
 
 if __name__ == '__main__':
     print 'sending...'
-    print send(sys.argv[1], sys.argv[2])
+    # print send(sys.argv[1], sys.argv[2])
+    print send(sys.argv[1], u"Входящее сообщение на %s" % ('http://common.yeee'))
