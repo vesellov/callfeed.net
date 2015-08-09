@@ -29,7 +29,7 @@ def send_email(subject, message, recipients):
         recipients = [recipients,]
 
     result = send_mail("CallFeed.NET: " + subject, '', CALLFEED_EMAIL, recipients, html_message=message)
-    print 'EMAIL', recipients, len(message), 'bytes'
+    print '[EMAIL]', recipients, len(message), 'bytes'
     return result
 
 
