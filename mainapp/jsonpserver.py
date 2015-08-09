@@ -649,14 +649,20 @@ class JSONPEntryPoint(View):
                         str(jdata['message_email']),
                         jdata['message_text'],
                         widget.site_url)  
-                    # notify manager via SMS
-                    sms.send(widget.sms_notification_number, 
-                        "Получено новое сообщение от посетителя %s, проверьте ваш почтовый ящик" % (
-                            widget.site_url))
                     response = 'ok'
                 except:
                     traceback.print_exc()
                     response = 'exception: ' + traceback.format_exc()
+
+                if response == 'ok':
+                    try:
+                        # notify manager via SMS
+                        sms.send(str(widget.sms_notification_number), 
+                            "Получено новое сообщение от посетителя %s, проверьте ваш почтовый ящик" % (
+                                widget.site_url))
+                    except:
+                        traceback.print_exc()
+                        response = 'exception: ' + traceback.format_exc()
 
                 jdata.update({'response': response,
                               'message': 'sending email to manager on %s' % widget.callback_notifications_email, })
