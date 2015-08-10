@@ -293,8 +293,9 @@ class Tariff(models.Model):
 #------------------------------------------------------------------------------ 
 
 class Widget(models.Model):
-    SETTINGS_FIELD_MAX_LENGTH = 5000  # максмальная длина поля, в котором будут храниться все настройки
-                                      # виджета
+    # максмальная длина поля, в котором будут храниться все настройки
+    # виджета
+    SETTINGS_FIELD_MAX_LENGTH = 5000  
     #
     CALLBACK_TYPE_RING_ALL = 'ringall'
     CALLBACK_TYPE_LINEAR = 'linear'
@@ -576,6 +577,7 @@ class Widget(models.Model):
     def __unicode__(self):
         return u'Widget(%s)' % self.site_url
 
+#------------------------------------------------------------------------------ 
 
 class CallbackInfo(models.Model):
     """
