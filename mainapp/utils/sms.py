@@ -64,10 +64,10 @@ class SMS:
 
         try:
             res = urlopen(url, timeout=self.http_timeout)
-            print("GET: {}\nReply:\n{}".format(
-                res.geturl(), res.info()))
+            # print("GET: {}\nReply:\n{}".format(
+            #     res.geturl(), res.info()))
         except URLError as err_str:
-            print('sms sender[debug]: {} '.format(err_str))
+            print('        {} '.format(err_str))
             return '{}'.format(err_str)
 
         try:
@@ -75,16 +75,16 @@ class SMS:
             service_result = result.splitlines()
             
             if not result.strip() or not service_result:
-                print("sms send[debug]: Empty response from SMS.RU")
+                print("        Empty response from SMS.RU")
                 return "Empty response from SMS.RU"
     
             if int(service_result[0]) != 100:
-                print("sms send[debug]: Unable send sms message to %s when service has returned code: %s " % (
+                print("        Unable send sms message to %s when service has returned code: %s " % (
                     to, service_codes[int(service_result[0])]))
                 return service_codes[int(service_result[0])]
     
             if int(service_result[0]) == 100:
-                print("sms send[debug]: Message send ok. ID: %s" % (service_result[1]))
+                print("        Message send ok. ID: %s" % (service_result[1]))
                 
         except:
             traceback.print_exc()
