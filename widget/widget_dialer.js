@@ -306,6 +306,7 @@ var WidgetDialer = Automat.extend({
 	        	break;
 	        }
 	        case 'out_of_balance': {
+	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_connected);
 	        	break;
 	        }
         }
