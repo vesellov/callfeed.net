@@ -43,6 +43,53 @@ CALLBACK_STATUSES = (
     (CALLBACK_STATUS_FAIL_OUT_OF_BALANCE, 'Недостаточно минут'),
 )
     
+def tracking_history_to_callback_status(t, condition):
+    start_side_A = t.count(TRACKING_EVENT_START_SIDE_A) > 0
+    start_side_B = t.count(TRACKING_EVENT_START_SIDE_B) > 0
+
+    end_side_A = t.count(TRACKING_EVENT_START_SIDE_A) > 0
+    end_side_B = t.count(TRACKING_EVENT_START_SIDE_B) > 0
+    
+    end_side_A_or_B = end_side_A or end_side_B
+    
+    full_side_A = start_side_A and end_side_A
+    full_side_B = start_side_B and end_side_B
+    
+    not_side_A = not start_side_A and not end_side_A
+    not_side_B = not start_side_B and not end_side_B
+             
+    if full_side_A and full_side_B :
+        return CALLBACK_STATUS_SUCCEED
+    
+    if not_side_A and not_side_B:
+        return CALLBACK_STATUS_STARTED
+
+    if start_side_A and not end_side_A_or_B:
+        return CALLBACK_STATUS_LASTING
+    
+    if condition == 'tracking':
+        print 'WARNING tracking_history_to_callback_status() : wrong tracking state: %s' % t
+        return CALLBACK_STATUS_STARTED
+    
+    if condition == 'custom timeout' or condition == 'dropped':
+        return CALLBACK_STATUS_FAIL_A
+    
+    if condition == 'service timeout':
+        return CALLBACK_STATUS_FAIL_A
+    
+    if condition == 'processed':
+        if start_side_B and not end_side_B:
+            return CALLBACK_STATUS_FAIL_B
+        if start_side_A and not end_side_A:
+            return CALLBACK_STATUS_FAIL_A
+        return CALLBACK_STATUS_SUCCEED
+
+    if condition == 'out of balance':
+        return CALLBACK_STATUS_FAIL_OUT_OF_BALANCE
+    
+    print 'WARNING tracking_history_to_callback_status() : unknowen state: %s, condition: %s' % (t, condition)
+    return CALLBACK_STATUS_SUCCEED
+    
 #------------------------------------------------------------------------------ 
 
 class ResetPasswordStorage(models.Model):
@@ -243,6 +290,7 @@ class Tariff(models.Model):
         return u'Tariff: %s (%smin.; %s RUB/min.; %s free mins)' \
                % (self.name, self.minutes, self.price_per_minute, self.free_minutes)
 
+#------------------------------------------------------------------------------ 
 
 class Widget(models.Model):
     SETTINGS_FIELD_MAX_LENGTH = 5000  # максмальная длина поля, в котором будут храниться все настройки
@@ -257,7 +305,7 @@ class Widget(models.Model):
     #
     INCOMING_NUMBER_CALLFEED = 'callfeed'
     INCOMING_NUMBER_CLIENT = 'client'
-    INCOMING_NUMBER_CHOICES = [(INCOMING_NUMBER_CALLFEED, 'Callfeed'),
+    INCOMING_NUMBER_CHOICES = [(INCOMING_NUMBER_CALLFEED, 'CallFeed.NET'),
                                (INCOMING_NUMBER_CLIENT, 'Клиент')]
     #
     GEO_FILTER_ALL = 'all'

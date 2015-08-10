@@ -24,6 +24,7 @@ from mainapp.utils import mtt
 from mainapp.utils import sms
 from mainapp.utils import mail
 from mainapp.utils.common import random_delay
+from django.forms.widgets import Widget
 
 # ------------------------------------------------------------------------------
 
@@ -256,8 +257,7 @@ class JSONPEntryPoint(View):
             phoneB = phone_number
             timeout = widget.time_before_callback_sec
             call_duration = timeout * (len(managers) + 1)
-            client_caller_id = widget_settings.CALLFEED_PHONE_NUMBER \
-                if widget.operator_incoming_number == Widget.INCOMING_NUMBER_CALLFEED else phoneB
+            client_caller_id = widget_settings.CALLFEED_PHONE_NUMBER if widget.operator_incoming_number == Widget.INCOMING_NUMBER_CALLFEED else phoneB
             structs = []
             for i in range(len(managers)):
                 m = managers[i]
@@ -294,7 +294,7 @@ class JSONPEntryPoint(View):
                 client_caller_id=str(client_caller_id.strip('+')),
                 duration=int(call_duration),
                 direction=0,
-                caller_description=str('CallFeed.NET from %s to %s' % (phoneB.strip('+'), phoneA.strip('+'))),
+                caller_description=str(u'Соединение абонентов, звонок с номера %s на %s' % (phoneB.strip('+'), phoneA.strip('+'))),
                 callback_follow_me_struct=structs)
             mtt_response_result = mtt_response.get('result', None)
 
@@ -485,7 +485,7 @@ class JSONPEntryPoint(View):
             #--- REQUEST STATUS
             if 'request_status' in request.GET: 
                 hostname = request.GET.get('hostname', None)
-                call_id = request.GET.get('call_id', None)
+                call_id = request.GET.get('callback_id', None)
                 valid_host = False
                 # print 'request_options', widget.site_url, hostname, unicode(hostname).decode('idna'), type(unicode(hostname).decode('idna'))
                 if hostname:
@@ -513,6 +513,7 @@ class JSONPEntryPoint(View):
                     
                 jdata['status'] = {
                     'tracking_history': callback.tracking_history,
+                    'callback_status': callback.callback_status,
                     }
 
                 jdata.update({
@@ -538,20 +539,22 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
                 try:
-                    # notify manager via email
-                    mail.send_email_order_call(
-                        widget.callback_notifications_email,
-                        jdata['order_phone'],
-                        jdata['order_day'],
-                        jdata['order_time'],
-                        widget.site_url)  
-                    # notify manager via SMS
-                    sms.send(widget.sms_notification_number, 
-                        "Заказ обратного звонка с %s, телефон: %s, время для связи: %s в %s" % (
-                            widget.site_url,
+                    if widget.is_email_notification_on:
+                        # notify manager via email
+                        mail.send_email_order_call(
+                            widget.callback_notifications_email,
                             jdata['order_phone'],
                             jdata['order_day'],
-                            jdata['order_time']))
+                            jdata['order_time'],
+                            widget.site_url)
+                    if widget.is_sms_notification_on:  
+                        # notify manager via SMS
+                        sms.send(widget.sms_notification_number, 
+                            u"CallFeed.NET: обратный звонок на %s, телефон: %s, время для связи: %s в %s" % (
+                                widget.site_url,
+                                jdata['order_phone'],
+                                widget.callback_notifications_email,
+                                jdata['order_time']))
                     response = 'ok'
                 except:
                     traceback.print_exc()
@@ -570,6 +573,8 @@ class JSONPEntryPoint(View):
                 except:
                     import traceback
                     print traceback.format_exc()
+                    
+                print '        ORDER call on %s' % (widget.site_url,)
 
                 # temporary save data to the local file
                 filename = '/home/callfeed/incomings/%s_%s.txt' % (
@@ -594,20 +599,22 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
                 try:
-                    # notify manager via email
-                    mail.send_email_timeoff_order_call(
-                        widget.callback_notifications_email,
-                        jdata['timeoff_phone'],
-                        jdata['timeoff_day'],
-                        jdata['timeoff_time'],
-                        widget.site_url)  
-                    # notify manager via SMS
-                    sms.send(widget.sms_notification_number, 
-                        "Заказ звонка с %s в нерабочее время, телефон: %s, время для связи: %s в %s" % (
-                            widget.site_url,                                                                                                        
+                    if widget.is_email_notification_on:
+                        # notify manager via email
+                        mail.send_email_timeoff_order_call(
+                            widget.callback_notifications_email,
                             jdata['timeoff_phone'],
                             jdata['timeoff_day'],
-                            jdata['timeoff_time']))
+                            jdata['timeoff_time'],
+                            widget.site_url)
+                    if widget.is_sms_notification_on:  
+                        # notify manager via SMS
+                        sms.send(widget.sms_notification_number, 
+                            u"CallFeed.NET: заказ звонка с %s в нерабочее время, телефон: %s, время для связи: %s в %s" % (
+                                widget.site_url,                                                                                                        
+                                jdata['timeoff_phone'],
+                                jdata['timeoff_day'],
+                                jdata['timeoff_time']))
                     response = 'ok'
                 except:
                     traceback.print_exc()
@@ -615,6 +622,8 @@ class JSONPEntryPoint(View):
 
                 jdata.update({'response': response,
                               'message': 'sending email to manager, email=%s' % widget.callback_notifications_email, })
+                
+                print '        visitor made a TIME OFF call on %s' % widget.site_url
 
                 # temporary save data to the local file
                 filename = '/home/callfeed/incomings/%s_%s.txt' % (
@@ -639,8 +648,6 @@ class JSONPEntryPoint(View):
                         request.GET['callback'],
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
-                # pprint.pprint(widget.offline_message_notifications_email)
-                # pprint.pprint(jdata)
                 try:
                     # notify manager via email
                     mail.send_email_message(
@@ -649,24 +656,19 @@ class JSONPEntryPoint(View):
                         str(jdata['message_email']),
                         jdata['message_text'],
                         widget.site_url)  
+                    if widget.is_sms_notification_on:
+                        # notify manager via SMS
+                        sms.send(widget.sms_notification_number, 
+                            u"CallFeed.NET: новое входящее сообщение на %s, проверьте почту" % (widget.site_url))
                     response = 'ok'
                 except:
                     traceback.print_exc()
                     response = 'exception: ' + traceback.format_exc()
 
-                if response == 'ok':
-                    try:
-                        # pass
-                        # notify manager via SMS
-                        sms.send(str(widget.sms_notification_number), 
-                            u"CallFeed.NET: Новое сообщение на %s" % (widget.site_url))
-                    except Exception as e:
-                        # print 'sms error', e
-                        # traceback.print_exc()
-                        response = 'exception: ERROR sending SMS'
-
                 jdata.update({'response': response,
                               'message': 'sending email to manager', })
+                
+                print "        incomming MESSAGE on %s" % widget.site_url
 
                 # temporary save data to the local file
                 filename = '/home/callfeed/incomings/%s_%s.txt' % (
@@ -704,6 +706,8 @@ class JSONPEntryPoint(View):
 
                 jdata.update({'response': response,
                               'message': 'sending email to manager, email=%s' % widget.callback_notifications_email, })
+                
+                print '        FREE call from visitor on %s' % (widget.site_url,)
 
                 # temporary save data to the local file
                 filename = '/home/callfeed/incomings/%s_%s.txt' % (
@@ -733,6 +737,7 @@ class JSONPEntryPoint(View):
                     request.GET['callback'],
                     json.dumps(jdata, ensure_ascii=False)),
                                     'text/javascript')
+                
             #--- INITIATE CALLBACK
             callback_result = JSONPEntryPoint.initiate_callback(jdata['phone'], widget, '', '', jdata['ip'])
             if callback_result[0] == 'exception':
@@ -751,20 +756,6 @@ class JSONPEntryPoint(View):
 
             mtt_response = jdata.get('mtt_response', {})
             mtt_response_result = mtt_response.get('result', None)
-
-#            if mtt_response_result is not None:
-#                mtt_response_result_callback_id = mtt_response_result.get('callBackCall_id', None)
-#
-#                if mtt_response_result_callback_id is not None:
-#                    pending_callback = PendingCallback(
-#                        widget=widget,
-#                        mtt_callback_call_id=mtt_response_result_callback_id,
-#                        ip_side_b=client_ip_addr,
-#                        geodata_side_b=ip_to_location(client_ip_addr),
-#                        referer=jdata['referrer'],
-#                        search_request=jdata['search_request'],
-#                        when=datetime.datetime.now())
-#                    pending_callback.save()
 
             # temporary save data to the local file
             filename = '/home/callfeed/incomings/%s_%s.txt' % (

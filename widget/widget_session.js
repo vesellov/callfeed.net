@@ -214,7 +214,6 @@ var WidgetSession = Automat.extend({
     		'hostname': encodeURIComponent(this.hostname)
     	}),
 	        function(data) {
-	            debug.log("doConnect.success", data);
 	            var response = "error";
 	            var message = "";
 	            var options = null;
@@ -247,12 +246,13 @@ var WidgetSession = Automat.extend({
 	            	return;
 	            }	 
 	            if (response == 'ok' && options && mode && options['managers']) {
+		            debug.log("doConnect.success", data);
 	        		if (options['flag_disable_on_mobiles'] && isTouchDevice()) {
 		            	CallFeedSession.event('off');
 	            		return;
 	        		}
 	            	if (mode == 'off') {
-		            	debug.log('This widget IS NOT ACTIVE at the moment');
+		            	debug.log('This widget IS NOT ACTIVE at the moment !!!!!!');
 		            	CallFeedSession.event('off');
 	            	} else {
 		            	CallFeedOptions = options;
@@ -261,7 +261,7 @@ var WidgetSession = Automat.extend({
 		            	CallFeedSession.event('connected');
 	            	}
 	            } else {
-	            	debug.log('FAILED', response, options);
+	            	debug.log('doConnect FAILED', data);
 	            	CallFeedSession.event('fail');
 	            }
 	        },

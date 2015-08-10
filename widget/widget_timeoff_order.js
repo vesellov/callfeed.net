@@ -101,10 +101,11 @@ var WidgetTimeoffOrder = Automat.extend({
         		'hostame': encodeURIComponent(CallFeedSession.hostname)
         	}),
             function(data) {
-                debug.log("doJSONPSend.success", data);
                 if (data.hasOwnProperty('response') && data['response'] == 'ok') {
+                    debug.log("doJSONPSend.success", data);
                     CallFeedWidget.timeofforder.event('send-success', data);
                 } else {
+                    debug.log("doJSONPSend.failed", data);
                 	CallFeedWidget.timeofforder.event('send-failed', data);
                 }
             },

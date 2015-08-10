@@ -10,14 +10,8 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404 
 
-from mainapp.models import CallbackInfo
 from mainapp.models import PendingCallback
-from mainapp.models import CALLBACK_STATUS_SUCCEED
-from mainapp.models import CALLBACK_STATUS_LASTING
-from mainapp.models import TRACKING_EVENT_END_SIDE_A
-from mainapp.models import TRACKING_EVENT_END_SIDE_B
-from mainapp.models import TRACKING_EVENT_START_SIDE_A
-from mainapp.models import TRACKING_EVENT_START_SIDE_B
+from mainapp.models import tracking_history_to_callback_status 
  
 from mainapp.utils.common import random_delay
 from mainapp.utils import mtt
@@ -57,18 +51,7 @@ def track_by_id(request, id):
     
     callback.mtt_callback_call_id = callback_id
     callback.tracking_history += "%s(%s);" % (event, dt)
-    
-    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
-       not callback.tracking_history.count(TRACKING_EVENT_END_SIDE_A) and \
-       not callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B):
-        callback.callback_status = CALLBACK_STATUS_LASTING
-
-    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
-       callback.tracking_history.count(TRACKING_EVENT_START_SIDE_B) and \
-       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_A) and \
-       callback.tracking_history.count(TRACKING_EVENT_END_SIDE_B) :
-        callback.callback_status = CALLBACK_STATUS_SUCCEED
-
+    callback.callback_status = tracking_history_to_callback_status(callback.tracking_history, 'tracking')
     callback.save()
         
     print '        OK! [%s], callback_status = %s' % (callback.tracking_history, callback.callback_status) 

@@ -99,10 +99,11 @@ var WidgetMessanger = Automat.extend({
         		'hostame': encodeURIComponent(CallFeedSession.hostname)
 	    	}),
 	        function(data) {
-	            debug.log("doJSONPSend.success", data);
 	            if (data.hasOwnProperty('response') && data['response'] == 'ok') {
+		            debug.log("doJSONPSend.success", data);
 	                CallFeedWidget.messanger.event('send-success', data);
 	            } else {
+		            debug.log("doJSONPSend.failed", data);
 	            	CallFeedWidget.messanger.event('send-failed', data);
 	            }
 	        },
