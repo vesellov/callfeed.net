@@ -24,7 +24,6 @@ from mainapp.utils import mtt
 from mainapp.utils import sms
 from mainapp.utils import mail
 from mainapp.utils.common import random_delay
-from django.forms.widgets import Widget
 
 # ------------------------------------------------------------------------------
 
@@ -268,7 +267,7 @@ class JSONPEntryPoint(View):
                     str(widget.callback_type),
                     m['name']))
             if pending_callback_id:
-                new_pending_info = PendingCallback.objects().get(id=pending_callback_id) 
+                new_pending_info = PendingCallback.objects.get(id=pending_callback_id) 
                 print '        loaded existing PendingCallback (id=%d) : %s' % (new_pending_info.id, new_pending_info)
             else:
                 new_pending_info = PendingCallback(
