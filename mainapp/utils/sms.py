@@ -53,7 +53,9 @@ class SMS:
         app_id = self.app_id
         debug = self.debug
         service_codes = self.service_codes
-        message = unicode(message).encode(locale.getpreferredencoding())
+        
+        if isinstance(message, unicode):
+            message = message.encode(locale.getpreferredencoding())
 
         url = self.url % (app_id, to.lstrip('+'), quote(message), PARTNER_ID)
 
