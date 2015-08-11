@@ -317,10 +317,10 @@ class Widget(models.Model):
     settings = models.CharField(max_length=SETTINGS_FIELD_MAX_LENGTH, default=widget_settings.DEFAULT_SETTINGS_JSON)
     site_url = models.URLField('Адрес сайта', blank=True, null=True)
     is_active = models.BooleanField('Активен', default=True)
-    is_email_notification_on = models.BooleanField('Получать email уведомления', default=False)
-    is_sms_notification_on = models.BooleanField('Получать SMS-уведомления', default=False)
-    is_operator_name_included = models.BooleanField('Включать имя оператора в SMS', default=False)
-    is_operator_shown_in_widget = models.BooleanField('Показывать в виджете информацию об операторе', default=False)
+    is_email_notification_on = models.BooleanField('Получать email уведомления', default=True)
+    is_sms_notification_on = models.BooleanField('Получать SMS-уведомления', default=True)
+    is_operator_name_included = models.BooleanField('Включать имя оператора в SMS', default=True)
+    is_operator_shown_in_widget = models.BooleanField('Показывать в виджете информацию об операторе', default=True)
     callback_type = models.CharField('Порядок дозвона', max_length=10, choices=CALLBACK_TYPES,
                                      default=CALLBACK_TYPE_LINEAR)
     is_raw = models.BooleanField(default=False)  # whether the widget ready for being used(all its options are complete).
