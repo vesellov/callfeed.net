@@ -220,6 +220,7 @@ var WidgetDialer = Automat.extend({
         debug.log(this.name+".doSaveCallbackID('"+event+"', "+args+")");
         try {
         	this.callback_id = args['callback_id'];
+        	debug.log('callback ID: ', this.callback_id);
         } catch (e) {
         	CallFeedWidget.dialer.event('call-failed', args);
         }
@@ -359,7 +360,7 @@ var WidgetDialer = Automat.extend({
         		'request_status': 1,
         		'token': CallFeedToken, 
         		'callback_id': this.callback_id,
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'hostname': encodeURIComponent(CallFeedSession.hostname)
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok' && data.hasOwnProperty('status')) {

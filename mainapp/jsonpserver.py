@@ -506,7 +506,7 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
                 try:
-                    callback = PendingCallback.objects.get(mtt_callback_call_id=call_id)
+                    callback = PendingCallback.objects.get(id=call_id)
                 except ObjectDoesNotExist:
                     random_delay(finishing_with=0.6)  # to prevent time attacks
                     jdata.update({'response': 'failed',
