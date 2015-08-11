@@ -8,6 +8,7 @@ import sys
 import traceback
 import time
 import datetime
+from OpenSSL.test.test_ssl import client
 
 __author__ = 'max'
 from huey.djhuey import periodic_task, crontab, task
@@ -32,6 +33,7 @@ from mainapp.models import TRACKING_EVENT_END_SIDE_B
 from mainapp.models import tracking_history_to_callback_status
 
 from mainapp.utils import mtt
+from mainapp.utils import sms
 from mainapp.utils.jsonrpc2 import rpcException
 from mainapp.utils.mail import send_email_out_of_balance_initiate_callback
 
@@ -96,46 +98,57 @@ def process_pending_callback(callback,
                 print '        new CallbackInfo created from PendingCallback:', callback_info
     
         else:
-            if mtt_response_result_struct:
-                record_url_a = mtt_response_result_struct.get('call_back_record_URL_A', '')
-                record_url_a = mtt_response_result_struct.get('downloadURL', '')
-                record_url_b = mtt_response_result_struct.get('call_back_record_URL_B', '')
-                record_url_b = mtt_response_result_struct.get('downloadURL', '')
-                callback_info = CallbackInfo(
-                    widget = callback.widget,
-                    call_description = mtt_response_result_struct.get('callDescription', ''),
-                    phone_number_side_a = mtt_response_result_struct.get('destination_A', ''),
-                    phone_number_side_b = mtt_response_result_struct.get('destination_B', ''),
-                    charged_length_a_sec = int(mtt_response_result_struct.get('call_back_charged_length_A', '0')),
-                    charged_length_b_sec = int(mtt_response_result_struct.get('call_back_charged_length_B', '0')),
-                    real_length_a_sec = int(mtt_response_result_struct.get('call_back_real_length_A', '0')),
-                    real_length_b_sec = int(mtt_response_result_struct.get('call_back_real_length_B', '0')),
-                    record_url_a = record_url_a, record_url_b=record_url_b,
-                    waiting_period_a_sec = mtt_response_result_struct.get('waiting_period_A', '0'),
-                    waiting_period_b_sec = mtt_response_result_struct.get('waiting_period_B', '0'),
-                    callback_status = new_callback_status,
-                    cost = mtt_response_result_struct.get('call_back_cost', 0.0),
-                    currency = mtt_response_result_struct.get('call_back_currency', 'RUB'),
-                    ip_side_b = callback.ip_side_b,
-                    geodata_side_b = callback.geodata_side_b,
-                    mtt_callback_call_id = callback.mtt_callback_call_id,
-                    referer = callback.referer, 
-                    search_request=callback.search_request,
-                    when = callback.when,
-                    tracking_history = callback.tracking_history)
-                callback_info.save()
-                print '        new CallbackInfo created from MTT response:', callback_info
-    
-                try:
-                    charged_a = int(mtt_response_result_struct.get('call_back_charged_length_A', '0'))
-                    charged_b = int(mtt_response_result_struct.get('call_back_charged_length_B', '0'))
-                    delta = int((float(charged_a) + float(charged_b)) / 60.0)
-                    callback.widget.client.balance_minutes -= delta
-                    callback.widget.client.save()
-                    print '        BALANCE:', callback.widget.client.name, callback.widget.client.email, callback.widget.client.balance_minutes, delta
-                except Exception as e:
-                    traceback.print_exc()
-    
+            if not mtt_response_result_struct:
+                print '        WARNING!!! nothing to process, %s not removed' % callback
+                return
+            
+            record_url_a = mtt_response_result_struct.get('call_back_record_URL_A', '')
+            record_url_a = mtt_response_result_struct.get('downloadURL', '')
+            record_url_b = mtt_response_result_struct.get('call_back_record_URL_B', '')
+            record_url_b = mtt_response_result_struct.get('downloadURL', '')
+            callback_info = CallbackInfo(
+                widget = callback.widget,
+                call_description = mtt_response_result_struct.get('callDescription', ''),
+                phone_number_side_a = mtt_response_result_struct.get('destination_A', ''),
+                phone_number_side_b = mtt_response_result_struct.get('destination_B', ''),
+                charged_length_a_sec = int(mtt_response_result_struct.get('call_back_charged_length_A', '0')),
+                charged_length_b_sec = int(mtt_response_result_struct.get('call_back_charged_length_B', '0')),
+                real_length_a_sec = int(mtt_response_result_struct.get('call_back_real_length_A', '0')),
+                real_length_b_sec = int(mtt_response_result_struct.get('call_back_real_length_B', '0')),
+                record_url_a = record_url_a, record_url_b=record_url_b,
+                waiting_period_a_sec = mtt_response_result_struct.get('waiting_period_A', '0'),
+                waiting_period_b_sec = mtt_response_result_struct.get('waiting_period_B', '0'),
+                callback_status = new_callback_status,
+                cost = mtt_response_result_struct.get('call_back_cost', 0.0),
+                currency = mtt_response_result_struct.get('call_back_currency', 'RUB'),
+                ip_side_b = callback.ip_side_b,
+                geodata_side_b = callback.geodata_side_b,
+                mtt_callback_call_id = callback.mtt_callback_call_id,
+                referer = callback.referer, 
+                search_request=callback.search_request,
+                when = callback.when,
+                tracking_history = callback.tracking_history)
+            callback_info.save()
+            print '        new CallbackInfo created from MTT response:', callback_info
+
+            try:
+                charged_a = int(mtt_response_result_struct.get('call_back_charged_length_A', '0'))
+                charged_b = int(mtt_response_result_struct.get('call_back_charged_length_B', '0'))
+                delta = int((float(charged_a) + float(charged_b)) / 60.0)
+                callback.widget.client.balance_minutes -= delta
+                callback.widget.client.save()
+                print '        BALANCE:', callback.widget.client.name, callback.widget.client.email, callback.widget.client.balance_minutes, delta
+            except Exception as e:
+                traceback.print_exc()
+                
+            if callback.widget.client.balance_minutes < 1:
+                if callback.widget.is_sms_notification_on:
+                    try:
+                        sms.send(callback.widget.sms_notification_number,
+                            u'CallFeed.NET: на вашем балансе недостаточно средств для совершения звонков')
+                    except:
+                        traceback.print_exc()
+            
     except:
         traceback.print_exc()
 
