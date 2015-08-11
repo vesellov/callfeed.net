@@ -58,7 +58,7 @@ def send_email_timeoff_order_call(notification_email, timeoff_phone, timeoff_day
 
 
 def send_email_out_of_balance_initiate_callback(notification_email, phone_number, when, url):
-    subject = u'Заказ обратного звонка с сайта(недостаточно средств)'
+    subject = u'Заказ обратного звонка с сайта (недостаточно средств)'
     template_content = unicode(open('%s/mail/out_of_balance_initiate_callback.html' % settings.TEMPLATE_DIRS[0], 'r').read(),
                                'utf-8')
     mail_body = template_content % {'phone_number': phone_number,
