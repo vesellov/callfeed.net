@@ -4003,36 +4003,7 @@ var WidgetDialer = Automat.extend({
     doPrintStatus: function(event, args) {
         // Action method.
         debug.log(this.name+".doPrintStatus('"+event+"', "+args+")");
-        switch (args['callback_status']) {
-	        case 'started': {
-	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_start);
-	        	break;
-	        }
-	        case 'succeed': {
-	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_finished);
-	        	break;
-	        }
-	        case 'planned': {
-	        	// ???
-	        	break;
-	        }
-	        case 'lasting': {
-	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_connected);
-	        	break;
-	        }
-	        case 'fail_a': {
-	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_refused);
-	        	break;
-	        }
-	        case 'fail_b': {
-	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_connected);
-	        	break;
-	        }
-	        case 'out_of_balance': {
-	            $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_connected);
-	        	break;
-	        }
-        }
+        $('#cf_dial_custom_text_value').html(this._tracking_history_to_status_string(args['tracking_history']));
     },
 
     doPrintReady: function(event, args) {
@@ -4092,6 +4063,37 @@ var WidgetDialer = Automat.extend({
                 CallFeedWidget.dialer.event('call-failed', url);
             }
         );
+    },
+    
+    _tracking_history_to_status_string: function(t) {
+    	var start_side_A = t.indexOf('start_side_A') >= 0;
+        var start_side_B = t.indexOf('start_side_B') >= 0;
+        var end_side_A = t.indexOf('end_side_A') >= 0;
+        var end_side_B = t.indexOf('end_side_B') >= 0;
+        var end_side_B_before_end_side_A = t.indexOf('end_side_A') > t.indexOf('end_side_B');
+        var start_side_A_and_B = start_side_A && start_side_B;
+        var end_side_A_or_B = end_side_A || end_side_B;
+        var full_side_A = start_side_A && end_side_A;
+        var full_side_B = start_side_B && end_side_B;
+        var not_side_A = ! start_side_A && ! end_side_A;
+        var not_side_B = ! start_side_B && ! end_side_B;
+        
+        if ( not_side_A && not_side_B )
+            return CallFeedOptions.text_dial_start;
+
+        if ( start_side_A && ! start_side_B && ! end_side_A_or_B ) 
+            return CallFeedOptions.text_dial_connected;
+        
+        if ( start_side_A_and_B && ! end_side_A_or_B ) 
+        	return CallFeedOptions.text_dial_success;
+
+        if ( full_side_A && full_side_B ) 
+            return CallFeedOptions.text_dial_finished;
+
+        if ( full_side_A && not_side_B ) 
+            return CallFeedOptions.text_dial_refused;
+
+        return CallFeedOptions.text_dial_start;
     },
     
     _update_countdown_element: function() {
