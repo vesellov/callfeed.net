@@ -266,11 +266,15 @@ class JSONPEntryPoint(View):
                     int(timeout),
                     str(m['phone'].strip('+')),
                     str(widget.callback_type),
-                    m['name']))
+                    m['name']))    
+            new_pending_info = None
             if pending_callback_id:
-                new_pending_info = PendingCallback.objects.get(id=pending_callback_id) 
-                print '        loaded existing PendingCallback (id=%d) : %s' % (new_pending_info.id, new_pending_info)
-            else:
+                try:
+                    new_pending_info = PendingCallback.objects.get(id=pending_callback_id) 
+                    print '        loaded existing PendingCallback (id=%d) : %s' % (new_pending_info.id, new_pending_info)
+                except:
+                    new_pending_info = None
+            if not new_pending_info:
                 new_pending_info = PendingCallback(
                     widget = widget,
                     mtt_callback_call_id = '',
@@ -282,8 +286,8 @@ class JSONPEntryPoint(View):
                     phone_number_side_b = phone_number,
                     callback_status = CALLBACK_STATUS_STARTED)
                 new_pending_info.save()
+                pending_callback_id = new_pending_info.id
                 print '        new PendingCallback created (id=%d) : %s' % (new_pending_info.id, new_pending_info)
-            
             mttproxy = mtt.MTTProxy(mtt.CUSTOMER_NAME, mtt.LOGIN, mtt.PASSWORD, mtt.api_url)
             mtt_response = mttproxy.makeCallBackCallFollowme(
                 mtt.CUSTOMER_NAME,
@@ -297,6 +301,7 @@ class JSONPEntryPoint(View):
                 caller_description=(u'Соединение абонентов, звонок с номера %s на %s' % (phoneB.strip('+'), phoneA.strip('+'))).encode(locale.getpreferredencoding()),
                 callback_follow_me_struct=structs)
             mtt_response_result = mtt_response.get('result', None)
+            mtt_response_result['callback_id'] = pending_callback_id 
 
             if mtt_response_result is None:
                 print '        ERROR: makeCallBackCallFollowme returned None'
@@ -752,6 +757,7 @@ class JSONPEntryPoint(View):
                                     'text/javascript')
 
             jdata['mtt_response'] = callback_result[0]
+            jdata['callback_id'] = callback_result[0]['callback_id']
             jdata.update({'response': 'ok', 'message': callback_result[1], })
 
             mtt_response = jdata.get('mtt_response', {})
@@ -762,7 +768,7 @@ class JSONPEntryPoint(View):
                 jdata['ip'].replace('.', '_'), jdata['callback'])
             open(filename, 'wb').write(pprint.pformat(jdata))
             
-            print ('MTT CALL!!!',  jdata['token'], jdata['hostname'], jdata['phone'], client_ip_addr, mtt_response_result)
+            print ('MTT CALL!!!',  jdata['token'], jdata['hostname'], jdata['phone'], client_ip_addr, jdata['callback_id'], mtt_response_result)
 
         except Exception as e:
             traceback.print_exc()

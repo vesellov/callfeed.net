@@ -74,6 +74,7 @@ class jsonrpc2(object):
             if 'error' in f_obj.keys():
                 raise rpcException(f_obj['error'])
             else:
+                print '            RPC RESPONSE:', pprint.pformat(f_obj)
                 return f_obj
 
     def __getattr__(self, method):

@@ -219,7 +219,7 @@ var WidgetDialer = Automat.extend({
         // Action method.
         debug.log(this.name+".doSaveCallbackID('"+event+"', "+args+")");
         try {
-        	this.callback_id = args['mtt_response']['callBackCall_id'];
+        	this.callback_id = args['callback_id'];
         } catch (e) {
         	CallFeedWidget.dialer.event('call-failed', args);
         }
@@ -231,7 +231,11 @@ var WidgetDialer = Automat.extend({
         if (this.checker) {
             clearInterval(this.checker);       	
         }
-    	this.checker = setInterval(CallFeedWidget.dialer._JSONP_check, 1000);
+    	this.checker = setInterval(
+			function() {
+				CallFeedWidget.dialer._JSONP_check();
+			},
+		1000);
     },
     
     doStopJSONPChecker: function(event, args) {
