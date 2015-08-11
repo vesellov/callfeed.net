@@ -103,6 +103,7 @@ var WidgetDialer = Automat.extend({
                     this.doStopJSONPChecker(event, args);
                     this.doPrintReady(event, args);
                 } else if ( event === 'call-success' ) {
+                    this.doSaveCallbackID(event, args);
                     this.doStartJSONPChecker(event, args);
                 } else if ( event === 'countdown-finished' ) {
                     this.state = 'LATE';

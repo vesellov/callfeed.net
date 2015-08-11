@@ -71,6 +71,9 @@ def tracking_history_to_callback_status(t, condition):
     if start_side_A_and_B and end_side_A_or_B:
         return CALLBACK_STATUS_SUCCEED
     
+    if full_side_A and not_side_B:
+        return CALLBACK_STATUS_FAIL_A
+    
     if condition == 'tracking':
         print 'WARNING tracking_history_to_callback_status() : wrong tracking state: %s' % t
         return CALLBACK_STATUS_STARTED
