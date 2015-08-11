@@ -8,7 +8,6 @@ import sys
 import traceback
 import time
 import datetime
-from OpenSSL.test.test_ssl import client
 
 __author__ = 'max'
 from huey.djhuey import periodic_task, crontab, task
