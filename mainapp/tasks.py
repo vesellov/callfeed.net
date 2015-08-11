@@ -188,7 +188,8 @@ def refresh_pending_callbacks(pending_callbacks=None):
                 mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
             except:
                 if delta.total_seconds() > callback.widget.time_before_callback_sec * 2:
-                    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A):
+                    if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
+                       callback.tracking_history.count(TRACKING_EVENT_START_SIDE_B) == 0:
                         print '        PendingCallback %d (%s), timed out' % (callback.id, callback.mtt_callback_call_id)
                         process_pending_callback(callback,
                             condition='dropped',
@@ -201,7 +202,7 @@ def refresh_pending_callbacks(pending_callbacks=None):
                     process_pending_callback(callback,
                         # callback_status=CALLBACK_STATUS_FAIL_A,
                         condition='service timeout',
-                        call_description="Звонок не был зарегистрирован в течении 5 минут")
+                        call_description="Звонок не был обработан в течении 5 минут")
                     continue
                 
                 refresh_pending_callback_again.schedule(args=(callback.id,), delay=(1*5))
@@ -252,18 +253,6 @@ def refresh_pending_callback_again(callback_id):
 
 #------------------------------------------------------------------------------ 
 
-#@periodic_task(crontab(minute='*/1'))
-#def refresh_pending_callbacks_task():
-#    # print 'refresh_pending_callbacks_task'
-#    try:
-#        return refresh_pending_callbacks()
-#    except:
-#        traceback.print_exc()
-#    return True
-
-
-#------------------------------------------------------------------------------ 
-
 @task()
 def initiate_deferred_callback(deferred_callback_info):
     """
@@ -295,4 +284,14 @@ def initiate_deferred_callback(deferred_callback_info):
 
     return True
 
+#------------------------------------------------------------------------------ 
+
+#@periodic_task(crontab(minute='*/1'))
+#def refresh_pending_callbacks_task():
+#    # print 'refresh_pending_callbacks_task'
+#    try:
+#        return refresh_pending_callbacks()
+#    except:
+#        traceback.print_exc()
+#    return True
 

@@ -47,8 +47,8 @@ def tracking_history_to_callback_status(t, condition):
     start_side_A = t.count(TRACKING_EVENT_START_SIDE_A) > 0
     start_side_B = t.count(TRACKING_EVENT_START_SIDE_B) > 0
 
-    end_side_A = t.count(TRACKING_EVENT_START_SIDE_A) > 0
-    end_side_B = t.count(TRACKING_EVENT_START_SIDE_B) > 0
+    end_side_A = t.count(TRACKING_EVENT_END_SIDE_A) > 0
+    end_side_B = t.count(TRACKING_EVENT_END_SIDE_B) > 0
     
     end_side_A_or_B = end_side_A or end_side_B
     
