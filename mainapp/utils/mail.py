@@ -67,6 +67,14 @@ def send_email_out_of_balance_initiate_callback(notification_email, phone_number
     return send_email(subject, mail_body, notification_email)
 
 
+def send_email_zero_balance(notification_email):
+    subject = u'Недостаточно средств для совершения звонков'
+    template_content = unicode(open('%s/mail/zero_balance.html' % settings.TEMPLATE_DIRS[0], 'r').read(),
+                               'utf-8')
+    mail_body = template_content 
+    return send_email(subject, mail_body, notification_email)
+
+
 def send_email_message(notification_email, message_phone, message_email, message_text, url):
     subject = u'Новое сообщение от посетителя сайта %s' % url
     template_content = unicode(open('%s/mail/callback_message.html' % settings.TEMPLATE_DIRS[0], 'r').read(), 'utf-8')

@@ -107,10 +107,8 @@ def process_pending_callback(callback,
             if callback.widget.is_email_notification_on:
                 try:
                     # notify manager via email
-                    mail.send_email_out_of_balance_initiate_callback(
-                        str(callback.widget.offline_message_notifications_email),
-                        mtt_response_result_struct.get('destination_B', ''),
-                        callback.widget.site_url,)  
+                    mail.send_email_zero_balance(
+                        str(callback.widget.out_of_balance_notifications_email),)  
                 except:
                     traceback.print_exc()
             

@@ -5,6 +5,7 @@ import json
 import pprint
 import datetime
 import urllib
+import locale
 
 from django.views.generic import View
 from django.http import HttpResponse
@@ -293,7 +294,7 @@ class JSONPEntryPoint(View):
                 client_caller_id=str(client_caller_id.strip('+')),
                 duration=int(call_duration),
                 direction=0,
-                caller_description=u'Соединение абонентов, звонок с номера %s на %s' % (phoneB.strip('+'), phoneA.strip('+')),
+                caller_description=(u'Соединение абонентов, звонок с номера %s на %s' % (phoneB.strip('+'), phoneA.strip('+'))).encode(locale.getpreferredencoding()),
                 callback_follow_me_struct=structs)
             mtt_response_result = mtt_response.get('result', None)
 
