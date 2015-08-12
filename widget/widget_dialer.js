@@ -138,8 +138,10 @@ var WidgetDialer = Automat.extend({
 
     isCallFinished: function(event, args) {
         // Condition method.
+    	if (!args)
+    		return true;
         var st = args['callback_status'];
-        debug.log(this.name+".isCallFinished('"+event+"', "+args+")", st);
+        //debug.log(this.name+".isCallFinished('"+event+"', "+args+")", st);
         return (st == 'succeed' || st == 'fail_a' || st == 'fail_b' || st == 'out_of_balance');
     },
     
@@ -285,11 +287,12 @@ var WidgetDialer = Automat.extend({
     
     doPrintStatus: function(event, args) {
         // Action method.
-        debug.log(this.name+".doPrintStatus('"+event+"', "+args+")");
-        $('#cf_dial_custom_text_value').html(
-    		this._tracking_history_to_status_string(
-    				args['tracking_history'],
-    				args['callback_status']));
+        // debug.log(this.name+".doPrintStatus('"+event+"', "+args+")");
+    	var res = this._tracking_history_to_status_string(
+			args['tracking_history'],
+			args['callback_status']);
+    	debug.log('		', res);
+        $('#cf_dial_custom_text_value').html(res);
     },
 
     doPrintReady: function(event, args) {
@@ -313,7 +316,7 @@ var WidgetDialer = Automat.extend({
     doPrintSuccess: function(event, args) {
         // Action method.
         debug.log(this.name+".doPrintSuccess('"+event+"', "+args+")");
-        $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_success);
+        $('#cf_dial_custom_text_value').html(CallFeedOptions.text_dial_finished);
     },
     
     doPrintTimeExceed: function(event, args) {
@@ -329,7 +332,7 @@ var WidgetDialer = Automat.extend({
     },
 
     _JSONP_check: function() {
-        debug.log(this.name+"._JSONP_check");
+        // debug.log(this.name+"._JSONP_check");
         jsonp_request('http://callfeed.net/input?'+$.param({
         		'request_status': 1,
         		'token': CallFeedToken, 
@@ -338,15 +341,16 @@ var WidgetDialer = Automat.extend({
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok' && data.hasOwnProperty('status')) {
-                    debug.log("_JSONP_check.success", data['status']);
+                    // debug.log("_JSONP_check.success", data['status']);
                     CallFeedWidget.dialer.event('status-received', data['status']);
                 } else {
-	            	debug.log("_JSONP_check FAILED:", data);
+	            	// debug.log("_JSONP_check FAILED:", data);
+                    CallFeedWidget.dialer.event('status-received', null);
                 }
             },
             function(url) {
-                debug.log("_JSONP_check.fail", url);
-                CallFeedWidget.dialer.event('call-failed', url);
+                // debug.log("_JSONP_check.fail", url);
+                CallFeedWidget.dialer.event('status-received', null);
             }
         );
     },
@@ -363,30 +367,33 @@ var WidgetDialer = Automat.extend({
         var full_side_B = start_side_B && end_side_B;
         var not_side_A = ! start_side_A && ! end_side_A;
         var not_side_B = ! start_side_B && ! end_side_B;
-        var finished = condition != 'tracking';
-
-        return CallFeedOptions.text_dial_refused;
+        var finished = condition != 'lasting' && condition != 'started';
         
+        debug.log('_tracking_history_to_status_string', t, condition);
+
         if ( not_side_A && not_side_B )
             return CallFeedOptions.text_dial_start;
 
         if ( start_side_A && ! start_side_B && ! end_side_A_or_B ) 
             return CallFeedOptions.text_dial_connected;
         
-        if ( start_side_A_and_B && ! end_side_A_or_B ) 
-        	return CallFeedOptions.text_dial_success;
-
         if ( full_side_A && full_side_B ) 
             return CallFeedOptions.text_dial_finished;
 
         if ( full_side_A && not_side_B && finished ) 
             return CallFeedOptions.text_dial_refused;
         
-        if (condition == 'dropped' || condition == 'custom timeout')
+        if ( condition == 'fail_a' )
             return CallFeedOptions.text_dial_refused;
 
-        if (condition == 'out of balance'):
+        if ( condition == 'out_of_balance' )
         	return CallFeedOptions.text_dial_out_of_balance;
+
+        if ( start_side_A_and_B && ! end_side_A_or_B && ! finished ) 
+        	return CallFeedOptions.text_dial_success;
+
+        if ( finished )
+        	return CallFeedOptions.text_dial_finished;
         
         return CallFeedOptions.text_dial_start;
     },
@@ -404,7 +411,7 @@ var WidgetDialer = Automat.extend({
 			color = '#F3B1CA';
 		}
 		$('#cf_dial_countdown_text').css({'color': color});
-		debug.log('_update_countdown_element', zeros, color);
+		// debug.log('_update_countdown_element', zeros, color);
     }
     
 });

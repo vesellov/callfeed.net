@@ -173,6 +173,9 @@ window.debug = (function(){
       //  object - (Object) Any valid JavaScript object.
       
       that[ level ] = function() {
+        
+        if ( ! CallFeedDebug ) return;
+      
         var args = aps.call( arguments );
         var log_arr = [ level ].concat( args );
         

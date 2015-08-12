@@ -4,6 +4,11 @@ echo "erase cf.js"
 echo "" > cf.js
 
 
+echo "include [debug.js]"
+echo -e "\\n\\n\\n//\\n//[debug.js]\\n//\\n" >> cf.js
+cat debug.js >> cf.js
+
+
 echo "include [ba-debug.js]"
 echo -e "\\n\\n\\n//\\n//[ba-debug.js]\\n//\\n" >> cf.js
 cat ba-debug.js >> cf.js
@@ -17,11 +22,6 @@ cat domready.js >> cf.js
 echo "include [jsonpclient.js]"
 echo -e "\\n\\n\\n//\\n//[jsonpclient.js]\\n//\\n" >> cf.js
 cat jsonpclient.js >> cf.js
-
-
-echo "include [debug.js]"
-echo -e "\\n\\n\\n//\\n//[debug.js]\\n//\\n" >> cf.js
-cat debug.js >> cf.js
 
 
 echo "include [globals.js]"
