@@ -20,7 +20,9 @@ from mainapp.tasks import refresh_pending_callbacks
 #------------------------------------------------------------------------------ 
 
 def track_by_id(request, id):
-    event = request.GET.get('stage', None)
+    event = request.GET.get('event', None)
+    if event is None:
+        event = request.GET.get('stage', None)
     callback_id = request.GET.get('id', None)
     
     print 'track_by_id', id, event, callback_id

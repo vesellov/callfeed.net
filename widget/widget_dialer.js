@@ -72,7 +72,11 @@ var WidgetDialer = Automat.extend({
                     this.doStopCounter(event, args);
                     this.doStopJSONPChecker(event, args);
                     this.doPrintSuccess(event, args);
-                }
+	            } else if ( event === 'countdown-finished' && ! this.isCallSuccess(event, args) ) {
+	                this.state = 'LATE';
+	                this.doStopJSONPChecker(event, args);
+	                this.doPrintTimeExceed(event, args);
+	            }                
                 break;
             }
             //---AT_STARTUP---
@@ -136,6 +140,13 @@ var WidgetDialer = Automat.extend({
     },
 
 
+    isCallSuccess: function(event, args) {
+        // Condition method.
+    	var st2 = this.last_status_received[1];
+        debug.log(this.name+".isCallFinished('"+event+"', "+args+")", st2);
+    	return (st2 != 'started')
+    },
+    
     isCallFinished: function(event, args) {
         // Condition method.
     	if (!args)
@@ -153,6 +164,7 @@ var WidgetDialer = Automat.extend({
     	this.counter = null;
     	this.countdown_seconds = -1;
     	this.callback_id = '';
+    	this.last_status_received = ['', ''];
     },
 
     doJSONPConnect: function(event, args) {
@@ -370,6 +382,8 @@ var WidgetDialer = Automat.extend({
         var finished = condition != 'lasting' && condition != 'started';
         
         debug.log('_tracking_history_to_status_string', t, condition);
+        
+        this.last_status_received = [t, condition];
 
         if ( not_side_A && not_side_B )
             return CallFeedOptions.text_dial_start;
