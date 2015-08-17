@@ -200,7 +200,13 @@ def refresh_pending_callbacks(pending_callbacks=None):
             try:
                 mtt_response = mtt_proxy.getCallBackFollowmeCallInfo(mtt.CUSTOMER_NAME, callback.mtt_callback_call_id)
             except rpcException as e:
-                print e, dir(e)
+                if e.fullMessage == 'Call ended by timeout on side B':
+                    print '        PendingCallback %d (%s), operator is not available' % (callback.id, callback.mtt_callback_call_id)
+                    process_pending_callback(callback,
+                        condition='dropped',
+                        callback_status=CALLBACK_STATUS_FAIL_A,
+                        call_description="Телефон оператора выключен или вне зоны действия сети")
+                    continue
                 
                 if delta.total_seconds() > callback.widget.time_before_callback_sec * 2:
                     if callback.tracking_history.count(TRACKING_EVENT_START_SIDE_A) and \
