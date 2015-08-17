@@ -84,7 +84,7 @@ body {
 }
 
 .section-1 {
-    background-size: cover;
+    /* background-size: cover; */
     padding-top: 140px;
     color: #efefef;
     text-align: left;
@@ -157,7 +157,6 @@ body {
 
 .section-2 .because {
 	border-bottom: 4px solid #000;
-	/* height: 107px; */
 	padding-bottom: 20px;
 	font-size: 18px;
 	line-height: 18px;
@@ -170,11 +169,6 @@ body {
 }
 
 .section-2 .benefit {
-	/* width: 250px; */
-    /* padding-bottom: 30px; */
-    /* padding-left: 40px;
-    padding-right: 40px; */
-	/* margin-bottom: 0 !important; */
 	text-align: center;
 	height: 290px;
 }
@@ -199,10 +193,8 @@ body {
     letter-spacing: 3px;
     background-color: #00EF81;
     color: #000;
-    font-size: 40px;
-    line-height: 40px;
-	/* padding-left: 6px; */
-	/* padding-right: 6px; */
+    font-size: 41px;
+    line-height: 41px;
 }
 
 .widget-img {
@@ -244,7 +236,7 @@ body {
 }
 
 .widget-1 {
-	padding-top: 50px; 
+	padding-top: 80px; 
 }
 
 .widget-2 {
@@ -269,19 +261,90 @@ body {
 }
 
 .section-3 {
-    background: url('./../img/landing/bg_2.jpg') 50% 50% no-repeat;
+    background: url('./../img/landing/bg_3.png') no-repeat;
     background-size: cover;
+    background-position: center center;
     color: #F1F1F1;
     text-align: center; 
+    padding-bottom: 10px;
+}
+
+.section-3 h1 {
+    font-family: bebasneue_regular, serif;
+    letter-spacing: 3px;
+    font-size: 41px;
+    line-height: 41px;
+    padding-top: 30px;
+    padding-bottom: 20px;
 }
 
 .section-3 .brands {
 	border-top: 4px solid #EAEAEA;
 	border-bottom: 4px solid #EAEAEA;
-	height: 200px;
+    padding-bottom: 30px;
 }
 
+.section-3 span {
+ 	font-family: roboto_light;
+	font-size: 18px;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
 
+.section-3 .brand {
+    margin-top: 30px;
+    width: 257px;
+    height: 80px;
+}
+
+.section-3 #brand1 {
+    background: url('./../img/landing/nurseassist_normal.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand1:hover {
+    background: url('./../img/landing/nurseassist_hover.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand2 {
+    background: url('./../img/landing/horscompany_normal.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand2:hover {
+    background: url('./../img/landing/horscompany_hover.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand3 {
+    background: url('./../img/landing/pitermag_normal.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand3:hover {
+    background: url('./../img/landing/pitermag_hover.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand4 {
+    background: url('./../img/landing/kyma_normal.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand4:hover {
+    background: url('./../img/landing/kyma_hover.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand5 {
+    background: url('./../img/landing/moyastrast_normal.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand5:hover {
+    background: url('./../img/landing/moyastrast_hover.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand6 {
+    background: url('./../img/landing/callfeed_normal.png') 50% 50% no-repeat;
+}
+
+.section-3 #brand6:hover {
+    background: url('./../img/landing/callfeed_hover.png') 50% 50% no-repeat;
+}
 
 .try-now-button {
     padding-left: 25px;
@@ -310,15 +373,14 @@ body {
 	margin-top: 20px; 
 }
 
+
 footer {
     width: 100%;
     min-height: 190px;
     background-color: #000;
     color: #526B77;
-}
-
-footer > .container {
-    padding-top: 30px;
+    padding-top: 10px!important; 
+    padding-bottom: 20px; 
 }
 
 footer .phone {
@@ -405,6 +467,15 @@ footer .bottom-links li {
 	}
 	
 }
+
+@media screen and (min-width: 959px) {
+
+    .section-2 .benefits {
+        padding-left: 90px;
+        padding-right: 90px;
+    }
+}
+
 
 @media screen and (max-width: 768px) {
 

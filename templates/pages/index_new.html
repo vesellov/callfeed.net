@@ -133,7 +133,7 @@
                 </div>
                 <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
 		           <div class="headline">
-		                  <span>Удобная форма виджета</span>
+                      <span>Удобная форма виджета</span>
 		           </div>
           		</div>
                 <div class="col-lg-1 height0">
@@ -417,6 +417,32 @@
                 </div>
                 <div class="col-lg-10">
                 	<div class="brands">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand1" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand2" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand3" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand4" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand5" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand6" class="brand">
+                                </div>
+                            </div>
+                        </div>
                 	</div>
 				</div>
                 <div class="col-lg-1 height0">
@@ -432,6 +458,23 @@
     
 </main>
 
+<script>
+$(document).ready(function() {
+    pic1 = new Image();
+    pic2 = new Image();
+    pic3 = new Image();
+    pic4 = new Image();
+    pic5 = new Image();
+    pic6 = new Image();
+    pic1.src="{% static 'img/landing/kyma_hover.png' %}";
+    pic2.src="{% static 'img/landing/pitermag_hover.png' %}";
+    pic3.src="{% static 'img/landing/horscompany_hover.png' %}";
+    pic4.src="{% static 'img/landing/moyastrast_hover.png' %}";
+    pic5.src="{% static 'img/landing/nurseassist_hover.png' %}";
+    pic6.src="{% static 'img/landing/callfeed_hover.png' %}";
+});
+</script>
+
 {% endblock %}
 
 
@@ -443,6 +486,7 @@
 {% endblock %}
 
 {% block additional_css %}
+    <link href="{% static 'css/style_new.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{% static 'css/landing_style_new.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 {% endblock %}
 
