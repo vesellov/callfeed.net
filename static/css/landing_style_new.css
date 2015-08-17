@@ -269,7 +269,7 @@ body {
 }
 
 .section-3 {
-    background: url('./../img/landing/Bg_2.jpg') 50% 50% no-repeat;
+    background: url('./../img/landing/bg_2.jpg') 50% 50% no-repeat;
     background-size: cover;
     color: #F1F1F1;
     text-align: center; 
@@ -393,7 +393,7 @@ footer .bottom-links li {
 @media screen and (min-width: 769px) {
 
 	.section-1 {
-	    background: url('./../img/landing/Bg_1.jpg') 50% 50% no-repeat !important;
+	    background: url('./../img/landing/bg_1.jpg') 50% 50% no-repeat !important;
 	}
 	
 	.section-2 .why2 {
@@ -409,7 +409,7 @@ footer .bottom-links li {
 @media screen and (max-width: 768px) {
 
 	.section-1 {
-		background: url('./../img/landing/Bg_1_blur.jpg') 50% 50% no-repeat !important;
+		background: url('./../img/landing/bg_1_blur.jpg') 50% 50% no-repeat !important;
 	}
 	
 	.section-2 .why {
