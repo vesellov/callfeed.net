@@ -85,6 +85,8 @@ urlpatterns = patterns(
     url(r'^robokassa_test$', Robokassa.as_view()),
     # Test page
     url(r'^index_test/?$', TemplateView.as_view(template_name='pages/index_test.html')),
+    # Test Landing
+    url(r'^index_new/?$', TemplateView.as_view(template_name='pages/index_new.html')),
     # The main page
     url(r'^$', TemplateView.as_view(template_name='pages/index.html')),
     # FAQ page
