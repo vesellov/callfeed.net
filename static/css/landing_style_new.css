@@ -153,6 +153,10 @@ body {
 	height: 290px;
 }
 
+.section-2 .benefit img {
+	margin-top: 20px;		
+}
+
 .section-2 .benefits p {
     padding-top: 10px;
 	font-size: 18px;
