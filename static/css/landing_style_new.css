@@ -280,6 +280,8 @@ body {
     margin-top: 30px;
     width: 257px;
     height: 80px;
+    margin-left: auto;
+	margin-right: auto;
 }
 
 .section-3 #brand1 {
