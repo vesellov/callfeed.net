@@ -1,195 +1,159 @@
-{% extends 'base_no_bootstrap.html' %}
+{% extends 'base.html' %}
 
 {% load staticfiles %}
-{% block body_content %}
-    <div class="banner-1 index-banner"> {# there was parallax-container class #}
-        <div class="section no-pad-bot">
-            <div class="container">
-                <div class="text-block" id="callfeed_button">
-                    <br/><br/>
-                    <h1 class="header teal-text" style="letter-spacing: 3px;">CallFeed.net</h1>
-                    <p class="header col s12 light">Callfeed.net – новейший сервис обратных <b>бесплатных</b> звонков, использующий уникальную стратегию <br/> увлекательного игрового маркетинга и обеспечивающий увеличение количества Ваших клиентов и конверсии Вашего сайта на <b><span style="font-size: 32px;">93%</span></b></p>
-                    
 
-<!-- callfeed widget BEGIN-->
-
-<a href="javascript:void(0);" id="callfeed_button_link" class="button">Попробовать бесплатно</a>
-
-<script type="text/javascript">
-
-var CallFeedToken = "callfeedmain";
-
-var CallFeedOptions = null;
-
-if(!window.jQuery){
-    var jq = document.createElement("script");
-    jq.type = "text/javascript";
-    jq.async = true;
-    jq.onload = init_callfeed;
-    jq.src = "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
-    document.getElementsByTagName("head")[0].appendChild(jq);
-} else {
-    init_callfeed();
-};
-
-function init_callfeed() {
-    (function(window, document) {
-        var po = document.createElement("script"); 
-        po.type = "text/javascript"; 
-        po.async = true;
-        po.src = "http://callfeed.net/static/cf.min.js";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(po, s);
-    })(window, document);
-};
-</script>
-                    <br/><br/>
-				</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="banner-2 index-banner">
-        <div class="section no-pad-bot">
-            <div class="container">
-			    <div class="text-block" id="why-we-block">
-                    <br><br>
-					<h2 class="header teal-text">Почему именно мы?</h2>
-					<div class="center">
-                        <div class="block-2">
-						    <img class="padding-top-7" src="{% static 'img/landing/ico_1.png' %}" alt=" ">
-							<p>Уникальная технология <br /> увлекательного игрового <br /> маркетинга, увеличивающая <br /> <b>конверсию сайта на 93%</b></p>
-						</div>
-					    <div class="block-2">
-						    <img class="padding-top-7" src="{% static 'img/landing/ico_2.png' %}" alt=" ">
-							<p>Вы платите за <b>количество <br /> реально использованных <br /> минут</b>, а не за период <br /> использования виджета</p>
-						</div>
-					    <div class="block-2">
-						    <img class="padding-top-7" src="{% static 'img/landing/ico_3.png' %}" alt=" ">
-						    <p>Виджет положительно <br /> влияет на продвижение <br /> сайта, <b>улучшает его <br /> SEO-позиции</b></p>
-						</div>
-					</div>
-					<div style="text-align: center;">
-					    <div class="block-2">
-						    <img class="padding-top-7" src="{% static 'img/landing/ico_4.png' %}" alt=" ">
-							<p>Виджет <b>НЕ</b> блокирует сайт, <br /> <b>НЕ</b> раздражает клиентов, <br /> <b>НЕ</b> мешает навигации <br /> по сайту</p>
-						</div>
-					    <div class="block-2">
-						    <img class="padding-top-7" src="{% static 'img/landing/ico_5.png' %}" alt=" ">
-							<p>Использовать мультивиджет <br /> легко: просто оставьте <br /> заявку, а <b>мы возьмем <br /> на себя его установку <br /> и настройку</b></p>
-						</div>
-					    <div class="block-2">
-						    <img class="padding-top-7" src="{% static 'img/landing/ico_6.png' %}" alt=" ">
-							<p>Виджет не перестает <br /> работать <b>даже при <br /> нулевом балансе</b></p>
-						</div>
-				    </div>
-                    <br><br>
-				</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="banner-3 index-banner">
-        <div class="section no-pad-bot">
-            <div class="container">
-			    <div class="text-block">
-                    <br><br>
-					<h2 class="header teal-text">Тарифы</h2>
-					<div style="text-align: center; margin: 10px 0 60px;">
-                        <div class="block-3 shark_1">
-						    <div style="padding-top: 7px;">
-                                <div class="shark-card-content">
-                                    <h3>Sharky</h3>
-                                    <ul>
-                                        <li class="list-style-time"><span>20 минут</span></li>
-                                        <li class="list-style-fish"><span>8 клиентов &nbsp;&nbsp;<span class="tooltip"><img src="{% static 'img/landing/lil_question_ico.png' %}" alt="подсказка"/><i>При средней продолжительности разговора 2 минуты</i></span></span></li>
-                                        <li class="list-style-ruble"><span>0 руб/мин</span></li>
-                                    </ul>
-                                    <p>0 руб.</p>
-                                    <button class="callfeed_buttons_link">Подключить</button>
-                                </div>
-                            </div>
-						</div>
-					    <div class="block-3 shark_2" style="margin: 0 35px;">
-						    <div style="padding-top: 7px;">
-                                <div class="shark-card-content">
-                                    <h3>Dark Shark</h3>
-                                    <ul>
-                                        <li class="list-style-time"><span>90 минут</span></li>
-                                        <li class="list-style-fish"><span>36 клиентов &nbsp;&nbsp;<span class="tooltip"><img src="{% static 'img/landing/lil_question_ico.png' %}" alt="подсказка"/><i>При средней продолжительности разговора 2 минуты</i></span></span></li>
-                                        <li class="list-style-ruble"><span>14 руб/мин</span></li>
-                                    </ul>
-                                    <p>1 260 руб.</p>
-                                    <button class="callfeed_buttons_link">Подключить</button>
-                                </div>
-                            </div>
-						</div>
-					    <div class="block-3 shark_3">
-							<div style="padding-top: 7px;">
-                                <div class="shark-card-content">
-                                    <h3>Caribbean Shark</h3>
-                                    <ul>
-                                        <li class="list-style-time"><span>150 минут</span></li>
-                                        <li class="list-style-fish"><span>60 клиентов &nbsp;&nbsp;<span class="tooltip"><img src="{% static 'img/landing/lil_question_ico.png' %}" alt="подсказка"/><i>При средней продолжительности разговора 2 минуты</i></span></span></li>
-                                        <li class="list-style-ruble"><span>13 руб/мин</span></li>
-                                    </ul>
-                                    <p>1 950 руб.</p>
-                                    <button class="callfeed_buttons_link">Подключить</button>
-                                </div>
-                            </div>
-						</div>
-					</div>
-					<div style="text-align: center;">
-					    <div class="block-3 shark_4">
-							<div style="padding-top: 7px;">
-                                <div class="shark-card-content">
-                                    <h3>Sand Shark</h3>
-                                    <ul>
-                                        <li class="list-style-time"><span>300 минут</span></li>
-                                        <li class="list-style-ship"><span>120 клиентов &nbsp;<span class="tooltip"><img src="{% static 'img/landing/lil_question_ico.png' %}" alt="подсказка"/><i>При средней продолжительности разговора 2 минуты</i></span></span></li>
-                                        <li class="list-style-ruble"><span>12 руб/мин</span></li>
-                                    </ul>
-                                    <p>3 600 руб.</p>
-                                    <button class="callfeed_buttons_link">Подключить</button>
-                                </div>
-                            </div>
-						</div>
-					    <div class="block-3 shark_5" style="margin: 0 35px;">
-							<div style="padding-top: 7px;">
-                                <div class="shark-card-content">
-                                    <h3>Tiger Shark</h3>
-                                    <ul>
-                                        <li class="list-style-time"><span>500 минут</span></li>
-                                        <li class="list-style-yacht"><span>200 клиентов &nbsp;<span class="tooltip"><img src="{% static 'img/landing/lil_question_ico.png' %}" alt="подсказка"/><i>При средней продолжительности разговора 2 минуты</i></span></span></li>
-                                        <li class="list-style-ruble"><span>11 руб/мин</span></li>
-                                    </ul>
-                                    <p>5 560 руб.</p>
-                                    <button class="callfeed_buttons_link">Подключить</button>
-                                </div>
-                            </div>
-						</div>
-					    <div class="block-3 shark_6">
-                            <div style="padding-top: 7px;">
-                                <div class="shark-card-content">
-                                    <h3>White Shark</h3>
-                                    <ul>
-                                        <li class="list-style-time"><span>1000 минут</span></li>
-                                        <li class="list-style-layner"><span>400 клиентов &nbsp;<span class="tooltip"><img src="{% static 'img/landing/lil_question_ico.png' %}" alt="подсказка"/><i>При средней продолжительности разговора 2 минуты</i></span></span></li>
-                                        <li class="list-style-ruble"><span>10 руб/мин</span></li>
-                                    </ul>
-                                    <p>10 000 руб.</p>
-                                    <button class="callfeed_buttons_link">Подключить</button>
-                                </div>
-                            </div>
-						</div>
-				    </div>
-                    <br><br>
-				</div>
-            </div>
-        </div>
-    </div>
+{% block additional_css %}
+    <link href="{% static 'css/landing_style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 {% endblock %}
 
 {% block additional_js %}
+    <script type="text/javascript">var CallFeedToken = "41";</script>
+    <script type="text/javascript" charset="UTF-8" src="http://callfeed.net/static/cf.min.js"></script>
+{% endblock %}
 
+{% block header %}
+    <header class="navbar-purple">
+        <div class="container">
+            <nav>
+                <a class="pull-left" href="/"><img class="brand-logo-pic" src="{% static 'img/landing/logo.png' %}" alt=""/></a>
+                <ul class="pull-right horizontal-ul">
+                    <li><a href="/accounts/login">Вход</a></li>
+                    <li><a href="/accounts/client/register">Регистрация</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body_content %}
+    <main>
+        <section class="section-1">
+            <div class="container">
+                <h1>Уникальный виджет <br/>мгновенного обратного звонка, <br/> повышающий конверсию сайта</h1>
+                <button onclick="window.location.assign('/accounts/client/register')" type="button">Получить бесплатно</button>
+            </div>
+        </section>
+        <section class="section-2">
+            <div class="container">
+                <p>Профессиональный маркетинговый инструмент для вашего сайта, разработанный специально для увеличения конверсии и продаж. CallFeed предлагает нерешительному посетителю Вашего сайта ввести свой номер телефона, после чего система автоматически сделает двусторонний звонок ему и свободному оператору.</p>
+                <div class="benefits row">
+                    <div class="col-md-4 benefit-1">
+                        <img src="{% static 'img/landing/icons_1.png' %}" alt=""/>
+                        <p class="text-left"><b>Стимулирет на покупки</b></p>
+                        <p class="text-left">Широкий функционал и гибкие настройки CallFeed позволяют точечно воздействовать на целевые группы, предоставляя им особые условия совершения покупок.</p>
+                    </div>
+                    <div class="col-md-4 benefit-2">
+                        <img src="{% static 'img/landing/icons_2.png' %}" alt=""/>
+                        <p class="text-left"><b>Помогает нерешительным</b></p>
+                        <p class="text-left">CallFeed может воздействовать на нерешительных посетителей Вашего сайта, придавая им уверенности в оформлении заказа здесь и сейчас.</p>
+                    </div>
+                    <div class="col-md-4 benefit-3">
+                        <img src="{% static 'img/landing/icons_3.png' %}" alt=""/>
+                        <p class="text-left"><b>Позволяет провести акцию</b></p>
+                        <p class="text-left">Возможности CallFeed позволяют легко настроить и провести небольшую маркетинговую акцию на сайте, увеличивая лояльность посетителей и повышая конверсию в продажи.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="widget-1">
+            <div class="headline">
+                <div class="container">
+                    <h1>Удобная форма виджета</h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <img src="{% static 'img/landing/widget_1.png' %}" alt=""/>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <p>Благодаря удобной форме и привычному расположению, виджет CallFeed не блокирует содержимое Вашего сайта, не раздражает посетителей, вызывает положительную реакцию поисковых систем.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="widget-2">
+            <div class="headline">
+                <div class="container">
+                    <h1>Настраиваемый дизайн</h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <p>Благодаря гибким настройкам дизайна, Callfeed эстетично впишется в Ваш сайт и повысит его эффективность.</p>
+                    </div>
+                    <div id="img-widget-2" class="col-lg-6 col-md-6" style="overflow:hidden;">
+                        <img src="{% static 'img/landing/widget_2.png' %}" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="widget-3">
+            <div class="headline">
+                <div class="container">
+                    <h1>Активное вовлечение к звонку</h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <img src="{% static 'img/landing/widget_3.png' %}" alt=""/>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <p>По определенным правилам, на выбранных Вами страницах и в заданное время, клиентам отображается уникальное
+                            маркетинговое предложение. Это позволяет вовлечь в воронку продаж  клиентов, сомневающихся в покупке,
+                            и таким образом, увеличить продажи сайта.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="widget-4">
+            <div class="headline">
+                <div class="container">
+                    <h1>Брендирование Вашего виджета</h1>
+                    <!-- <img src="{% static 'img/landing/background_web_1.png' %}" alt=""/> -->
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <p>Специалисты Callfeed помогут реализовать Ваши идеи и правильно настроить виджет. Индивидуальный дизайн
+                           виджета станет отличным решением для Вашего сайта. Исследования показали, что уникальный виджет цепляет
+                           взгляд 87% посетителей сайтов и 65% из них вовлекает к заказу обратного звонка</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <img src="{% static 'img/landing/widget_4.png' %}" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="widget-5">
+            <div class="headline">
+                <div class="container">
+                    <h1>Удобная форма обратной связи</h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <img src="{% static 'img/landing/widget_5.png' %}" alt=""/>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <p>Один из самых важных элементов сайта - форма обратной связи теперь будет доступна на всех страницах Вашего сайта.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="try-now">
+            <div class="container">
+                <h1>Попробуйте <u>бесплатно</u> прямо сейчас</h1>
+                <button onclick="window.location.assign('/accounts/client/register')" type="button">Получить бесплатно</button>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {% include 'parts/footer.html' %}
 {% endblock %}

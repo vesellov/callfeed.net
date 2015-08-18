@@ -2,158 +2,495 @@
 
 {% load staticfiles %}
 
+
+
+{% block header %}
+
+<header class="navbar-purple">
+    <div class="container">
+        <nav>
+            <a class="pull-left" href="/"><img class="brand-logo-pic" src="{% static 'img/landing/logo_new.png' %}" alt=""/></a>
+            <ul id="top-menu-links" class="pull-right horizontal-ul">
+                <li><span><a href="/accounts/login">Вход</a></span></li>
+                <li><span><a href="/accounts/client/register">Регистрация</a></span></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+{% endblock %}
+
+
+
+{% block body_content %}
+
+<main>
+
+    <section class="section-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-1 col-sm-6 col-md-6 col-lg-6 height0">
+                    &nbsp;
+                </div>
+                <div class="col-xs-11 col-sm-6 col-md-6 col-lg-6">
+                    <h1>Уникальный виджет <br/>мгновенного обратного звонка</h1>
+                    <img src="{% static 'img/landing/logo_2.png' %}">
+                    <br/>
+                    <span>Способствует увеличению вашей прибыли</span>
+                    <br/>
+                    <button class="try-now-button" onclick="window.location.assign('/accounts/client/register')" type="button">получить бесплатно</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section-2">
+        <div class="container">
+        	<div class="row">
+        		<div class="col-lg-1 height0">&nbsp;</div>
+        		<div class="col-sm-4 col-md-4 col-lg-3">
+        			<div class="why">
+        				<span>Почему</span>
+        				<br/>
+        				<span>именно мы?</span>
+        			</div>
+        		</div>
+        		<div class="col-sm-8 col-md-8 col-lg-7">
+        			<div class="because">
+              			Профессиональный маркетинговый инструмент для вашего сайта, разработанный специально для увеличения конверсии и продаж. 
+              			CallFeed предлагает нерешительному посетителю Вашего сайта ввести свой номер телефона, после чего система автоматически сделает двусторонний звонок ему и свободному оператору.
+             		</div>
+        		</div>
+        		<div class="col-lg-1 height0">&nbsp;</div>
+        	</div>
+        	
+        	<div class="row">
+        		<div class="col-sm-12">
+        			<div class="why2">
+        				<span>Почему именно мы?</span>
+        			</div>
+        		</div>
+        	</div>
+            
+           	<div class="row benefits">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                    <img src="{% static 'img/landing/ico_1_new.png' %}" alt=""/>
+                    <p class="text-center">
+                    	Уникальная технология увлекательного игрового маркетинга,
+                    	<b>увеличивающая количество откликов от клиентов</b>
+                   	</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                    <img src="{% static 'img/landing/ico_2_new.png' %}" alt=""/>
+                    <p class="text-center">
+                    	Вы платите за количество <b>реально использованных минут</b>,
+                    	а не за период использования виджета 
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                    <img src="{% static 'img/landing/ico_3_new.png' %}" alt=""/>
+                    <p class="text-center">
+                    	Виджет положительно влияет на продвижение сайта,
+                    	<b>улучшает его SEO-позиции</b>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                    <img src="{% static 'img/landing/ico_4_new.png' %}" alt=""/>
+                    <p class="text-center">
+                    	Виджет
+                    	<b>НЕ</b> блокирует окна,
+                    	<b>НЕ</b> раздражает клиентов,
+                    	<b>НЕ</b> мешает навигации по сайту
+                   	</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                    <img src="{% static 'img/landing/ico_5_new.png' %}" alt=""/>
+                    <p class="text-center">
+                    	Использовать мультивиджет легко: просто оставьте заявку, а
+                    	<b>мы возьмем на себя его установку и настойку</b>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                    <img src="{% static 'img/landing/ico_6_new.png' %}" alt=""/>
+                    <p class="text-center">
+                    	Виджет не перестает работать
+                    	<b>даже при нулевом балансе</b>
+                   	</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section class="widget-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+		           <div class="headline">
+                      <span>Удобная форма виджета</span>
+		           </div>
+          		</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+         	</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                	<div class="widget-img text-left">
+                		<img src="{% static 'img/landing/widget_1.png' %}" alt=""/>
+               		</div>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+				</div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+                	<div class="feature">
+                    	<p>
+                    		Благодаря удобной форме и привычному расположению, виджет CallFeed не блокирует содержимое Вашего сайта, не раздражает посетителей, вызывает положительную реакцию поисковых систем.
+                   		</p>
+                   	</div>
+				</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>				
+        </div>
+    </section>
+    
+    <section class="widget-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+           			<div class="headline">
+                  		<span>Настраиваемый дизайн</span>
+           			</div>
+          		</div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+         	</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                	<div class="widget-img text-right">
+                		<img src="{% static 'img/landing/widget_2.png' %}" alt=""/>
+               		</div>
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+                	<div class="feature">
+                    	<p>
+                    		Гибкие настройки дизайна CallFeed позволяют виджету органично вписаться в Ваш сайт и повысить его эффективность.
+                   		</p>
+                   	</div>
+				</div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12 height0">
+                	&nbsp;
+				</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>				
+        </div>
+    </section>
+
+    <section class="widget-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+           			<div class="headline">
+                		<span>Активное вовлечение к звонку</span>
+           			</div>
+          		</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+         	</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                	<div class="widget-img text-left">
+                		<img src="{% static 'img/landing/widget_3.png' %}" alt=""/>
+               		</div>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+				</div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+                	<div class="feature">
+                    	<p>
+                    		По определенным правилам, на выбранных Вами страницах и в заданное время, клиентам отображается уникальное
+                        	маркетинговое предложение. Это позволяет вовлечь в воронку продаж  клиентов, сомневающихся в покупке,
+                        	и таким образом, увеличить продажи сайта.
+                       	</p>
+                   	</div>
+				</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>				
+        </div>
+    </section>
+    
+    <section class="widget-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+           	<div class="headline">
+                <span>Брендирование Вашего виджета</span>
+           	</div>
+          	</div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+         	</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                	<div class="widget-img text-right">
+                		<img src="{% static 'img/landing/widget_4.png' %}" alt=""/>
+               		</div>
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+                	<div class="feature">
+                    	<p>
+                    		Специалисты CallFeed помогут реализовать Ваши идеи и правильно настроить виджет. Индивидуальный дизайн
+                   			виджета станет отличным решением для Вашего сайта. 
+                       		По статистике, виджет цепляет взгляд 87% посетителей сайтов
+                       		и 65% из них вовлекает к заказу обратного звонка.
+                  		</p>
+                   	</div>
+				</div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+				</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>				
+        </div>
+    </section>
+    
+    
+
+    <section class="widget-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                	&nbsp;
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+           	<div class="headline">
+                <span>Удобная форма обратной связи</span>
+           	</div>
+          	</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+         	</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                	<div class="widget-img text-left">
+                		<img src="{% static 'img/landing/widget_5.png' %}" alt=""/>
+               		</div>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 height0">
+                	&nbsp;
+				</div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
+                	<div class="feature">
+                    	<p>
+                    		Один из важнейших элементов современного сайта - 
+                    		форма обратной связи. С помощью CallFeed эта функция
+                    		будет доступна на всех страницах Вашего ресурса,
+                    		что значительно упрощает связь между компанией и клиентом.
+                       	</p>
+                   	</div>
+				</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>				
+        </div>
+    </section>
+    
+                    
+	<section class="section-3">
+		<h1>Нам доверяют</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+                <div class="col-lg-10">
+                	<div class="brands">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand1" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand2" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand3" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand4" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand5" class="brand">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div id="brand6" class="brand">
+                                </div>
+                            </div>
+                        </div>
+                	</div>
+				</div>
+                <div class="col-lg-1 height0">
+                	&nbsp;
+                </div>
+			</div>				
+        </div>
+        <span>И еще более 2000 компаний</span>
+        <br/>
+        <button class="try-now-button" onclick="window.location.assign('/accounts/client/register')" type="button">получить бесплатно</button>
+        
+    </section>
+    
+</main>
+
+<script>
+$(document).ready(function() {
+    pic1 = new Image();
+    pic2 = new Image();
+    pic3 = new Image();
+    pic4 = new Image();
+    pic5 = new Image();
+    pic6 = new Image();
+    pic1.src="{% static 'img/landing/kyma_hover.png' %}";
+    pic2.src="{% static 'img/landing/pitermag_hover.png' %}";
+    pic3.src="{% static 'img/landing/horscompany_hover.png' %}";
+    pic4.src="{% static 'img/landing/moyastrast_hover.png' %}";
+    pic5.src="{% static 'img/landing/nurseassist_hover.png' %}";
+    pic6.src="{% static 'img/landing/callfeed_hover.png' %}";
+});
+</script>
+
+{% endblock %}
+
+
+
+
+
+{% block footer %}
+    {% include 'parts/footer_new.html' %}
+{% endblock %}
+
 {% block additional_css %}
-    <link href="{% static 'css/landing_style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style_new.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/landing_style_new.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 {% endblock %}
 
 {% block additional_js %}
     <script type="text/javascript">var CallFeedToken = "41";</script>
     <script type="text/javascript" charset="UTF-8" src="http://callfeed.net/static/cf.min.js"></script>
-{% endblock %}
-
-{% block header %}
-    <header class="navbar-purple">
-        <div class="container">
-            <nav>
-                <a class="pull-left" href="/"><img class="brand-logo-pic" src="{% static 'img/landing/logo.png' %}" alt=""/></a>
-                <ul class="pull-right horizontal-ul">
-                    <li><a href="/accounts/login">Вход</a></li>
-                    <li><a href="/accounts/client/register">Регистрация</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-{% endblock %}
-
-{% block body_content %}
-    <main>
-        <section class="section-1">
-            <div class="container">
-                <h1>Уникальный виджет <br/>мгновенного обратного звонка, <br/> повышающий конверсию сайта</h1>
-                <button onclick="window.location.assign('/accounts/client/register')" type="button">Получить бесплатно</button>
-            </div>
-        </section>
-        <section class="section-2">
-            <div class="container">
-                <p>Профессиональный маркетинговый инструмент для вашего сайта, разработанный специально для увеличения конверсии и продаж. CallFeed предлагает нерешительному посетителю Вашего сайта ввести свой номер телефона, после чего система автоматически сделает двусторонний звонок ему и свободному оператору.</p>
-                <div class="benefits row">
-                    <div class="col-md-4 benefit-1">
-                        <img src="{% static 'img/landing/icons_1.png' %}" alt=""/>
-                        <p class="text-left"><b>Стимулирет на покупки</b></p>
-                        <p class="text-left">Широкий функционал и гибкие настройки CallFeed позволяют точечно воздействовать на целевые группы, предоставляя им особые условия совершения покупок.</p>
-                    </div>
-                    <div class="col-md-4 benefit-2">
-                        <img src="{% static 'img/landing/icons_2.png' %}" alt=""/>
-                        <p class="text-left"><b>Помогает нерешительным</b></p>
-                        <p class="text-left">CallFeed может воздействовать на нерешительных посетителей Вашего сайта, придавая им уверенности в оформлении заказа здесь и сейчас.</p>
-                    </div>
-                    <div class="col-md-4 benefit-3">
-                        <img src="{% static 'img/landing/icons_3.png' %}" alt=""/>
-                        <p class="text-left"><b>Позволяет провести акцию</b></p>
-                        <p class="text-left">Возможности CallFeed позволяют легко настроить и провести небольшую маркетинговую акцию на сайте, увеличивая лояльность посетителей и повышая конверсию в продажи.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="widget-1">
-            <div class="headline">
-                <div class="container">
-                    <h1>Удобная форма виджета</h1>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <img src="{% static 'img/landing/widget_1.png' %}" alt=""/>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <p>Благодаря удобной форме и привычному расположению, виджет CallFeed не блокирует содержимое Вашего сайта, не раздражает посетителей, вызывает положительную реакцию поисковых систем.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="widget-2">
-            <div class="headline">
-                <div class="container">
-                    <h1>Настраиваемый дизайн</h1>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-5">
-                        <p>Благодаря гибким настройкам дизайна, Callfeed эстетично впишется в Ваш сайт и повысит его эффективность.</p>
-                    </div>
-                    <div id="img-widget-2" class="col-lg-6 col-md-6" style="overflow:hidden;">
-                        <img src="{% static 'img/landing/widget_2.png' %}" alt=""/>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="widget-3">
-            <div class="headline">
-                <div class="container">
-                    <h1>Активное вовлечение к звонку</h1>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <img src="{% static 'img/landing/widget_3.png' %}" alt=""/>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <p>По определенным правилам, на выбранных Вами страницах и в заданное время, клиентам отображается уникальное
-                            маркетинговое предложение. Это позволяет вовлечь в воронку продаж  клиентов, сомневающихся в покупке,
-                            и таким образом, увеличить продажи сайта.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="widget-4">
-            <div class="headline">
-                <div class="container">
-                    <h1>Брендирование Вашего виджета</h1>
-                    <!-- <img src="{% static 'img/landing/background_web_1.png' %}" alt=""/> -->
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <p>Специалисты Callfeed помогут реализовать Ваши идеи и правильно настроить виджет. Индивидуальный дизайн
-                           виджета станет отличным решением для Вашего сайта. Исследования показали, что уникальный виджет цепляет
-                           взгляд 87% посетителей сайтов и 65% из них вовлекает к заказу обратного звонка</p>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <img src="{% static 'img/landing/widget_4.png' %}" alt=""/>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="widget-5">
-            <div class="headline">
-                <div class="container">
-                    <h1>Удобная форма обратной связи</h1>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <img src="{% static 'img/landing/widget_5.png' %}" alt=""/>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <p>Один из самых важных элементов сайта - форма обратной связи теперь будет доступна на всех страницах Вашего сайта.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="try-now">
-            <div class="container">
-                <h1>Попробуйте <u>бесплатно</u> прямо сейчас</h1>
-                <button onclick="window.location.assign('/accounts/client/register')" type="button">Получить бесплатно</button>
-            </div>
-        </section>
-    </main>
-{% endblock %}
-
-{% block footer %}
-    {% include 'parts/footer.html' %}
 {% endblock %}
