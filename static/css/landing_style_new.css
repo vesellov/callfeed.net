@@ -373,10 +373,6 @@ body {
 		display: none;
 	}
 
-	footer .phone1 {
-		display: none;
-	}
-	
 }
 
 @media screen and (min-width: 959px) {
@@ -425,10 +421,6 @@ body {
 	
 	.widget-1, .widget-2, .widget-3, .widget-4, .widget-5 {
 		padding-top: 20px;
-	}
-
-	footer .phone2 {
-		display: none;
 	}
 
 }
