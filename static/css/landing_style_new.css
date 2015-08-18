@@ -131,6 +131,7 @@ body {
 	line-height: 32px;
 	text-transform: uppercase;
 	text-align: left;
+    width: 190px;
 }
 
 .section-2 .why span {
@@ -141,7 +142,7 @@ body {
 	border-bottom: 4px solid #000;
 	padding-bottom: 20px;
     font-size: 16px;
-    line-height: 16px;        
+    line-height: 20px;        
 	text-align: left;
 }
 
@@ -298,8 +299,8 @@ body {
 .section-3 h1 {
     font-family: bebasneue_regular, serif;
     letter-spacing: 3px;
-    font-size: 41px;
-    line-height: 41px;
+    font-size: 36px;
+    line-height: 36px;
     padding-top: 30px;
     padding-bottom: 20px;
 }
@@ -418,10 +419,13 @@ body {
 
 
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
 
 	.section-1 {
-	    background: url('./../img/landing/bg_1.jpg') 50% 50% no-repeat !important;
+	    background: url('./../img/landing/bg_1.jpg')!important;
+        background-repeat: no-repeat!important;
+        background-position: 50% 50%!important;
+        background-size:   cover!important;                     
 	}
 	
 	.section-2 .why2 {
@@ -430,6 +434,8 @@ body {
 
     .section-2 .because {
         height: 108px;
+        margin-left: -40px;
+        line-height: 18px;
     }
     
     .widget-4 img {
@@ -443,10 +449,17 @@ body {
 }
 
 
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 992px) {
+
+	.section-1 {
+        /* background-size: 100% !important; */
+	    /* background: url('./../img/landing/bg_1.jpg') 50% 50% no-repeat !important; */
+	}
 
     .section-2 .because {
         height: 108px;
+        margin-left: -50px;
+        line-height: 22px;
     }
     
 }
@@ -462,17 +475,20 @@ body {
     
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 
 	.section-1 {
-		background: url('./../img/landing/bg_1_blur.jpg') 50% 50% no-repeat !important;
+	    background: url('./../img/landing/bg_1_blur.jpg')!important;
+        background-repeat: no-repeat!important;
+        background-position: 50% 50%!important;
+        background-size:   cover!important;                     
 	}
 	
 	.section-2 .why {
 		display: none;
 	}
 
-	.headline {
+    .headline {
 		border: 0px;
 		text-align: center;
 		margin-left: 0px!important;
