@@ -65,17 +65,19 @@ body {
 }
 
 .section-1 {
-    padding-top: 140px;
     color: #efefef;
     text-align: left;
+    height: 590px;
+    margin-top: 55px;
 }
 
 .section-1 h1 {
+    padding-top: 170px;
 	font-family: roboto_light;
     margin: 0;
     text-align: left;
     font-size: 30px;
-    line-height: 30px;
+    line-height: 40px;
 }
 
 .section-1 img {
@@ -167,6 +169,7 @@ body {
 
 .section-2 .benefits p b {
 	font-size: 18px;
+    font-family: roboto_bold;
 }
 
 .height0 {
@@ -174,18 +177,20 @@ body {
 }
 
 .headline {
-	border-bottom: 4px solid #000;
-	padding-bottom: 4px;
+	/* padding-bottom: 4px; */
 }
 
-.headline span {
+.headline .headtext {
+}
+
+.headline .headtext span {
     font-family: bebasneue_regular, serif;
     letter-spacing: 3px;
     background-color: #00EF81;
     color: #000;
     font-size: 36px;
+    line-height: 36px;
     font-weight: bold;
-    line-height: 35px;
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -199,6 +204,7 @@ body {
 }
 
 .feature {
+	border-top: 4px solid #000;
 	border-bottom: 4px solid #000;
 	height: 190px;
 	font-size: 16px;
