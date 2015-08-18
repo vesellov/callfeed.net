@@ -39,6 +39,16 @@
             </div>
         </div>
     </main>
+    
+    <script>
+        $(document).ready(function() {
+            $('#id_phone_number').focus(function() {
+                if ($(this).val() == "")
+                    $(this).val("+7");
+            });
+        });
+    </script>
+    
 {% endblock %}
 
 {% block footer %}

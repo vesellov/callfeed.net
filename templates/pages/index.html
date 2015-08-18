@@ -6,15 +6,25 @@
 
 {% block header %}
 
-<header class="navbar-purple">
+<header class="navbar-purple navbar navbar-fixed-top">
     <div class="container">
-        <nav>
-            <a class="pull-left" href="/"><img class="brand-logo-pic" src="{% static 'img/landing/logo_new.png' %}" alt=""/></a>
-            <ul id="top-menu-links" class="pull-right horizontal-ul">
-                <li><span><a href="/accounts/login">Вход</a></span></li>
-                <li><span><a href="/accounts/client/register">Регистрация</a></span></li>
-            </ul>
-        </nav>
+        <div class="row">
+            <div class="col-lg-1 height0">
+                &nbsp;
+            </div>
+            <div class="col-lg-10">
+                <nav>
+                    <a class="pull-left" href="/"><img class="brand-logo-pic" src="{% static 'img/landing/logo_new.png' %}" alt=""/></a>
+                    <ul id="top-menu-links" class="pull-right horizontal-ul">
+                        <li><span><a href="/accounts/login">Вход</a></span></li>
+                        <li><span><a href="/accounts/client/register">Регистрация</a></span></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-1 height0">
+                &nbsp;
+            </div>
+        </div>
     </div>
 </header>
 
@@ -38,7 +48,7 @@
                     <br/>
                     <span>Способствует увеличению вашей прибыли</span>
                     <br/>
-                    <button class="try-now-button" onclick="window.location.assign('/accounts/client/register')" type="button">получить бесплатно</button>
+                    <button id="try-now-1" class="try-now-button" onclick="window.location.assign('/accounts/client/register')" type="button">получить бесплатно</button>
                 </div>
             </div>
         </div>
@@ -73,50 +83,56 @@
         	</div>
             
            	<div class="row benefits">
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
-                    <img src="{% static 'img/landing/ico_1_new.png' %}" alt=""/>
-                    <p class="text-center">
-                    	Уникальная технология увлекательного игрового маркетинга,
-                    	<b>увеличивающая количество откликов от клиентов</b>
-                   	</p>
+        		<div class="col-lg-1 height0">&nbsp;</div>
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                            <img src="{% static 'img/landing/ico_1_new.png' %}" alt=""/>
+                            <p class="text-center">
+                                Уникальная технология <br/> увлекательного игрового  <br/> маркетинга,
+                                <b>увеличивающая  <br/> количество откликов клиентов</b>
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                            <img src="{% static 'img/landing/ico_2_new.png' %}" alt=""/>
+                            <p class="text-center">
+                                Вы платите за количество  <br/> <b>реально  <br/> использованных  <br/>  минут</b>,
+                                а не за период  <br/>  использования виджета 
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                            <img src="{% static 'img/landing/ico_3_new.png' %}" alt=""/>
+                            <p class="text-center">
+                                Виджет положительно  <br/> влияет на продвижение  <br/> сайта,
+                                <b>улучшает его  <br/> SEO-позиции</b>
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                            <img src="{% static 'img/landing/ico_4_new.png' %}" alt=""/>
+                            <p class="text-center">
+                                Виджет
+                                <b>НЕ</b> блокирует окна, <br/> 
+                                <b>НЕ</b> раздражает клиентов, <br/> 
+                                <b>НЕ</b> мешает навигации  <br/> по сайту
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                            <img src="{% static 'img/landing/ico_5_new.png' %}" alt=""/>
+                            <p class="text-center">
+                                Использовать мультивиджет  <br/> легко: просто оставьте <br/>  заявку, а
+                                <b>мы возьмем  <br/> на себя его установку  <br/> и настойку</b>
+                            </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
+                            <img src="{% static 'img/landing/ico_6_new.png' %}" alt=""/>
+                            <p class="text-center">
+                                Виджет не перестает  <br/> работать
+                                <b>даже при  <br/> нулевом балансе</b>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
-                    <img src="{% static 'img/landing/ico_2_new.png' %}" alt=""/>
-                    <p class="text-center">
-                    	Вы платите за количество <b>реально использованных минут</b>,
-                    	а не за период использования виджета 
-                    </p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
-                    <img src="{% static 'img/landing/ico_3_new.png' %}" alt=""/>
-                    <p class="text-center">
-                    	Виджет положительно влияет на продвижение сайта,
-                    	<b>улучшает его SEO-позиции</b>
-                    </p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
-                    <img src="{% static 'img/landing/ico_4_new.png' %}" alt=""/>
-                    <p class="text-center">
-                    	Виджет
-                    	<b>НЕ</b> блокирует окна,
-                    	<b>НЕ</b> раздражает клиентов,
-                    	<b>НЕ</b> мешает навигации по сайту
-                   	</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
-                    <img src="{% static 'img/landing/ico_5_new.png' %}" alt=""/>
-                    <p class="text-center">
-                    	Использовать мультивиджет легко: просто оставьте заявку, а
-                    	<b>мы возьмем на себя его установку и настойку</b>
-                    </p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 benefit">
-                    <img src="{% static 'img/landing/ico_6_new.png' %}" alt=""/>
-                    <p class="text-center">
-                    	Виджет не перестает работать
-                    	<b>даже при нулевом балансе</b>
-                   	</p>
-                </div>
+        		<div class="col-lg-1 height0">&nbsp;</div>
             </div>
         </div>
     </section>
@@ -452,7 +468,7 @@
         </div>
         <span>И еще более 2000 компаний</span>
         <br/>
-        <button class="try-now-button" onclick="window.location.assign('/accounts/client/register')" type="button">получить бесплатно</button>
+        <button id="try-now-2" class="try-now-button" onclick="window.location.assign('/accounts/client/register')" type="button">получить бесплатно</button>
         
     </section>
     

@@ -8,6 +8,7 @@ body {
     padding-top: 7px;
     padding-bottom: 10px;
     color: #fff;
+    border-bottom: 1px solid #c6c6c6;
 }
 
 .brand-logo-pic {
@@ -64,7 +65,6 @@ body {
 }
 
 .section-1 {
-    /* background-size: cover; */
     padding-top: 140px;
     color: #efefef;
     text-align: left;
@@ -107,8 +107,8 @@ body {
 .section-2 span {
     font-family: bebasneue_regular, serif;
     letter-spacing: 3px;
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 36px;
+    line-height: 41px;
 	padding-left: 6px;
 	padding-right: 6px;
     background-color: #00EF81;
@@ -138,8 +138,8 @@ body {
 .section-2 .because {
 	border-bottom: 4px solid #000;
 	padding-bottom: 20px;
-	font-size: 18px;
-	line-height: 18px;
+    font-size: 16px;
+    line-height: 16px;        
 	text-align: left;
 }
 
@@ -151,6 +151,8 @@ body {
 .section-2 .benefit {
 	text-align: center;
 	height: 290px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .section-2 .benefit img {
@@ -159,8 +161,12 @@ body {
 
 .section-2 .benefits p {
     padding-top: 10px;
-	font-size: 18px;
+	font-size: 16px;
     font-weight: 400;
+}
+
+.section-2 .benefits p b {
+	font-size: 18px;
 }
 
 .height0 {
@@ -177,8 +183,11 @@ body {
     letter-spacing: 3px;
     background-color: #00EF81;
     color: #000;
-    font-size: 41px;
-    line-height: 41px;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 35px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .widget-img {
@@ -191,9 +200,6 @@ body {
 
 .feature {
 	border-bottom: 4px solid #000;
-	padding-left: 60px;
-	padding-top: 10px;
-	padding-right: 60px;
 	height: 190px;
 	font-size: 16px;
 }
@@ -240,6 +246,36 @@ body {
 	padding-bottom: 100px;
 }
 
+.widget-1 .feature {
+    padding-top: 40px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.widget-2 .feature {
+    padding-top: 50px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.widget-3 .feature {
+    padding-top: 30px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.widget-4 .feature {
+    padding-top: 30px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.widget-5 .feature {
+    padding-top: 40px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
 .widget-5 .widget-img img {
 	margin-top: -182px;	
 }
@@ -270,7 +306,7 @@ body {
 
 .section-3 span {
  	font-family: roboto_light;
-	font-size: 18px;
+	font-size: 16px;
     display: block;
     padding-top: 20px;
     padding-bottom: 15px;
@@ -279,7 +315,7 @@ body {
 .section-3 .brand {
     margin-top: 30px;
     width: 257px;
-    height: 80px;
+    height: 90px;
     margin-left: auto;
 	margin-right: auto;
 }
@@ -336,9 +372,6 @@ body {
     padding-left: 25px;
     padding-right: 25px;
     margin-bottom: 40px;
-    color: #000;
-	background-color: #fff;
-	border: 3px solid #FFF;
 	border-radius: 24px;
 	font-family: roboto_regular;
     font-weight: bold;
@@ -349,8 +382,24 @@ body {
     text-transform: uppercase;
 }
 
-.try-now-button:hover {
+#try-now-1 {
+    color: #fff;
+	border: 3px solid #fff;
+	background-color: rgba(0,0,0,0);
+}
+
+#try-now-1:hover {
     color: #00EF81;
+}
+
+#try-now-2 {
+    color: #000;
+	border: 3px solid #FFF;
+	background-color: #fff;
+}
+
+#try-now-2:hover {
+    color: #fff;
 	border: 3px solid #FFF;
 	background-color: rgba(0,0,0,0);
 }
@@ -362,12 +411,6 @@ body {
 
 
 
-@media screen and (max-width: 1200px) {
-	.feature {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-}
 
 @media screen and (min-width: 769px) {
 
@@ -379,16 +422,39 @@ body {
 		display: none;
 	}
 
+    .section-2 .because {
+        height: 108px;
+    }
+    
+    .widget-4 img {
+        margin-left: -25px;
+    }
+
+    .widget-4 .headline {
+        margin-right: 25px;
+    }
+
 }
+
 
 @media screen and (min-width: 959px) {
 
-    .section-2 .benefits {
-        padding-left: 90px;
-        padding-right: 90px;
+    .section-2 .because {
+        height: 108px;
     }
+    
 }
 
+
+@media screen and (max-width: 959px) {
+
+    .feature {
+        padding-top: 20px!important;
+        padding-left: 0px!important;
+        padding-right: 0px!important;
+    }
+    
+}
 
 @media screen and (max-width: 768px) {
 
@@ -399,7 +465,7 @@ body {
 	.section-2 .why {
 		display: none;
 	}
-	
+
 	.headline {
 		border: 0px;
 		text-align: center;
@@ -412,7 +478,8 @@ body {
 		margin-top: -20px;
 		height: inherit;
 		padding-bottom: 40px; 
-		/* height: 200px; */
+        margin-left: 0px!important; 
+        margin-right: 0px!important; 
 	}
 
 	.widget-img {
@@ -430,3 +497,5 @@ body {
 	}
 
 }
+
+

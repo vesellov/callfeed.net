@@ -371,7 +371,7 @@ footer .phone {
 
 footer .copyright-text {
     padding-top: 10px;
-    padding-left: 15px;
+    padding-left: 0px;
     font-size: 16px;
     margin-top: 10px;
     line-height: 34px;
@@ -405,8 +405,8 @@ footer ul {
 }
 
 footer a:hover {
-    color: white;
-    text-decoration: none;
+    color: #fff!important;
+    text-decoration: underline;
 }
 
 footer a:visited {
