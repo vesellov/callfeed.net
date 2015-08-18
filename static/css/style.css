@@ -356,8 +356,8 @@ footer {
     min-height: 190px;
     background-color: #000;
     color: #526B77;
-    padding-top: 10px!important; 
-    padding-bottom: 20px; 
+    padding-top: 25px; 
+    padding-bottom: 30px; 
 }
 
 footer .phone {
@@ -551,6 +551,10 @@ footer .bottom-links li {
 
 @media screen and (max-width: 768px) {
 
+	footer {
+		padding-bottom: 40px!important; 
+	}
+	
 	footer .phone2 {
 		display: none;
 	}
