@@ -986,9 +986,9 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
             'offline_message_notifications_email']
         widget.save()
         # return HttpResponseRedirect('/profile/client/widget/notifications?widget_id=%d' % notifications_form.cleaned_data['widget_id'])
-        return self.get(request, messages=[u'Изменения сохранены'])
+        return self.get(request, message=u'Изменения сохранены')
 
-    def get(self, request, errors=None, messages=None):
+    def get(self, request, errors=None, message=None):
         try:
             widget = Widget.objects.get(id=request.GET.get('widget_id', ''))
         except (ObjectDoesNotExist, KeyError):
@@ -1010,9 +1010,8 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
             notifications_form.has_errors = True
             notifications_form.errors = errors
             
-        if messages:
-            notifications_form.has_messages = True
-            notifications_form.messages = messages
+        if message:
+            notifications_form.message = message
 
         return render(request, 'pages/profile/client/client_widget_notifications.html', {
             'client': self.client,

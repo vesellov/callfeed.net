@@ -467,3 +467,9 @@ input[type="submit"] {
     text-align: justify;
 }
 
+.green-message {
+	background: #dfd;
+	color: #6f6;
+	border: 1px solid #6f6;
+}
+
