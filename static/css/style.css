@@ -349,84 +349,6 @@ input[type="submit"] {
     margin-left: 45px;
 }
 
-/* footer */
-body > div.container {
-    margin-bottom: 180px;
-}
-
-
-
-footer {
-    width: 100%;
-    min-height: 190px;
-    background-color: #000;
-    color: #526B77;
-    padding-top: 25px; 
-    padding-bottom: 30px; 
-}
-
-footer .phone {
-    margin-bottom: 0;
-    font-weight: 400;
-    font-size: 32px;
-    white-space: nowrap;
-    font-family: bebasneue_regular, serif;
-    line-height: 100px;
-}
-
-footer .copyright-text {
-    padding-top: 10px;
-    padding-left: 0px;
-    font-size: 16px;
-    margin-top: 10px;
-    line-height: 34px;
-}
-
-footer li {
-	padding: 10px;
-    font-size: 16px;
-}
-
-footer .menu {
-    padding-top: 3px;
-    padding-left: 0;
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: 7px;
-    white-space: nowrap;
-}
-
-footer .logo {
-    height: 33px;
-    width: 170px;
-}
-
-footer a {
-    color: #607D8B !important;
-}
-
-footer ul {
-    list-style: none;
-}
-
-footer a:hover {
-    color: #fff!important;
-    text-decoration: underline;
-}
-
-footer a:visited {
-    color: #526B77;
-}
-
-footer .bottom-links {
-	margin-right: 0px;
-	margin-left: 0px;
-}
-
-footer .bottom-links li {
-	margin-left: -50px;
-}
-
 
 /* Bootstrap addons */
 
@@ -545,23 +467,3 @@ footer .bottom-links li {
     text-align: justify;
 }
 
-
-@media screen and (min-width: 769px) {
-
-	footer .phone1 {
-		display: none;
-	}
-	
-}
-
-@media screen and (max-width: 768px) {
-
-	footer {
-		padding-bottom: 40px!important; 
-	}
-	
-	footer .phone2 {
-		display: none;
-	}
-
-}

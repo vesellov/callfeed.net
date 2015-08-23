@@ -77,7 +77,7 @@ body {
     margin: 0;
     text-align: left;
     font-size: 30px;
-    line-height: 40px;
+    line-height: 40px!important;
 }
 
 .section-1 img {
@@ -109,8 +109,8 @@ body {
 .section-2 span {
     font-family: bebasneue_regular, serif;
     letter-spacing: 3px;
-    font-size: 36px;
-    line-height: 41px;
+    font-size: 36px!important;
+    line-height: 41px!important;
 	padding-left: 6px;
 	padding-right: 6px;
     background-color: #00EF81;
@@ -125,10 +125,10 @@ body {
 .section-2 .why {
 	border-top: 4px solid #000;
 	height: 100px;
-	padding-top: 20px;
+	padding-top: 17px;
 	/* padding-right: 40px; */
-	font-size: 32px;
-	line-height: 32px;
+	font-size: 32px!important;
+	line-height: 32px!important;
 	text-transform: uppercase;
 	text-align: left;
     width: 190px;
@@ -141,8 +141,8 @@ body {
 .section-2 .because {
 	border-bottom: 4px solid #000;
 	padding-bottom: 20px;
-    font-size: 16px;
-    line-height: 20px;        
+    font-size: 16px!important;
+    line-height: 20px!important;
 	text-align: left;
 }
 
@@ -189,8 +189,8 @@ body {
     letter-spacing: 3px;
     background-color: #00EF81;
     color: #000;
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 36px!important;
+    line-height: 36px!important;
     font-weight: bold;
     padding-left: 8px;
     padding-right: 8px;
@@ -287,6 +287,10 @@ body {
 	margin-top: -182px;	
 }
 
+.widget-2 {
+    overflow-x: hidden;
+}
+
 .section-3 {
     background: url('./../img/landing/bg_3.png') no-repeat;
     background-size: cover;
@@ -300,8 +304,8 @@ body {
     font-family: bebasneue_regular, serif;
     letter-spacing: 3px;
     font-size: 36px;
-    line-height: 36px;
-    padding-top: 30px;
+    line-height: 36px!important;
+    padding-top: 30px!important;
     padding-bottom: 20px;
 }
 
@@ -384,7 +388,7 @@ body {
     font-weight: bold;
     font-size: 14px;
     letter-spacing: 2px;
-    line-height: 28px;
+    line-height: 28px!important;
     height: 48px;
     text-transform: uppercase;
 }
@@ -417,63 +421,6 @@ body {
 
 
 
-
-
-@media screen and (min-width: 768px) {
-
-	.section-1 {
-	    background: url('./../img/landing/bg_1.jpg')!important;
-        background-repeat: no-repeat!important;
-        background-position: 50% 50%!important;
-        background-size:   cover!important;                     
-	}
-	
-	.section-2 .why2 {
-		display: none;
-	}
-
-    .section-2 .because {
-        height: 108px;
-        margin-left: -40px;
-        line-height: 18px;
-    }
-    
-    .widget-4 img {
-        margin-left: -25px;
-    }
-
-    .widget-4 .headline {
-        margin-right: 25px;
-    }
-
-}
-
-
-@media screen and (min-width: 992px) {
-
-	.section-1 {
-        /* background-size: 100% !important; */
-	    /* background: url('./../img/landing/bg_1.jpg') 50% 50% no-repeat !important; */
-	}
-
-    .section-2 .because {
-        height: 108px;
-        margin-left: -50px;
-        line-height: 22px;
-    }
-    
-}
-
-
-@media screen and (max-width: 959px) {
-
-    .feature {
-        padding-top: 20px!important;
-        padding-left: 0px!important;
-        padding-right: 0px!important;
-    }
-    
-}
 
 @media screen and (max-width: 767px) {
 
@@ -519,5 +466,65 @@ body {
 	}
 
 }
+
+
+@media screen and (min-width: 768px) {
+
+	.section-1 {
+	    background: url('./../img/landing/bg_1.jpg')!important;
+        background-repeat: no-repeat!important;
+        background-position: 50% 50%!important;
+        background-size:   cover!important;                     
+	}
+	
+	.section-2 .why2 {
+		display: none;
+	}
+
+    .section-2 .because {
+        height: 112px;
+        margin-left: -40px;
+        line-height: 18px!important;
+        margin-top: -4px;
+    }
+    
+    .widget-4 img {
+        margin-left: -25px;
+    }
+
+    .widget-4 .headline {
+        margin-right: 25px;
+    }
+
+}
+
+
+@media screen and (max-width: 959px) {
+
+    .feature {
+        padding-top: 20px!important;
+        padding-left: 0px!important;
+        padding-right: 0px!important;
+    }
+    
+}
+
+
+@media screen and (min-width: 992px) {
+
+	.section-1 {
+        /* background-size: 100% !important; */
+	    /* background: url('./../img/landing/bg_1.jpg') 50% 50% no-repeat !important; */
+	}
+
+    .section-2 .because {
+        height: 108px;
+        margin-left: -50px;
+        line-height: 22px!important;
+    }
+    
+}
+
+
 
 
