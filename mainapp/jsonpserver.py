@@ -342,7 +342,6 @@ class JSONPEntryPoint(View):
                 widget = Widget.objects.get(id=int(token))
             except:
                 import traceback
-
                 return HttpResponse('%s(%s);' % (
                     request.GET['callback'],
                     json.dumps({
@@ -361,7 +360,6 @@ class JSONPEntryPoint(View):
                 'search_request': request.GET.get('search_request', ''),
                 'hostname': request.GET.get('hostname', ''),
             }
-
 
             #--- check ip in black list
             if self.is_ip_in_blacklist(jdata['ip'], widget.blacklist_ip.split(',')):

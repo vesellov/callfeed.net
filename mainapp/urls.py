@@ -24,6 +24,8 @@ from mainapp.trackingserver import track_by_id
 __author__ = 'max'
 
 urlpatterns = patterns(
+    # Tests
+    url(r'^test/?$', TestEverything.as_view()),
     # BackEnd servers
     url(r'^input', JSONPEntryPoint.as_view()), 
     url(r'^tracking/(?P<id>[0-9]+)/event.php$', track_by_id),
@@ -91,6 +93,4 @@ urlpatterns = patterns(
     url(r'^faq/?$', TemplateView.as_view(template_name='pages/faq.html')),
     # Technologies page
     url(r'^technologies/?$', TemplateView.as_view(template_name='pages/technologies.html')),
-    # Test
-    url(r'^test/?$', TestEverything.as_view()),
 )
