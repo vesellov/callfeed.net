@@ -981,7 +981,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
         widget.offline_message_notifications_email = notifications_form.cleaned_data[
             'offline_message_notifications_email']
         widget.save()
-        return HttpResponseRedirect('/profile/client/notifications?widget_id=%d' % notifications_form.cleaned_data['widget_id'])
+        return HttpResponseRedirect('/profile/client/widgets/notifications?widget_id=%d' % notifications_form.cleaned_data['widget_id'])
         # return self.get(request)
 
     def get(self, request, errors=None):
