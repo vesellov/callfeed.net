@@ -694,7 +694,7 @@ class ClientOperatorsEdit(ProtectedClientView):
 
         if not operator_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % operator_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=operator_form.errors)
 
         operator = None
         operator_params = {
@@ -824,7 +824,7 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
             widget.save()
         except ObjectDoesNotExist:
             print 'FAIL: OPERATOR DOES NOT EXIST'
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=['OPERATOR DOES NOT EXIST'])
 
         widget.related_operators.clear()
 
@@ -867,7 +867,7 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
                        'widget_id': widget.id,
                        'options_form': options_form})
 
-    def get(self, request, errors=None):
+    def get(self, request, errors=None, messages=None):
         widget = self.widget
         schedule = widget.schedule
 
@@ -914,6 +914,10 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
             options_form.has_errors = True
             options_form.errors = errors
 
+        if messages:
+            options_form.has_messages = True
+            options_form.messages = messages
+
         return render(request, 'pages/profile/client/client_widget_options.html',
                       {'client': self.client,
                        'widget_id': widget.id,
@@ -926,7 +930,7 @@ class ClientWidgetDesign(ProtectedClientWidgetView):
 
         if not design_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % design_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=design_form.errors)
 
         if 'background_image_global' in request.FILES.keys():
             background_image_global_url = save_media_file(request.FILES['background_image_global'])
@@ -962,7 +966,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
 
         if not notifications_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % notifications_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=notifications_form.errors)
 
         widget = None
 
@@ -970,7 +974,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
             widget = Widget.objects.get(id=notifications_form.cleaned_data['widget_id'])
         except (ObjectDoesNotExist, KeyError):
             print 'FAIL: WIDGET DOES NOT EXIST'
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=['WIDGET DOES NOT EXIST'])
 
         widget.is_email_notification_on = notifications_form.cleaned_data['is_email_notification_on']
         widget.is_sms_notification_on = notifications_form.cleaned_data['is_sms_notification_on']
@@ -981,11 +985,16 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
         widget.offline_message_notifications_email = notifications_form.cleaned_data[
             'offline_message_notifications_email']
         widget.save()
-        return HttpResponseRedirect('/profile/client/widget/notifications?widget_id=%d' % notifications_form.cleaned_data['widget_id'])
-        # return self.get(request)
+        # return HttpResponseRedirect('/profile/client/widget/notifications?widget_id=%d' % notifications_form.cleaned_data['widget_id'])
+        return self.get(request, messages=[u'Изменения сохранены'])
 
-    def get(self, request, errors=None):
-        widget = self.widget
+    def get(self, request, errors=None, messages=None):
+        try:
+            widget = Widget.objects.get(id=request.GET.get('widget_id', ''))
+        except (ObjectDoesNotExist, KeyError):
+            traceback.print_exc()
+            return HttpResponseRedirect('/profile/client/widgets')
+        # widget = self.widget
 
         initial = {'widget_id': widget.id,
                    'is_email_notification_on': widget.is_email_notification_on,
@@ -994,11 +1003,16 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
                    'callback_notifications_email': widget.callback_notifications_email,
                    'out_of_balance_notifications_email': widget.out_of_balance_notifications_email,
                    'offline_message_notifications_email': widget.offline_message_notifications_email}
+        
         notifications_form = ClientWidgetNotificationsForm(initial=initial)
 
         if errors:
             notifications_form.has_errors = True
             notifications_form.errors = errors
+            
+        if messages:
+            notifications_form.has_messages = True
+            notifications_form.messages = messages
 
         return render(request, 'pages/profile/client/client_widget_notifications.html', {
             'client': self.client,
@@ -1024,7 +1038,7 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
 
         if not parameters_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % parameters_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=parameters_form.errors)
 
         widget = None
 
@@ -1032,7 +1046,7 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
             widget = Widget.objects.get(id=parameters_form.cleaned_data['widget_id'])
         except (ObjectDoesNotExist, KeyError):
             print 'FAIL: WIDGET DOES NOT EXIST'
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=['WIDGET DOES NOT EXIST'])
         # widget.popup_time_sec = parameters_form.cleaned_data['popup_time_sec']
         widget.time_before_callback_sec = parameters_form.cleaned_data['time_before_callback_sec']
         # widget.delay_before_callback_from_a_to_b = parameters_form.cleaned_data['delay_before_callback_from_a_to_b']
@@ -1102,7 +1116,7 @@ class ClientWidgetContactsForm(ProtectedClientWidgetView):
 
         if not contacts_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % contacts_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=contacts_form.errors)
 
         self.widget.update_settings(contacts_form.cleaned_data, contacts_form.excluded_fields)
         return self.get(request)
@@ -1129,7 +1143,7 @@ class ClientWidgetContent(ProtectedClientWidgetView):
 
         if not content_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % content_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=content_form.errors)
 
         self.widget.update_settings(content_form.cleaned_data, content_form.excluded_fields)
 
@@ -1199,7 +1213,7 @@ class ClientInfoPersonal(ProtectedClientView):
 
         if not personal_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % personal_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=personal_form.errors)
 
         update_dict = {'name': personal_form.cleaned_data['name'],  # client
                        'first_name': personal_form.cleaned_data['name'],  # user
@@ -1236,14 +1250,14 @@ class ClientInfoSecurity(ProtectedClientView):
 
         if not security_form.is_valid():
             print 'FAIL: FORM IS NOT VALID %s' % security_form.errors
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=security_form.errors)
 
         success = self.client.user.check_password(security_form.cleaned_data['old_password']) and \
                   security_form.cleaned_data['new_password'] == security_form.cleaned_data['new_password_confirmation']
 
         if not success:
             print 'FAIL: OLD PASSWORD DO NOT MATCH OR PASSWORDS ARE DIFFERENT'
-            return self.get(request, has_errors=True)
+            return self.get(request, errors=['OLD PASSWORD DO NOT MATCH OR PASSWORDS ARE DIFFERENT'])
 
         self.client.user.set_password(security_form.cleaned_data['new_password'])
         self.client.user.save()

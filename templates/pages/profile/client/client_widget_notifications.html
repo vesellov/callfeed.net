@@ -6,10 +6,17 @@
 
 {% block page_content %}
     <form action="" method="post">{% csrf_token %}
-        {% if options_form.has_errors %}
+        {% if notifications_form.has_errors %}
             <div class="col-lg-12">
-                <b>{{ options_form.errors }}</b>
+                <b>{{ notifications_form.errors }}</b>
                 <b class="text-red">Не все обязательные поля заполнены. Пожалуйста, убедитесь, что соблюдены все требования к заполнению формы</b>
+            </div>
+            <div class="col-lg-12">&nbsp;</div>
+        {% endif %}
+
+        {% if notifications_form.has_messages %}
+            <div class="col-lg-12">
+                <b style="color: green;">{{ notifications_form.messages }}</b>
             </div>
             <div class="col-lg-12">&nbsp;</div>
         {% endif %}
