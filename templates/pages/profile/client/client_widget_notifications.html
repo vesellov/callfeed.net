@@ -17,6 +17,19 @@
         <div class="col-lg-12">
             <div class="col-lg-8">
                 <div class="row">
+                    <b>{{ notifications_form.is_sms_notification_on.label }}</b><br/>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ notifications_form.is_sms_notification_on }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
                     <b>{{ notifications_form.sms_notification_number.label }}</b><br/>
                     <span>Укажите номер телефона для SMS-отчётов о качестве принятых звонков</span>
                 </div>
@@ -24,6 +37,20 @@
             <div class="col-lg-4">
                 <span class="width-100percent">
                     {{ notifications_form.sms_notification_number }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+        
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row">
+                    <b>{{ notifications_form.is_email_notification_on.label }}</b><br/>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="width-100percent">
+                    {{ notifications_form.is_email_notification_on }}
                 </span>
             </div>
         </div>

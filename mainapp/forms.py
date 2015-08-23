@@ -394,6 +394,10 @@ class ClientWidgetNotificationsForm(ClientWidgetForm):
     # CSS-класс 'phone-number' используется для того, чтобы делать по нему
     #  автоподстановку маски для ввода номера(+7) при получением полем
     #  фокуса; js-код в base.html
+    is_email_notification_on = forms.BooleanField(required=False,
+                                                label="Включить уведомления по электронной почте")
+    is_sms_notification_on = forms.BooleanField(required=False,
+                                                  label="Включить SMS-уведомления")
     sms_notification_number = forms.CharField(max_length=20, required=False,
                                               label='Номер телефона для SMS-уведомлений',
                                               widget=forms.TextInput(attrs={'class': 'phone-number'}))

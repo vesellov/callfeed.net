@@ -972,6 +972,8 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
             print 'FAIL: WIDGET DOES NOT EXIST'
             return self.get(request, has_errors=True)
 
+        widget.is_email_notification_on = notifications_form.cleaned_data['is_email_notification_on']
+        widget.is_sms_notification_on = notifications_form.cleaned_data['is_sms_notification_on']
         widget.sms_notification_number = notifications_form.cleaned_data['sms_notification_number']
         widget.callback_notifications_email = notifications_form.cleaned_data['callback_notifications_email']
         widget.out_of_balance_notifications_email = notifications_form.cleaned_data[
@@ -986,6 +988,8 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
         widget = self.widget
 
         initial = {'widget_id': widget.id,
+                   'is_email_notification_on': widget.is_email_notification_on,
+                   'is_sms_notification_on': widget.is_sms_notification_on,
                    'sms_notification_number': widget.sms_notification_number,
                    'callback_notifications_email': widget.callback_notifications_email,
                    'out_of_balance_notifications_email': widget.out_of_balance_notifications_email,
