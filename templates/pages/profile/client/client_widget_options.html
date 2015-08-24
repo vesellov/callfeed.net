@@ -4,6 +4,13 @@
 Основные настройки виджета
 {% endblock %}
 
+
+{% block message_box %}
+	{% if options_form.message %}
+        <span class="green-message">{{ options_form.message }}</span>
+	{% endif %}
+{% endblock %}
+
 {% block page_content %}
     <form action="" method="post">{% csrf_token %}
         {% if options_form.has_errors %}
@@ -33,7 +40,7 @@
             <div class="col-lg-8">
                 <div class="row">
                     <b>Часовой пояс</b><br/>
-                    <span>По данному часовому поясу ббут отображаться время отправки оффлайн-сообщений и сообщений в чате. Так же, согласно этому часовому поясу будет рассчитываться и отправляться на email еежедневная статистика по работе операторов.</span>
+                    <span>По данному часовому поясу будут отображаться время отправки оффлайн-сообщений и сообщений в чате. Так же, согласно этому часовому поясу будет рассчитываться и отправляться на email еежедневная статистика по работе операторов.</span>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -138,13 +145,6 @@
 	            </table>
             </div>
         </div>
-
-		{% if options_form.message %}
-		    <div class="col-lg-12">
-		        <span class="green-message">{{ options_form.message }}</span>
-		    </div>
-		    <div class="col-lg-12">&nbsp;</div>
-		{% endif %}
 
         <div class="col-lg-12">
             <input class="btn-green" type="submit" value="Сохранить"/>
