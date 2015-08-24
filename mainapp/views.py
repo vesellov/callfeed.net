@@ -941,9 +941,9 @@ class ClientWidgetDesign(ProtectedClientWidgetView):
 
         self.widget.update_settings(design_form.cleaned_data, design_form.excluded_fields)
 
-        return self.get(request)
+        return self.get(request, message = u'Изменения успешно сохранены')
 
-    def get(self, request, errors=None):
+    def get(self, request, errors=None, message=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id}
@@ -954,6 +954,9 @@ class ClientWidgetDesign(ProtectedClientWidgetView):
         if errors:
             design_form.has_errors = True
             design_form.errors = errors
+            
+        if message:
+            design_form.message = message
 
         return render(request, 'pages/profile/client/client_widget_design.html',
                       {'client': self.client,
