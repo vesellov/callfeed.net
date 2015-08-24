@@ -1,6 +1,10 @@
 body {
     font-family: roboto_regular, Arial, serif;
 }
+
+main {
+    overflow: hidden;
+}
     
 .navbar-purple {
     height: 55px;
@@ -288,7 +292,7 @@ body {
 }
 
 .widget-2 {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .section-3 {
@@ -482,7 +486,7 @@ body {
 	}
 
     .section-2 .because {
-        height: 112px;
+        height: 108px;
         margin-left: -40px;
         line-height: 18px!important;
         margin-top: -4px;
@@ -526,5 +530,19 @@ body {
 }
 
 
+@media screen and (max-width: 510px) {
+    #top-menu-links {
+        margin-left: -40px!important;    
+    }
+    #top-menu-links li {
+        padding-left: 0px!important;    
+    }
+}
 
-
+@media screen and (max-width: 410px) {
+    #top-menu-links {
+        margin-top: 45px!important;    
+        position: absolute;
+        right: 10px;
+    }
+}

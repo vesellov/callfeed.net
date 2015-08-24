@@ -1,1 +1,4 @@
 *.pyc
+redis-server.log
+static/reports
+uwsgi.nohup.out
