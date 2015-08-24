@@ -138,6 +138,14 @@
 	            </table>
             </div>
         </div>
+
+		{% if options_form.message %}
+		    <div class="col-lg-12">
+		        <span class="green-message">{{ options_form.message }}</span>
+		    </div>
+		    <div class="col-lg-12">&nbsp;</div>
+		{% endif %}
+
         <div class="col-lg-12">
             <input class="btn-green" type="submit" value="Сохранить"/>
         </div>

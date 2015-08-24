@@ -2,14 +2,6 @@
 
 {% block page_title %}
 Уведомления
-
-{% if notifications_form.message %}
-    <div class="col-lg-12">
-        <span class="green-message">{{ notifications_form.message }}</span>
-    </div>
-    <div class="col-lg-12">&nbsp;</div>
-{% endif %}
-
 {% endblock %}
 
 {% block page_content %}
@@ -105,8 +97,16 @@
             </div>
         </div>
         <div class="col-lg-12">&nbsp;</div>
-
+        
+		{% if notifications_form.message %}
+		    <div class="col-lg-12">
+		        <span class="green-message">{{ notifications_form.message }}</span>
+		    </div>
+		    <div class="col-lg-12">&nbsp;</div>
+		{% endif %}
+		
         {{ notifications_form.widget_id }}
+        
         <div class="col-lg-12">
             <input class="btn-green" type="submit" value="Сохранить"/>
         </div>

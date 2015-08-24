@@ -468,8 +468,7 @@ input[type="submit"] {
 }
 
 .green-message {
-	background: #dfd;
-	color: #6f6;
-	border: 1px solid #6f6;
+	font-size: 12px;
+	color: #4FAD4F;
 }
 

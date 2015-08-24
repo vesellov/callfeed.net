@@ -861,13 +861,15 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
 
         schedule.save()
         widget.save()
+        
+        options_form.message = u'Изменения успешно сохранены'
 
         return render(request, 'pages/profile/client/client_widget_options.html',
                       {'client': self.client,
                        'widget_id': widget.id,
                        'options_form': options_form})
 
-    def get(self, request, errors=None, messages=None):
+    def get(self, request, errors=None, message=None):
         widget = self.widget
         schedule = widget.schedule
 
@@ -914,9 +916,8 @@ class ClientWidgetOptions(ProtectedClientWidgetView):
             options_form.has_errors = True
             options_form.errors = errors
 
-        if messages:
-            options_form.has_messages = True
-            options_form.messages = messages
+        if message:
+            options_form.message = message
 
         return render(request, 'pages/profile/client/client_widget_options.html',
                       {'client': self.client,
@@ -986,7 +987,7 @@ class ClientWidgetNotifications(ProtectedClientWidgetView):
             'offline_message_notifications_email']
         widget.save()
         # return HttpResponseRedirect('/profile/client/widget/notifications?widget_id=%d' % notifications_form.cleaned_data['widget_id'])
-        return self.get(request, message=u'Изменения сохранены')
+        return self.get(request, message=u'Изменения успешно сохранены')
 
     def get(self, request, errors=None, message=None):
         try:
