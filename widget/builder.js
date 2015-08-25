@@ -32,27 +32,27 @@ function CallFeedGenerateSources(my_token, settings){
 	        if (defaults.controllers.hasOwnProperty(controller_key) && !sett.controllers.hasOwnProperty(controller_key))
 	        	sett.controllers[key] = defaults.controllers[key];
     }
-    
+
+    /*
 	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
 	    var aa = sett[key];
 	    var bb = '';
-	    /*
-		for (var i = 0; i < aa.length; i++) {
-            var charCode = aa.charCodeAt(i);
-            if (charCode > 127) {
-            	//bb += unicodeCharEscape(charCode);
-            	bb += aa.charAt(i);
-            } else {
-            	bb += aa.charAt(i);
-            }
-		}
-		*/
+//		for (var i = 0; i < aa.length; i++) {
+//            var charCode = aa.charCodeAt(i);
+//            if (charCode > 127) {
+//            	//bb += unicodeCharEscape(charCode);
+//            	bb += aa.charAt(i);
+//            } else {
+//            	bb += aa.charAt(i);
+//            }
+//		}
 	    // bb = htmlEncode(aa);
 	    bb = aa;
 		sett[key] = bb;
 		delete aa;
 		delete bb;
 	}
+	*/
    
     var preload = CallFeedBuildPreLoadHTML(sett);
     var embed = CallFeedBuildEmbedHTML(my_token, 'cf.min.js');
