@@ -774,6 +774,7 @@ class JSONPEntryPoint(View):
             print ('MTT CALL!!!',  jdata['token'], jdata['hostname'], jdata['phone'], client_ip_addr, jdata['callback_id'], mtt_response_result)
 
         except Exception as e:
+            import traceback
             traceback.print_exc()
 
         return HttpResponse('%s(%s);' % (
