@@ -466,12 +466,12 @@ class JSONPEntryPoint(View):
                 s = widget.settings
                 
                 try:
-                    s = unicode(widget.settings).encode('unicode-escape')
+                    s = unicode(widget.settings) # .encode('unicode-escape')
                 except:
                     import traceback
                     traceback.print_exc()
                     
-                print s 
+                # print s 
 
                 s = json.loads(s)
                 # BE SURE TO CHECK FOR DEFAULT VALUES FOR ALL NEW OPTIONS !!!
