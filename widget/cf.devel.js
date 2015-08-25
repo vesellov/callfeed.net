@@ -1196,7 +1196,7 @@ function CallFeedBuildCSS(settings) {
     o+="    user-select: none;\n";
     o+="}\n";
     o+="#cf_main_button:hover {\n";
-    o+="	opacity: 1!important;\n";
+    o+="\topacity: 1!important;\n";
     o+="}\n";
     o+="#cf_main_button_content {\n";
     o+="    position: absolute!important;\n";
@@ -1438,7 +1438,7 @@ function CallFeedBuildCSS(settings) {
     o+="    text-align: center!important;\n";
     o+="}\n";
     o+="#cf_dial_countdown_text {\n";
-    o+="    font-family: &quot;Courier Обычный&quot;,&quot;Courier&quot;!important;\n";
+    o+="    font-family: &quot;Courier \u041e\u0431\u044b\u0447\u043d\u044b\u0439&quot;,&quot;Courier&quot;!important;\n";
     o+="    font-weight: 600!important;\n";
     o+="    font-size: 50px!important;\n";
     o+="    line-height: 50px!important;\n";
@@ -1701,10 +1701,10 @@ function CallFeedBuildCSS(settings) {
     o+=".cf__divtext { }\n";
     o+=".cf__divpanel { }\n";
     o+=".cf__div0height {\n";
-    o+="	height: 0px!important;\n";
+    o+="\theight: 0px!important;\n";
     o+="}\n";
     o+=".cf__divhidden {\n";
-    o+="	display: none!important;\n";
+    o+="\tdisplay: none!important;\n";
     o+="}\n";
     o+=".cf__divinput { }\n";
     o+=".cf__divlink {\n";
@@ -1728,7 +1728,7 @@ function CallFeedBuildCSS(settings) {
     o+="    color: #ccc!important;\n";
     o+="}\n";
     o+=".cf__valid {\n";
-    o+="	border-color: %(color_background_inputs)s!important;\n";
+    o+="\tborder-color: %(color_background_inputs)s!important;\n";
     o+="    background-color: %(color_background_inputs)s!important;\n";
     o+="    opacity: %(color_opacity_inputs)s!important;\n";
     o+="}\n";
@@ -1766,7 +1766,7 @@ function CallFeedBuildCSS(settings) {
     o+="    appearance: none!important;\n";
     o+="}\n";
     o+=".cf__input:focus, .cf__input:hover {\n";
-    o+="	/* border: 0!important; */\n";
+    o+="\t/* border: 0!important; */\n";
     o+="    border: 1px solid %(color_background_inputs)s;\n";
     o+="    outline:0!important;\n";
     o+="    -webkit-box-shadow: none!important;\n";
@@ -1851,7 +1851,7 @@ function CallFeedBuildCSS(settings) {
     o+="&lt;/style&gt;\n";
     for (var key in settings) if (settings.hasOwnProperty(key))
         if ((key.indexOf("flag_")==0)||(key.indexOf("text_")==0)||(key.indexOf("param_")==0)||(key.indexOf("color_")==0))
-            o = o.replace(new RegExp("%\\("+key+"\\)s", "g"), settings[key]);
+            o = o.replace(new RegExp("%\\("+key+"\\)s", "g"), unescape(settings[key]));
     return o;
 }
 
@@ -1892,7 +1892,7 @@ function CallFeedBuildHTML(settings) {
     o+="        &lt;span class=&quot;cf__span cf__u&quot;&gt;%(text_link_send_message)s&lt;/span&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_main_call_panel&quot; class=&quot;cf_call_panel cf__divpanel cf__valid&quot;&gt;\n";
-    o+="        &lt;input id=&quot;cf_main_call_input&quot; class=&quot;cf_call_input cf__input&quot; placeholder=&quot;Ваш номер телефона&quot; type=&quot;text&quot; pattern=&quot;[0-9]*&quot; /&gt;\n";
+    o+="        &lt;input id=&quot;cf_main_call_input&quot; class=&quot;cf_call_input cf__input&quot; placeholder=&quot;\u0412\u0430\u0448 \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430&quot; type=&quot;text&quot; pattern=&quot;[0-9]*&quot; /&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_main_custom_text&quot; class=&quot;cf_custom_text cf__divtext&quot;&gt;\n";
     o+="        &lt;p id=&quot;cf_main_custom_text_value&quot; class=&quot;cf__p&quot;&gt;%(text_main)s&lt;/p&gt;\n";
@@ -1944,15 +1944,15 @@ function CallFeedBuildHTML(settings) {
     o+="        &lt;p id=&quot;cf_free_custom_text_value&quot; class=&quot;cf__p&quot;&gt;%(text_order_start)s&lt;/p&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_free_call_panel&quot; class=&quot;cf_call_panel cf__divpanel&quot;&gt;\n";
-    o+="        &lt;input id=&quot;cf_free_call_input&quot; class=&quot;cf_call_input cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;Ваш номер телефона&quot; maxlength=&quot;12&quot; type=&quot;tel&quot; /&gt;\n";
+    o+="        &lt;input id=&quot;cf_free_call_input&quot; class=&quot;cf_call_input cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;\u0412\u0430\u0448 \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430&quot; maxlength=&quot;12&quot; type=&quot;tel&quot; /&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_free_daytime_panel&quot; class=&quot;cf__divpanel&quot;&gt;\n";
     o+="        &lt;select id=&quot;cf_free_day_select&quot; class=&quot;cf_day_select cf__select&quot;&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Сегодня'&gt;Сегодня&lt;/option&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Завтра'&gt;Завтра&lt;/option&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Послезавтра'&gt;Послезавтра&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u0421\u0435\u0433\u043e\u0434\u043d\u044f'&gt;\u0421\u0435\u0433\u043e\u0434\u043d\u044f&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u0417\u0430\u0432\u0442\u0440\u0430'&gt;\u0417\u0430\u0432\u0442\u0440\u0430&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u041f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430'&gt;\u041f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430&lt;/option&gt;\n";
     o+="        &lt;/select&gt;\n";
-    o+="        &lt;p class=&quot;cf_daytime_at_text cf__p&quot;&gt;в&lt;/p&gt;\n";
+    o+="        &lt;p class=&quot;cf_daytime_at_text cf__p&quot;&gt;\u0432&lt;/p&gt;\n";
     o+="        &lt;select id=&quot;cf_free_time_select&quot; class=&quot;cf_time_select cf__select&quot;&gt;\n";
     o+="        &lt;/select&gt;\n";
     o+="      &lt;/div&gt;\n";
@@ -1986,11 +1986,11 @@ function CallFeedBuildHTML(settings) {
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_timeoff_daytime_panel&quot; class=&quot;cf__divpanel&quot;&gt;\n";
     o+="        &lt;select id=&quot;cf_timeoff_day_select&quot; class=&quot;cf_day_select cf__select&quot;&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Сегодня'&gt;Сегодня&lt;/option&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Завтра'&gt;Завтра&lt;/option&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Послезавтра'&gt;Послезавтра&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u0421\u0435\u0433\u043e\u0434\u043d\u044f'&gt;\u0421\u0435\u0433\u043e\u0434\u043d\u044f&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u0417\u0430\u0432\u0442\u0440\u0430'&gt;\u0417\u0430\u0432\u0442\u0440\u0430&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u041f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430'&gt;\u041f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430&lt;/option&gt;\n";
     o+="        &lt;/select&gt;\n";
-    o+="        &lt;p class=&quot;cf_daytime_at_text cf__p&quot;&gt;в&lt;/p&gt;\n";
+    o+="        &lt;p class=&quot;cf_daytime_at_text cf__p&quot;&gt;\u0432&lt;/p&gt;\n";
     o+="        &lt;select id=&quot;cf_timeoff_time_select&quot; class=&quot;cf_time_select cf__select&quot;&gt;\n";
     o+="          &lt;option class=&quot;cf__option&quot; value='10:00'&gt;10:00&lt;/option&gt;\n";
     o+="          &lt;option class=&quot;cf__option&quot; value='11:00'&gt;11:00&lt;/option&gt;\n";
@@ -2004,7 +2004,7 @@ function CallFeedBuildHTML(settings) {
     o+="        &lt;/select&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_timeoff_call_panel&quot; class=&quot;cf_call_panel cf__divpanel&quot;&gt;\n";
-    o+="        &lt;input id=&quot;cf_timeoff_call_input&quot; class=&quot;cf_call_input cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;Ваш номер телефона&quot; maxlength=&quot;12&quot; type=&quot;tel&quot; /&gt;\n";
+    o+="        &lt;input id=&quot;cf_timeoff_call_input&quot; class=&quot;cf_call_input cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;\u0412\u0430\u0448 \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430&quot; maxlength=&quot;12&quot; type=&quot;tel&quot; /&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div class=&quot;cf_send_message_link cf__divlink&quot;&gt;\n";
     o+="        &lt;span class=&quot;cf__span cf__u&quot;&gt;%(text_link_send_message)s&lt;/span&gt;\n";
@@ -2034,16 +2034,16 @@ function CallFeedBuildHTML(settings) {
     o+="      &lt;div id=&quot;cf_message_custom_text&quot; class=&quot;cf_custom_text cf__divtext&quot;&gt;\n";
     o+="        &lt;p id=&quot;cf_message_custom_text_value&quot; class=&quot;cf__p&quot;&gt;%(text_message_start)s&lt;/p&gt;\n";
     o+="      &lt;/div&gt;\n";
-    o+="      &lt;textarea id=&quot;cf_message_message_textarea&quot; class=&quot;cf__textarea&quot; placeholder=&quot;Напишите ваш вопрос&quot; &gt;&lt;/textarea&gt;\n";
-    o+="      &lt;input id=&quot;cf_message_name_input&quot; class=&quot;cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;Ваше имя&quot; type=&quot;text&quot; /&gt;\n";
+    o+="      &lt;textarea id=&quot;cf_message_message_textarea&quot; class=&quot;cf__textarea&quot; placeholder=&quot;\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u0432\u0430\u0448 \u0432\u043e\u043f\u0440\u043e\u0441&quot; &gt;&lt;/textarea&gt;\n";
+    o+="      &lt;input id=&quot;cf_message_name_input&quot; class=&quot;cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;\u0412\u0430\u0448\u0435 \u0438\u043c\u044f&quot; type=&quot;text&quot; /&gt;\n";
     o+="      &lt;input id=&quot;cf_message_email_input&quot; class=&quot;cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;E-mail&quot; type=&quot;email&quot; /&gt;\n";
-    o+="      &lt;input id=&quot;cf_message_phone_input&quot; class=&quot;cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;Телефон&quot; type=&quot;tel&quot; /&gt;\n";
+    o+="      &lt;input id=&quot;cf_message_phone_input&quot; class=&quot;cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;\u0422\u0435\u043b\u0435\u0444\u043e\u043d&quot; type=&quot;tel&quot; /&gt;\n";
     o+="      &lt;div class=&quot;cf_message_go_back_link cf__divlink&quot;&gt;\n";
     o+="        &lt;span class=&quot;cf__span cf__u&quot;&gt;%(text_link_message_go_back)s&lt;/span&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="     &lt;/div&gt;\n";
     o+="     &lt;div id=&quot;cf_message_send_button&quot; class=&quot;cf_button&quot;&gt;\n";
-    o+="       &lt;span class=&quot;cf__span&quot;&gt;Отправить&lt;/span&gt;\n";
+    o+="       &lt;span class=&quot;cf__span&quot;&gt;\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c&lt;/span&gt;\n";
     o+="     &lt;/div&gt;\n";
     o+="    &lt;/div&gt;\n";
     o+="    &lt;div id=&quot;cf_message_sent_content&quot; class=&quot;cf_content cf__divpanel&quot;&gt;\n";
@@ -2075,15 +2075,15 @@ function CallFeedBuildHTML(settings) {
     o+="        &lt;p id=&quot;cf_order_custom_text_value&quot; class=&quot;cf_custom_text_value cf__p&quot;&gt;%(text_order_start)s&lt;/p&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_order_call_panel&quot; class=&quot;cf_call_panel cf__divpanel&quot;&gt;\n";
-    o+="        &lt;input id=&quot;cf_order_call_input&quot; class=&quot;cf_call_input cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;Ваш номер телефона&quot; maxlength=&quot;12&quot; type=&quot;tel&quot; /&gt;\n";
+    o+="        &lt;input id=&quot;cf_order_call_input&quot; class=&quot;cf_call_input cf__input cf__valid&quot; value=&quot;&quot; placeholder=&quot;\u0412\u0430\u0448 \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430&quot; maxlength=&quot;12&quot; type=&quot;tel&quot; /&gt;\n";
     o+="      &lt;/div&gt;\n";
     o+="      &lt;div id=&quot;cf_order_daytime_panel&quot; class=&quot;cf__divpanel&quot;&gt;\n";
     o+="        &lt;select id=&quot;cf_order_day_select&quot; class=&quot;cf_day_select cf__select&quot;&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Сегодня'&gt;Сегодня&lt;/option&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Завтра'&gt;Завтра&lt;/option&gt;\n";
-    o+="          &lt;option class=&quot;cf__option&quot; value='Послезавтра'&gt;Послезавтра&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u0421\u0435\u0433\u043e\u0434\u043d\u044f'&gt;\u0421\u0435\u0433\u043e\u0434\u043d\u044f&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u0417\u0430\u0432\u0442\u0440\u0430'&gt;\u0417\u0430\u0432\u0442\u0440\u0430&lt;/option&gt;\n";
+    o+="          &lt;option class=&quot;cf__option&quot; value='\u041f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430'&gt;\u041f\u043e\u0441\u043b\u0435\u0437\u0430\u0432\u0442\u0440\u0430&lt;/option&gt;\n";
     o+="        &lt;/select&gt;\n";
-    o+="        &lt;p class=&quot;cf_daytime_at_text cf__p&quot;&gt;в&lt;/p&gt;\n";
+    o+="        &lt;p class=&quot;cf_daytime_at_text cf__p&quot;&gt;\u0432&lt;/p&gt;\n";
     o+="        &lt;select id=&quot;cf_order_time_select&quot; class=&quot;cf_time_select cf__select&quot;&gt;\n";
     o+="          &lt;option class=&quot;cf__option&quot; value='10:00'&gt;10:00&lt;/option&gt;\n";
     o+="          &lt;option class=&quot;cf__option&quot; value='11:00'&gt;11:00&lt;/option&gt;\n";
@@ -2135,7 +2135,7 @@ function CallFeedBuildHTML(settings) {
     o+="&lt;/div&gt;\n";
     for (var key in settings) if (settings.hasOwnProperty(key))
         if ((key.indexOf("flag_")==0)||(key.indexOf("text_")==0)||(key.indexOf("param_")==0)||(key.indexOf("color_")==0))
-            o = o.replace(new RegExp("%\\("+key+"\\)s", "g"), settings[key]);
+            o = o.replace(new RegExp("%\\("+key+"\\)s", "g"), unescape(settings[key]));
     return o;
 }
 
@@ -2209,6 +2209,26 @@ function CallFeedBuildPreLoadHTML(settings) {
 //[builder.js]
 //
 
+function padWithLeadingZeros(string) {
+    return new Array(5 - string.length).join("0") + string;
+}
+
+function unicodeCharEscape(charCode) {
+    return "\\u" + padWithLeadingZeros(charCode.toString(16));
+}
+
+
+function htmlEncode(value){
+	//create a in-memory div, set it's inner text(which jQuery automatically encodes)
+	//then grab the encoded contents back out.  The div never exists on the page.
+	return $('<div/>').text(value).html();
+}
+
+function htmlDecode(value){
+	return $('<div/>').html(value).text();
+}
+
+	
 function CallFeedGenerateSources(my_token, settings){
 	var sett = settings; 
 	var defaults = CallFeedDefaultSettings(my_token);
@@ -2223,9 +2243,30 @@ function CallFeedGenerateSources(my_token, settings){
 	        if (defaults.controllers.hasOwnProperty(controller_key) && !sett.controllers.hasOwnProperty(controller_key))
 	        	sett.controllers[key] = defaults.controllers[key];
     }
+    
+	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
+	    var aa = sett[key];
+	    var bb = '';
+	    /*
+		for (var i = 0; i < aa.length; i++) {
+            var charCode = aa.charCodeAt(i);
+            if (charCode > 127) {
+            	//bb += unicodeCharEscape(charCode);
+            	bb += aa.charAt(i);
+            } else {
+            	bb += aa.charAt(i);
+            }
+		}
+		*/
+	    // bb = htmlEncode(aa);
+	    bb = aa;
+		sett[key] = bb;
+		delete aa;
+		delete bb;
+	}
    
     var preload = CallFeedBuildPreLoadHTML(sett);
-    var embed = CallFeedBuildEmbedHTML(my_token, 'cf.devel.js');
+    var embed = CallFeedBuildEmbedHTML(my_token, 'cf.min.js');
     var widget = CallFeedBuildHTML(sett);
     var styles = CallFeedBuildCSS(sett);
 
@@ -2632,9 +2673,9 @@ var WidgetSession = Automat.extend({
     	sources = CallFeedGenerateSources(CallFeedToken, CallFeedOptions);
     	CallFeedOptions = sources[4];
         debug.log(this.name+".doInit('"+event+"', "+args+")", CallFeedOptions);
-    	$('body').append($(sources[0].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[1].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[2].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
+    	$('body').append($(this._prepare_html_source(sources[0])));
+    	$('body').append($(this._prepare_html_source(sources[1])));
+    	$('body').append($(this._prepare_html_source(sources[2])));
         debug.log('INIT!', CallFeedOptions)
     },
     
@@ -2643,9 +2684,9 @@ var WidgetSession = Automat.extend({
     	sources = CallFeedGenerateSources(CallFeedToken, null);
     	CallFeedOptions = sources[4];
         debug.log(this.name+".doInitDefaults('"+event+"', "+args+")", CallFeedOptions);
-    	$('body').append($(sources[0].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[1].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[2].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
+    	$('body').append($(this._prepare_html_source(sources[0])));
+    	$('body').append($(this._prepare_html_source(sources[1])));
+    	$('body').append($(this._prepare_html_source(sources[2])));
         debug.log('INIT DEFAULTS!', CallFeedOptions)
     },    
 
@@ -2756,8 +2797,51 @@ var WidgetSession = Automat.extend({
         CallFeedSession.kill();
         CallFeedSession = null;
         CallFeedOptions = null;
-    }
+    },
     
+    _prepare_html_source: function(html_src) {
+    	var html_src_new = html_src;
+    	// debug.log(html_src_new);
+    	html_src_new = html_src_new.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+    	
+    	/*
+    	debug.log(html_src_new);
+    	if (document.characterSet.toLowerCase() == 'windows-1251') {
+	    	debug.log('_prepare_html_source: detected windows-1251 charset !!!!');
+		    var aa = html_src_new, bb = '', c = 0;
+		    for (var i = 0; i < aa.length; i++) {
+		        c = aa.charCodeAt(i);
+		        if (c > 127) {
+		        	//bb += '\\u'+aa.charAt(i).toString(16).toUpperCase();
+		        	bb += aa[i].normalize('NFC');
+		        } else {
+		            bb += aa.charAt(i);
+		        }
+
+	        	/*
+		        c = aa.charCodeAt(i);
+		        if (c > 127) {
+		            if (c > 1024) {
+		                if (c == 1025) {
+		                    c = 1016;
+		                } else if (c == 1105) {
+		                    c = 1032;
+		                }
+			        	debug.log(c, aa[i], String.fromCharCode(c - 848));
+		                bb += String.fromCharCode(c - 848);
+		            }
+		        } else {
+		            bb += aa.charAt(i);
+		        }
+		        */
+    	/*
+		    }
+		    html_src_new = bb;
+    	}
+    	*/
+    	// debug.log(html_src_new);
+    	return html_src_new;
+    }
     
 });
 

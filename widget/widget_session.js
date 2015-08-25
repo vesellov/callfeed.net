@@ -188,9 +188,9 @@ var WidgetSession = Automat.extend({
     	sources = CallFeedGenerateSources(CallFeedToken, CallFeedOptions);
     	CallFeedOptions = sources[4];
         debug.log(this.name+".doInit('"+event+"', "+args+")", CallFeedOptions);
-    	$('body').append($(sources[0].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[1].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[2].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
+    	$('body').append($(this._prepare_html_source(sources[0])));
+    	$('body').append($(this._prepare_html_source(sources[1])));
+    	$('body').append($(this._prepare_html_source(sources[2])));
         debug.log('INIT!', CallFeedOptions)
     },
     
@@ -199,9 +199,9 @@ var WidgetSession = Automat.extend({
     	sources = CallFeedGenerateSources(CallFeedToken, null);
     	CallFeedOptions = sources[4];
         debug.log(this.name+".doInitDefaults('"+event+"', "+args+")", CallFeedOptions);
-    	$('body').append($(sources[0].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[1].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
-    	$('body').append($(sources[2].replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')));
+    	$('body').append($(this._prepare_html_source(sources[0])));
+    	$('body').append($(this._prepare_html_source(sources[1])));
+    	$('body').append($(this._prepare_html_source(sources[2])));
         debug.log('INIT DEFAULTS!', CallFeedOptions)
     },    
 
@@ -312,7 +312,50 @@ var WidgetSession = Automat.extend({
         CallFeedSession.kill();
         CallFeedSession = null;
         CallFeedOptions = null;
-    }
+    },
     
+    _prepare_html_source: function(html_src) {
+    	var html_src_new = html_src;
+    	// debug.log(html_src_new);
+    	html_src_new = html_src_new.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+    	
+    	/*
+    	debug.log(html_src_new);
+    	if (document.characterSet.toLowerCase() == 'windows-1251') {
+	    	debug.log('_prepare_html_source: detected windows-1251 charset !!!!');
+		    var aa = html_src_new, bb = '', c = 0;
+		    for (var i = 0; i < aa.length; i++) {
+		        c = aa.charCodeAt(i);
+		        if (c > 127) {
+		        	//bb += '\\u'+aa.charAt(i).toString(16).toUpperCase();
+		        	bb += aa[i].normalize('NFC');
+		        } else {
+		            bb += aa.charAt(i);
+		        }
+
+	        	/*
+		        c = aa.charCodeAt(i);
+		        if (c > 127) {
+		            if (c > 1024) {
+		                if (c == 1025) {
+		                    c = 1016;
+		                } else if (c == 1105) {
+		                    c = 1032;
+		                }
+			        	debug.log(c, aa[i], String.fromCharCode(c - 848));
+		                bb += String.fromCharCode(c - 848);
+		            }
+		        } else {
+		            bb += aa.charAt(i);
+		        }
+		        */
+    	/*
+		    }
+		    html_src_new = bb;
+    	}
+    	*/
+    	// debug.log(html_src_new);
+    	return html_src_new;
+    }
     
 });
