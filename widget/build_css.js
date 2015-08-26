@@ -83,7 +83,7 @@ function CallFeedBuildCSS(settings) {
     o+="    user-select: none;\n";
     o+="}\n";
     o+="#cf_main_button:hover {\n";
-    o+="	opacity: 1!important;\n";
+    o+="\topacity: 1!important;\n";
     o+="}\n";
     o+="#cf_main_button_content {\n";
     o+="    position: absolute!important;\n";
@@ -325,7 +325,7 @@ function CallFeedBuildCSS(settings) {
     o+="    text-align: center!important;\n";
     o+="}\n";
     o+="#cf_dial_countdown_text {\n";
-    o+="    font-family: &quot;Courier Обычный&quot;,&quot;Courier&quot;!important;\n";
+    o+="    font-family: &quot;Courier \u041e\u0431\u044b\u0447\u043d\u044b\u0439&quot;,&quot;Courier&quot;!important;\n";
     o+="    font-weight: 600!important;\n";
     o+="    font-size: 50px!important;\n";
     o+="    line-height: 50px!important;\n";
@@ -588,10 +588,10 @@ function CallFeedBuildCSS(settings) {
     o+=".cf__divtext { }\n";
     o+=".cf__divpanel { }\n";
     o+=".cf__div0height {\n";
-    o+="	height: 0px!important;\n";
+    o+="\theight: 0px!important;\n";
     o+="}\n";
     o+=".cf__divhidden {\n";
-    o+="	display: none!important;\n";
+    o+="\tdisplay: none!important;\n";
     o+="}\n";
     o+=".cf__divinput { }\n";
     o+=".cf__divlink {\n";
@@ -615,7 +615,7 @@ function CallFeedBuildCSS(settings) {
     o+="    color: #ccc!important;\n";
     o+="}\n";
     o+=".cf__valid {\n";
-    o+="	border-color: %(color_background_inputs)s!important;\n";
+    o+="\tborder-color: %(color_background_inputs)s!important;\n";
     o+="    background-color: %(color_background_inputs)s!important;\n";
     o+="    opacity: %(color_opacity_inputs)s!important;\n";
     o+="}\n";
@@ -653,7 +653,7 @@ function CallFeedBuildCSS(settings) {
     o+="    appearance: none!important;\n";
     o+="}\n";
     o+=".cf__input:focus, .cf__input:hover {\n";
-    o+="	/* border: 0!important; */\n";
+    o+="\t/* border: 0!important; */\n";
     o+="    border: 1px solid %(color_background_inputs)s;\n";
     o+="    outline:0!important;\n";
     o+="    -webkit-box-shadow: none!important;\n";
