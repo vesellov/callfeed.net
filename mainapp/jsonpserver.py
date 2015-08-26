@@ -463,7 +463,7 @@ class JSONPEntryPoint(View):
                         json.dumps(jdata, ensure_ascii=False)),
                                         'text/javascript')
 
-                s = widget.settings
+                s = widget.settings 
                 
 #                try:
 #                    s = unicode(widget.settings) # .encode('unicode-escape')
