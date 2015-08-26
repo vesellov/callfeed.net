@@ -209,7 +209,7 @@ var WidgetSession = Automat.extend({
         // Action method.
         debug.log(this.name+".doConnect('"+event+"', "+args+"): ", encodeURIComponent(this.hostname));
         jsonp_request('http://callfeed.net/input?'+$.param({
-    		'request_options': '2',
+    		'request_options': '1',
     		'token': CallFeedToken,
     		'hostname': encodeURIComponent(this.hostname)
     	}),
@@ -217,6 +217,7 @@ var WidgetSession = Automat.extend({
 	            var response = "error";
 	            var message = "";
 	            var options = null;
+	            var sett = null;
 	            var mode = null;
 	            try {
 	            	response = data['response'];
@@ -232,9 +233,21 @@ var WidgetSession = Automat.extend({
 	            	return;
 	            }
 	            try {
-	            	options = data['options'];
 	            	mode = data['mode'];
-	            	options['managers'] = data['managers'];
+
+	            	sett = data['options'];
+	            	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
+            	    	sett[key] = from_unicode_escape(sett[key]);
+	            	}
+	            	options = sett;
+	            	
+	            	sett = data['managers']
+	            	for (var key in sett) if (sett.hasOwnProperty(key)) {
+            	    	sett[key]['role'] = from_unicode_escape(sett[key]['role']);
+            	    	sett[key]['name'] = from_unicode_escape(sett[key]['name']);
+	            	}
+	            	options['managers'] = sett;
+	            	
 	            	options['schedule'] = data['schedule'];
 	            	if (options['color_font_global'] &&
 	            		options.color_font_global.toLowerCase() != '#fff' &&

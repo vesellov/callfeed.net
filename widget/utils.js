@@ -113,4 +113,13 @@ function convert_weekday_to_delta_days(weekday_or_day_label) {
 	return result;
 }
 
+function from_unicode_escape(x) {
+	var r = /\\u([\d\w]{4})/gi;
+	x = x.replace(r, function (match, grp) {
+	    return String.fromCharCode(parseInt(grp, 16)); } );
+	x = unescape(x);
+	return x;
+}
+
+	
 

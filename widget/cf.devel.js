@@ -2209,35 +2209,6 @@ function CallFeedBuildPreLoadHTML(settings) {
 //[builder.js]
 //
 
-function padWithLeadingZeros(string) {
-    return new Array(5 - string.length).join("0") + string;
-}
-
-function unicodeCharEscape(charCode) {
-    return "\\u" + padWithLeadingZeros(charCode.toString(16));
-}
-
-
-function htmlEncode(value){
-	//create a in-memory div, set it's inner text(which jQuery automatically encodes)
-	//then grab the encoded contents back out.  The div never exists on the page.
-	return $('<div/>').text(value).html();
-}
-
-function htmlDecode(value){
-	return $('<div/>').html(value).text();
-}
-
-
-function decodeUni(x) {
-	var r = /\\u([\d\w]{4})/gi;
-	x = x.replace(r, function (match, grp) {
-	    return String.fromCharCode(parseInt(grp, 16)); } );
-	x = unescape(x);
-	return x;
-}
-
-	
 function CallFeedGenerateSources(my_token, settings){
 	var sett = settings; 
 	var defaults = CallFeedDefaultSettings(my_token);
@@ -2252,33 +2223,7 @@ function CallFeedGenerateSources(my_token, settings){
 	        if (defaults.controllers.hasOwnProperty(controller_key) && !sett.controllers.hasOwnProperty(controller_key))
 	        	sett.controllers[key] = defaults.controllers[key];
     }
-
     
-	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
-	    var aa = sett[key];
-	    var bb = '';
-//		for (var i = 0; i < aa.length; i++) {
-//            var charCode = aa.charCodeAt(i);
-//            if (charCode > 127) {
-//            	//bb += unicodeCharEscape(charCode);
-//            	bb += aa.charAt(i);
-//            } else {
-//            	bb += aa.charAt(i);
-//            }
-//		}
-	    // bb = htmlEncode(aa);
-	    try {
-	    	bb = decodeUni(aa);
-	    } catch (e) {
-	    	bb = aa;
-	    }
-	    debug.log(aa, bb);
-		sett[key] = bb;
-		delete aa;
-		delete bb;
-	}
-	
-   
     var preload = CallFeedBuildPreLoadHTML(sett);
     var embed = CallFeedBuildEmbedHTML(my_token, 'cf.min.js');
     var widget = CallFeedBuildHTML(sett);
@@ -2411,6 +2356,15 @@ function convert_weekday_to_delta_days(weekday_or_day_label) {
 	return result;
 }
 
+function from_unicode_escape(x) {
+	var r = /\\u([\d\w]{4})/gi;
+	x = x.replace(r, function (match, grp) {
+	    return String.fromCharCode(parseInt(grp, 16)); } );
+	x = unescape(x);
+	return x;
+}
+
+	
 
 
 
@@ -2716,6 +2670,7 @@ var WidgetSession = Automat.extend({
 	            var response = "error";
 	            var message = "";
 	            var options = null;
+	            var sett = null;
 	            var mode = null;
 	            try {
 	            	response = data['response'];
@@ -2731,9 +2686,21 @@ var WidgetSession = Automat.extend({
 	            	return;
 	            }
 	            try {
-	            	options = data['options'];
 	            	mode = data['mode'];
-	            	options['managers'] = data['managers'];
+
+	            	sett = data['options'];
+	            	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
+            	    	sett[key] = from_unicode_escape(sett[key]);
+	            	}
+	            	options = sett;
+	            	
+	            	sett = data['managers']
+	            	for (var key in sett) if (sett.hasOwnProperty(key)) {
+            	    	sett[key]['role'] = from_unicode_escape(sett[key]['role']);
+            	    	sett[key]['name'] = from_unicode_escape(sett[key]['name']);
+	            	}
+	            	options['managers'] = sett;
+	            	
 	            	options['schedule'] = data['schedule'];
 	            	if (options['color_font_global'] &&
 	            		options.color_font_global.toLowerCase() != '#fff' &&
