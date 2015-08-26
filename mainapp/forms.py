@@ -329,6 +329,9 @@ class ClientWidgetDesignForm(ClientWidgetForm, ClientWidgetSettingsField):
     param_button_position = forms.ChoiceField(choices=widget_settings.BUTTON_POSITION_CHOICES,
                                               initial=widget_settings.BUTTON_POSITION_BELLOW_WIDGET,
                                               label='Позиция плавающей кнопки')
+    param_button_top_offset = forms.CharField(initial=widget_settings.DEFAULT_SETTINGS['param_button_top_offset'],
+                                                 label='Смещените плавающей точки от верха экрана')
+    
     flag_button_visible = forms.BooleanField(required=False, initial=widget_settings.DEFAULT_SETTINGS['flag_button_visible'],
                                                    label='Отображать плавающую кнопку для вызова виджета')
     flag_button_text_animated = forms.BooleanField(initial=False, required=False,
