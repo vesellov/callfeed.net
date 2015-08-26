@@ -326,6 +326,9 @@ class ClientWidgetDesignForm(ClientWidgetForm, ClientWidgetSettingsField):
                                                          initial=widget_settings.DEFAULT_SETTINGS['param_main_button_border_radius'],
                                                          label='Радиус закругления плавающей кнопки')
     #
+    param_button_position = forms.ChoiceField(choices=widget_settings.BUTTON_POSITION_CHOICES,
+                                              initial=widget_settings.BUTTON_POSITION_BELLOW_WIDGET,
+                                              label='Позиция плавающей кнопки')
     flag_button_visible = forms.BooleanField(required=False, initial=widget_settings.DEFAULT_SETTINGS['flag_button_visible'],
                                                    label='Отображать плавающую кнопку для вызова виджета')
     flag_button_text_animated = forms.BooleanField(initial=False, required=False,

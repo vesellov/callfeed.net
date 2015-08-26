@@ -34,6 +34,14 @@ WIDGET_POSITION_LEFT = 'left'
 WIDGET_POSITION_RIGHT = 'right'
 WIDGET_POSITION_CHOICES = [(WIDGET_POSITION_LEFT, u'Слева'),
                            (WIDGET_POSITION_RIGHT, u'Справа'), ]
+
+BUTTON_POSITION_BELLOW_WIDGET = 'bellow-widget'
+BUTTON_POSITION_RIGHT = 'right'
+BUTTON_POSITION_LEFT = 'left'
+BUTTON_POSITION_CHOICES = [(BUTTON_POSITION_BELLOW_WIDGET, u'Под виджетом'),
+                           (BUTTON_POSITION_LEFT, u'Слева'),
+                           (BUTTON_POSITION_RIGHT, u'Справа'), ]
+
 FREE_MINUTES = 10
 DEFAULT_OPERATOR_POSITION = u'Консультант'  # used to set a new Operator's model instance position
 CALLFEED_PHONE_NUMBER = '+78123092803'
@@ -94,6 +102,7 @@ DEFAULT_SETTINGS = {
 	'param_z_index_global': 9999, # callfeed_root
     'param_content_border_radius': 15, # cf_content
     'param_main_button_border_radius': 19, # cf_main_button
+    'param_button_position': 'bellow-widget', # cf_main_button
 
     # TEXT VALUES
     # client should be able to set any text value directly from admin panel

@@ -1176,11 +1176,26 @@ function CallFeedBuildCSS(settings) {
     o+="    background-size: cover;\n";
     o+="}\n";
     o+="#cf_main_button {\n";
-    o+="    position: absolute!important;\n";
-    o+="    left: 30px!important;\n";
-    o+="    bottom: 0px!important;\n";
-    o+="    width: %(param_button_width)spx!important;\n";
+    o+="    position: fixed!important;\n";
+    o+="    left: %(param_root_position_left)s!important;\n";
+    o+="    right: %(param_root_position_right)s!important;\n";
+    o+="    bottom: %(param_root_position_bottom)s!important;\n";
+    o+="    width: %(param_total_max_width)spx!important;\n";
     o+="    height: %(param_button_height)spx!important;\n";
+    o+="}\n";
+    o+="#cf_main_button:hover {\n";
+    o+="\topacity: 1!important;\n";
+    o+="}\n";
+    o+="#cf_main_button_content {\n";
+    o+="    position: relative!important;\n";
+    o+="    margin-left: auto!important;\n";
+    o+="    margin-right: auto!important;\n";
+    o+="    width: %(param_button_width)spx!important;\n";
+    o+="    word-wrap: break-word!important;\n";
+    o+="    text-align: center!important;\n";
+    o+="    height: %(param_button_height)spx!important;\n";
+    o+="    line-height: 38px!important;\n";
+    o+="    vertical-align: middle;\n";
     o+="    cursor: pointer!important;\n";
     o+="    font-size: 17px!important;\n";
     o+="    color: %(color_font_global)s!important;\n";
@@ -1194,20 +1209,6 @@ function CallFeedBuildCSS(settings) {
     o+="    -moz-user-select: none;\n";
     o+="    -ms-user-select: none;\n";
     o+="    user-select: none;\n";
-    o+="}\n";
-    o+="#cf_main_button:hover {\n";
-    o+="\topacity: 1!important;\n";
-    o+="}\n";
-    o+="#cf_main_button_content {\n";
-    o+="    position: absolute!important;\n";
-    o+="    left: 0px!important;\n";
-    o+="    top: 0px!important;\n";
-    o+="    width: %(param_button_width)spx!important;\n";
-    o+="    word-wrap: break-word!important;\n";
-    o+="    text-align: center!important;\n";
-    o+="    height: %(param_button_height)spx!important;\n";
-    o+="    line-height: 38px!important;\n";
-    o+="    vertical-align: middle;\n";
     o+="}\n";
     o+="#cf_main_button_label {\n";
     o+="    font-family: Arial!important;\n";
@@ -1864,11 +1865,6 @@ function CallFeedBuildCSS(settings) {
 function CallFeedBuildHTML(settings) {
     var o = "";
     o+="&lt;div id=&quot;callfeed_root&quot; style=&quot;z-index:%(param_z_index_global)s;&quot;&gt;\n";
-    o+="  &lt;div id=&quot;cf_main_button&quot;&gt;\n";
-    o+="    &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
-    o+="      &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
-    o+="    &lt;/div&gt;\n";
-    o+="  &lt;/div&gt;\n";
     o+="  &lt;div id=&quot;cf_widget&quot;&gt;\n";
     o+="    &lt;div id=&quot;cf_widget_triangle_img&quot;&gt;&lt;/div&gt;\n";
     o+="    &lt;div id=&quot;cf_main_content&quot; class=&quot;cf_content cf__divpanel&quot;&gt;\n";
@@ -2131,6 +2127,11 @@ function CallFeedBuildHTML(settings) {
     o+="    &lt;div id=&quot;cf_copyright_link&quot; class=&quot;cf__divlink&quot;&gt;\n";
     o+="      &lt;a id=&quot;cf_copyright_link_content&quot; class=&quot;cf__link&quot; href=&quot;http://callfeed.net&quot; target=_blank&gt;callfeed.net&lt;/a&gt;\n";
     o+="    &lt;/div&gt;\n";
+    o+="  &lt;/div&gt;\n";
+    o+="&lt;/div&gt;\n";
+    o+="&lt;div id=&quot;cf_main_button&quot; style=&quot;z-index:%(param_z_index_global)s;&quot;&gt;\n";
+    o+="  &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
+    o+="    &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
     o+="  &lt;/div&gt;\n";
     o+="&lt;/div&gt;\n";
     for (var key in settings) if (settings.hasOwnProperty(key))
@@ -2662,7 +2663,7 @@ var WidgetSession = Automat.extend({
         // Action method.
         debug.log(this.name+".doConnect('"+event+"', "+args+"): ", encodeURIComponent(this.hostname));
         jsonp_request('http://callfeed.net/input?'+$.param({
-    		'request_options': '2',
+    		'request_options': '1',
     		'token': CallFeedToken,
     		'hostname': encodeURIComponent(this.hostname)
     	}),

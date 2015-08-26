@@ -1,11 +1,6 @@
 function CallFeedBuildHTML(settings) {
     var o = "";
     o+="&lt;div id=&quot;callfeed_root&quot; style=&quot;z-index:%(param_z_index_global)s;&quot;&gt;\n";
-    o+="  &lt;div id=&quot;cf_main_button&quot;&gt;\n";
-    o+="    &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
-    o+="      &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
-    o+="    &lt;/div&gt;\n";
-    o+="  &lt;/div&gt;\n";
     o+="  &lt;div id=&quot;cf_widget&quot;&gt;\n";
     o+="    &lt;div id=&quot;cf_widget_triangle_img&quot;&gt;&lt;/div&gt;\n";
     o+="    &lt;div id=&quot;cf_main_content&quot; class=&quot;cf_content cf__divpanel&quot;&gt;\n";
@@ -268,6 +263,11 @@ function CallFeedBuildHTML(settings) {
     o+="    &lt;div id=&quot;cf_copyright_link&quot; class=&quot;cf__divlink&quot;&gt;\n";
     o+="      &lt;a id=&quot;cf_copyright_link_content&quot; class=&quot;cf__link&quot; href=&quot;http://callfeed.net&quot; target=_blank&gt;callfeed.net&lt;/a&gt;\n";
     o+="    &lt;/div&gt;\n";
+    o+="  &lt;/div&gt;\n";
+    o+="&lt;/div&gt;\n";
+    o+="&lt;div id=&quot;cf_main_button&quot; style=&quot;z-index:%(param_z_index_global)s;&quot;&gt;\n";
+    o+="  &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
+    o+="    &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
     o+="  &lt;/div&gt;\n";
     o+="&lt;/div&gt;\n";
     for (var key in settings) if (settings.hasOwnProperty(key))

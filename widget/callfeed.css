@@ -64,11 +64,26 @@
 
 
 #cf_main_button {
-    position: absolute!important;
-    left: 30px!important;
-    bottom: 0px!important;
-    width: %(param_button_width)spx!important;
+    position: fixed!important;
+    left: %(param_root_position_left)s!important;
+    right: %(param_root_position_right)s!important;
+    bottom: %(param_root_position_bottom)s!important;
+    width: %(param_total_max_width)spx!important;
     height: %(param_button_height)spx!important;
+}
+#cf_main_button:hover {
+	opacity: 1!important;
+}
+#cf_main_button_content {
+    position: relative!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    width: %(param_button_width)spx!important;
+    word-wrap: break-word!important;
+    text-align: center!important;
+    height: %(param_button_height)spx!important;
+    line-height: 38px!important;
+    vertical-align: middle; 
     cursor: pointer!important;
     font-size: 17px!important;
     color: %(color_font_global)s!important;
@@ -82,20 +97,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;    
-}
-#cf_main_button:hover {
-	opacity: 1!important;
-}
-#cf_main_button_content {
-    position: absolute!important;
-    left: 0px!important;
-    top: 0px!important;
-    width: %(param_button_width)spx!important;
-    word-wrap: break-word!important;
-    text-align: center!important;
-    height: %(param_button_height)spx!important;
-    line-height: 38px!important;
-    vertical-align: middle; 
 }
 #cf_main_button_label {
     font-family: Arial!important;  
