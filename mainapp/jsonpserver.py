@@ -478,7 +478,9 @@ class JSONPEntryPoint(View):
                 try:
                     for k in s.keys():
                         if isinstance(s[k], unicode):
-                            s[k] = s[k].encode('unicode-escape') # TODO!!!
+                            s[k] = s[k].encode('unicode-escape') 
+                        elif isinstance(s[k], str):
+                            s[k] = unicode(s[k]).encode('unicode-escape') 
                 except:
                     import traceback
                     traceback.print_exc()
