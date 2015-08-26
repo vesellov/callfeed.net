@@ -474,6 +474,14 @@ class JSONPEntryPoint(View):
                 # print s 
 
                 s = json.loads(s)
+                
+                try:
+                    for k in s.keys():
+                        s[k] = s[k].encode('unicode-escape') # TODO!!!
+                except:
+                    import traceback
+                    traceback.print_exc()
+                
                 # BE SURE TO CHECK FOR DEFAULT VALUES FOR ALL NEW OPTIONS !!!
                 if 'cookie_ttl_seconds' not in s:
                     s['cookie_ttl_seconds'] = 1 * 60 * 60
@@ -481,6 +489,7 @@ class JSONPEntryPoint(View):
                     s['submit_button_line_height'] = 42
                 if 'encoding' not in s:
                     s['encoding'] = 'utf-8'
+                    
                 # TODO
                 s['position'] = 'fixed'
                 s['flag_is_operator_shown_in_widget'] = widget.is_operator_shown_in_widget
