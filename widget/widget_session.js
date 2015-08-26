@@ -209,7 +209,7 @@ var WidgetSession = Automat.extend({
         // Action method.
         debug.log(this.name+".doConnect('"+event+"', "+args+"): ", encodeURIComponent(this.hostname));
         jsonp_request('http://callfeed.net/input?'+$.param({
-    		'request_options': '2',
+    		'request_options': '1',
     		'token': CallFeedToken,
     		'hostname': encodeURIComponent(this.hostname)
     	}),
