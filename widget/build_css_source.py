@@ -7,7 +7,7 @@ for line in open(sys.argv[1]).read().splitlines():
     if not l:
         continue
     l = l.replace('"', '&quot;')
-    l = '    o+="%s\\n";\n' % (unicode(l, 'utf-8').encode('unicode-escape'))
+    l = '    o+="%s\\n";\n' % l # (unicode(l, 'utf-8').encode('unicode-escape'))
     sys.stdout.write(l)
 sys.stdout.write('    o+="&lt;/style&gt;\\n";\n')
 sys.stdout.write('    for (var key in settings) if (settings.hasOwnProperty(key))\n')
