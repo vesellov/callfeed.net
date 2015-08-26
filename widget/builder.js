@@ -33,7 +33,7 @@ function CallFeedGenerateSources(my_token, settings){
 	        	sett.controllers[key] = defaults.controllers[key];
     }
 
-    /*
+    
 	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
 	    var aa = sett[key];
 	    var bb = '';
@@ -47,12 +47,13 @@ function CallFeedGenerateSources(my_token, settings){
 //            }
 //		}
 	    // bb = htmlEncode(aa);
-	    bb = aa;
+	    bb = unescape(aa);
+	    debug.log(aa, bb);
 		sett[key] = bb;
 		delete aa;
 		delete bb;
 	}
-	*/
+	
    
     var preload = CallFeedBuildPreLoadHTML(sett);
     var embed = CallFeedBuildEmbedHTML(my_token, 'cf.min.js');
