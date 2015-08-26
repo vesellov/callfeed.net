@@ -551,9 +551,13 @@ var WidgetController = Automat.extend({
     	});    	
     	$('a').each(function(){
     		if (this.href.indexOf('#callfeed') >= 0) {
-        		debug.log('_bind_events found an anchor', this, this.href);
-    			$(this).click(function(){
+        		// debug.log('_bind_events found an anchor', this, this.href);
+    			$(this).click(function(e){
+    				e.preventDefault();
     	    		CallFeedWidget.event('button');
+    				if (window.location.hash.indexOf('callfeed')>=0) {
+    					window.location.hash = ' ';
+    				}
     			});
     		}
     	});

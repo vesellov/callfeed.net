@@ -54,6 +54,7 @@ function CallFeedDefaultSettings(my_token) {
     param_content_border_radius: 15, // cf_content
     param_main_button_border_radius: 19, // cf_main_button
     param_button_position: 'bellow-widget', // cf_main_button
+    param_button_top_offset: '5%', // cf_main_button
 	
 	// TEXT VALUES
 	// client should be able to set any text value directly from admin panel

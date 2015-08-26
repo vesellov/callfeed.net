@@ -102,7 +102,8 @@ DEFAULT_SETTINGS = {
 	'param_z_index_global': 9999, # callfeed_root
     'param_content_border_radius': 15, # cf_content
     'param_main_button_border_radius': 19, # cf_main_button
-    'param_button_position': 'bellow-widget', # cf_main_button
+    'param_button_position': BUTTON_POSITION_BELLOW_WIDGET, # cf_main_button
+    'param_button_top_offset': '5%', # cf_main_button
 
     # TEXT VALUES
     # client should be able to set any text value directly from admin panel

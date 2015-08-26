@@ -1039,6 +1039,8 @@ function CallFeedDefaultSettings(my_token) {
 	param_z_index_global: 9999, // callfeed_root
     param_content_border_radius: 15, // cf_content
     param_main_button_border_radius: 19, // cf_main_button
+    param_button_position: 'bellow-widget', // cf_main_button
+    param_button_top_offset: '5%', // cf_main_button
 	
 	// TEXT VALUES
 	// client should be able to set any text value directly from admin panel
@@ -1153,7 +1155,7 @@ function CallFeedBuildCSS(settings) {
     o+=".cf_content {\n";
     o+="    position: absolute!important;\n";
     o+="    left: 0px!important;\n";
-    o+="    bottom: 10px!important;\n";
+    o+="    bottom: 10px;\n";
     o+="    width: %(param_total_max_width)spx!important;\n";
     o+="    /* background-image: none!important; */\n";
     o+="    /* background: none!important; */\n";
@@ -1177,9 +1179,11 @@ function CallFeedBuildCSS(settings) {
     o+="}\n";
     o+="#cf_main_button {\n";
     o+="    position: fixed!important;\n";
-    o+="    left: %(param_root_position_left)s!important;\n";
-    o+="    right: %(param_root_position_right)s!important;\n";
-    o+="    bottom: %(param_root_position_bottom)s!important;\n";
+    o+="    left: %(param_root_position_left)s;\n";
+    o+="    right: %(param_root_position_right)s;\n";
+    o+="    bottom: %(param_root_position_bottom)s;\n";
+    o+="}\n";
+    o+="#cf_main_button_wrap {\n";
     o+="    width: %(param_total_max_width)spx!important;\n";
     o+="    height: %(param_button_height)spx!important;\n";
     o+="}\n";
@@ -1212,6 +1216,22 @@ function CallFeedBuildCSS(settings) {
     o+="}\n";
     o+="#cf_main_button_label {\n";
     o+="    font-family: Arial!important;\n";
+    o+="}\n";
+    o+=".cf_main_button_fixed_left {\n";
+    o+="    transform: rotate(90deg);\n";
+    o+="    transform-origin: 0px 100%;\n";
+    o+="\tright: initial!important;\n";
+    o+="\tleft: 0px!important;\n";
+    o+="\ttop: %(param_button_top_offset)s!important;\n";
+    o+="\tbottom: initial!important;\n";
+    o+="}\n";
+    o+=".cf_main_button_fixed_right {\n";
+    o+="    transform: rotate(-90deg);\n";
+    o+="    transform-origin: 100% 100%;\n";
+    o+="\tleft: initial!important;\n";
+    o+="\tright: 0px!important;\n";
+    o+="\ttop: %(param_button_top_offset)s!important;\n";
+    o+="\tbottom: initial!important;\n";
     o+="}\n";
     o+="#cf_copyright_link {\n";
     o+="    position: absolute!important;\n";
@@ -2130,8 +2150,10 @@ function CallFeedBuildHTML(settings) {
     o+="  &lt;/div&gt;\n";
     o+="&lt;/div&gt;\n";
     o+="&lt;div id=&quot;cf_main_button&quot; style=&quot;z-index:%(param_z_index_global)s;&quot;&gt;\n";
-    o+="  &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
-    o+="    &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
+    o+="  &lt;div id=&quot;cf_main_button_wrap&quot;&gt;\n";
+    o+="    &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
+    o+="      &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
+    o+="    &lt;/div&gt;\n";
     o+="  &lt;/div&gt;\n";
     o+="&lt;/div&gt;\n";
     for (var key in settings) if (settings.hasOwnProperty(key))
@@ -3386,9 +3408,13 @@ var WidgetController = Automat.extend({
     	});    	
     	$('a').each(function(){
     		if (this.href.indexOf('#callfeed') >= 0) {
-        		debug.log('_bind_events found an anchor', this, this.href);
-    			$(this).click(function(){
+        		// debug.log('_bind_events found an anchor', this, this.href);
+    			$(this).click(function(e){
+    				e.preventDefault();
     	    		CallFeedWidget.event('button');
+    				if (window.location.hash.indexOf('callfeed')>=0) {
+    					window.location.hash = ' ';
+    				}
     			});
     		}
     	});
@@ -3571,12 +3597,18 @@ var WidgetVisualizer = Automat.extend({
     
     _widget_show: function() {
     	// this._start_loop_animate_logo();
+    	if (CallFeedOptions.param_button_position != 'bellow-widget' && CallFeedOptions.flag_button_visible) {
+    		$('#cf_main_button').hide();
+    	}
     	this._size_on_pages();
         return $("#cf_widget").show();
     },
     
     _widget_hide: function() {
     	// this._stop_loop_animate_logo();
+    	if (CallFeedOptions.param_button_position != 'bellow-widget' && CallFeedOptions.flag_button_visible) {
+    		$('#cf_main_button').show();
+    	}
         ret = $("#cf_widget").hide();
     	this._size_off_pages();
         return ret;
@@ -3620,11 +3652,21 @@ var WidgetVisualizer = Automat.extend({
 	// LOAD PARAMS ///////////////////////////////////////////////////
 
     _apply_main_button: function() {
+    	if (CallFeedOptions.param_button_position != 'bellow-widget') {
+    		$('#cf_widget_triangle_img').hide();
+    		$('#cf_widget').css({'bottom': '0px'});
+    		$('.cf_content').css({'bottom': '0px'});
+    		if (CallFeedOptions.param_button_position == 'right') {
+    			$('#cf_main_button').addClass('cf_main_button_fixed_right');
+    		} else if (CallFeedOptions.param_button_position == 'left') {
+    			$('#cf_main_button').addClass('cf_main_button_fixed_left');
+    		}
+    	}
     	if (!CallFeedOptions.flag_button_visible) {
-    		//CallFeedOptions.
     		$('#cf_main_button').hide();
     		$('#cf_widget_triangle_img').hide();
     		$('#cf_widget').css({'bottom': '0px'});
+    		$('.cf_content').css({'bottom': '0px'});
     	}
     },
     
@@ -5201,6 +5243,7 @@ var HashChecker = Automat.extend({
         // Action method.
         debug.log(this.name+".doCheckHash('"+event+"', "+args+")");
 		if (window.location.hash.indexOf(this.options['keyword'])>=0) {
+			window.location.hash = ' ';
 			CallFeedWidget.controllers['hash_checker'].event('hash-exist');
 		}
     },

@@ -266,8 +266,10 @@ function CallFeedBuildHTML(settings) {
     o+="  &lt;/div&gt;\n";
     o+="&lt;/div&gt;\n";
     o+="&lt;div id=&quot;cf_main_button&quot; style=&quot;z-index:%(param_z_index_global)s;&quot;&gt;\n";
-    o+="  &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
-    o+="    &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
+    o+="  &lt;div id=&quot;cf_main_button_wrap&quot;&gt;\n";
+    o+="    &lt;div id=&quot;cf_main_button_content&quot;&gt;\n";
+    o+="      &lt;span id=&quot;cf_main_button_label&quot; class=&quot;cf__span&quot;&gt;%(text_button)s&lt;/span&gt;\n";
+    o+="    &lt;/div&gt;\n";
     o+="  &lt;/div&gt;\n";
     o+="&lt;/div&gt;\n";
     for (var key in settings) if (settings.hasOwnProperty(key))

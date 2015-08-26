@@ -63,6 +63,7 @@ var HashChecker = Automat.extend({
         // Action method.
         debug.log(this.name+".doCheckHash('"+event+"', "+args+")");
 		if (window.location.hash.indexOf(this.options['keyword'])>=0) {
+			window.location.hash = ' ';
 			CallFeedWidget.controllers['hash_checker'].event('hash-exist');
 		}
     },

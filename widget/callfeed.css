@@ -37,7 +37,7 @@
 .cf_content {
     position: absolute!important;
     left: 0px!important;
-    bottom: 10px!important;
+    bottom: 10px;
     width: %(param_total_max_width)spx!important;
     /* background-image: none!important; */
     /* background: none!important; */    
@@ -65,9 +65,11 @@
 
 #cf_main_button {
     position: fixed!important;
-    left: %(param_root_position_left)s!important;
-    right: %(param_root_position_right)s!important;
-    bottom: %(param_root_position_bottom)s!important;
+    left: %(param_root_position_left)s;
+    right: %(param_root_position_right)s;
+    bottom: %(param_root_position_bottom)s;
+}
+#cf_main_button_wrap {
     width: %(param_total_max_width)spx!important;
     height: %(param_button_height)spx!important;
 }
@@ -100,6 +102,22 @@
 }
 #cf_main_button_label {
     font-family: Arial!important;  
+}
+.cf_main_button_fixed_left {
+    transform: rotate(90deg);
+    transform-origin: 0px 100%;
+	right: initial!important;
+	left: 0px!important;
+	top: %(param_button_top_offset)s!important;
+	bottom: initial!important;
+}
+.cf_main_button_fixed_right {
+    transform: rotate(-90deg);
+    transform-origin: 100% 100%;	
+	left: initial!important;
+	right: 0px!important;
+	top: %(param_button_top_offset)s!important;
+	bottom: initial!important;
 }
 
 
