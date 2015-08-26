@@ -408,19 +408,25 @@ class JSONPEntryPoint(View):
             for i, operator in enumerate(operators, 1):
                 if operator == widget.default_operator:
                     managers_wo_phones.insert(0, {
-                        'name': operator.name.encode('utf8').decode('utf8'),
-                        'role': operator.position.encode('utf8').decode('utf8'),
+                        # 'name': operator.name.encode('utf8').decode('utf8'),
+                        # 'role': operator.position.encode('utf8').decode('utf8'),
+                        'name': unicode(operator.name).encode('unicode-escape'),
+                        'role': unicode(operator.position).encode('unicode-escape'),
                         'photo_url': operator.photo_url,
                     })
                     manager = {
-                        'name': operator.name.encode('utf8').decode('utf8'),
-                        'role': operator.position.encode('utf8').decode('utf8'),
+                        # 'name': operator.name.encode('utf8').decode('utf8'),
+                        # 'role': operator.position.encode('utf8').decode('utf8'),
+                        'name': unicode(operator.name).encode('unicode-escape'),
+                        'role': unicode(operator.position).encode('unicode-escape'),
                         'photo_url': operator.photo_url,
                     }
                 else:
                     managers_wo_phones.append({
-                        'name': operator.name.encode('utf8').decode('utf8'),
-                        'role': operator.position.encode('utf8').decode('utf8'),
+                        # 'name': operator.name.encode('utf8').decode('utf8'),
+                        # 'role': operator.position.encode('utf8').decode('utf8'),
+                        'name': unicode(operator.name).encode('unicode-escape'),
+                        'role': unicode(operator.position).encode('unicode-escape'),
                         'photo_url': operator.photo_url,
                     })
                     
@@ -483,6 +489,7 @@ class JSONPEntryPoint(View):
                                 s[k] = (s[k].encode('unicode-escape')) 
                             elif isinstance(s[k], str):
                                 s[k] = (unicode(s[k]).encode('unicode-escape'))
+                        
                     except:
                         import traceback
                         traceback.print_exc()
