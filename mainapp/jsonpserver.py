@@ -465,16 +465,15 @@ class JSONPEntryPoint(View):
 
                 s = widget.settings
                 
-                try:
-                    s = unicode(widget.settings) # .encode('unicode-escape')
-                except:
-                    import traceback
-                    traceback.print_exc()
+#                try:
+#                    s = unicode(widget.settings) # .encode('unicode-escape')
+#                except:
+#                    import traceback
+#                    traceback.print_exc()
                     
                 # print s 
 
                 s = json.loads(s)
-                
                 
 #                try:
 #                    for k in s.keys():
