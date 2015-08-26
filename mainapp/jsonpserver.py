@@ -465,18 +465,18 @@ class JSONPEntryPoint(View):
 
                 s = widget.settings 
                 
-                if request.GET.get('request_options', None) == '2':
-                    try:
-                        s = unicode(s).encode('unicode-escape')
-                    except:
-                        import traceback
-                        traceback.print_exc()
+#                if request.GET.get('request_options', None) == '2':
+#                    try:
+#                        s = unicode(s).encode('unicode-escape')
+#                    except:
+#                        import traceback
+#                        traceback.print_exc()
                     
                 # print s 
 
                 s = json.loads(s)
                 
-                if request.GET.get('request_options', None) == '3':
+                if request.GET.get('request_options', None) == '2':
                     try:
                         for k in s.keys():
                             if isinstance(s[k], unicode):
