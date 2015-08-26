@@ -2228,6 +2228,15 @@ function htmlDecode(value){
 	return $('<div/>').html(value).text();
 }
 
+
+function decodeUni(x) {
+	var r = /\\u([\d\w]{4})/gi;
+	x = x.replace(r, function (match, grp) {
+	    return String.fromCharCode(parseInt(grp, 16)); } );
+	x = unescape(x);
+	return x;
+}
+
 	
 function CallFeedGenerateSources(my_token, settings){
 	var sett = settings; 
@@ -2244,7 +2253,7 @@ function CallFeedGenerateSources(my_token, settings){
 	        	sett.controllers[key] = defaults.controllers[key];
     }
 
-    /*
+    
 	for (var key in sett) if (sett.hasOwnProperty(key) && (typeof sett[key] === 'string' || sett[key] instanceof String)) {
 	    var aa = sett[key];
 	    var bb = '';
@@ -2258,12 +2267,17 @@ function CallFeedGenerateSources(my_token, settings){
 //            }
 //		}
 	    // bb = htmlEncode(aa);
-	    bb = aa;
+	    try {
+	    	bb = decodeUni(aa);
+	    } catch (e) {
+	    	bb = aa;
+	    }
+	    debug.log(aa, bb);
 		sett[key] = bb;
 		delete aa;
 		delete bb;
 	}
-	*/
+	
    
     var preload = CallFeedBuildPreLoadHTML(sett);
     var embed = CallFeedBuildEmbedHTML(my_token, 'cf.min.js');
