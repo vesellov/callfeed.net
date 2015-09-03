@@ -467,8 +467,6 @@ class JSONPEntryPoint(View):
                             valid_host = True
                         if widget.site_url.count(unicode(hostname)):
                             valid_host = True
-                        if widget.site_url.count(unicode(hostname).encode(locale.getpreferredencoding())):
-                            valid_host = True
                     try:
                         if unicode(widget.site_url).count(unicode(hostname)):
                             valid_host = True
