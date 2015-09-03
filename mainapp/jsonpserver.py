@@ -469,8 +469,8 @@ class JSONPEntryPoint(View):
                     except:
                         pass
                     try:
-                        print unicode(hostname).decode('idna').encode('utf-8') 
-                        if widget.site_url.count(unicode(hostname).decode('idna').encode('utf-8')):
+                        print unicode(hostname).decode('idna').encode('idna') 
+                        if widget.site_url.count(unicode(hostname).decode('idna').encode('idna')):
                             valid_host = True
                     except:
                         pass
