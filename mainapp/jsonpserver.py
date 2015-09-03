@@ -473,7 +473,7 @@ class JSONPEntryPoint(View):
                         except:
                             pass
                         try:
-                            print (urllib.unquote(hostname)).encode(locale.getpreferredencoding())
+                            print (urllib.unquote(hostname.decode('utf-8'))).encode(locale.getpreferredencoding())
                         except:
                             pass
                         if widget.site_url.count(hostname):
