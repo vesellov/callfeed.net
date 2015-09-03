@@ -451,34 +451,26 @@ class JSONPEntryPoint(View):
             if 'request_options' in request.GET:
                 hostname = request.GET.get('hostname', None)
                 valid_host = False
-                print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding())
+                print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding()), type(widget.site_url)
                 if hostname:
-                    print type(hostname)
-                    print unicode(hostname).encode(locale.getpreferredencoding())
+                    if widget.site_url.count(hostname):
+                        valid_host = True
                     if isinstance(hostname, unicode):
-#                        try:
-#                            hostname = hostname.encode('idna')
-#                        except:
-#                            pass
+                        print type(hostname)
+                        print unicode(hostname).encode(locale.getpreferredencoding())
                         try:
                             hostname = hostname.decode('idna')
                         except:
                             pass
-                    print unicode(hostname).encode(locale.getpreferredencoding())
-                    if widget.site_url.count(hostname):
-                        valid_host = True
-                    try:
-                        if widget.site_url.count(unicode(hostname).decode('utf-8')):
+                        print unicode(hostname).encode(locale.getpreferredencoding())
+                        if widget.site_url.count(hostname):
                             valid_host = True
-                    except:
-                        pass
-                    try:
-                        if widget.site_url.count(unicode(hostname).decode('idna')):
-                            valid_host = True
-                    except:
-                        pass
-                    try:
                         if widget.site_url.count(unicode(hostname)):
+                            valid_host = True
+                        if widget.site_url.count(unicode(hostname).encode(locale.getpreferredencoding())):
+                            valid_host = True
+                    try:
+                        if unicode(widget.site_url).count(unicode(hostname)):
                             valid_host = True
                     except:
                         pass
