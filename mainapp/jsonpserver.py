@@ -475,6 +475,10 @@ class JSONPEntryPoint(View):
                         except:
                             pass
                         try:
+                            print (hostname.decode('utf-8'))
+                        except:
+                            pass
+                        try:
                             print (hostname.decode('utf-8')).encode(locale.getpreferredencoding())
                         except:
                             pass
