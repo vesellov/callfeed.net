@@ -365,7 +365,7 @@ class ProfileReseller(ProtectedResellerView):
                 for widget in client.widget_set.all():
                     if widget.is_active:
                         widgets_list.append(widget)
-        if filt == 'not-active':
+        elif filt == 'not-active':
             for client in reseller.client_set.all():
                 for widget in client.widget_set.all():
                     if not widget.is_active:
