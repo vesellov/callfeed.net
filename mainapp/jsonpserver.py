@@ -456,9 +456,7 @@ class JSONPEntryPoint(View):
                     if widget.site_url.count(hostname):
                         valid_host = True
                     print type(hostname)
-                    if hostname.count('\%'):
-                        print 'unescape'
-                        hostname = urllib.unquote(hostname)
+                    hostname = urllib.unquote(hostname)
                     print type(hostname)
                     if isinstance(hostname, unicode):
                         print unicode(hostname).encode(locale.getpreferredencoding())
