@@ -2,6 +2,60 @@
 
 {% block body_content %}
     {{ block.super }}
+    
+	
+	<script>
+		$(document).ready(function() {
+			$('.refresh-widget-presence-ico').each(function(i,itm){
+				$(itm).click(function(){
+					var wid = $(itm).attr('id').substring(15);
+					$('#refresh-widget-'+wid).attr('src', '{% static 'img/refresh_wait_ico.png' %}');
+					$.ajax({
+						url: "/profile/reseller/widget_check",
+						data: { widget_id: wid },
+						success: function (result) {
+						    // location.href = "/profile/reseller#refresh-widget-" + wid;
+						    if (result == 'True') {
+						        $('#refresh-widget-'+wid).attr('src', '{% static 'img/refresh_green_ico.png' %}');
+					        } else {
+					            $('#refresh-widget-'+wid).attr('src', '{% static 'img/refresh_red_ico.png' %}');
+							}
+					 	}
+					});
+				});
+			});
+		 
+			$('#filter_all').click(function(){
+		    	location.href = "/profile/reseller?filter=all";
+			});
+			
+			$('#filter_active').click(function(){
+		    	location.href = "/profile/reseller?filter=active";
+			});
+
+			$('#filter_not_active').click(function(){
+		    	location.href = "/profile/reseller?filter=not-active";
+			});
+
+			$('#filter_installed').click(function(){
+		    	location.href = "/profile/reseller?filter=installed";
+			});
+
+			$('#filter_not_installed').click(function(){
+		    	location.href = "/profile/reseller?filter=not-installed";
+			});
+			
+			$('#filter_executed').click(function(){
+		    	location.href = "/profile/reseller?filter=executed";
+			});
+
+			$('#scan_all').click(function(){
+		    	
+			});
+		 
+		});
+	</script>
+	    
     <div class="container">
         <div class="row col s12">
             <h3 class="center">Кабинет Реселлера</h3>
@@ -12,6 +66,17 @@
             <div class="col s12">
                 {% include 'parts/reseller_clients_list.html' %}
             </div>
+            <form action="" method="get">
+            <div class="col s12">
+                <input type="button" id="filter_all" value="Все" class="btn"/>
+                <input type="button" id="filter_active" value="Активные" class="btn"/>
+                <input type="button" id="filter_not_active" value="НЕ активные" class="btn"/>
+                <input type="button" id="filter_executed" value="Запускавшиеся ранее" class="btn"/>
+                <input type="button" id="filter_installed" value="Установленные" class="btn"/>
+                <input type="button" id="filter_not_installed" value="НЕ установленные" class="btn"/>
+                <input type="button" id="scan_all" value="Просканировать всех" class="btn"/>
+            </div>
+            </form>
         </div>
     </div>
 {% endblock %}

@@ -4,11 +4,17 @@
 Параметры
 {% endblock %}
 
+{% block message_box %}
+	{% if parameters_form.message %}
+        <span class="green-message">{{ parameters_form.message }}</span>
+	{% endif %}
+{% endblock %}
+
 {% block page_content %}
     <form action="" method="post">{% csrf_token %}
-        {% if options_form.has_errors %}
+        {% if parameters_form.has_errors %}
             <div class="col-lg-12">
-                <b>{{ options_form.errors }}</b>
+                <b>{{ parameters_form.errors }}</b>
                 <b class="text-red">Не все обязательные поля заполнены. Пожалуйста, убедитесь, что соблюдены все требования к заполнению формы</b>
             </div>
             <div class="col-lg-12">&nbsp;</div>

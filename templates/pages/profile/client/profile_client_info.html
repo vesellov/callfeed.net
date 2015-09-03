@@ -5,6 +5,12 @@
     <br/>
     <div class="container">
         <section id="settings">
+        
+	    	<div class="message-box">
+	    		{% block message_box %}
+	    		{% endblock %}
+	    	</div>
+        
             <div class="row">
                 <div class="col-lg-2 pull-left">
                     {% include 'parts/profile_client_edit_sidebar.html' %}

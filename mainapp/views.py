@@ -357,8 +357,33 @@ class ProfileReseller(ProtectedResellerView):
         except ObjectDoesNotExist:
             print 'FAIL: RESELLER OBJECT DOES NOT EXIST'
             return HttpResponseRedirect('/')
+        filt = request.GET.get('filter', '')
+        clients_list = []
+        if filt == 'active':
+            for client in reseller.client_set.all():
+                if client.widget_set.filter(is_active=True).exists():
+                    clients_list.append(client)
+        if filt == 'not-active':
+            for client in reseller.client_set.all():
+                if client.widget_set.filter(is_active=False).exists():
+                    clients_list.append(client)
+        elif filt == 'installed':
+            for client in reseller.client_set.all():
+                if client.widget_set.filter(is_installed=True).exists():
+                    clients_list.append(client)
+        elif filt == 'not-installed':
+            for client in reseller.client_set.all():
+                if client.widget_set.filter(is_installed=False).exists():
+                    clients_list.append(client)
+        elif filt == 'executed':
+            for client in reseller.client_set.all():
+                if client.widget_set.filter(last_executed__range=(datetime.fromtimestamp(0), datetime.now())).exists():
+                    clients_list.append(client)
+        else:
+            clients_list = reseller.client_set.all()
         return render(request, 'pages/profile/reseller/profile_reseller.html',
-                      {'reseller': reseller})
+                      {'reseller': reseller,
+                       'clients_list': clients_list,})
 
 
 # ## Administrative manager pages
@@ -1068,7 +1093,10 @@ class ClientWidgetParameters(ProtectedClientWidgetView):
             widget.settings = json.dumps(current_settings, ensure_ascii=False)
         except Exception as e:    
             traceback.print_exc()
+            return self.get(request, errors=['ERROR WRITING SETTINGS'])
         widget.save()
+        
+        parameters_form.message = u'Изменения успешно сохранены'
 
         return render(request, 'pages/profile/client/client_widget_parameters.html',
                       {'client': self.client,
@@ -1122,9 +1150,10 @@ class ClientWidgetContactsForm(ProtectedClientWidgetView):
             return self.get(request, errors=contacts_form.errors)
 
         self.widget.update_settings(contacts_form.cleaned_data, contacts_form.excluded_fields)
-        return self.get(request)
+        
+        return self.get(request, message=u'Изменения успешно сохранены')
 
-    def get(self, request, errors=None):
+    def get(self, request, errors=None, message=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id}
@@ -1133,6 +1162,9 @@ class ClientWidgetContactsForm(ProtectedClientWidgetView):
         if errors:
             contacts_form.has_errors = True
             contacts_form.errors = errors
+            
+        if message:
+            contacts_form.message = message
 
         return render(request, 'pages/profile/client/client_widget_contacts_form.html',
                       {'client': self.client,
@@ -1150,9 +1182,9 @@ class ClientWidgetContent(ProtectedClientWidgetView):
 
         self.widget.update_settings(content_form.cleaned_data, content_form.excluded_fields)
 
-        return self.get(request)
+        return self.get(request, message=u'Изменения успешно сохранены')
 
-    def get(self, request, errors=None):
+    def get(self, request, errors=None, message=None):
         widget = self.widget
 
         initial = {'widget_id': widget.id}
@@ -1162,6 +1194,9 @@ class ClientWidgetContent(ProtectedClientWidgetView):
         if errors:
             content_form.has_errors = True
             content_form.errors = errors
+
+        if message:
+            content_form.message = message
 
         return render(request, 'pages/profile/client/client_widget_content.html',
                       {'client': self.client,
@@ -1174,13 +1209,15 @@ class ClientWidgetCode(ProtectedClientWidgetView):
         widget_code = request.POST.get('widget_code')
         web_master_notification_email = request.POST.get('notification_email')
 
+        message = None
         if widget_code != '' and widget_code is not None \
                 and web_master_notification_email != '' and web_master_notification_email is not None:
             send_email_widget_setup_code(web_master_notification_email, widget_code)
+            message = u"Письмо с инструкциями по установке виджета было отправлено по адресу %s" % web_master_notification_email
+            
+        return self.get(request, message=message)
 
-        return self.get(request)
-
-    def get(self, request):
+    def get(self, request, message=''):
         site_url = self.widget.site_url
 
         if site_url in ('', None):
@@ -1192,6 +1229,7 @@ class ClientWidgetCode(ProtectedClientWidgetView):
             'client': self.client,
             'widget': self.widget,
             'widget_id': self.widget.id,
+            'message': message,
             'site_url': site_url
         })
 
@@ -1230,6 +1268,8 @@ class ClientInfoPersonal(ProtectedClientView):
                        }
 
         self.client.update_registration_data(update_dict)
+        
+        personal_form.message = u'Изменения успешно сохранены'
 
         return render(request, 'pages/profile/client/client_info_personal.html',
                       {'client': self.client,
@@ -1268,14 +1308,17 @@ class ClientInfoSecurity(ProtectedClientView):
         user = authenticate(username=self.client.user.username, password=security_form.cleaned_data['new_password'])
         login(request, user)
 
-        return self.get(request)
+        return self.get(request, message=u'Ваш новый пароль был успешно записан')
 
-    def get(self, request, errors=None):
+    def get(self, request, errors=None, message=None):
         security_form = ClientInfoSecurityForm()
 
         if errors:
             security_form.has_errors = True
             security_form.errors = errors
+            
+        if message:
+            security_form.message = message
 
         return render(request, 'pages/profile/client/client_info_security.html', {
             'client': self.client,

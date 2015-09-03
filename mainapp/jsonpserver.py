@@ -196,16 +196,6 @@ class JSONPEntryPoint(View):
             callback_status = CALLBACK_STATUS_PLANNED,
             planned_for_datetime = callback_planned_for_datetime,)
 
-    
-#        deferred_callback_info = CallbackInfo(widget=widget, 
-#                                              ip_side_b=ip_side_b,
-#                                              geodata_side_b=ip_to_location(ip_side_b),
-#                                              referer=referrer,
-#                                              search_request=search_request,
-#                                              planned_for_datetime=callback_planned_for_datetime,
-#                                              when=datetime.datetime.now(),
-#                                              phone_number_side_b=phone_number)
-
         deferred_callback_info.save()
         from tasks import initiate_deferred_callback
         initiate_deferred_callback.schedule(args=(deferred_callback_info,), eta=callback_planned_for_datetime)
@@ -351,7 +341,7 @@ class JSONPEntryPoint(View):
                                     'text/javascript')
 
             client_ip_addr = request.META.get('REMOTE_ADDR', '')
-
+            
             jdata = {
                 'callback': request.GET['callback'].replace('CallbackRegistry.', ''),
                 'ip': client_ip_addr,
@@ -360,6 +350,9 @@ class JSONPEntryPoint(View):
                 'search_request': request.GET.get('search_request', ''),
                 'hostname': request.GET.get('hostname', ''),
             }
+            
+            widget.last_executed = datetime.datetime.now()
+            widget.save()
 
             #--- check ip in black list
             if self.is_ip_in_blacklist(jdata['ip'], widget.blacklist_ip.split(',')):

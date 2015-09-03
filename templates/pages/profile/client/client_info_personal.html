@@ -4,6 +4,12 @@
 Личные данные
 {% endblock %}
 
+{% block message_box %}
+	{% if personal_form.message %}
+        <span class="green-message">{{ personal_form.message }}</span>
+	{% endif %}
+{% endblock %}
+
 {% block page_content %}
     <form action="" method="post">{% csrf_token %}
         <div class="col-lg-12">

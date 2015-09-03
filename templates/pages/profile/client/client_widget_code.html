@@ -4,6 +4,12 @@
 Код виджета
 {% endblock %}
 
+{% block message_box %}
+	{% if message %}
+        <span class="green-message">{{ message }}</span>
+	{% endif %}
+{% endblock %}
+
 {% block page_content %}
     <form action="" method="post">{% csrf_token %}
         <div class="col-lg-12">
