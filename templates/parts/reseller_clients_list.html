@@ -3,7 +3,7 @@
 
 <h4 class="center">Список клиентов:</h4>
 <div class="table-responsive">
-<table class="table table-bordered-cells" cellspacing=0 cellpadding=0>
+<table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
     {% for widget in widgets_list %}
     	<tr class="text-center">
     		<td>
@@ -12,6 +12,13 @@
     		<td>
     			{{ widget.id }}
     		</td>
+            <td>
+                {% if widget.site_url != None %}
+                    <a href="{{ widget.site_url }}" target=_blank>{{ widget.site_url }}</a>
+                {% else %}
+                    <i>сайт не указан</i>
+                {% endif %}
+            </td>
     		<td>
             	<a href="/profile/reseller/edit_clients?client_id={{ widget.client.id }}">{{ widget.client.name }}</a>
            	</td>
@@ -25,23 +32,16 @@
             	{{ widget.client.user.date_joined }}
             </td>
             <td>
-             	{{ widget.client.balance_minutes }} мин.
+             	{{ widget.client.balance_minutes }}
             </td>
-            <td class="text-left" style="white-space: nowrap;"> 
+            <td class="text-left"> 
            		<img style="cursor: pointer;" id="refresh-widget-{{ widget.id }}" class="refresh-widget-presence-ico" src="{% if widget.is_installed %}{% static 'img/refresh_green_ico.png' %}{% else %}{% static 'img/refresh_red_ico.png' %}{% endif %}" alt=""/>
             </td>
             <td>
-                {% if widget.site_url != None %}
-                    <a href="{{ widget.site_url }}" target=_blank>{{ widget.site_url }}</a>
-                {% else %}
-                    <i>имя сайта не было указано</i>
-                {% endif %}
-            </td>
-            <td>
 	            {% if widget.is_active %}
-	                <span style="color: green;">включен</span>
+	                <span style="color: green;">ON</span>
 	            {% else %}
-	                <span style="color: gray;">выключен</span>
+	                <span style="color: gray;">OFF</span>
 	            {% endif %}
             </td>
            	<td>
