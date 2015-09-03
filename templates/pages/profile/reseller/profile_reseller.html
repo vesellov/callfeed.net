@@ -63,9 +63,7 @@
                 Name: {{ reseller.name }}<br/>
                 Tariff: {{ reseller.tariff }}<br/>
             </div>
-            <div class="col s12">
-                {% include 'parts/reseller_clients_list.html' %}
-            </div>
+            
             <form action="" method="get">
             <div class="col s12">
                 <input type="button" id="filter_all" value="Все" class="btn"/>
@@ -77,6 +75,23 @@
                 <input type="button" id="scan_all" value="Просканировать всех" class="btn"/>
             </div>
             </form>
+            
+            <div class="col s12">
+                {% include 'parts/reseller_clients_list.html' %}
+            </div>
+            
+            <form action="" method="get">
+            <div class="col s12">
+                <input type="button" id="filter_all" value="Все" class="btn"/>
+                <input type="button" id="filter_active" value="Активные" class="btn"/>
+                <input type="button" id="filter_not_active" value="НЕ активные" class="btn"/>
+                <input type="button" id="filter_executed" value="Запускавшиеся ранее" class="btn"/>
+                <input type="button" id="filter_installed" value="Установленные" class="btn"/>
+                <input type="button" id="filter_not_installed" value="НЕ установленные" class="btn"/>
+                <input type="button" id="scan_all" value="Просканировать всех" class="btn"/>
+            </div>
+            </form>
+            
         </div>
     </div>
 {% endblock %}

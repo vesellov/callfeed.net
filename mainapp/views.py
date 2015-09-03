@@ -381,6 +381,9 @@ class ProfileReseller(ProtectedResellerView):
                     clients_list.append(client)
         else:
             clients_list = reseller.client_set.all()
+            
+        print clients_list
+        
         return render(request, 'pages/profile/reseller/profile_reseller.html',
                       {'reseller': reseller,
                        'clients_list': clients_list,})
