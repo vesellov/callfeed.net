@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import traceback
+import pprint
 
 from collections import OrderedDict
 from datetime import date, datetime, timedelta
@@ -358,35 +359,42 @@ class ProfileReseller(ProtectedResellerView):
             print 'FAIL: RESELLER OBJECT DOES NOT EXIST'
             return HttpResponseRedirect('/')
         filt = request.GET.get('filter', '')
-        clients_list = []
+        widgets_list = []
         if filt == 'active':
             for client in reseller.client_set.all():
-                if client.widget_set.filter(is_active=True).exists():
-                    clients_list.append(client)
+                for widget in client.widget_set.all():
+                    if widget.is_active:
+                        widgets_list.append(widget)
         if filt == 'not-active':
             for client in reseller.client_set.all():
-                if client.widget_set.filter(is_active=False).exists():
-                    clients_list.append(client)
+                for widget in client.widget_set.all():
+                    if not widget.is_active:
+                        widgets_list.append(widget)
         elif filt == 'installed':
             for client in reseller.client_set.all():
-                if client.widget_set.filter(is_installed=True).exists():
-                    clients_list.append(client)
+                for widget in client.widget_set.all():
+                    if widget.is_installed:
+                        widgets_list.append(widget)
         elif filt == 'not-installed':
             for client in reseller.client_set.all():
-                if client.widget_set.filter(is_installed=False).exists():
-                    clients_list.append(client)
+                for widget in client.widget_set.all():
+                    if not widget.is_installed:
+                        widgets_list.append(widget)
         elif filt == 'executed':
             for client in reseller.client_set.all():
-                if client.widget_set.filter(last_executed__range=(datetime.fromtimestamp(0), datetime.now())).exists():
-                    clients_list.append(client)
+                for widget in client.widget_set.all():
+                    if widget.last_executed:
+                        widgets_list.append(widget)
         else:
-            clients_list = reseller.client_set.all()
+            for client in reseller.client_set.all():
+                for widget in client.widget_set.all():
+                    widgets_list.append(widget)
             
-        print clients_list
+        pprint.pprint(widgets_list)
         
         return render(request, 'pages/profile/reseller/profile_reseller.html',
                       {'reseller': reseller,
-                       'clients_list': clients_list,})
+                       'widgets_list': widgets_list,})
 
 
 # ## Administrative manager pages
