@@ -456,8 +456,12 @@ class JSONPEntryPoint(View):
                     print type(hostname)
                     print unicode(hostname).encode(locale.getpreferredencoding())
                     if isinstance(hostname, unicode):
+#                        try:
+#                            hostname = hostname.encode('idna')
+#                        except:
+#                            pass
                         try:
-                            hostname = hostname.encode('idna')
+                            hostname = hostname.decode('idna')
                         except:
                             pass
                     print unicode(hostname).encode(locale.getpreferredencoding())
