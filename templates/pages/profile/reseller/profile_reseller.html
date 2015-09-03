@@ -9,16 +9,16 @@
 			$('.refresh-widget-presence-ico').each(function(i,itm){
 				$(itm).click(function(){
 					var wid = $(itm).attr('id').substring(15);
-					$('#refresh-widget-'+wid).attr('src', '{% static 'img/refresh_wait_ico.png' %}');
+					$('#refresh-widget-'+wid).attr('src', 'img/refresh_wait_ico.png');
 					$.ajax({
 						url: "/profile/reseller/widget_check",
 						data: { widget_id: wid },
 						success: function (result) {
 						    // location.href = "/profile/reseller#refresh-widget-" + wid;
 						    if (result == 'True') {
-						        $('#refresh-widget-'+wid).attr('src', '{% static 'img/refresh_green_ico.png' %}');
+						        $('#refresh-widget-'+wid).attr('src', 'img/refresh_green_ico.png');
 					        } else {
-					            $('#refresh-widget-'+wid).attr('src', '{% static 'img/refresh_red_ico.png' %}');
+					            $('#refresh-widget-'+wid).attr('src', 'img/refresh_red_ico.png');
 							}
 					 	}
 					});
