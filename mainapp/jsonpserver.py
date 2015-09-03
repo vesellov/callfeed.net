@@ -455,9 +455,14 @@ class JSONPEntryPoint(View):
                 if hostname:
                     if widget.site_url.count(hostname):
                         valid_host = True
-                    print type(hostname)
-                    # hostname = urllib.unquote(hostname)
-                    # print type(hostname)
+                    if widget.site_url.count(unicode(hostname)):
+                        valid_host = True
+                    try:
+                        if unicode(widget.site_url).count(unicode(hostname)):
+                            valid_host = True
+                    except:
+                        pass
+                    print type(hostname), valid_host
                     if isinstance(hostname, unicode):
                         print unicode(hostname).encode(locale.getpreferredencoding())
                         try:
@@ -470,31 +475,9 @@ class JSONPEntryPoint(View):
                         except:
                             pass
                         try:
-                            if widget.site_url.count(hostname.decode('utf-8')):
-                                valid_host = True
+                            print urllib.unquote(hostname).encode(locale.getpreferredencoding())
                         except:
                             pass
-                        try:
-                            print (hostname.decode('utf-8'))
-                        except:
-                            pass
-                        try:
-                            print hostname.encode('unicode-escape') 
-                        except:
-                            pass
-                        try:
-                            print hostname.decode('unicode-escape') 
-                        except:
-                            pass
-                        if widget.site_url.count(hostname):
-                            valid_host = True
-                        if widget.site_url.count(unicode(hostname)):
-                            valid_host = True
-                    try:
-                        if unicode(widget.site_url).count(unicode(hostname)):
-                            valid_host = True
-                    except:
-                        pass
                 if not valid_host:
                     jdata.update({'response': 'refused',
                                   'message': 'incorrect host name', })
