@@ -358,7 +358,7 @@ class Widget(models.Model):
     #
     default_operator = models.ForeignKey(Operator, related_name='widgets_operator_is_default_for',
                                          blank=True, null=True)
-    last_executed = models.DateTimeField('Время последнего запуска')
+    last_executed = models.DateTimeField('Время последнего запуска', blank=True, null=True)
 
     def validate(self):
         """
