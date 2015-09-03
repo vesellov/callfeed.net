@@ -468,12 +468,12 @@ class JSONPEntryPoint(View):
                         except:
                             pass
                         try:
-                            if widget.site_url.count(urllib.unquote(hostname)):
+                            if widget.site_url.count(hostname.decode('utf-8')):
                                 valid_host = True
                         except:
                             pass
                         try:
-                            print (urllib.unquote(hostname.decode('utf-8'))).encode(locale.getpreferredencoding())
+                            print (hostname.decode('utf-8')).encode(locale.getpreferredencoding())
                         except:
                             pass
                         if widget.site_url.count(hostname):
