@@ -451,27 +451,27 @@ class JSONPEntryPoint(View):
             if 'request_options' in request.GET:
                 hostname = request.GET.get('hostname', None)
                 valid_host = False
-                print 'request_options'
+                print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding())
                 if hostname:
-                    print unicode(widget.site_url).encode(locale.getpreferredencoding()), unicode(hostname).encode(locale.getpreferredencoding())
+                    print unicode(hostname).encode(locale.getpreferredencoding())
                     if widget.site_url.count(hostname):
                         valid_host = True
                     try:
-                        print unicode(widget.site_url).encode(locale.getpreferredencoding()), unicode(unicode(hostname).decode('utf-8')).encode(locale.getpreferredencoding())
                         if widget.site_url.count(unicode(hostname).decode('utf-8')):
                             valid_host = True
+                        print unicode(hostname).decode('utf-8')
                     except:
                         pass
                     try:
-                        print unicode(widget.site_url).encode(locale.getpreferredencoding()), unicode(unicode(hostname).decode('idna')).encode(locale.getpreferredencoding())
                         if widget.site_url.count(unicode(hostname).decode('idna')):
                             valid_host = True
+                        print unicode(hostname).decode('idna')
                     except:
                         pass
                     try:
-                        print unicode(hostname).decode('idna').encode('idna') 
-                        if widget.site_url.count(unicode(hostname).decode('idna').encode('idna')):
+                        if widget.site_url.count(unicode(hostname)):
                             valid_host = True
+                        print unicode(hostname) 
                     except:
                         pass
                 if not valid_host:
