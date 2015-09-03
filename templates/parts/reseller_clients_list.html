@@ -3,11 +3,20 @@
 
 <h4 class="center">Список клиентов:</h4>
 <div class="table-responsive">
-<table class="table table-bordered-cells">
+<table class="table table-bordered-cells" cellspacing=0 cellpadding=0>
     {% for widget in widgets_list %}
     	<tr class="text-center">
     		<td>
-            	<a href="/profile/reseller/edit_clients?client_id={{ widget.client.id }}">{{ widget.client.name }}<br/>{{ widget.client.email }}</a>
+    			{{ widget.client.id }}
+    		</td>
+    		<td>
+    			{{ widget.id }}
+    		</td>
+    		<td>
+            	<a href="/profile/reseller/edit_clients?client_id={{ widget.client.id }}">{{ widget.client.name }}</a>
+           	</tr>
+           	<tr>
+            	<a href="mailto: {{ widget.client.email }}">{{ widget.client.email }}</a>
             </td>
             <td>
              	{{ widget.client.phone_number }}

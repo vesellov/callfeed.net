@@ -6,6 +6,7 @@ import pprint
 import datetime
 import urllib
 import locale
+import time
 
 from django.views.generic import View
 from django.http import HttpResponse
@@ -351,7 +352,7 @@ class JSONPEntryPoint(View):
                 'hostname': request.GET.get('hostname', ''),
             }
             
-            widget.last_executed = datetime.datetime.now()
+            widget.last_executed = datetime.datetime.fromtimestamp(time.time())
             widget.save()
 
             #--- check ip in black list
