@@ -11,6 +11,7 @@ import time
 from django.views.generic import View
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 
 #------------------------------------------------------------------------------ 
 
@@ -352,8 +353,9 @@ class JSONPEntryPoint(View):
                 'hostname': request.GET.get('hostname', ''),
             }
             
-            widget.last_executed = datetime.datetime.fromtimestamp(time.time())
+            widget.last_executed = timezone.now()
             widget.save()
+            
 
             #--- check ip in black list
             if self.is_ip_in_blacklist(jdata['ip'], widget.blacklist_ip.split(',')):

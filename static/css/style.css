@@ -481,6 +481,8 @@ input[type="submit"] {
     height: 40px;
     text-align: center;
 }
+
 #reseller-widgets td {
 	padding: 2px!important;
+	border: 1px solid #aaa !important;
 }
