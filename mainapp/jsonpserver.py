@@ -453,33 +453,29 @@ class JSONPEntryPoint(View):
                 valid_host = False
                 print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding())
                 if hostname:
+                    print type(hostname)
+                    print unicode(hostname).encode(locale.getpreferredencoding())
+                    if isinstance(hostname, unicode):
+                        try:
+                            hostname = hostname.encode('idna')
+                        except:
+                            pass
                     print unicode(hostname).encode(locale.getpreferredencoding())
                     if widget.site_url.count(hostname):
                         valid_host = True
                     try:
                         if widget.site_url.count(unicode(hostname).decode('utf-8')):
                             valid_host = True
-                        print unicode(hostname).decode('utf-8')
-                        print unicode(hostname).encode('utf-8')
                     except:
                         pass
                     try:
                         if widget.site_url.count(unicode(hostname).decode('idna')):
                             valid_host = True
-                        print unicode(hostname).decode('idna'), type(unicode(hostname).decode('idna'))
-                        print unicode(widget.site_url).encode('idna'), type(unicode(widget.site_url).encode('idna'))
-                        print unicode(widget.site_url).decode('idna'), type(unicode(widget.site_url).decode('idna'))
-                        print type(urllib.unquote(unicode(hostname).decode('idna')))
-                        print urllib.unquote(unicode(hostname).decode('idna')).encode(locale.getpreferredencoding())
-                        print type(unicode(hostname).decode('idna').encode('utf-8'))
-                        print unicode(hostname).decode('idna').encode('utf-8')
-                        print unicode(hostname).encode('idna'), type(unicode(hostname).encode('idna'))
                     except:
                         pass
                     try:
                         if widget.site_url.count(unicode(hostname)):
                             valid_host = True
-                        print unicode(hostname) 
                     except:
                         pass
                 if not valid_host:
