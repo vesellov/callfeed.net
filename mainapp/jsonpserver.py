@@ -451,7 +451,7 @@ class JSONPEntryPoint(View):
             if 'request_options' in request.GET:
                 hostname = request.GET.get('hostname', None)
                 valid_host = False
-                print 'request_options', widget.site_url, hostname
+                print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding()), unicode(hostname).encode(locale.getpreferredencoding())
                 if hostname:
                     if widget.site_url.count(hostname):
                         valid_host = True
