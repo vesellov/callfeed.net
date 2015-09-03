@@ -50,7 +50,25 @@
 			});
 
 			$('#scan_all').click(function(){
-		    	
+		    	$('.site_url_item').each(function(i,itm){
+					var wid = $(itm).attr('id').substring(14);
+					$('#refresh-widget-'+wid).html("проверка...");
+					$('#refresh-widget-'+wid).css('color', 'blue');
+					$.ajax({
+						url: "/profile/reseller/widget_check",
+						data: { widget_id: wid },
+						success: function (result) {
+						    if (result == 'True') {
+								$('#refresh-widget-'+wid).html("установлен");
+								$('#refresh-widget-'+wid).css('color', 'green');
+					        } else {
+								$('#refresh-widget-'+wid).html("не найден");
+								$('#refresh-widget-'+wid).css('color', 'gray');
+							}
+					 	}
+					});
+		    		
+		    	});
 			});
 		 
 		});

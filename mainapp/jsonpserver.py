@@ -451,12 +451,20 @@ class JSONPEntryPoint(View):
             if 'request_options' in request.GET:
                 hostname = request.GET.get('hostname', None)
                 valid_host = False
-                # print 'request_options', widget.site_url, hostname, unicode(hostname).decode('idna'), type(unicode(hostname).decode('idna'))
+                print 'request_options', widget.site_url, hostname, unicode(hostname).decode('idna'), type(unicode(hostname).decode('idna'))
                 if hostname:
                     if widget.site_url.count(hostname):
                         valid_host = True
-                    if widget.site_url.count(unicode(hostname).decode('idna')):
-                        valid_host = True
+                    try:
+                        if widget.site_url.count(unicode(hostname).decode('utf-8')):
+                            valid_host = True
+                    except:
+                        pass
+                    try:
+                        if widget.site_url.count(unicode(hostname).decode('idna')):
+                            valid_host = True
+                    except:
+                        pass
                 if not valid_host:
                     jdata.update({'response': 'refused',
                                   'message': 'incorrect host name', })

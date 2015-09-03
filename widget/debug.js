@@ -1,1 +1,1 @@
-var CallFeedDebug = false;
+var CallFeedDebug = true;
