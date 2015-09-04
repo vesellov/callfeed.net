@@ -8,62 +8,62 @@
 <table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
 	<tr>
    		<td width="50">
-   			<span style="color: gray;">{{ client.id }}</span>
+            <a href="http://callfeed.net/admin/mainapp/client/{{ client.id }}/">{{ client.id }}</a>
    		</td>
-   		<td width="20%">
+   		<td width="20%" class="text-left">
            	<a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }}</a>
       	</td>
-       	<td width="20%">
+       	<td width="20%" class="text-left">
            	<a href="mailto: {{ client.email }}">{{ client.email }}</a>
         </td>
-        <td width="20%">
+        <td width="20%" class="text-left">
          	{{ client.phone_number }}
         </td>
-        <td>
-        	{{ client.user.date_joined }}
+        <td width="100">
+         	{{ client.balance_minutes }} мин.
         </td>
-        <td width="80">
-         	{{ client.balance_minutes }}
+        <td class="text-right">
+        	<span style="color:#888;">клиент:</span> {{ client.user.date_joined }}
         </td>
 	</tr>
 </table>
-<table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
+<table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0 style="margin-top: -1px;">
 	{% for widget in widgets_list %}
 	   	<tr class="text-center">
     		<td width="50">
-    			<span style="color: gray;">{{ widget.id }}</span>
+                <a href="http://callfeed.net/admin/mainapp/widget/{{ widget.id }}/">{{ widget.id }}</a>
     		</td>
-            <td>
+            <td class="text-left" width="40%">
                 {% if widget.site_url != None %}
                     <a class="site_url_item" id="site_url_item-{{ widget.id }}" href="{{ widget.site_url }}" target=_blank>{{ widget.site_url }}</a>
                 {% else %}
-                    <i>сайт не указан</i>
+                    <span style="color: gray;">сайт не указан</span>
                 {% endif %}
             </td>
-            <td class="text-left"> 
+            <td class="text-left" width="140"> 
 	            {% if widget.is_installed %}
-	                <span id="refresh-widget-{{ widget.id }}" style="color: green;">установлен</span>
+	                <span id="refresh-widget-{{ widget.id }}" style="color: green;">УСТАНОВЛЕН</span>
 	            {% else %}
-	                <span id="refresh-widget-{{ widget.id }}" style="color: gray;">не найден</span>
+	                <span id="refresh-widget-{{ widget.id }}" style="color: red;">НЕ УСТАНОВЛЕН</span>
 	            {% endif %}
             </td>
-            <td>
+            <td width="100">
 	            {% if widget.is_active %}
-	                <span style="color: green;">ON</span>
+	                <span style="color: green;">ВКЛЮЧЕН</span>
 	            {% else %}
-	                <span style="color: gray;">OFF</span>
+	                <span style="color: red;">ВЫКЛЮЧЕН</span>
 	            {% endif %}
             </td>
-           	<td>
+           	<td class="text-right">
 				{% if widget.last_executed %}
-					<span style="color: green;">{{ widget.last_executed }}</span>
+					<span style="color:#888;">виджет:</span> <span style="color: green;">{{ widget.last_executed }}</span>
 				{% else %}
 	                <span style="color: gray;">не запускался</span>
 				{% endif %}
            	</td>
         </tr>
    	{% empty %}
-    	<tr><td><span style="color: gray;">виджеты отсутсвуют</span></td></tr>
+    	<tr><td class="text-left"><span style="color: gray; padding-left: 70px;">виджеты отсутствуют</span></td></tr>
     {% endfor %}
 </table>
 {% endfor %}
