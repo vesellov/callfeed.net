@@ -432,7 +432,7 @@ class Widget(models.Model):
         """
         # setup_code_lines = self.gen_setup_code().split('\n')
         setup_code_lines = [
-            "var CallFeedToken = ",
+            'var CallFeedToken = "%d"' % self.id,
             "http://callfeed.net/static/cf.",
             ]
         
