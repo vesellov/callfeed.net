@@ -2,9 +2,10 @@
 
 import sys
 import traceback
-
+import locale
 import datetime
 import json
+
 from decimal import Decimal
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ObjectDoesNotExist
@@ -436,7 +437,7 @@ class Widget(models.Model):
             ]
         
         import requests
-        print 'check_if_installed ', str(self.site_url)
+        print 'check_if_installed ', unicode(self.site_url).encode(locale.getpreferredencoding())
         try:
             page_content = requests.get(self.site_url).content
         except:
