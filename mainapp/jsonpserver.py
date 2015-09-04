@@ -4,7 +4,7 @@ import traceback
 import json
 import pprint
 import datetime
-import urllib
+import urllib2
 import locale
 import time
 
@@ -27,6 +27,7 @@ from mainapp.utils import mtt
 from mainapp.utils import sms
 from mainapp.utils import mail
 from mainapp.utils.common import random_delay
+from django.contrib.admin.utils import unquote
 
 # ------------------------------------------------------------------------------
 
@@ -348,9 +349,9 @@ class JSONPEntryPoint(View):
                 'callback': request.GET['callback'].replace('CallbackRegistry.', ''),
                 'ip': client_ip_addr,
                 'token': request.GET['token'],
-                'referrer': urllib.unquote(request.GET.get('referrer', '')),
-                'search_request': request.GET.get('search_request', ''),
-                'hostname': request.GET.get('hostname', ''),
+                'referrer': urllib2.unquote(request.GET.get('referrer', '')),
+                'search_request': urllib2.unquote(request.GET.get('search_request', '')),
+                'hostname': urllib2.unquote(request.GET.get('hostname', '')),
             }
             
             widget.last_executed = timezone.now()
@@ -453,31 +454,39 @@ class JSONPEntryPoint(View):
                 valid_host = False
                 print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding()), type(widget.site_url)
                 if hostname:
+                    print 'hostname', type(hostname)
+                    hostname = unicode(hostname)
+                    try:
+                        print hostname.encode(locale.getpreferredencoding())
+                    except:
+                        print 'FAIL: hostname.encode(locale.getpreferredencoding())'
                     if widget.site_url.count(hostname):
                         valid_host = True
-                    if widget.site_url.count(unicode(hostname)):
-                        valid_host = True
                     try:
-                        if unicode(widget.site_url).count(unicode(hostname)):
+                        hostname_uq = urllib2.unquote(hostname)
+                        if widget.site_url.count(hostname_uq):
                             valid_host = True
+                        print 'hostname_uq', type(hostname_uq)
+                        print hostname_uq.encode(locale.getpreferredencoding())
                     except:
-                        pass
-                    print type(hostname), valid_host
-                    if isinstance(hostname, unicode):
-                        print unicode(hostname).encode(locale.getpreferredencoding())
-                        try:
-                            if widget.site_url.count(hostname.decode('idna')):
-                                valid_host = True
-                        except:
-                            pass
-                        try:
-                            print (hostname.decode('idna')).encode(locale.getpreferredencoding())
-                        except:
-                            pass
-                        try:
-                            print unicode(urllib.unquote(hostname).decode('utf-8')).encode(locale.getpreferredencoding())
-                        except:
-                            pass
+                        print 'FAIL: hostname_uq = urllib2.unquote(hostname)'
+                    try:
+                        hostname_idna = hostname.decode('idna')
+                        if widget.site_url.count(hostname_idna):
+                            valid_host = True
+                        print 'hostname_idna', type(hostname_idna)
+                        print hostname_idna.encode(locale.getpreferredencoding())
+                    except:
+                        print 'FAIL: hostname_idna = hostname.decode("idna")'
+                    try:
+                        hostname_utf8 = hostname_uq.decode('utf8')
+                        if widget.site_url.count(hostname_utf8):
+                            valid_host = True
+                        print 'hostname_utf8', type(hostname_utf8)
+                        print hostname_utf8.encode(locale.getpreferredencoding())
+                    except:
+                        print 'FAIL: hostname_utf8 = hostname_uq.decode("utf8")'
+                print 'valid_host:', valid_host
                 if not valid_host:
                     jdata.update({'response': 'refused',
                                   'message': 'incorrect host name', })

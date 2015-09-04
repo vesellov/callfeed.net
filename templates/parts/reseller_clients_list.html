@@ -3,12 +3,26 @@
 
 <h4 class="center">Список клиентов:</h4>
 <div class="table-responsive">
+{% for client, widgets_list in clients_list %}
 <table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
-    {% for widget in widgets_list %}
-    	<tr class="text-center">
-    		<td>
-    			{{ widget.client.id }}
-    		</td>
+	<tr>
+   		<td>
+   			{{ client.id }}
+   		</td>
+        <td>
+         	{{ client.phone_number }}
+        </td>
+        <td>
+        	{{ client.user.date_joined }}
+        </td>
+        <td>
+         	{{ client.balance_minutes }}
+        </td>
+	</tr>
+</table>
+<table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
+	{% for widget in widgets_list %}
+	   	<tr class="text-center">
     		<td>
     			{{ widget.id }}
     		</td>
@@ -24,15 +38,6 @@
            	</td>
            	<td>
             	<a href="mailto: {{ widget.client.email }}">{{ widget.client.email }}</a>
-            </td>
-            <td>
-             	{{ widget.client.phone_number }}
-            </td>
-            <td>
-            	{{ widget.client.user.date_joined }}
-            </td>
-            <td>
-             	{{ widget.client.balance_minutes }}
             </td>
             <td class="text-left"> 
 	            {% if widget.is_installed %}
@@ -56,8 +61,9 @@
 				{% endif %}
            	</td>
         </tr>
-    {% empty %}
-        <tr><td><h5 class="center">У вас нет ни одного клиента</h5></td></tr>
+   	{% empty %}
+    	<tr><td><span style="color: gray;">виджеты отсутсвуют</span></td></tr>
     {% endfor %}
 </table>
+{% endfor %}
 </div>

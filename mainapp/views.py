@@ -359,42 +359,60 @@ class ProfileReseller(ProtectedResellerView):
             print 'FAIL: RESELLER OBJECT DOES NOT EXIST'
             return HttpResponseRedirect('/')
         filt = request.GET.get('filter', '')
-        widgets_list = []
+        clients_list = []
         if filt == 'active':
             for client in reseller.client_set.all():
+                widgets_list = []
                 for widget in client.widget_set.all():
                     if widget.is_active:
                         widgets_list.append(widget)
+                clients_list.append((client, widgets_list))
+                del widgets_list
         elif filt == 'not-active':
             for client in reseller.client_set.all():
+                widgets_list = []
                 for widget in client.widget_set.all():
                     if not widget.is_active:
                         widgets_list.append(widget)
+                clients_list.append((client, widgets_list))
+                del widgets_list
         elif filt == 'installed':
             for client in reseller.client_set.all():
+                widgets_list = []
                 for widget in client.widget_set.all():
                     if widget.is_installed:
                         widgets_list.append(widget)
+                clients_list.append((client, widgets_list))
+                del widgets_list
         elif filt == 'not-installed':
             for client in reseller.client_set.all():
+                widgets_list = []
                 for widget in client.widget_set.all():
                     if not widget.is_installed:
                         widgets_list.append(widget)
+                clients_list.append((client, widgets_list))
+                del widgets_list
         elif filt == 'executed':
             for client in reseller.client_set.all():
+                widgets_list = []
                 for widget in client.widget_set.all():
                     if widget.last_executed:
                         widgets_list.append(widget)
+                clients_list.append((client, widgets_list))
+                del widgets_list
         else:
             for client in reseller.client_set.all():
+                widgets_list = []
                 for widget in client.widget_set.all():
                     widgets_list.append(widget)
+                clients_list.append((client, widgets_list))
+                del widgets_list
             
-        pprint.pprint(widgets_list)
+        pprint.pprint(clients_list)
         
         return render(request, 'pages/profile/reseller/profile_reseller.html',
                       {'reseller': reseller,
-                       'widgets_list': widgets_list,})
+                       'clients_list': clients_list,})
 
 
 # ## Administrative manager pages
