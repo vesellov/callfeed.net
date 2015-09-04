@@ -95,8 +95,8 @@ var WidgetMessanger = Automat.extend({
 	    		'message_phone': $("#cf_message_phone_input").val(),
 	    		'message_email': $("#cf_message_email_input").val(),
 	    		'message_text': $("#cf_message_message_textarea").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
 	    	}),
 	        function(data) {
 	            if (data.hasOwnProperty('response') && data['response'] == 'ok') {

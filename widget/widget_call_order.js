@@ -97,8 +97,8 @@ var WidgetCallOrder = Automat.extend({
         		'order_day': $("#cf_order_day_select").val(), 
         		'order_delta_day': convert_weekday_to_delta_days($("#cf_order_day_select").val()), 
         		'order_time': $("#cf_order_time_select").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok') {

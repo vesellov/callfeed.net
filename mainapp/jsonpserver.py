@@ -463,38 +463,42 @@ class JSONPEntryPoint(View):
                         print 'FAIL: hostname.encode(locale.getpreferredencoding())'
                     if widget.site_url.count(hostname):
                         valid_host = True
-                    try:
-                        hostname_uq = urllib2.unquote(hostname)
-                        if widget.site_url.count(hostname_uq):
-                            valid_host = True
-                        print 'hostname_uq', type(hostname_uq)
-                        print hostname_uq.encode(locale.getpreferredencoding())
-                    except:
-                        print 'FAIL: hostname_uq = urllib2.unquote(hostname)'
-                    try:
-                        hostname_idna = hostname.decode('idna')
-                        if widget.site_url.count(hostname_idna):
-                            valid_host = True
-                        print 'hostname_idna', type(hostname_idna)
-                        print hostname_idna.encode(locale.getpreferredencoding())
-                    except:
-                        print 'FAIL: hostname_idna = hostname.decode("idna")'
-                    try:
-                        hostname_utf8 = hostname_uq.decode('utf8')
-                        if widget.site_url.count(hostname_utf8):
-                            valid_host = True
-                        print 'hostname_utf8', type(hostname_utf8)
-                        print hostname_utf8.encode(locale.getpreferredencoding())
-                    except:
-                        print 'FAIL: hostname_utf8 = hostname_uq.decode("utf8")'
-                    try:
-                        hostname_win1251 = hostname_uq.decode('windows-1251')
-                        if widget.site_url.count(hostname_win1251):
-                            valid_host = True
-                        print 'hostname_win1251', type(hostname_win1251)
-                        print hostname_win1251.encode(locale.getpreferredencoding())
-                    except:
-                        print 'FAIL: hostname_win1251 = hostname_uq.decode("windows-1251")'
+                    if not valid_host:
+                        try:
+                            hostname_uq = urllib2.unquote(hostname)
+                            if widget.site_url.count(hostname_uq):
+                                valid_host = True
+                            print 'hostname_uq', type(hostname_uq)
+                            print hostname_uq.encode(locale.getpreferredencoding())
+                        except:
+                            print 'FAIL: hostname_uq = urllib2.unquote(hostname)'
+                    if not valid_host:
+                        try:
+                            hostname_idna = hostname.decode('idna')
+                            if widget.site_url.count(hostname_idna):
+                                valid_host = True
+                            print 'hostname_idna', type(hostname_idna)
+                            print hostname_idna.encode(locale.getpreferredencoding())
+                        except:
+                            print 'FAIL: hostname_idna = hostname.decode("idna")'
+                    if not valid_host:
+                        try:
+                            hostname_utf8 = hostname_uq.decode('utf8')
+                            if widget.site_url.count(hostname_utf8):
+                                valid_host = True
+                            print 'hostname_utf8', type(hostname_utf8)
+                            print hostname_utf8.encode(locale.getpreferredencoding())
+                        except:
+                            print 'FAIL: hostname_utf8 = hostname_uq.decode("utf8")'
+                    if not valid_host:
+                        try:
+                            hostname_win1251 = hostname_uq.decode('windows-1251')
+                            if widget.site_url.count(hostname_win1251):
+                                valid_host = True
+                            print 'hostname_win1251', type(hostname_win1251)
+                            print hostname_win1251.encode(locale.getpreferredencoding())
+                        except:
+                            print 'FAIL: hostname_win1251 = hostname_uq.decode("windows-1251")'
                 print 'valid_host:', valid_host
                 if not valid_host:
                     jdata.update({'response': 'refused',

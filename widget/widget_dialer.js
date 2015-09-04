@@ -210,8 +210,8 @@ var WidgetDialer = Automat.extend({
         jsonp_request('http://callfeed.net/input?'+$.param({
         		'token': CallFeedToken, 
         		'phone': $("#cf_main_call_input").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': CallFeedSession.referrer,
+        		'hostname': CallFeedSession.hostname
         	}),
             function(data) {
                 debug.log("doJSONPCall.success", data);
@@ -349,7 +349,7 @@ var WidgetDialer = Automat.extend({
         		'request_status': 1,
         		'token': CallFeedToken, 
         		'callback_id': this.callback_id,
-        		'hostname': encodeURIComponent(CallFeedSession.hostname)
+        		'hostname': CallFeedSession.hostname
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok' && data.hasOwnProperty('status')) {

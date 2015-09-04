@@ -97,8 +97,8 @@ var WidgetTimeoffOrder = Automat.extend({
         		'timeoff_phone': $("#cf_timeoff_call_input").val(),
         		'timeoff_day': $("#cf_timeoff_day_select").val(),
         		'timeoff_time': $("#cf_timeoff_time_select").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok') {

@@ -2683,11 +2683,11 @@ var WidgetSession = Automat.extend({
 
     doConnect: function(event, args) {
         // Action method.
-        debug.log(this.name+".doConnect('"+event+"', "+args+"): ", encodeURIComponent(this.hostname));
+        debug.log(this.name+".doConnect('"+event+"', "+args+"): ", this.hostname);
         jsonp_request('http://callfeed.net/input?'+$.param({
     		'request_options': '1',
     		'token': CallFeedToken,
-    		'hostname': encodeURIComponent(this.hostname)
+    		'hostname': this.hostname
     	}),
 	        function(data) {
 	            var response = "error";
@@ -4038,8 +4038,8 @@ var WidgetDialer = Automat.extend({
         jsonp_request('http://callfeed.net/input?'+$.param({
         		'token': CallFeedToken, 
         		'phone': $("#cf_main_call_input").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': CallFeedSession.referrer,
+        		'hostname': CallFeedSession.hostname
         	}),
             function(data) {
                 debug.log("doJSONPCall.success", data);
@@ -4177,7 +4177,7 @@ var WidgetDialer = Automat.extend({
         		'request_status': 1,
         		'token': CallFeedToken, 
         		'callback_id': this.callback_id,
-        		'hostname': encodeURIComponent(CallFeedSession.hostname)
+        		'hostname': CallFeedSession.hostname
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok' && data.hasOwnProperty('status')) {
@@ -4363,8 +4363,8 @@ var WidgetCallOrder = Automat.extend({
         		'order_day': $("#cf_order_day_select").val(), 
         		'order_delta_day': convert_weekday_to_delta_days($("#cf_order_day_select").val()), 
         		'order_time': $("#cf_order_time_select").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok') {
@@ -4555,8 +4555,8 @@ var WidgetTimeoffOrder = Automat.extend({
         		'timeoff_phone': $("#cf_timeoff_call_input").val(),
         		'timeoff_day': $("#cf_timeoff_day_select").val(),
         		'timeoff_time': $("#cf_timeoff_time_select").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
         	}),
             function(data) {
                 if (data.hasOwnProperty('response') && data['response'] == 'ok') {
@@ -4742,8 +4742,8 @@ var WidgetMessanger = Automat.extend({
 	    		'message_phone': $("#cf_message_phone_input").val(),
 	    		'message_email': $("#cf_message_email_input").val(),
 	    		'message_text': $("#cf_message_message_textarea").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
 	    	}),
 	        function(data) {
 	            if (data.hasOwnProperty('response') && data['response'] == 'ok') {
@@ -4999,8 +4999,8 @@ var WidgetFreeCaller = Automat.extend({
 	    		'free_phone': $("#cf_free_call_input").val(),
         		'free_day': $("#cf_free_day_select").val(),
         		'free_time': $("#cf_free_time_select").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
 	    	}),
 	        function(data) {
 	            if (data.hasOwnProperty('response') && data['response'] == 'ok') {

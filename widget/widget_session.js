@@ -207,11 +207,11 @@ var WidgetSession = Automat.extend({
 
     doConnect: function(event, args) {
         // Action method.
-        debug.log(this.name+".doConnect('"+event+"', "+args+"): ", this.hostname, encodeURIComponent(this.hostname));
+        debug.log(this.name+".doConnect('"+event+"', "+args+"): ", this.hostname);
         jsonp_request('http://callfeed.net/input?'+$.param({
     		'request_options': '1',
     		'token': CallFeedToken,
-    		'hostname': encodeURIComponent(this.hostname)
+    		'hostname': this.hostname
     	}),
 	        function(data) {
 	            var response = "error";

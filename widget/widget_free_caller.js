@@ -97,8 +97,8 @@ var WidgetFreeCaller = Automat.extend({
 	    		'free_phone': $("#cf_free_call_input").val(),
         		'free_day': $("#cf_free_day_select").val(),
         		'free_time': $("#cf_free_time_select").val(),
-        		'referrer': encodeURIComponent(CallFeedSession.referrer),
-        		'hostame': encodeURIComponent(CallFeedSession.hostname)
+        		'referrer': (CallFeedSession.referrer),
+        		'hostname': (CallFeedSession.hostname)
 	    	}),
 	        function(data) {
 	            if (data.hasOwnProperty('response') && data['response'] == 'ok') {
