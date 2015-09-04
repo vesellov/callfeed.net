@@ -420,7 +420,7 @@ class ProfileReseller(ProtectedResellerView):
                 clients_list.append((client, widgets_list))
                 del widgets_list
             
-        pprint.pprint(clients_list)
+        # pprint.pprint(clients_list)
         
         return render(request, 'pages/profile/reseller/profile_reseller.html',
                       {'reseller': reseller,
