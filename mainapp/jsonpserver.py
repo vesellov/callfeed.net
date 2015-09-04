@@ -452,9 +452,9 @@ class JSONPEntryPoint(View):
             if 'request_options' in request.GET:
                 hostname = request.GET.get('hostname', None)
                 valid_host = False
-                print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding()), type(widget.site_url)
+                print 'request_options', unicode(widget.site_url).encode(locale.getpreferredencoding())
                 if hostname:
-                    print 'hostname', type(hostname)
+                    # print 'hostname', type(hostname)
                     hostname = unicode(hostname)
                     hostname = hostname.replace('www.', '')
                     try:
@@ -468,7 +468,7 @@ class JSONPEntryPoint(View):
                             hostname_uq = urllib2.unquote(hostname)
                             if widget.site_url.count(hostname_uq):
                                 valid_host = True
-                            print 'hostname_uq', type(hostname_uq)
+                            # print 'hostname_uq', type(hostname_uq)
                             print hostname_uq.encode(locale.getpreferredencoding())
                         except:
                             print 'FAIL: hostname_uq = urllib2.unquote(hostname)'
@@ -477,7 +477,7 @@ class JSONPEntryPoint(View):
                             hostname_idna = hostname.decode('idna')
                             if widget.site_url.count(hostname_idna):
                                 valid_host = True
-                            print 'hostname_idna', type(hostname_idna)
+                            # print 'hostname_idna', type(hostname_idna)
                             print hostname_idna.encode(locale.getpreferredencoding())
                         except:
                             print 'FAIL: hostname_idna = hostname.decode("idna")'
@@ -486,7 +486,7 @@ class JSONPEntryPoint(View):
                             hostname_utf8 = hostname_uq.decode('utf8')
                             if widget.site_url.count(hostname_utf8):
                                 valid_host = True
-                            print 'hostname_utf8', type(hostname_utf8)
+                            # print 'hostname_utf8', type(hostname_utf8)
                             print hostname_utf8.encode(locale.getpreferredencoding())
                         except:
                             print 'FAIL: hostname_utf8 = hostname_uq.decode("utf8")'
@@ -495,7 +495,7 @@ class JSONPEntryPoint(View):
                             hostname_win1251 = hostname_uq.decode('windows-1251')
                             if widget.site_url.count(hostname_win1251):
                                 valid_host = True
-                            print 'hostname_win1251', type(hostname_win1251)
+                            # print 'hostname_win1251', type(hostname_win1251)
                             print hostname_win1251.encode(locale.getpreferredencoding())
                         except:
                             print 'FAIL: hostname_win1251 = hostname_uq.decode("windows-1251")'
