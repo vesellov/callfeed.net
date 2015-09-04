@@ -456,6 +456,7 @@ class JSONPEntryPoint(View):
                 if hostname:
                     print 'hostname', type(hostname)
                     hostname = unicode(hostname)
+                    hostname = hostname.replace('www.', '')
                     try:
                         print hostname.encode(locale.getpreferredencoding())
                     except:
