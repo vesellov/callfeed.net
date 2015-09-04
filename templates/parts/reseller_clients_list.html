@@ -7,22 +7,22 @@
 <br/>
 <table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
 	<tr>
-   		<td>
-   			{{ client.id }}
+   		<td width="50">
+   			<span style="color: gray;">{{ client.id }}</span>
    		</td>
-   		<td>
+   		<td width="20%">
            	<a href="/profile/reseller/edit_clients?client_id={{ client.id }}">{{ client.name }}</a>
       	</td>
-       	<td>
+       	<td width="20%">
            	<a href="mailto: {{ client.email }}">{{ client.email }}</a>
         </td>
-        <td>
+        <td width="20%">
          	{{ client.phone_number }}
         </td>
         <td>
         	{{ client.user.date_joined }}
         </td>
-        <td>
+        <td width="80">
          	{{ client.balance_minutes }}
         </td>
 	</tr>
@@ -30,8 +30,8 @@
 <table class="table table-bordered-cells" cellspacing=0 cellpadding=0 border=0>
 	{% for widget in widgets_list %}
 	   	<tr class="text-center">
-    		<td>
-    			{{ widget.id }}
+    		<td width="50">
+    			<span style="color: gray;">{{ widget.id }}</span>
     		</td>
             <td>
                 {% if widget.site_url != None %}

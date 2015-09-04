@@ -28,6 +28,14 @@
 			$('#filter_all').click(function(){
 		    	location.href = "/profile/reseller?filter=all";
 			});
+
+			$('#filter_widgets').click(function(){
+		    	location.href = "/profile/reseller?filter=widgets";
+			});
+
+			$('#filter_no_widgets').click(function(){
+		    	location.href = "/profile/reseller?filter=no-widgets";
+			});
 			
 			$('#filter_active').click(function(){
 		    	location.href = "/profile/reseller?filter=active";
@@ -85,6 +93,8 @@
             <form action="" method="get">
             <div class="col s12">
                 <input type="button" id="filter_all" value="Все" class="btn"/>
+                <input type="button" id="filter_widgets" value="С виджетами" class="btn"/>
+                <input type="button" id="filter_no_widgets" value="БЕЗ виджетов" class="btn"/>
                 <input type="button" id="filter_active" value="Активные" class="btn"/>
                 <input type="button" id="filter_not_active" value="НЕ активные" class="btn"/>
                 <input type="button" id="filter_executed" value="Запускавшиеся ранее" class="btn"/>
@@ -97,18 +107,6 @@
             <div id="reseller-widgets" class="col s12">
                 {% include 'parts/reseller_clients_list.html' %}
             </div>
-            
-            <form action="" method="get">
-            <div class="col s12">
-                <input type="button" id="filter_all" value="Все" class="btn"/>
-                <input type="button" id="filter_active" value="Активные" class="btn"/>
-                <input type="button" id="filter_not_active" value="НЕ активные" class="btn"/>
-                <input type="button" id="filter_executed" value="Запускавшиеся ранее" class="btn"/>
-                <input type="button" id="filter_installed" value="Установленные" class="btn"/>
-                <input type="button" id="filter_not_installed" value="НЕ установленные" class="btn"/>
-                <input type="button" id="scan_all" value="Просканировать всех" class="btn"/>
-            </div>
-            </form>
             
         </div>
     </div>

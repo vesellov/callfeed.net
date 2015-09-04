@@ -360,7 +360,19 @@ class ProfileReseller(ProtectedResellerView):
             return HttpResponseRedirect('/')
         filt = request.GET.get('filter', '')
         clients_list = []
-        if filt == 'active':
+        if filt == 'widgets':
+            for client in reseller.client_set.all():
+                widgets_list = []
+                for widget in client.widget_set.all():
+                    widgets_list.append(widget)
+                if len(widgets_list):
+                    clients_list.append((client, widgets_list))
+                del widgets_list
+        elif filt == 'no-widgets':
+            for client in reseller.client_set.all():
+                if len(client.widget_set.all()) == 0:
+                    clients_list.append((client, []))
+        elif filt == 'active':
             for client in reseller.client_set.all():
                 widgets_list = []
                 for widget in client.widget_set.all():
