@@ -487,6 +487,14 @@ class JSONPEntryPoint(View):
                         print hostname_utf8.encode(locale.getpreferredencoding())
                     except:
                         print 'FAIL: hostname_utf8 = hostname_uq.decode("utf8")'
+                    try:
+                        hostname_win1251 = hostname_uq.decode('windows-1251')
+                        if widget.site_url.count(hostname_win1251):
+                            valid_host = True
+                        print 'hostname_win1251', type(hostname_win1251)
+                        print hostname_win1251.encode(locale.getpreferredencoding())
+                    except:
+                        print 'FAIL: hostname_win1251 = hostname_uq.decode("windows-1251")'
                 print 'valid_host:', valid_host
                 if not valid_host:
                     jdata.update({'response': 'refused',
