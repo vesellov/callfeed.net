@@ -6,25 +6,6 @@
 	
 	<script>
 		$(document).ready(function() {
-			$('.refresh-widget-presence-ico').each(function(i,itm){
-				$(itm).click(function(){
-					var wid = $(itm).attr('id').substring(15);
-					$('#refresh-widget-'+wid).attr('src', 'img/refresh_wait_ico.png');
-					$.ajax({
-						url: "/profile/reseller/widget_check",
-						data: { widget_id: wid },
-						success: function (result) {
-						    // location.href = "/profile/reseller#refresh-widget-" + wid;
-						    if (result == 'True') {
-						        $('#refresh-widget-'+wid).attr('src', 'img/refresh_green_ico.png');
-					        } else {
-					            $('#refresh-widget-'+wid).attr('src', 'img/refresh_red_ico.png');
-							}
-					 	}
-					});
-				});
-			});
-		 
 			$('#filter_all').click(function(){
 		    	location.href = "/profile/reseller?filter=all";
 			});
@@ -57,21 +38,43 @@
 		    	location.href = "/profile/reseller?filter=executed";
 			});
 
-			$('#scan_all').click(function(){
-		    	$('.site_url_item').each(function(i,itm){
-					var wid = $(itm).attr('id').substring(14);
-					$('#refresh-widget-'+wid).html("проверка...");
+			$('.refresh-widget-presence').each(function(i,itm){
+				$(itm).click(function(){
+					var wid = $(itm).attr('id').substring(15);
+					$('#refresh-widget-'+wid).html("ПРОВЕРКА ...");
 					$('#refresh-widget-'+wid).css('color', 'blue');
 					$.ajax({
 						url: "/profile/reseller/widget_check",
 						data: { widget_id: wid },
 						success: function (result) {
 						    if (result == 'True') {
-								$('#refresh-widget-'+wid).html("установлен");
+								$('#refresh-widget-'+wid).html("УСТАНОВЛЕН");
 								$('#refresh-widget-'+wid).css('color', 'green');
 					        } else {
-								$('#refresh-widget-'+wid).html("не найден");
-								$('#refresh-widget-'+wid).css('color', 'gray');
+								$('#refresh-widget-'+wid).html("НЕ УСТАНОВЛЕН");
+								$('#refresh-widget-'+wid).css('color', 'red');
+							}
+					 	}
+					 	
+					});
+				});
+			});
+		 
+			$('#scan_all').click(function(){
+		    	$('.site_url_item').each(function(i,itm){
+					var wid = $(itm).attr('id').substring(14);
+					$('#refresh-widget-'+wid).html("ПРОВЕРКА ...");
+					$('#refresh-widget-'+wid).css('color', 'blue');
+					$.ajax({
+						url: "/profile/reseller/widget_check",
+						data: { widget_id: wid },
+						success: function (result) {
+						    if (result == 'True') {
+								$('#refresh-widget-'+wid).html("УСТАНОВЛЕН");
+								$('#refresh-widget-'+wid).css('color', 'green');
+					        } else {
+								$('#refresh-widget-'+wid).html("НЕ УСТАНОВЛЕН");
+								$('#refresh-widget-'+wid).css('color', 'red');
 							}
 					 	}
 					});

@@ -42,9 +42,9 @@
             </td>
             <td class="text-left" width="140"> 
 	            {% if widget.is_installed %}
-	                <span id="refresh-widget-{{ widget.id }}" style="color: green;">УСТАНОВЛЕН</span>
+	                <span class="refresh-widget-presence" id="refresh-widget-{{ widget.id }}" style="cursor: pointer; color: green;">УСТАНОВЛЕН</span>
 	            {% else %}
-	                <span id="refresh-widget-{{ widget.id }}" style="color: red;">НЕ УСТАНОВЛЕН</span>
+	                <span class="refresh-widget-presence" id="refresh-widget-{{ widget.id }}" style="cursor: pointer; color: red;">НЕ УСТАНОВЛЕН</span>
 	            {% endif %}
             </td>
             <td width="100">
