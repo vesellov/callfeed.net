@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "!!!!! build RELEASE VERSION !!!!!"
-echo "var CallFeedDebug = true;" > debug.js
+echo "var CallFeedDebug = false;" > debug.js
 ./build.sh
 
 
